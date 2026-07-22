@@ -1,0 +1,84 @@
+@import '../../../styles/variables.less';
+
+.zdy-radio {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: @pc-font-size-base;
+  color: @text-color;
+  transition: all 0.2s ease;
+
+  &:hover:not(.zdy-radio--disabled) {
+    .zdy-radio-inner {
+      border-color: @primary-color;
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &--checked {
+    .zdy-radio-inner {
+      border-color: @primary-color;
+      background-color: @primary-color;
+    }
+  }
+
+  &-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-inner {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border: 2px solid @border-color;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%) scale(0);
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #fff;
+      transition: transform 0.2s ease;
+    }
+  }
+
+  &--checked {
+    .zdy-radio-inner::after {
+      transform: translate(-50%, -50%) scale(1);
+    }
+  }
+
+  &-label {
+    margin-left: 8px;
+    line-height: 18px;
+    white-space: nowrap;
+  }
+}
+
+.zdy-radio-group {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 16px;
+
+  &-vertical {
+    flex-direction: column;
+  }
+}

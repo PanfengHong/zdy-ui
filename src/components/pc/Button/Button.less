@@ -1,0 +1,260 @@
+@import '../../../styles/variables.less';
+
+.zdy-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 0 20px;
+  font-size: @pc-font-size-base;
+  font-weight: 500;
+  line-height: 1.5;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  user-select: none;
+  border: 1px solid transparent;
+  border-radius: @border-radius-sm;
+  transition: all 0.2s ease;
+  
+  // 主按钮 - 实心蓝色
+  &--primary {
+    height: 40px;
+    color: #fff;
+    background-color: #2587ff;
+    border-color: #2587ff;
+    
+    &:hover {
+      background-color: #2587ff;
+      border-color: #2587ff;
+      box-shadow: 0 4px 12px rgba(37, 135, 255, 0.4);
+    }
+    
+    &:active {
+      background-color: #1a6ee0;
+      border-color: #1a6ee0;
+      box-shadow: none;
+    }
+  }
+  
+  // 次按钮 - 边框按钮
+  &--default {
+    height: 36px;
+    color: #333;
+    background-color: transparent;
+    border-color: #d9d9d9;
+    
+    &:hover {
+      color: #2587ff;
+      background-color: transparent;
+      border-color: #2587ff;
+      box-shadow: 0 4px 12px rgba(37, 135, 255, 0.4);
+    }
+    
+    &:active {
+      color: #1a6ee0;
+      border-color: #1a6ee0;
+      box-shadow: 0 2px 6px rgba(37, 135, 255, 0.3);
+    }
+  }
+  
+  // 次按钮灰色 - 浅灰色背景
+  &--success {
+    height: 32px;
+    color: #666;
+    background-color: #f5f5f5;
+    border-color: #e8e8e8;
+    
+    &:hover {
+      background-color: #e8e8e8;
+      border-color: #d9d9d9;
+    }
+    
+    &:active {
+      background-color: #d9d9d9;
+      border-color: #bfbfbf;
+    }
+  }
+  
+  // 文字按钮 - 只有文字
+  &--text {
+    height: 32px;
+    padding: 0;
+    color: #666;
+    background-color: transparent;
+    border-color: transparent;
+    border-width: 0;
+    
+    &:hover {
+      color: #2587ff;
+      background-color: #f0f5ff;
+      border-color: transparent;
+      border-width: 0;
+      box-shadow: none;
+    }
+    
+    &:active {
+      color: #1a6ee0;
+      background-color: #e0ebff;
+      border-color: transparent;
+      border-width: 0;
+      box-shadow: none;
+    }
+  }
+  
+  // 链接按钮 - 超链接样式
+  &--link {
+    height: 32px;
+    padding: 0;
+    color: #2587ff;
+    background-color: transparent;
+    border-color: transparent;
+    border-width: 0;
+    
+    &:hover {
+      color: #1a6ee0;
+      text-decoration: underline;
+      border-color: transparent;
+      border-width: 0;
+      box-shadow: none;
+    }
+    
+    &:active {
+      color: #0f5bc4;
+      border-color: transparent;
+      border-width: 0;
+      box-shadow: none;
+    }
+  }
+  
+  // 成功按钮 - 绿色
+  &--success {
+    height: 40px;
+    color: #fff;
+    background-color: @success-color;
+    border-color: @success-color;
+    
+    &:hover {
+      background-color: darken(@success-color, 10%);
+      border-color: darken(@success-color, 10%);
+      box-shadow: 0 4px 12px rgba(82, 196, 26, 0.4);
+    }
+    
+    &:active {
+      background-color: darken(@success-color, 15%);
+      border-color: darken(@success-color, 15%);
+    }
+  }  
+  // 警告按钮 - 橙色
+  &--warning {
+    height: 40px;
+    color: #fff;
+    background-color: @warning-color;
+    border-color: @warning-color;
+    
+    &:hover {
+      background-color: darken(@warning-color, 10%);
+      border-color: darken(@warning-color, 10%);
+      box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+    }
+    
+    &:active {
+      background-color: darken(@warning-color, 15%);
+      border-color: darken(@warning-color, 15%);
+    }
+  }
+  
+  // 危险按钮 - 红色
+  &--danger {
+    height: 40px;
+    color: #fff;
+    background-color: @error-color;
+    border-color: @error-color;
+    
+    &:hover {
+      background-color: darken(@error-color, 10%);
+      border-color: darken(@error-color, 10%);
+      box-shadow: 0 4px 12px rgba(245, 108, 108, 0.4);
+    }
+    
+    &:active {
+      background-color: darken(@error-color, 15%);
+      border-color: darken(@error-color, 15%);
+    }
+  }
+  
+  // 错误按钮（兼容旧版）
+  &--error {
+    height: 40px;
+    color: #fff;
+    background-color: @error-color;
+    border-color: @error-color;
+    
+    &:hover {
+      background-color: darken(@error-color, 10%);
+      border-color: darken(@error-color, 10%);
+      box-shadow: 0 4px 12px rgba(245, 108, 108, 0.4);
+    }
+    
+    &:active {
+      background-color: darken(@error-color, 15%);
+      border-color: darken(@error-color, 15%);
+    }
+  }
+  
+  // 尺寸样式
+  &--small {
+    height: 28px;
+    padding: 0 12px;
+    font-size: @pc-font-size-small;
+  }
+  
+  &--medium {
+    height: 36px;
+    padding: 0 20px;
+    font-size: @pc-font-size-base;
+  }
+  
+  &--large {
+    height: 44px;
+    padding: 0 24px;
+    font-size: @pc-font-size-large;
+  }
+  
+  // 形状样式
+  &--shape-circle {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border-radius: 50%;
+  }
+  
+  &--shape-round {
+    border-radius: 20px;
+  }
+  
+  // 状态样式
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    
+    &,
+    &:hover,
+    &:active {
+      color: #999;
+      background-color: #f5f5f5;
+      border-color: #e8e8e8;
+      box-shadow: none;
+    }
+  }
+  
+  &--loading {
+    opacity: 0.8;
+    cursor: not-allowed;
+    
+    &-icon {
+      margin-right: 4px;
+    }
+  }
+}
