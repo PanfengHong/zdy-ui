@@ -85,6 +85,18 @@ export interface BaseDialogProps extends BaseComponentProps {
 // Icon组件类型定义
 export type IconType = 'add' | 'delete' | 'close' | 'edit' | 'search' | 'save' | 'cancel' | 'confirm' | 'back' | 'forward' | 'up' | 'down' | 'left' | 'right' | 'check' | 'error' | 'warning' | 'info';
 
+export type AlertType = 'success' | 'info' | 'warning' | 'error';
+
+export interface BaseAlertProps extends BaseComponentProps {
+  type?: AlertType;
+  title?: React.ReactNode;
+  message?: React.ReactNode;
+  closable?: boolean;
+  showIcon?: boolean;
+  onClose?: () => void;
+  children?: React.ReactNode;
+}
+
 // Icon组件通用Props
 export interface BaseIconProps extends BaseComponentProps {
   type?: IconType;

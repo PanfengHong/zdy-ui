@@ -1,3 +1,135 @@
-.alert {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-mobile-alert {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  margin-bottom: 12px;
+  border-radius: 8px;
+  border: 1px solid @border-color;
+  font-size: @mobile-font-size-base;
+  line-height: 1.6;
+  transition: all 0.2s ease;
+
+  &--no-icon {
+    .zdy-mobile-alert-content {
+      margin-left: 0;
+    }
+  }
+
+  &--closable {
+    padding-right: 44px;
+  }
+
+  &--success {
+    background-color: #f6ffed;
+    border-color: #b7eb8f;
+
+    .zdy-mobile-alert-title {
+      color: #389e0d;
+    }
+
+    .zdy-mobile-alert-message {
+      color: #52c41a;
+    }
+  }
+
+  &--info {
+    background-color: #e6f7ff;
+    border-color: #91d5ff;
+
+    .zdy-mobile-alert-title {
+      color: #096dd9;
+    }
+
+    .zdy-mobile-alert-message {
+      color: #1890ff;
+    }
+  }
+
+  &--warning {
+    background-color: #fffbe6;
+    border-color: #ffe58f;
+
+    .zdy-mobile-alert-title {
+      color: #d48806;
+    }
+
+    .zdy-mobile-alert-message {
+      color: #faad14;
+    }
+  }
+
+  &--error {
+    background-color: #fff1f0;
+    border-color: #ffccc7;
+
+    .zdy-mobile-alert-title {
+      color: #cf1322;
+    }
+
+    .zdy-mobile-alert-message {
+      color: #f5222d;
+    }
+  }
+}
+
+.zdy-mobile-alert-icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+  margin-top: 2px;
+}
+
+.zdy-mobile-alert-content {
+  flex: 1;
+  min-width: 0;
+  margin-left: 4px;
+}
+
+.zdy-mobile-alert-title {
+  margin: 0 0 6px 0;
+  padding: 0;
+  font-size: @mobile-font-size-base;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.zdy-mobile-alert-message {
+  margin: 0;
+  padding: 0;
+  font-size: @mobile-font-size-small;
+  color: @text-color-secondary;
+  line-height: 1.6;
+}
+
+.zdy-mobile-alert-close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: @text-color-secondary;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: @text-color;
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }

@@ -12,6 +12,8 @@ import DialogDemo from './components/pc/Dialog/demo';
 import IconDemo from './components/pc/Icon/demo';
 import LayoutDemo from './components/pc/Layout/demo';
 import GridDemo from './components/pc/Grid/demo';
+import AlertDemo from './components/pc/Alert/demo';
+import RadioDemo from './components/pc/Radio/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -173,6 +175,8 @@ function App() {
       Icon: IconDemo,
       Layout: LayoutDemo,
       Grid: GridDemo,
+      Alert: AlertDemo,
+      Radio: RadioDemo,
     };
     
     const DemoComponent = demoComponents[componentName];

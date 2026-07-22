@@ -1,3 +1,131 @@
-.alert {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-alert {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  margin-bottom: 16px;
+  border-radius: @border-radius;
+  border: 1px solid @border-color;
+  font-size: @pc-font-size-base;
+  line-height: 22px;
+  transition: all 0.2s ease;
+
+  &--no-icon {
+    .zdy-alert-content {
+      margin-left: 0;
+    }
+  }
+
+  &--closable {
+    padding-right: 40px;
+  }
+
+  &--success {
+    background-color: #f6ffed;
+    border-color: #b7eb8f;
+
+    .zdy-alert-title {
+      color: #389e0d;
+    }
+
+    .zdy-alert-message {
+      color: #52c41a;
+    }
+  }
+
+  &--info {
+    background-color: #e6f7ff;
+    border-color: #91d5ff;
+
+    .zdy-alert-title {
+      color: #096dd9;
+    }
+
+    .zdy-alert-message {
+      color: #1890ff;
+    }
+  }
+
+  &--warning {
+    background-color: #fffbe6;
+    border-color: #ffe58f;
+
+    .zdy-alert-title {
+      color: #d48806;
+    }
+
+    .zdy-alert-message {
+      color: #faad14;
+    }
+  }
+
+  &--error {
+    background-color: #fff1f0;
+    border-color: #ffccc7;
+
+    .zdy-alert-title {
+      color: #cf1322;
+    }
+
+    .zdy-alert-message {
+      color: #f5222d;
+    }
+  }
+}
+
+.zdy-alert-icon {
+  flex-shrink: 0;
+  line-height: 0;
+}
+
+.zdy-alert-content {
+  flex: 1;
+  min-width: 0;
+  margin-left: 8px;
+}
+
+.zdy-alert-title {
+  margin: 0 0 4px 0;
+  padding: 0;
+  font-size: @pc-font-size-base;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.zdy-alert-message {
+  margin: 0;
+  padding: 0;
+  font-size: @pc-font-size-small;
+  color: @text-color-secondary;
+}
+
+.zdy-alert-close-icon {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: @text-color-secondary;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: @text-color;
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
 }
