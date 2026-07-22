@@ -4,8 +4,8 @@
   "version": "1.0.0",
   "description": "A React component library with PC and mobile versions",
   "type": "module",
-  "main": "./dist/react-ui-component-library.umd.cjs",
-  "module": "./dist/react-ui-component-library.js",
+  "main": "./dist/react-ui-component-library.umd.js",
+  "module": "./dist/react-ui-component-library.es.js",
   "types": "./dist/index.d.ts",
   "files": [
     "dist"
@@ -16,9 +16,7 @@
     "build:types": "tsc -p tsconfig.types.json",
     "build:all": "npm run build && npm run build:types",
     "lint": "eslint .",
-    "preview": "vite preview",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "preview": "vite preview"
   },
   "dependencies": {
     "classnames": "^2.5.1",
@@ -26,36 +24,19 @@
     "react-dom": "^19.2.0"
   },
   "devDependencies": {
-    "@chromatic-com/storybook": "^5.0.0",
     "@eslint/js": "^9.39.1",
-    "@storybook/addon-a11y": "^10.1.11",
-    "@storybook/addon-docs": "^10.1.11",
-    "@storybook/addon-onboarding": "^10.1.11",
-    "@storybook/addon-vitest": "^10.1.11",
-    "@storybook/react-vite": "^10.1.11",
-    "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
-    "@types/jest": "^30.0.0",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
-    "@vitejs/plugin-react": "^5.1.1",
-    "@vitest/browser-playwright": "^4.0.17",
-    "@vitest/coverage-v8": "^4.0.17",
+    "@vitejs/plugin-react": "^6.0.0",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
-    "eslint-plugin-storybook": "^10.1.11",
     "globals": "^16.5.0",
-    "jest": "^30.2.0",
     "less": "^4.5.1",
-    "playwright": "^1.57.0",
-    "react-testing-library": "^8.0.1",
-    "storybook": "^10.1.11",
-    "ts-jest": "^29.4.6",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
-    "vite": "^7.2.4",
-    "vitest": "^4.0.17"
+    "vite": "^8.0.0"
   }
 }
