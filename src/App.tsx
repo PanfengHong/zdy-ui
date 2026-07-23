@@ -14,6 +14,8 @@ import LayoutDemo from './components/pc/Layout/demo';
 import GridDemo from './components/pc/Grid/demo';
 import AlertDemo from './components/pc/Alert/demo';
 import RadioDemo from './components/pc/Radio/demo';
+import CheckboxDemo from './components/pc/Checkbox/demo';
+import SelectDemo from './components/pc/Select/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -177,6 +179,8 @@ function App() {
       Grid: GridDemo,
       Alert: AlertDemo,
       Radio: RadioDemo,
+      Checkbox: CheckboxDemo,
+      Select: SelectDemo,
     };
     
     const DemoComponent = demoComponents[componentName];

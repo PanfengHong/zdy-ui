@@ -11,7 +11,11 @@ interface RadioGroupContextValue {
 
 const RadioGroupContext = createContext<RadioGroupContextValue | null>(null);
 
-const Radio: React.FC<BaseRadioProps> = ({
+interface RadioComponent extends React.FC<BaseRadioProps> {
+  Group: React.FC<BaseRadioGroupProps>;
+}
+
+const Radio = ({
   value,
   checked: checkedProp,
   defaultChecked = false,
@@ -21,7 +25,7 @@ const Radio: React.FC<BaseRadioProps> = ({
   children,
   className = '',
   style
-}) => {
+}: BaseRadioProps) => {
   const [internalChecked, setInternalChecked] = useState(defaultChecked);
   const context = useContext(RadioGroupContext);
   
@@ -59,14 +63,14 @@ const Radio: React.FC<BaseRadioProps> = ({
   );
 };
 
-const RadioGroup: React.FC<BaseRadioGroupProps> = ({
+const RadioGroup = ({
   value: valueProp,
   defaultValue,
   onChange,
   children,
   className = '',
   style
-}) => {
+}: BaseRadioGroupProps) => {
   const [internalValue, setInternalValue] = useState(defaultValue);
   const isControlled = valueProp !== undefined;
   const currentValue = isControlled ? valueProp : internalValue;
@@ -87,6 +91,6 @@ const RadioGroup: React.FC<BaseRadioGroupProps> = ({
   );
 };
 
-Radio.Group = RadioGroup;
+(Radio as RadioComponent).Group = RadioGroup;
 
-export default Radio;
+export default Radio as RadioComponent;

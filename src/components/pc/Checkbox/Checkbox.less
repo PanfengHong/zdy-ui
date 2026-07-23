@@ -1,3 +1,105 @@
-.checkbox {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  font-size: @pc-font-size-base;
+  color: @text-color;
+  transition: all 0.2s ease;
+
+  &:hover:not(.zdy-checkbox--disabled) {
+    .zdy-checkbox-inner {
+      border-color: @primary-color;
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  &--checked {
+    .zdy-checkbox-inner {
+      border-color: @primary-color;
+      background-color: @primary-color;
+    }
+  }
+
+  &--indeterminate {
+    .zdy-checkbox-inner {
+      border-color: @primary-color;
+      background-color: @primary-color;
+    }
+  }
+
+  &-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-inner {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border: 2px solid @border-color;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 40%;
+      left: 50%;
+      width: 5px;
+      height: 10px;
+      border: solid #fff;
+      border-width: 0 2px 2px 0;
+      transform: translate(-50%, -50%) rotate(45deg) scale(0);
+      transition: transform 0.2s ease;
+    }
+  }
+
+  &--checked {
+    .zdy-checkbox-inner::after {
+      transform: translate(-50%, -50%) rotate(45deg) scale(1);
+    }
+  }
+
+  &--indeterminate {
+    .zdy-checkbox-inner::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 2px;
+      background-color: #fff;
+      transform: translate(-50%, -50%) scale(1);
+      border: none;
+    }
+  }
+
+  &-label {
+    margin-left: 8px;
+    line-height: 18px;
+    white-space: nowrap;
+  }
+}
+
+.zdy-checkbox-group {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 16px;
+
+  &-vertical {
+    flex-direction: column;
+  }
 }

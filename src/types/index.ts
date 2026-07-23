@@ -148,6 +148,39 @@ export interface BaseRadioGroupProps extends BaseComponentProps {
   children?: React.ReactNode;
 }
 
+export interface BaseCheckboxProps extends BaseComponentProps {
+  value?: string;
+  checked?: boolean;
+  defaultChecked?: boolean;
+  indeterminate?: boolean;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  disabled?: boolean;
+  label?: React.ReactNode;
+  children?: React.ReactNode;
+}
+
+export interface BaseCheckboxGroupProps extends BaseComponentProps {
+  value?: string[];
+  defaultValue?: string[];
+  onChange?: (value: string[]) => void;
+  children?: React.ReactNode;
+}
+
+export interface SelectOption {
+  value: string;
+  label: React.ReactNode;
+  disabled?: boolean;
+}
+
+export interface BaseSelectProps extends BaseComponentProps {
+  value?: string;
+  defaultValue?: string;
+  options: SelectOption[];
+  placeholder?: string;
+  disabled?: boolean;
+  onChange?: (value: string) => void;
+}
+
 export type ColSpanType = number | string;
 
 export interface BaseRowProps extends BaseComponentProps {
