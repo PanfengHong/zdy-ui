@@ -14,7 +14,7 @@ const Tabs: React.FC<TabsProps> = ({
 }) => {
 
   return (
-    <div className={classNames('tabs', className)} style={style}>
+    <div className={classNames('zdy-mobile-tabs', className)} style={style}>
       {children}
     </div>
   );

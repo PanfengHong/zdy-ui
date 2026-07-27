@@ -14,7 +14,7 @@ const Anchor: React.FC<AnchorProps> = ({
 }) => {
 
   return (
-    <div className={classNames('anchor', className)} style={style}>
+    <div className={classNames('zdy-mobile-anchor', className)} style={style}>
       {children}
     </div>
   );

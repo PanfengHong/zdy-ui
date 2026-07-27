@@ -14,7 +14,7 @@ const Board: React.FC<BoardProps> = ({
 }) => {
 
   return (
-    <div className={classNames('board', className)} style={style}>
+    <div className={classNames('zdy-mobile-board', className)} style={style}>
       {children}
     </div>
   );

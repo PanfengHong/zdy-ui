@@ -14,7 +14,7 @@ const Pagination: React.FC<PaginationProps> = ({
 }) => {
 
   return (
-    <div className={classNames('pagination', className)} style={style}>
+    <div className={classNames('zdy-mobile-pagination', className)} style={style}>
       {children}
     </div>
   );

@@ -14,7 +14,7 @@ const Popover: React.FC<PopoverProps> = ({
 }) => {
 
   return (
-    <div className={classNames('popover', className)} style={style}>
+    <div className={classNames('zdy-mobile-popover', className)} style={style}>
       {children}
     </div>
   );

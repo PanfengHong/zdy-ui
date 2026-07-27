@@ -14,7 +14,7 @@ const DateTimePicker: React.FC<DateTimePickerProps> = ({
 }) => {
 
   return (
-    <div className={classNames('datetimepicker', className)} style={style}>
+    <div className={classNames('zdy-mobile-datetimepicker', className)} style={style}>
       {children}
     </div>
   );

@@ -1,3 +1,80 @@
-.textarea {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-textarea-wrapper {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+
+  &--small {
+    .zdy-textarea {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  }
+
+  &--medium {
+    .zdy-textarea {
+      padding: 8px 12px;
+      font-size: 14px;
+    }
+  }
+
+  &--large {
+    .zdy-textarea {
+      padding: 10px 14px;
+      font-size: 16px;
+    }
+  }
+
+  &--disabled {
+    .zdy-textarea {
+      cursor: not-allowed;
+      opacity: 0.5;
+      background-color: #f5f5f5;
+    }
+  }
+
+  &--show-count {
+    padding-bottom: 24px;
+  }
+}
+
+.zdy-textarea {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid @border-color;
+  border-radius: 4px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: @text-color;
+  background-color: #fff;
+  resize: vertical;
+  outline: none;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+
+  &::placeholder {
+    color: @placeholder-color;
+  }
+
+  &:focus {
+    border-color: @primary-color;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+  }
+
+  &:hover:not(:focus) {
+    border-color: @primary-color;
+  }
+}
+
+.zdy-textarea-count {
+  position: absolute;
+  right: 12px;
+  bottom: 4px;
+  font-size: 12px;
+  color: @text-color-secondary;
+
+  &--overflow {
+    color: #ff4d4f;
+  }
 }

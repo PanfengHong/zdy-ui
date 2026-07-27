@@ -14,7 +14,7 @@ const Calendar: React.FC<CalendarProps> = ({
 }) => {
 
   return (
-    <div className={classNames('calendar', className)} style={style}>
+    <div className={classNames('zdy-mobile-calendar', className)} style={style}>
       {children}
     </div>
   );

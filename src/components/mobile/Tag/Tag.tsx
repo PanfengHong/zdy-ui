@@ -14,7 +14,7 @@ const Tag: React.FC<TagProps> = ({
 }) => {
 
   return (
-    <div className={classNames('tag', className)} style={style}>
+    <div className={classNames('zdy-mobile-tag', className)} style={style}>
       {children}
     </div>
   );

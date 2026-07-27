@@ -14,7 +14,7 @@ const Intro: React.FC<IntroProps> = ({
 }) => {
 
   return (
-    <div className={classNames('intro', className)} style={style}>
+    <div className={classNames('zdy-mobile-intro', className)} style={style}>
       {children}
     </div>
   );

@@ -14,7 +14,7 @@ const Slider: React.FC<SliderProps> = ({
 }) => {
 
   return (
-    <div className={classNames('slider', className)} style={style}>
+    <div className={classNames('zdy-mobile-slider', className)} style={style}>
       {children}
     </div>
   );

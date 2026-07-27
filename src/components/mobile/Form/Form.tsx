@@ -14,7 +14,7 @@ const Form: React.FC<FormProps> = ({
 }) => {
 
   return (
-    <div className={classNames('form', className)} style={style}>
+    <div className={classNames('zdy-mobile-form', className)} style={style}>
       {children}
     </div>
   );

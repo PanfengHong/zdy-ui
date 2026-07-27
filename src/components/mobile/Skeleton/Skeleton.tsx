@@ -14,7 +14,7 @@ const Skeleton: React.FC<SkeletonProps> = ({
 }) => {
 
   return (
-    <div className={classNames('skeleton', className)} style={style}>
+    <div className={classNames('zdy-mobile-skeleton', className)} style={style}>
       {children}
     </div>
   );

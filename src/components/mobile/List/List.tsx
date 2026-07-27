@@ -14,7 +14,7 @@ const List: React.FC<ListProps> = ({
 }) => {
 
   return (
-    <div className={classNames('list', className)} style={style}>
+    <div className={classNames('zdy-mobile-list', className)} style={style}>
       {children}
     </div>
   );

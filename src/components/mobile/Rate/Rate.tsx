@@ -14,7 +14,7 @@ const Rate: React.FC<RateProps> = ({
 }) => {
 
   return (
-    <div className={classNames('rate', className)} style={style}>
+    <div className={classNames('zdy-mobile-rate', className)} style={style}>
       {children}
     </div>
   );

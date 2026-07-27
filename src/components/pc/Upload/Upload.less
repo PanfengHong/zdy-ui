@@ -1,3 +1,158 @@
-.upload {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-upload {
+  display: inline-block;
+  width: 100%;
+  max-width: 300px;
+
+  &--disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &-trigger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100px;
+    border: 1px dashed @border-color;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+    color: @text-color-secondary;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: @primary-color;
+      color: @primary-color;
+      background-color: @primary-color-light;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  &-text {
+    margin-top: 8px;
+    font-size: 14px;
+  }
+
+  &-hint {
+    margin-top: 4px;
+    font-size: 12px;
+    color: @text-color-disabled;
+  }
+
+  &-list {
+    margin-top: 12px;
+  }
+
+  &-list-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px;
+    margin-bottom: 8px;
+    border: 1px solid @border-color;
+    border-radius: 4px;
+    background-color: #fff;
+    transition: all 0.2s ease;
+
+    &--uploading {
+      border-color: @primary-color;
+    }
+
+    &--done {
+      border-color: #52c41a;
+    }
+
+    &--error {
+      border-color: #ff4d4f;
+    }
+  }
+
+  &-list-item-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &-list-item-name {
+    font-size: 14px;
+    color: @text-color;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &-list-item-size {
+    font-size: 12px;
+    color: @text-color-secondary;
+    margin-top: 2px;
+  }
+
+  &-list-item-progress {
+    width: 100%;
+    height: 4px;
+    margin-top: 8px;
+    background-color: #f0f0f0;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  &-list-item-progress-bar {
+    height: 100%;
+    background-color: @primary-color;
+    border-radius: 2px;
+    transition: width 0.2s ease;
+  }
+
+  &-list-item-status {
+    margin-left: 12px;
+    flex-shrink: 0;
+  }
+
+  &-list-item-status-text {
+    font-size: 12px;
+    color: @primary-color;
+
+    &--error {
+      color: #ff4d4f;
+    }
+  }
+
+  &-list-item-actions {
+    display: flex;
+    gap: 8px;
+    margin-left: 12px;
+    flex-shrink: 0;
+  }
+
+  &-list-item-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: none;
+    border-radius: 4px;
+    background: transparent;
+    cursor: pointer;
+    color: @text-color-secondary;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: @background-color-hover;
+      color: @text-color;
+    }
+
+    &--retry:hover {
+      color: @primary-color;
+    }
+
+    &--remove:hover {
+      color: #ff4d4f;
+    }
+  }
 }

@@ -14,7 +14,7 @@ const Notification: React.FC<NotificationProps> = ({
 }) => {
 
   return (
-    <div className={classNames('notification', className)} style={style}>
+    <div className={classNames('zdy-mobile-notification', className)} style={style}>
       {children}
     </div>
   );

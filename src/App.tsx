@@ -16,6 +16,8 @@ import AlertDemo from './components/pc/Alert/demo';
 import RadioDemo from './components/pc/Radio/demo';
 import CheckboxDemo from './components/pc/Checkbox/demo';
 import SelectDemo from './components/pc/Select/demo';
+import UploadDemo from './components/pc/Upload/demo';
+import TextareaDemo from './components/pc/Textarea/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -181,6 +183,8 @@ function App() {
       Radio: RadioDemo,
       Checkbox: CheckboxDemo,
       Select: SelectDemo,
+      Upload: UploadDemo,
+      Textarea: TextareaDemo,
     };
     
     const DemoComponent = demoComponents[componentName];

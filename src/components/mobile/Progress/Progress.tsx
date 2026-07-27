@@ -14,7 +14,7 @@ const Progress: React.FC<ProgressProps> = ({
 }) => {
 
   return (
-    <div className={classNames('progress', className)} style={style}>
+    <div className={classNames('zdy-mobile-progress', className)} style={style}>
       {children}
     </div>
   );

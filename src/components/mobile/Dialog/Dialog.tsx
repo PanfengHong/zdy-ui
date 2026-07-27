@@ -14,7 +14,7 @@ const Dialog: React.FC<DialogProps> = ({
 }) => {
 
   return (
-    <div className={classNames('dialog', className)} style={style}>
+    <div className={classNames('zdy-mobile-dialog', className)} style={style}>
       {children}
     </div>
   );

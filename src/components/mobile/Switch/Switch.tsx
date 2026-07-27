@@ -14,7 +14,7 @@ const Switch: React.FC<SwitchProps> = ({
 }) => {
 
   return (
-    <div className={classNames('switch', className)} style={style}>
+    <div className={classNames('zdy-mobile-switch', className)} style={style}>
       {children}
     </div>
   );

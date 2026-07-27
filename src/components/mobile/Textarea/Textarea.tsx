@@ -14,7 +14,7 @@ const Textarea: React.FC<TextareaProps> = ({
 }) => {
 
   return (
-    <div className={classNames('textarea', className)} style={style}>
+    <div className={classNames('zdy-mobile-textarea', className)} style={style}>
       {children}
     </div>
   );

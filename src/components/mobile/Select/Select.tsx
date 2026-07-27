@@ -14,7 +14,7 @@ const Select: React.FC<SelectProps> = ({
 }) => {
 
   return (
-    <div className={classNames('select', className)} style={style}>
+    <div className={classNames('zdy-mobile-select', className)} style={style}>
       {children}
     </div>
   );

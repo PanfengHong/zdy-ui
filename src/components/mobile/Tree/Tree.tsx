@@ -14,7 +14,7 @@ const Tree: React.FC<TreeProps> = ({
 }) => {
 
   return (
-    <div className={classNames('tree', className)} style={style}>
+    <div className={classNames('zdy-mobile-tree', className)} style={style}>
       {children}
     </div>
   );

@@ -14,7 +14,7 @@ const Carousel: React.FC<CarouselProps> = ({
 }) => {
 
   return (
-    <div className={classNames('carousel', className)} style={style}>
+    <div className={classNames('zdy-mobile-carousel', className)} style={style}>
       {children}
     </div>
   );

@@ -14,7 +14,7 @@ const Steps: React.FC<StepsProps> = ({
 }) => {
 
   return (
-    <div className={classNames('steps', className)} style={style}>
+    <div className={classNames('zdy-mobile-steps', className)} style={style}>
       {children}
     </div>
   );

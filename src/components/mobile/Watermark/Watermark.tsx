@@ -14,7 +14,7 @@ const Watermark: React.FC<WatermarkProps> = ({
 }) => {
 
   return (
-    <div className={classNames('watermark', className)} style={style}>
+    <div className={classNames('zdy-mobile-watermark', className)} style={style}>
       {children}
     </div>
   );

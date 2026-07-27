@@ -14,7 +14,7 @@ const Breadcrumb: React.FC<BreadcrumbProps> = ({
 }) => {
 
   return (
-    <div className={classNames('breadcrumb', className)} style={style}>
+    <div className={classNames('zdy-mobile-breadcrumb', className)} style={style}>
       {children}
     </div>
   );

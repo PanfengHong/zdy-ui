@@ -14,7 +14,7 @@ const Empty: React.FC<EmptyProps> = ({
 }) => {
 
   return (
-    <div className={classNames('empty', className)} style={style}>
+    <div className={classNames('zdy-mobile-empty', className)} style={style}>
       {children}
     </div>
   );

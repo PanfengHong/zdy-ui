@@ -18,12 +18,12 @@ const Button: React.FC<BaseButtonProps> = ({
   return (
     <button
       className={classNames(
-        'zdy-button-m',
-        `zdy-button-m--${type}`,
-        `zdy-button-m--${size}`,
-        {[`zdy-button-m--shape-${shape}`]: shape !== 'default'},
-        {'zdy-button-m--disabled': disabled},
-        {'zdy-button-m--loading': loading},
+        'zdy-mobile-button',
+        `zdy-mobile-button--${type}`,
+        `zdy-mobile-button--${size}`,
+        {[`zdy-mobile-button--shape-${shape}`]: shape !== 'default'},
+        {'zdy-mobile-button--disabled': disabled},
+        {'zdy-mobile-button--loading': loading},
         className
       )}
       style={style}

@@ -33,6 +33,20 @@ export interface BaseInputProps extends BaseComponentProps {
   suffix?: React.ReactNode;
 }
 
+// Textarea组件通用Props
+export interface BaseTextareaProps extends BaseComponentProps {
+  value?: string;
+  onChange?: React.ChangeEventHandler<HTMLTextAreaElement>;
+  placeholder?: string;
+  disabled?: boolean;
+  size?: SizeType;
+  rows?: number;
+  cols?: number;
+  maxLength?: number;
+  showCount?: boolean;
+  autoSize?: boolean;
+}
+
 // Card组件通用Props
 export interface BaseCardProps extends BaseComponentProps {
   title?: React.ReactNode;
@@ -201,4 +215,34 @@ export interface BaseColProps extends BaseComponentProps {
   lg?: ColSpanType | { span?: ColSpanType; offset?: ColSpanType };
   xl?: ColSpanType | { span?: ColSpanType; offset?: ColSpanType };
   children?: React.ReactNode;
+}
+
+export interface UploadFile {
+  uid: string;
+  name: string;
+  status?: 'pending' | 'uploading' | 'done' | 'error';
+  percent?: number;
+  url?: string;
+  thumbUrl?: string;
+  size?: number;
+  type?: string;
+}
+
+export interface BaseUploadProps extends BaseComponentProps {
+  action: string;
+  method?: 'post' | 'get';
+  headers?: Record<string, string>;
+  data?: Record<string, any>;
+  accept?: string;
+  multiple?: boolean;
+  maxFileSize?: number;
+  maxCount?: number;
+  disabled?: boolean;
+  showUploadList?: boolean;
+  beforeUpload?: (file: File) => boolean | Promise<boolean>;
+  onProgress?: (percent: number, file: UploadFile) => void;
+  onSuccess?: (response: any, file: UploadFile) => void;
+  onError?: (error: Error, file: UploadFile) => void;
+  onChange?: (fileList: UploadFile[]) => void;
+  onRemove?: (file: UploadFile) => void;
 }

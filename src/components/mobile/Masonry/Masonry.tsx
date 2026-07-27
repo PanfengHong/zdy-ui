@@ -14,7 +14,7 @@ const Masonry: React.FC<MasonryProps> = ({
 }) => {
 
   return (
-    <div className={classNames('masonry', className)} style={style}>
+    <div className={classNames('zdy-mobile-masonry', className)} style={style}>
       {children}
     </div>
   );

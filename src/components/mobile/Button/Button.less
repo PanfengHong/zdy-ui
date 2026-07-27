@@ -1,6 +1,6 @@
 @import '../../../styles/variables.less';
 
-.zdy-button-m {
+.zdy-mobile-zdy-mobile-button {
   display: inline-block;
   position: relative;
   padding: 12px 24px;
@@ -16,83 +16,80 @@
   border-radius: 12px;
   transition: all 0.3s ease;
   min-width: 88px;
-  min-height: 44px; // 确保触摸区域至少44x44px
-  
+  min-height: 44px;
+
   &:active {
     transform: scale(0.95);
   }
-  
-  // 类型样式
+
   &--primary {
     color: #fff;
     background-color: @primary-color;
-    
+
     &:hover {
       background-color: darken(@primary-color, 10%);
     }
   }
-  
+
   &--default {
     color: @text-color;
     background-color: #fff;
     border: 2px solid @border-color;
-    
+
     &:hover {
       color: @primary-color;
       border-color: @primary-color;
     }
   }
-  
+
   &--success {
     color: #fff;
     background-color: @success-color;
-    
+
     &:hover {
       background-color: darken(@success-color, 10%);
     }
   }
-  
+
   &--warning {
     color: #fff;
     background-color: @warning-color;
-    
+
     &:hover {
       background-color: darken(@warning-color, 10%);
     }
   }
-  
+
   &--error {
     color: #fff;
     background-color: @error-color;
-    
+
     &:hover {
       background-color: darken(@error-color, 10%);
     }
   }
-  
-  // 尺寸样式
+
   &--small {
     padding: 8px 16px;
     font-size: @mobile-font-size-small;
     min-width: 64px;
     min-height: 36px;
   }
-  
+
   &--medium {
     padding: 12px 24px;
     font-size: @mobile-font-size-base;
     min-width: 88px;
     min-height: 44px;
   }
-  
+
   &--large {
     padding: 16px 32px;
     font-size: @mobile-font-size-large;
     min-width: 112px;
     min-height: 56px;
   }
-  
-  // 形状样式
+
   &--shape-circle {
     width: 44px;
     height: 44px;
@@ -100,36 +97,35 @@
     border-radius: 50%;
     min-width: unset;
   }
-  
+
   &--shape-round {
     border-radius: 28px;
   }
-  
-  // 状态样式
+
   &--disabled {
     opacity: 0.6;
     cursor: not-allowed;
-    
+
     &:hover {
       opacity: 0.6;
       color: inherit;
       background-color: inherit;
       border-color: inherit;
     }
-    
+
     &:active {
       transform: none;
     }
   }
-  
+
   &--loading {
     opacity: 0.8;
     cursor: not-allowed;
-    
+
     &--icon {
       margin-right: 8px;
     }
-    
+
     &:active {
       transform: none;
     }

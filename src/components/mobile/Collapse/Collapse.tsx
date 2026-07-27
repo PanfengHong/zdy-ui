@@ -14,7 +14,7 @@ const Collapse: React.FC<CollapseProps> = ({
 }) => {
 
   return (
-    <div className={classNames('collapse', className)} style={style}>
+    <div className={classNames('zdy-mobile-collapse', className)} style={style}>
       {children}
     </div>
   );

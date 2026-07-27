@@ -14,7 +14,7 @@ const Upload: React.FC<UploadProps> = ({
 }) => {
 
   return (
-    <div className={classNames('upload', className)} style={style}>
+    <div className={classNames('zdy-mobile-upload', className)} style={style}>
       {children}
     </div>
   );

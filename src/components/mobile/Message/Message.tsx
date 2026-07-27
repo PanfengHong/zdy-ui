@@ -14,7 +14,7 @@ const Message: React.FC<MessageProps> = ({
 }) => {
 
   return (
-    <div className={classNames('message', className)} style={style}>
+    <div className={classNames('zdy-mobile-message', className)} style={style}>
       {children}
     </div>
   );

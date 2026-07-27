@@ -14,7 +14,7 @@ const ColorPicker: React.FC<ColorPickerProps> = ({
 }) => {
 
   return (
-    <div className={classNames('colorpicker', className)} style={style}>
+    <div className={classNames('zdy-mobile-colorpicker', className)} style={style}>
       {children}
     </div>
   );

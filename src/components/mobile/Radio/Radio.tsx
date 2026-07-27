@@ -9,6 +9,10 @@ interface RadioGroupContextValue {
   onChange?: (value: string) => void;
 }
 
+interface RadioComponent extends React.FC<BaseRadioProps> {
+  Group: React.FC<BaseRadioGroupProps>;
+}
+
 const RadioGroupContext = createContext<RadioGroupContextValue | null>(null);
 
 const Radio: React.FC<BaseRadioProps> = ({
@@ -40,18 +44,18 @@ const Radio: React.FC<BaseRadioProps> = ({
   };
 
   return (
-    <label className={classNames('zdy-radio', { 'zdy-radio--checked': isChecked }, { 'zdy-radio--disabled': disabled }, className)} style={style}>
+    <label className={classNames('zdy-mobile-radio', { 'zdy-mobile-radio--checked': isChecked }, { 'zdy-mobile-radio--disabled': disabled }, className)} style={style}>
       <input
         type="radio"
         value={value}
         checked={isChecked}
         onChange={handleChange}
         disabled={disabled}
-        className="zdy-radio-input"
+        className="zdy-mobile-radio-input"
       />
-      <span className="zdy-radio-inner" />
+      <span className="zdy-mobile-radio-inner" />
       {(label || children) && (
-        <span className="zdy-radio-label">
+        <span className="zdy-mobile-radio-label">
           {label || children}
         </span>
       )}
@@ -79,7 +83,7 @@ const RadioGroup: React.FC<BaseRadioGroupProps> = ({
   };
 
   return (
-    <div className={classNames('zdy-radio-group', className)} style={style}>
+    <div className={classNames('zdy-mobile-radio-group', className)} style={style}>
       <RadioGroupContext.Provider value={{ value: currentValue, onChange: handleChange }}>
         {children}
       </RadioGroupContext.Provider>
@@ -87,6 +91,6 @@ const RadioGroup: React.FC<BaseRadioGroupProps> = ({
   );
 };
 
-Radio.Group = RadioGroup;
+(Radio as RadioComponent).Group = RadioGroup;
 
 export default Radio;

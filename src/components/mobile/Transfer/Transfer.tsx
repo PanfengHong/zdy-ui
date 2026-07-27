@@ -14,7 +14,7 @@ const Transfer: React.FC<TransferProps> = ({
 }) => {
 
   return (
-    <div className={classNames('transfer', className)} style={style}>
+    <div className={classNames('zdy-mobile-transfer', className)} style={style}>
       {children}
     </div>
   );

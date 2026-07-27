@@ -14,7 +14,7 @@ const Table: React.FC<TableProps> = ({
 }) => {
 
   return (
-    <div className={classNames('table', className)} style={style}>
+    <div className={classNames('zdy-mobile-table', className)} style={style}>
       {children}
     </div>
   );

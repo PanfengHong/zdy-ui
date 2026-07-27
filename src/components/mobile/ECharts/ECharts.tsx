@@ -14,7 +14,7 @@ const ECharts: React.FC<EChartsProps> = ({
 }) => {
 
   return (
-    <div className={classNames('echarts', className)} style={style}>
+    <div className={classNames('zdy-mobile-echarts', className)} style={style}>
       {children}
     </div>
   );

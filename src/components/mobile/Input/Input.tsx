@@ -18,24 +18,24 @@ const Input = forwardRef<HTMLInputElement, BaseInputProps>(({
 
   return (
     <div className={classNames(
-      'mobile-input-wrapper',
-      `mobile-input-wrapper-${size}`,
-      {'mobile-input-wrapper-disabled': disabled},
-      {'mobile-input-wrapper-prefix': prefix},
-      {'mobile-input-wrapper-suffix': suffix},
+      'zdy-mobile-input-wrapper',
+      `zdy-mobile-input-wrapper--${size}`,
+      {'zdy-mobile-input-wrapper--disabled': disabled},
+      {'zdy-mobile-input-wrapper--prefix': prefix},
+      {'zdy-mobile-input-wrapper--suffix': suffix},
       className
     )} style={style}>
-      {prefix && <span className="mobile-input-prefix">{prefix}</span>}
+      {prefix && <span className="zdy-mobile-input__prefix">{prefix}</span>}
       <input
         ref={ref}
         type={type}
-        className="mobile-input"
+        className="zdy-mobile-input"
         placeholder={placeholder}
         disabled={disabled}
         value={value}
         onChange={onChange}
       />
-      {suffix && <span className="mobile-input-suffix">{suffix}</span>}
+      {suffix && <span className="zdy-mobile-input__suffix">{suffix}</span>}
     </div>
   );
 });

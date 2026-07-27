@@ -14,7 +14,7 @@ const Loading: React.FC<LoadingProps> = ({
 }) => {
 
   return (
-    <div className={classNames('loading', className)} style={style}>
+    <div className={classNames('zdy-mobile-loading', className)} style={style}>
       {children}
     </div>
   );
