@@ -1,4 +1,3 @@
-// 获取git commit记录
 export interface GitCommit {
   hash: string;
   date: string;
@@ -8,7 +7,7 @@ export interface GitCommit {
 
 export async function getGitCommits(count: number = 20): Promise<GitCommit[]> {
   try {
-    const response = await fetch('/api/git-log', {
+    const response = await fetch(`/api/git-log?count=${count}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -21,12 +20,10 @@ export async function getGitCommits(count: number = 20): Promise<GitCommit[]> {
     
     return await response.json();
   } catch (error) {
-    // 如果API不可用，返回模拟数据
     return getMockCommits();
   }
 }
 
-// 模拟commit数据
 function getMockCommits(): GitCommit[] {
   return [
     {
@@ -57,24 +54,6 @@ function getMockCommits(): GitCommit[] {
       hash: 'q3r4s5t',
       date: '2024-01-14',
       message: 'chore: 初始化React+TS+Vite项目',
-      author: 'Developer',
-    },
-    {
-      hash: 'u6v7w8x',
-      date: '2024-01-13',
-      message: 'chore: 添加Less样式支持',
-      author: 'Developer',
-    },
-    {
-      hash: 'y9z0a1b',
-      date: '2024-01-12',
-      message: 'chore: 配置TypeScript类型声明',
-      author: 'Developer',
-    },
-    {
-      hash: 'c2d3e4f',
-      date: '2024-01-11',
-      message: 'chore: 配置Vite构建工具',
       author: 'Developer',
     },
   ];
