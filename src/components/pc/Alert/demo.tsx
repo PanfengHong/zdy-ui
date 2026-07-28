@@ -11,7 +11,7 @@ const AlertDemo = () => {
                     code={`
 <Alert>基础示例</Alert>
 // 成功提示
-<Alert type="success" title="操作成功" message="数据已保存" />
+<Alert type="success" message="操作成功" message="数据已保存" />
 
 // 信息提示（可关闭）
 <Alert type="info" title="提示" message="请先完成表单填写" closable />
@@ -28,7 +28,7 @@ const AlertDemo = () => {
                     <div className="alert-group">
                         <Alert>基础示例</Alert>
                         
-                        <Alert type="success" title="操作成功" />
+                        <Alert type="success" message="操作成功" />
                         
                         <Alert type="warning" message="此操作将无法撤销" />
 

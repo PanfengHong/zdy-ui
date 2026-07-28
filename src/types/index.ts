@@ -111,6 +111,16 @@ export interface BaseAlertProps extends BaseComponentProps {
   children?: React.ReactNode;
 }
 
+export type MessageType = 'success' | 'info' | 'warning' | 'error';
+
+export interface MessageConfig {
+  content: React.ReactNode;
+  type?: MessageType;
+  duration?: number;
+  closable?: boolean;
+  onClose?: () => void;
+}
+
 // Icon组件通用Props
 export interface BaseIconProps extends BaseComponentProps {
   type?: IconType;

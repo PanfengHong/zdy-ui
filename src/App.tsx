@@ -18,6 +18,7 @@ import CheckboxDemo from './components/pc/Checkbox/demo';
 import SelectDemo from './components/pc/Select/demo';
 import UploadDemo from './components/pc/Upload/demo';
 import TextareaDemo from './components/pc/Textarea/demo';
+import MessageDemo from './components/pc/Message/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -185,6 +186,7 @@ function App() {
       Select: SelectDemo,
       Upload: UploadDemo,
       Textarea: TextareaDemo,
+      Message: MessageDemo,
     };
     
     const DemoComponent = demoComponents[componentName];
