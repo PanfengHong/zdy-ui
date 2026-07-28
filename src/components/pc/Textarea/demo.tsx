@@ -1,9 +1,32 @@
 import React, { useState } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
+import Table from '../Table/Table';
 import Textarea from './Textarea';
 
 const TextareaDemo = () => {
   const [value, setValue] = useState('');
+
+  const apiColumns = [
+    { title: '参数', dataIndex: 'prop' },
+    { title: '说明', dataIndex: 'desc' },
+    { title: '类型', dataIndex: 'type' },
+    { title: '默认值', dataIndex: 'default' }
+  ];
+
+  const apiData = [
+    { prop: 'value', desc: '当前值', type: 'string', default: '-' },
+    { prop: 'onChange', desc: '值变化回调', type: 'function', default: '-' },
+    { prop: 'placeholder', desc: '占位提示', type: 'string', default: '-' },
+    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
+    { prop: 'size', desc: '尺寸', type: 'SizeType', default: 'medium' },
+    { prop: 'rows', desc: '行数', type: 'number', default: '4' },
+    { prop: 'cols', desc: '列数', type: 'number', default: '50' },
+    { prop: 'maxLength', desc: '最大字符数', type: 'number', default: '-' },
+    { prop: 'showCount', desc: '是否显示字数', type: 'boolean', default: 'false' },
+    { prop: 'autoSize', desc: '是否自适应高度', type: 'boolean', default: 'false' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
+  ];
 
   return (
     <>
@@ -98,6 +121,11 @@ const [value, setValue] = useState('');
         >
           <Textarea autoSize placeholder="输入内容会自动增高" />
         </DemoBlock>
+      </div>
+
+      <div className="component-group" style={{ marginTop: '32px' }}>
+        <h3>API</h3>
+        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
       </div>
     </>
   );

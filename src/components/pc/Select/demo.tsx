@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
+import Table from '../Table/Table';
 import Select from './Select';
 
 const SelectDemo = () => {
@@ -11,6 +12,24 @@ const SelectDemo = () => {
     { value: 'banana', label: '香蕉' },
     { value: 'grape', label: '葡萄' },
     { value: 'mango', label: '芒果', disabled: true }
+  ];
+
+  const apiColumns = [
+    { title: '参数', dataIndex: 'prop' },
+    { title: '说明', dataIndex: 'desc' },
+    { title: '类型', dataIndex: 'type' },
+    { title: '默认值', dataIndex: 'default' }
+  ];
+
+  const apiData = [
+    { prop: 'value', desc: '当前选中值', type: 'string', default: '-' },
+    { prop: 'defaultValue', desc: '默认选中值', type: 'string', default: '-' },
+    { prop: 'options', desc: '选项列表', type: 'SelectOption[]', default: '-' },
+    { prop: 'placeholder', desc: '占位提示', type: 'string', default: '-' },
+    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
+    { prop: 'onChange', desc: '值变化回调', type: 'function(value)', default: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
   return (
@@ -92,6 +111,11 @@ const [value, setValue] = useState('orange');
             { value: 'banana', label: '香蕉' }
           ]} placeholder="禁用选项" />
         </DemoBlock>
+      </div>
+
+      <div className="component-group" style={{ marginTop: '32px' }}>
+        <h3>API</h3>
+        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
       </div>
     </>
   );

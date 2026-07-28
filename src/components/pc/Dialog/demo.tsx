@@ -1,11 +1,32 @@
 import React, { useState } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
+import Table from '../Table/Table';
 import Dialog from './Dialog';
 import Button from '../Button/Button';
 
 const DialogDemo = () => {
   const [visible1, setVisible1] = useState(false);
   const [visible2, setVisible2] = useState(false);
+
+  const apiColumns = [
+    { title: '参数', dataIndex: 'prop' },
+    { title: '说明', dataIndex: 'desc' },
+    { title: '类型', dataIndex: 'type' },
+    { title: '默认值', dataIndex: 'default' }
+  ];
+
+  const apiData = [
+    { prop: 'visible', desc: '是否显示对话框', type: 'boolean', default: 'false' },
+    { prop: 'title', desc: '对话框标题', type: 'ReactNode', default: '-' },
+    { prop: 'width', desc: '对话框宽度', type: 'string | number', default: '520' },
+    { prop: 'closable', desc: '是否显示关闭按钮', type: 'boolean', default: 'true' },
+    { prop: 'mask', desc: '是否显示遮罩', type: 'boolean', default: 'true' },
+    { prop: 'maskClosable', desc: '点击遮罩是否关闭', type: 'boolean', default: 'true' },
+    { prop: 'onClose', desc: '关闭回调', type: 'function', default: '-' },
+    { prop: 'footer', desc: '自定义底部', type: 'ReactNode', default: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
+  ];
 
   return (
     <>
@@ -80,6 +101,10 @@ const [visible, setVisible] = useState(false);
             无标题对话框内容
           </Dialog>
         </DemoBlock>
+      </div>
+      <div className="component-group" style={{ marginTop: '32px' }}>
+        <h3>API</h3>
+        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
       </div>
     </>
   );

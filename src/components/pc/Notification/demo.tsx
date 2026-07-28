@@ -1,9 +1,39 @@
 import React from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
+import Table from '../Table/Table';
 import Button from '../Button/Button';
 import Notification from './Notification';
 
 const NotificationDemo = () => {
+  const apiColumns = [
+    { title: '参数', dataIndex: 'prop' },
+    { title: '说明', dataIndex: 'desc' },
+    { title: '类型', dataIndex: 'type' },
+    { title: '默认值', dataIndex: 'default' }
+  ];
+
+  const apiData = [
+    { prop: 'message', desc: '通知标题', type: 'ReactNode', default: '-' },
+    { prop: 'description', desc: '通知内容', type: 'ReactNode', default: '-' },
+    { prop: 'type', desc: '通知类型', type: "'success' | 'info' | 'warning' | 'error'", default: 'info' },
+    { prop: 'duration', desc: '自动关闭时长（毫秒），0为不自动关闭', type: 'number', default: '4500' },
+    { prop: 'closable', desc: '是否可关闭', type: 'boolean', default: 'true' },
+    { prop: 'placement', desc: '显示位置', type: "'topLeft' | 'topRight' | 'bottomLeft' | 'bottomRight'", default: 'topRight' },
+    { prop: 'onClose', desc: '关闭回调', type: 'function', default: '-' },
+    { prop: 'onClick', desc: '点击回调', type: 'function', default: '-' },
+    { prop: 'btn', desc: '自定义按钮', type: 'ReactNode', default: '-' },
+    { prop: 'notificationKey', desc: '通知唯一标识，用于关闭指定通知', type: 'string', default: '-' }
+  ];
+
+  const methodApiData = [
+    { prop: 'Notification.success(config)', desc: '显示成功通知', type: 'function', default: '-' },
+    { prop: 'Notification.info(config)', desc: '显示信息通知', type: 'function', default: '-' },
+    { prop: 'Notification.warning(config)', desc: '显示警告通知', type: 'function', default: '-' },
+    { prop: 'Notification.error(config)', desc: '显示错误通知', type: 'function', default: '-' },
+    { prop: 'Notification.close(key)', desc: '关闭指定通知', type: 'function', default: '-' },
+    { prop: 'Notification.closeAll()', desc: '关闭所有通知', type: 'function', default: '-' }
+  ];
+
   return (
     <>
       <div className="component-group">
@@ -185,6 +215,15 @@ Notification.info('这是一个只有标题的简洁通知');
         >
           <Button onClick={() => Notification.info('这是一个只有标题的简洁通知')}>简洁通知</Button>
         </DemoBlock>
+      </div>
+
+      <div className="component-group" style={{ marginTop: '32px' }}>
+        <h3>配置参数</h3>
+        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
+      </div>
+      <div className="component-group">
+        <h3>方法</h3>
+        <Table columns={apiColumns} dataSource={methodApiData} className="zdy-table-api" />
       </div>
     </>
   );

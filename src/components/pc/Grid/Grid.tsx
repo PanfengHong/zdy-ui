@@ -9,6 +9,11 @@ interface SizeType {
   offset?: ColSpanType;
 }
 
+type GridType = React.FC & {
+  Row: typeof Row;
+  Col: typeof Col;
+};
+
 const Row: React.FC<BaseRowProps> = ({
   children,
   className = '',
@@ -88,7 +93,7 @@ const Col: React.FC<BaseColProps> = ({
   );
 };
 
-const Grid: React.FC = () => null;
+const Grid: GridType = () => null;
 
 Grid.Row = Row;
 Grid.Col = Col;

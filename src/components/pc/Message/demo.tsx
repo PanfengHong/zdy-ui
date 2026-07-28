@@ -1,9 +1,34 @@
 import React from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
+import Table from '../Table/Table';
 import Button from '../Button/Button';
 import Message from './Message';
 
 const MessageDemo = () => {
+  const apiColumns = [
+    { title: '参数', dataIndex: 'prop' },
+    { title: '说明', dataIndex: 'desc' },
+    { title: '类型', dataIndex: 'type' },
+    { title: '默认值', dataIndex: 'default' }
+  ];
+
+  const apiData = [
+    { prop: 'content', desc: '消息内容', type: 'ReactNode', default: '-' },
+    { prop: 'type', desc: '消息类型', type: "'success' | 'info' | 'warning' | 'error'", default: 'info' },
+    { prop: 'duration', desc: '自动关闭时长（毫秒），0为不自动关闭', type: 'number', default: '3000' },
+    { prop: 'closable', desc: '是否可关闭', type: 'boolean', default: 'true' },
+    { prop: 'onClose', desc: '关闭回调', type: 'function', default: '-' }
+  ];
+
+  const methodApiData = [
+    { prop: 'Message.success(content|config)', desc: '显示成功消息', type: 'function', default: '-' },
+    { prop: 'Message.info(content|config)', desc: '显示信息消息', type: 'function', default: '-' },
+    { prop: 'Message.warning(content|config)', desc: '显示警告消息', type: 'function', default: '-' },
+    { prop: 'Message.error(content|config)', desc: '显示错误消息', type: 'function', default: '-' },
+    { prop: 'Message.loading(content|config)', desc: '显示加载消息', type: 'function', default: '-' },
+    { prop: 'Message.closeAll()', desc: '关闭所有消息', type: 'function', default: '-' }
+  ];
+
   return (
     <>
       <div className="component-group">
@@ -94,6 +119,15 @@ Message.warning('第三条消息');
             setTimeout(() => Message.warning('第三条消息'), 400);
           }}>显示多条消息</Button>
         </DemoBlock>
+      </div>
+
+      <div className="component-group" style={{ marginTop: '32px' }}>
+        <h3>配置参数</h3>
+        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
+      </div>
+      <div className="component-group">
+        <h3>方法</h3>
+        <Table columns={apiColumns} dataSource={methodApiData} className="zdy-table-api" />
       </div>
     </>
   );

@@ -1,189 +1,112 @@
 import React from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
+import Table from '../Table/Table';
 import Icon from './Icon';
 
 const IconDemo = () => {
+  const apiColumns = [
+    { title: '参数', dataIndex: 'prop' },
+    { title: '说明', dataIndex: 'desc' },
+    { title: '类型', dataIndex: 'type' },
+    { title: '默认值', dataIndex: 'default' }
+  ];
+
+  const apiData = [
+    { prop: 'type', desc: '图标名称', type: 'string', default: '-' },
+    { prop: 'size', desc: '图标大小', type: 'number | string', default: 'inherit' },
+    { prop: 'color', desc: '图标颜色', type: 'string', default: 'inherit' },
+    { prop: 'spin', desc: '是否旋转', type: 'boolean', default: 'false' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
+  ];
+
   return (
     <>
       <div className="component-group">
-        <h3>基础用法</h3>
+        <h3>基础示例</h3>
         <DemoBlock
           code={`
-<Icon type="add" />
-<Icon type="delete" />
-<Icon type="close" />
-<Icon type="edit" />
+<Icon type="home" />
+<Icon type="user" />
 <Icon type="search" />
-<Icon type="save" />
+<Icon type="bell" />
+<Icon type="star" />
+<Icon type="heart" />
+<Icon type="settings" />
+<Icon type="close" />
           `.trim()}
         >
-          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" />
-              <span style={{ fontSize: '12px', color: '#999' }}>add</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="delete" />
-              <span style={{ fontSize: '12px', color: '#999' }}>delete</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="close" />
-              <span style={{ fontSize: '12px', color: '#999' }}>close</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="edit" />
-              <span style={{ fontSize: '12px', color: '#999' }}>edit</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="search" />
-              <span style={{ fontSize: '12px', color: '#999' }}>search</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="save" />
-              <span style={{ fontSize: '12px', color: '#999' }}>save</span>
-            </div>
+          <div style={{ display: 'flex', gap: '24px', fontSize: '24px' }}>
+            <Icon type="home" />
+            <Icon type="user" />
+            <Icon type="search" />
+            <Icon type="bell" />
+            <Icon type="star" />
+            <Icon type="heart" />
+            <Icon type="settings" />
+            <Icon type="close" />
           </div>
         </DemoBlock>
       </div>
+
       <div className="component-group">
-        <h3>导航图标</h3>
+        <h3>不同尺寸</h3>
         <DemoBlock
           code={`
-<Icon type="back" />
-<Icon type="forward" />
-<Icon type="up" />
-<Icon type="down" />
-<Icon type="left" />
-<Icon type="right" />
+<Icon type="home" size={16} />
+<Icon type="home" size={24} />
+<Icon type="home" size={32} />
+<Icon type="home" size={48} />
           `.trim()}
         >
           <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="back" />
-              <span style={{ fontSize: '12px', color: '#999' }}>back</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="forward" />
-              <span style={{ fontSize: '12px', color: '#999' }}>forward</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="up" />
-              <span style={{ fontSize: '12px', color: '#999' }}>up</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="down" />
-              <span style={{ fontSize: '12px', color: '#999' }}>down</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="left" />
-              <span style={{ fontSize: '12px', color: '#999' }}>left</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="right" />
-              <span style={{ fontSize: '12px', color: '#999' }}>right</span>
-            </div>
+            <Icon type="home" size={16} />
+            <Icon type="home" size={24} />
+            <Icon type="home" size={32} />
+            <Icon type="home" size={48} />
           </div>
         </DemoBlock>
       </div>
+
       <div className="component-group">
-        <h3>状态图标</h3>
+        <h3>不同颜色</h3>
         <DemoBlock
           code={`
-<Icon type="check" />
-<Icon type="error" />
-<Icon type="warning" />
-<Icon type="info" />
-<Icon type="confirm" />
-<Icon type="cancel" />
+<Icon type="star" color="#ff4d4f" size={32} />
+<Icon type="star" color="#faad14" size={32} />
+<Icon type="star" color="#52c41a" size={32} />
+<Icon type="star" color="#1890ff" size={32} />
+<Icon type="star" color="#722ed1" size={32} />
           `.trim()}
         >
-          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="check" />
-              <span style={{ fontSize: '12px', color: '#999' }}>check</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="error" />
-              <span style={{ fontSize: '12px', color: '#999' }}>error</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="warning" />
-              <span style={{ fontSize: '12px', color: '#999' }}>warning</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="info" />
-              <span style={{ fontSize: '12px', color: '#999' }}>info</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="confirm" />
-              <span style={{ fontSize: '12px', color: '#999' }}>confirm</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="cancel" />
-              <span style={{ fontSize: '12px', color: '#999' }}>cancel</span>
-            </div>
+          <div style={{ display: 'flex', gap: '24px' }}>
+            <Icon type="star" color="#ff4d4f" size={32} />
+            <Icon type="star" color="#faad14" size={32} />
+            <Icon type="star" color="#52c41a" size={32} />
+            <Icon type="star" color="#1890ff" size={32} />
+            <Icon type="star" color="#722ed1" size={32} />
           </div>
         </DemoBlock>
       </div>
+
       <div className="component-group">
-        <h3>图标尺寸</h3>
+        <h3>旋转动画</h3>
         <DemoBlock
           code={`
-<Icon type="add" size="small" />
-<Icon type="add" size="medium" />
-<Icon type="add" size="large" />
-<Icon type="add" size={32} />
+<Icon type="spin" spin size={32} />
+<Icon type="loading" spin size={32} />
           `.trim()}
         >
-          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" size="small" />
-              <span style={{ fontSize: '12px', color: '#999' }}>small</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" size="medium" />
-              <span style={{ fontSize: '12px', color: '#999' }}>medium</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" size="large" />
-              <span style={{ fontSize: '12px', color: '#999' }}>large</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" size={32} />
-              <span style={{ fontSize: '12px', color: '#999' }}>32px</span>
-            </div>
+          <div style={{ display: 'flex', gap: '24px' }}>
+            <Icon type="spin" spin size={32} />
+            <Icon type="loading" spin size={32} />
           </div>
         </DemoBlock>
       </div>
-      <div className="component-group">
-        <h3>图标颜色</h3>
-        <DemoBlock
-          code={`
-<Icon type="add" color="#2587ff" />
-<Icon type="add" color="#52c41a" />
-<Icon type="add" color="#faad14" />
-<Icon type="add" color="#ff4d4f" />
-          `.trim()}
-        >
-          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" color="#2587ff" />
-              <span style={{ fontSize: '12px', color: '#999' }}>blue</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" color="#52c41a" />
-              <span style={{ fontSize: '12px', color: '#999' }}>green</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" color="#faad14" />
-              <span style={{ fontSize: '12px', color: '#999' }}>orange</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" color="#ff4d4f" />
-              <span style={{ fontSize: '12px', color: '#999' }}>red</span>
-            </div>
-          </div>
-        </DemoBlock>
+
+      <div className="component-group" style={{ marginTop: '32px' }}>
+        <h3>API</h3>
+        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
       </div>
     </>
   );
