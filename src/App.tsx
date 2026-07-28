@@ -20,6 +20,7 @@ import UploadDemo from './components/pc/Upload/demo';
 import TextareaDemo from './components/pc/Textarea/demo';
 import MessageDemo from './components/pc/Message/demo';
 import NotificationDemo from './components/pc/Notification/demo';
+import LoadingDemo from './components/pc/Loading/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -189,6 +190,7 @@ function App() {
       Textarea: TextareaDemo,
       Message: MessageDemo,
       Notification: NotificationDemo,
+      Loading: LoadingDemo,
     };
     
     const DemoComponent = demoComponents[componentName];
