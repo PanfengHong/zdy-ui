@@ -1,16 +1,9 @@
 import React from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
-import Table from '../Table/Table';
+import ApiTable from '../../ApiTable/ApiTable';
 import Grid from './Grid';
 
 const GridDemo = () => {
-  const apiColumns = [
-    { title: '参数', dataIndex: 'prop' },
-    { title: '说明', dataIndex: 'desc' },
-    { title: '类型', dataIndex: 'type' },
-    { title: '默认值', dataIndex: 'default' }
-  ];
-
   const rowApiData = [
     { prop: 'gutter', desc: '栅格间距', type: 'number | object', default: '0' },
     { prop: 'justify', desc: '水平对齐方式', type: "'start' | 'end' | 'center' | 'space-around' | 'space-between'", default: 'start' },
@@ -250,11 +243,11 @@ const GridDemo = () => {
 
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Grid.Row API</h3>
-        <Table columns={apiColumns} dataSource={rowApiData} className="zdy-table-api" />
+        <ApiTable dataSource={rowApiData} />
       </div>
       <div className="component-group">
         <h3>Grid.Col API</h3>
-        <Table columns={apiColumns} dataSource={colApiData} className="zdy-table-api" />
+        <ApiTable dataSource={colApiData} />
       </div>
     </>
   );

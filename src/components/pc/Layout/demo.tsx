@@ -1,15 +1,9 @@
 import React from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
-import Table from '../Table/Table';
+import ApiTable from '../../ApiTable/ApiTable';
 import Layout from './Layout';
 
 const LayoutDemo = () => {
-  const apiColumns = [
-    { title: '参数', dataIndex: 'prop' },
-    { title: '说明', dataIndex: 'desc' },
-    { title: '类型', dataIndex: 'type' },
-    { title: '默认值', dataIndex: 'default' }
-  ];
 
   const layoutApiData = [
     { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
@@ -126,23 +120,23 @@ const LayoutDemo = () => {
 
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Layout API</h3>
-        <Table columns={apiColumns} dataSource={layoutApiData} className="zdy-table-api" />
+        <ApiTable dataSource={layoutApiData} />
       </div>
       <div className="component-group">
         <h3>Layout.Header API</h3>
-        <Table columns={apiColumns} dataSource={headerApiData} className="zdy-table-api" />
+        <ApiTable dataSource={headerApiData} />
       </div>
       <div className="component-group">
         <h3>Layout.Sider API</h3>
-        <Table columns={apiColumns} dataSource={siderApiData} className="zdy-table-api" />
+        <ApiTable dataSource={siderApiData} />
       </div>
       <div className="component-group">
         <h3>Layout.Content API</h3>
-        <Table columns={apiColumns} dataSource={contentApiData} className="zdy-table-api" />
+        <ApiTable dataSource={contentApiData} />
       </div>
       <div className="component-group">
         <h3>Layout.Footer API</h3>
-        <Table columns={apiColumns} dataSource={footerApiData} className="zdy-table-api" />
+        <ApiTable dataSource={footerApiData} />
       </div>
     </>
   );

@@ -1,22 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
+import type { TableProps } from './types';
 
 import './Table.less';
-
-export interface TableColumn {
-  title: string;
-  dataIndex: string;
-  width?: number | string;
-  render?: (value: any, record: any, index: number) => React.ReactNode;
-}
-
-interface TableProps {
-  columns: TableColumn[];
-  dataSource: Record<string, any>[];
-  className?: string;
-  style?: React.CSSProperties;
-  bordered?: boolean;
-}
 
 const Table: React.FC<TableProps> = ({
   columns,

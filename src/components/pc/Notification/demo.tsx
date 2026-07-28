@@ -1,16 +1,10 @@
 import React from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
-import Table from '../Table/Table';
+import ApiTable from '../../ApiTable/ApiTable';
 import Button from '../Button/Button';
 import Notification from './Notification';
 
 const NotificationDemo = () => {
-  const apiColumns = [
-    { title: '参数', dataIndex: 'prop' },
-    { title: '说明', dataIndex: 'desc' },
-    { title: '类型', dataIndex: 'type' },
-    { title: '默认值', dataIndex: 'default' }
-  ];
 
   const apiData = [
     { prop: 'message', desc: '通知标题', type: 'ReactNode', default: '-' },
@@ -219,11 +213,11 @@ Notification.info('这是一个只有标题的简洁通知');
 
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>配置参数</h3>
-        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
+        <ApiTable dataSource={apiData} />
       </div>
       <div className="component-group">
         <h3>方法</h3>
-        <Table columns={apiColumns} dataSource={methodApiData} className="zdy-table-api" />
+        <ApiTable dataSource={methodApiData} />
       </div>
     </>
   );

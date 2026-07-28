@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
-import Table from '../Table/Table';
+import ApiTable from '../../ApiTable/ApiTable';
 import Select from './Select';
 
 const SelectDemo = () => {
@@ -12,13 +12,6 @@ const SelectDemo = () => {
     { value: 'banana', label: '香蕉' },
     { value: 'grape', label: '葡萄' },
     { value: 'mango', label: '芒果', disabled: true }
-  ];
-
-  const apiColumns = [
-    { title: '参数', dataIndex: 'prop' },
-    { title: '说明', dataIndex: 'desc' },
-    { title: '类型', dataIndex: 'type' },
-    { title: '默认值', dataIndex: 'default' }
   ];
 
   const apiData = [
@@ -115,7 +108,7 @@ const [value, setValue] = useState('orange');
 
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
-        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
+        <ApiTable dataSource={apiData} />
       </div>
     </>
   );

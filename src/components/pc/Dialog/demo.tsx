@@ -1,19 +1,12 @@
 import React, { useState } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
-import Table from '../Table/Table';
+import ApiTable from '../../ApiTable/ApiTable';
 import Dialog from './Dialog';
 import Button from '../Button/Button';
 
 const DialogDemo = () => {
   const [visible1, setVisible1] = useState(false);
   const [visible2, setVisible2] = useState(false);
-
-  const apiColumns = [
-    { title: '参数', dataIndex: 'prop' },
-    { title: '说明', dataIndex: 'desc' },
-    { title: '类型', dataIndex: 'type' },
-    { title: '默认值', dataIndex: 'default' }
-  ];
 
   const apiData = [
     { prop: 'visible', desc: '是否显示对话框', type: 'boolean', default: 'false' },
@@ -104,7 +97,7 @@ const [visible, setVisible] = useState(false);
       </div>
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
-        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
+        <ApiTable dataSource={apiData} />
       </div>
     </>
   );

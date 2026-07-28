@@ -1,15 +1,9 @@
 import React from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
-import Table from '../Table/Table';
+import ApiTable from '../../ApiTable/ApiTable';
 import Alert from './Alert';
 
 const AlertDemo = () => {
-  const apiColumns = [
-    { title: '参数', dataIndex: 'prop' },
-    { title: '说明', dataIndex: 'desc' },
-    { title: '类型', dataIndex: 'type' },
-    { title: '默认值', dataIndex: 'default' }
-  ];
 
   const apiData = [
     { prop: 'type', desc: '警告类型', type: "'success' | 'info' | 'warning' | 'error'", default: 'info' },
@@ -51,7 +45,7 @@ const AlertDemo = () => {
       </div>
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
-        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
+        <ApiTable dataSource={apiData} />
       </div>
     </>
   );

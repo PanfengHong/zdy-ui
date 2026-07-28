@@ -1,15 +1,9 @@
 import React from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
-import Table from '../Table/Table';
+import ApiTable from '../../ApiTable/ApiTable';
 import Switch from './Switch';
 
 const SwitchDemo = () => {
-  const apiColumns = [
-    { title: '参数', dataIndex: 'prop' },
-    { title: '说明', dataIndex: 'desc' },
-    { title: '类型', dataIndex: 'type' },
-    { title: '默认值', dataIndex: 'default' }
-  ];
 
   const apiData = [
     { prop: 'checked', desc: '是否选中', type: 'boolean', default: '-' },
@@ -68,7 +62,7 @@ const SwitchDemo = () => {
       </div>
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
-        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
+        <ApiTable dataSource={apiData} />
       </div>
     </>
   );

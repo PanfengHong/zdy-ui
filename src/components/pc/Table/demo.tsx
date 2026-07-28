@@ -1,15 +1,9 @@
 import React from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
 import Table from '../Table';
+import ApiTable from '../../ApiTable/ApiTable';
 
 const TableDemo = () => {
-  const apiColumns = [
-    { title: '参数', dataIndex: 'prop' },
-    { title: '说明', dataIndex: 'desc' },
-    { title: '类型', dataIndex: 'type' },
-    { title: '默认值', dataIndex: 'default' }
-  ];
-
   const apiData = [
     { prop: 'columns', desc: '表格列配置', type: 'ColumnProps[]', default: '-' },
     { prop: 'dataSource', desc: '表格数据', type: 'any[]', default: '-' },
@@ -56,7 +50,7 @@ const demoColumns = [
       </div>
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
-        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
+        <ApiTable dataSource={apiData} />
       </div>
     </>
   );

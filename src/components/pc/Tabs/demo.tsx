@@ -1,15 +1,9 @@
 import React from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
-import Table from '../Table/Table';
+import ApiTable from '../../ApiTable/ApiTable';
 import Tabs from './Tabs';
 
 const TabsDemo = () => {
-  const apiColumns = [
-    { title: '参数', dataIndex: 'prop' },
-    { title: '说明', dataIndex: 'desc' },
-    { title: '类型', dataIndex: 'type' },
-    { title: '默认值', dataIndex: 'default' }
-  ];
 
   const apiData = [
     { prop: 'type', desc: '标签页类型', type: "'default' | 'capsule' | 'pill'", default: 'default' },
@@ -121,11 +115,11 @@ const TabsDemo = () => {
       </div>
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Tabs API</h3>
-        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
+        <ApiTable dataSource={apiData} />
       </div>
       <div className="component-group">
         <h3>TabPane API</h3>
-        <Table columns={apiColumns} dataSource={tabPaneApiData} className="zdy-table-api" />
+        <ApiTable dataSource={tabPaneApiData} />
       </div>
     </>
   );

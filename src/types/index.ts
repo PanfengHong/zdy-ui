@@ -170,6 +170,7 @@ export interface LayoutSiderProps extends BaseComponentProps {
   collapsedWidth?: string | number;
   onCollapse?: (collapsed: boolean) => void;
   children?: React.ReactNode;
+  defaultCollapsed?: boolean;
 }
 
 export interface BaseRadioProps extends BaseComponentProps {

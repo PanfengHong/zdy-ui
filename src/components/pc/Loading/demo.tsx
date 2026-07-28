@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
-import Table from '../Table/Table';
+import ApiTable from '../../ApiTable/ApiTable';
 import Button from '../Button/Button';
 import Loading from './Loading';
 
@@ -11,13 +11,6 @@ const LoadingDemo = () => {
   const [loading4, setLoading4] = useState(false);
   const [loading5, setLoading5] = useState(true);
   const [loading6, setLoading6] = useState(true);
-
-  const apiColumns = [
-    { title: '参数', dataIndex: 'prop' },
-    { title: '说明', dataIndex: 'desc' },
-    { title: '类型', dataIndex: 'type' },
-    { title: '默认值', dataIndex: 'default' }
-  ];
 
   const apiData = [
     { prop: 'loading', desc: '是否显示加载状态', type: 'boolean', default: 'false' },
@@ -248,15 +241,15 @@ Loading.hide();
 
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>组件属性</h3>
-        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
+        <ApiTable dataSource={apiData} />
       </div>
       <div className="component-group">
         <h3>全屏加载配置</h3>
-        <Table columns={apiColumns} dataSource={fullscreenApiData} className="zdy-table-api" />
+        <ApiTable dataSource={fullscreenApiData} />
       </div>
       <div className="component-group">
         <h3>方法</h3>
-        <Table columns={apiColumns} dataSource={methodApiData} className="zdy-table-api" />
+        <ApiTable dataSource={methodApiData} />
       </div>
     </>
   );

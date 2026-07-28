@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
-import Table from '../Table/Table';
+import ApiTable from '../../ApiTable/ApiTable';
 import Checkbox from './Checkbox';
 
 const CheckboxDemo = () => {
   const [groupValue, setGroupValue] = useState<string[]>(['apple', 'orange']);
-
-  const apiColumns = [
-    { title: '参数', dataIndex: 'prop' },
-    { title: '说明', dataIndex: 'desc' },
-    { title: '类型', dataIndex: 'type' },
-    { title: '默认值', dataIndex: 'default' }
-  ];
 
   const apiData = [
     { prop: 'value', desc: '当前选中值（用于Group）', type: 'string', default: '-' },
@@ -129,12 +122,12 @@ const [value, setValue] = useState(['apple', 'orange']);
 
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Checkbox API</h3>
-        <Table columns={apiColumns} dataSource={apiData} className="zdy-table-api" />
+        <ApiTable dataSource={apiData} />
       </div>
 
       <div className="component-group">
         <h3>Checkbox.Group API</h3>
-        <Table columns={apiColumns} dataSource={groupApiData} className="zdy-table-api" />
+        <ApiTable dataSource={groupApiData} />
       </div>
     </>
   );
