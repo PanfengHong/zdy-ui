@@ -1,3 +1,173 @@
-.notification {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-notification-container {
+  position: fixed;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  pointer-events: none;
+
+  &--topLeft {
+    top: 24px;
+    left: 24px;
+  }
+
+  &--topRight {
+    top: 24px;
+    right: 24px;
+  }
+
+  &--bottomLeft {
+    bottom: 24px;
+    left: 24px;
+  }
+
+  &--bottomRight {
+    bottom: 24px;
+    right: 24px;
+  }
+}
+
+.zdy-notification {
+  display: flex;
+  align-items: flex-start;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  width: 336px;
+  pointer-events: auto;
+  cursor: pointer;
+  overflow: hidden;
+  animation: notificationSlideIn 0.3s ease;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 4px;
+  }
+
+  &--success::before {
+    background-color: @success-color;
+  }
+
+  &--success {
+    .zdy-notification-icon {
+      color: @success-color;
+    }
+  }
+
+  &--info::before {
+    background-color: @primary-color;
+  }
+
+  &--info {
+    .zdy-notification-icon {
+      color: @primary-color;
+    }
+  }
+
+  &--warning::before {
+    background-color: @warning-color;
+  }
+
+  &--warning {
+    .zdy-notification-icon {
+      color: @warning-color;
+    }
+  }
+
+  &--error::before {
+    background-color: @error-color;
+  }
+
+  &--error {
+    .zdy-notification-icon {
+      color: @error-color;
+    }
+  }
+}
+
+.zdy-notification-icon {
+  margin-right: 12px;
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.zdy-notification-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.zdy-notification-message {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: @text-color;
+  margin-bottom: 4px;
+}
+
+.zdy-notification-description {
+  font-size: 14px;
+  line-height: 1.5;
+  color: @text-color-secondary;
+  word-break: break-word;
+}
+
+.zdy-notification-btn {
+  margin-top: 8px;
+}
+
+.zdy-notification-close {
+  margin-left: 12px;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: @text-color-secondary;
+  transition: color 0.2s ease;
+  flex-shrink: 0;
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+
+  &:hover {
+    color: @text-color;
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+}
+
+@keyframes notificationSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.zdy-notification-container--topLeft .zdy-notification,
+.zdy-notification-container--bottomLeft .zdy-notification {
+  animation: notificationSlideInLeft 0.3s ease;
+}
+
+@keyframes notificationSlideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
