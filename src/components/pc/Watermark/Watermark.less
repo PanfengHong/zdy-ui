@@ -1,3 +1,16 @@
-.watermark {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-watermark {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  &::selection {
+    background: transparent;
+  }
+
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 }

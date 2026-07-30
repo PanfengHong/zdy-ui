@@ -97,7 +97,7 @@ export interface BaseDialogProps extends BaseComponentProps {
 }
 
 // Icon组件类型定义
-export type IconType = 'add' | 'delete' | 'close' | 'edit' | 'search' | 'save' | 'cancel' | 'confirm' | 'back' | 'forward' | 'up' | 'down' | 'left' | 'right' | 'check' | 'error' | 'warning' | 'info';
+export type IconType = 'add' | 'delete' | 'close' | 'edit' | 'search' | 'save' | 'cancel' | 'confirm' | 'back' | 'forward' | 'up' | 'down' | 'left' | 'right' | 'check' | 'error' | 'warning' | 'info' | 'home' | 'user' | 'bell' | 'star' | 'heart' | 'settings' | 'spin' | 'loading';
 
 export type AlertType = 'success' | 'info' | 'warning' | 'error';
 
@@ -143,6 +143,7 @@ export interface BaseIconProps extends BaseComponentProps {
   type?: IconType;
   size?: SizeType | number;
   color?: string;
+  spin?: boolean;
 }
 
 // Layout组件类型定义
@@ -288,4 +289,88 @@ export interface LoadingConfig {
   tip?: React.ReactNode;
   size?: SizeType;
   indicator?: React.ReactNode;
+}
+
+export interface SkeletonParagraphProps {
+  rows?: number;
+  width?: number | string | Array<number | string>;
+}
+
+export interface BaseSkeletonProps extends BaseComponentProps {
+  active?: boolean;
+  avatar?: boolean | { size?: number; shape?: 'circle' | 'square' };
+  title?: boolean | { width?: number | string };
+  paragraph?: boolean | SkeletonParagraphProps;
+  loading?: boolean;
+  children?: React.ReactNode;
+}
+
+export type ProgressType = 'line' | 'circle';
+
+export type ProgressStatus = 'normal' | 'success' | 'exception' | 'active';
+
+export interface BaseProgressProps extends BaseComponentProps {
+  percent?: number;
+  type?: ProgressType;
+  status?: ProgressStatus;
+  strokeColor?: string;
+  strokeWidth?: number;
+  showInfo?: boolean;
+  format?: (percent: number) => React.ReactNode;
+  trailColor?: string;
+  width?: number;
+  gapDegree?: number;
+}
+
+export interface WatermarkFontConfig {
+  color?: string;
+  fontSize?: number;
+  fontFamily?: string;
+  fontWeight?: 'normal' | 'light' | 'weight' | number;
+}
+
+export interface BaseWatermarkProps extends BaseComponentProps {
+  content?: string | string[];
+  image?: string;
+  width?: number;
+  height?: number;
+  rotate?: number;
+  zIndex?: number;
+  gap?: [number, number];
+  offset?: [number, number];
+  font?: WatermarkFontConfig;
+  inherit?: boolean;
+  children?: React.ReactNode;
+}
+
+export interface SliderMark {
+  value: number;
+  label?: React.ReactNode;
+  style?: React.CSSProperties;
+  labelStyle?: React.CSSProperties;
+}
+
+export type SliderTooltipConfig =
+  | boolean
+  | {
+      visible?: boolean;
+      formatter?: (value: number) => React.ReactNode;
+    };
+
+export interface BaseSliderProps extends BaseComponentProps {
+  value?: number | [number, number];
+  defaultValue?: number | [number, number];
+  min?: number;
+  max?: number;
+  step?: number;
+  disabled?: boolean;
+  vertical?: boolean;
+  range?: boolean;
+  marks?: SliderMark[];
+  tooltip?: SliderTooltipConfig;
+  onChange?: (value: number | [number, number]) => void;
+  onAfterChange?: (value: number | [number, number]) => void;
+  size?: 'default' | 'small';
+  reverse?: boolean;
+  keyboard?: boolean;
 }

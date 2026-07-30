@@ -1,3 +1,138 @@
-.progress {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-progress {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+
+  &--line {
+    .zdy-progress-outer {
+      flex: 1;
+      padding-right: 0;
+      margin-right: 10px;
+      display: inline-block;
+      width: 100%;
+      vertical-align: middle;
+    }
+
+    .zdy-progress-inner {
+      position: relative;
+      overflow: hidden;
+      background-color: #f5f5f5;
+      border-radius: 100px;
+      transition: all 0.3s ease;
+    }
+
+    .zdy-progress-bar {
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    .zdy-progress-info {
+      display: inline-flex;
+      align-items: center;
+      width: 3em;
+      margin-left: 0;
+      font-size: 1em;
+      line-height: 1;
+      white-space: nowrap;
+      vertical-align: middle;
+      word-break: normal;
+    }
+
+    &.zdy-progress--success .zdy-progress-bar {
+      background-color: @success-color;
+    }
+
+    &.zdy-progress--exception .zdy-progress-bar {
+      background-color: @error-color;
+    }
+
+    &.zdy-progress--active .zdy-progress-bar {
+      background-color: @primary-color;
+    }
+
+    &.zdy-progress--active .zdy-progress-inner::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: @primary-color;
+      border-radius: 100px;
+      opacity: 0;
+      animation: zdy-progress-active 2.4s cubic-bezier(0.23, 1, 0.32, 1) infinite;
+    }
+  }
+
+  &--circle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+
+    svg {
+      position: relative;
+      display: block;
+      transform: rotate(-90deg);
+      transform-origin: center;
+    }
+
+    .zdy-progress-circle-trail {
+      opacity: 1;
+    }
+
+    .zdy-progress-circle-path {
+      transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
+    }
+
+    .zdy-progress-circle-info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 100%;
+      text-align: center;
+      font-size: 1em;
+      line-height: 1;
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &.zdy-progress--success .zdy-progress-circle-path {
+      stroke: @success-color;
+    }
+
+    &.zdy-progress--exception .zdy-progress-circle-path {
+      stroke: @error-color;
+    }
+
+    &.zdy-progress--active .zdy-progress-circle-path {
+      stroke: @primary-color;
+      animation: zdy-progress-circle-active 1.4s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes zdy-progress-active {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes zdy-progress-circle-active {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
 }

@@ -28,4 +28,17 @@
   &--flip-vertical {
     transform: scaleY(-1);
   }
+
+  &--spin {
+    animation: zdy-icon-spin 1s linear infinite;
+  }
+}
+
+@keyframes zdy-icon-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

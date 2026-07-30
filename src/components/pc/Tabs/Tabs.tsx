@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import type { BaseTabsProps } from '../../../types';
 import TabPane from './TabPane';
+import type { TabPaneProps } from '../../../types';
 
 import './Tabs.less';
 
-const Tabs: React.FC<BaseTabsProps> = ({
+const Tabs: React.FC<BaseTabsProps> & {
+  TabPane: React.FC<TabPaneProps>;
+} = ({
   type = 'default',
   activeKey,
   defaultActiveKey,
