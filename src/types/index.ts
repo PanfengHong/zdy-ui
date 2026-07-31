@@ -385,3 +385,19 @@ export interface BaseMasonryProps extends BaseComponentProps {
   renderItem?: (item: any, index: number) => React.ReactNode;
   keyField?: string;
 }
+
+export type CarouselEffect = 'slide' | 'fade' | 'stack';
+
+export interface BaseCarouselProps extends BaseComponentProps {
+  autoplay?: boolean;
+  interval?: number;
+  effect?: CarouselEffect;
+  dots?: boolean;
+  arrows?: boolean;
+  loop?: boolean;
+  pauseOnHover?: boolean;
+  afterChange?: (current: number) => void;
+  beforeChange?: (from: number, to: number) => void;
+  defaultActiveIndex?: number;
+  children?: React.ReactNode;
+}
