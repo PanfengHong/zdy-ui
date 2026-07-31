@@ -24,6 +24,7 @@ import NotificationDemo from './components/pc/Notification/demo';
 import LoadingDemo from './components/pc/Loading/demo';
 import TableDemo from './components/pc/Table/demo';
 import WatermarkDemo from './components/pc/Watermark/demo';
+import MasonryDemo from './components/pc/Masonry/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -197,6 +198,7 @@ function App() {
       Loading: LoadingDemo,
       Table: TableDemo,
       Watermark: WatermarkDemo,
+      Masonry: MasonryDemo,
     };
     
     const DemoComponent = demoComponents[componentName];

@@ -1,3 +1,63 @@
 .masonry {
-  // 组件样式
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.masonry-item {
+  box-sizing: border-box;
+  will-change: top, left, width;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  }
+}
+
+.masonry-item-content {
+  width: 100%;
+  height: 100%;
+}
+
+.masonry-card {
+  padding: 16px;
+  border-radius: 8px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.masonry-card-image {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.masonry-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.masonry-card-text {
+  font-size: 13px;
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.masonry-card-tag {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  background: #e6f7ff;
+  color: #1890ff;
+  width: fit-content;
 }
