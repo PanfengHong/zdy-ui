@@ -8,6 +8,7 @@ export type ButtonShape = 'default' | 'circle' | 'round';
 export interface BaseComponentProps {
   className?: string;
   style?: React.CSSProperties;
+  children?: React.ReactNode;
 }
 
 // Button组件通用Props
@@ -18,7 +19,6 @@ export interface BaseButtonProps extends BaseComponentProps {
   disabled?: boolean;
   loading?: boolean;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  children?: React.ReactNode;
 }
 
 // Input组件通用Props
@@ -97,7 +97,7 @@ export interface BaseDialogProps extends BaseComponentProps {
 }
 
 // Icon组件类型定义
-export type IconType = 'add' | 'delete' | 'close' | 'edit' | 'search' | 'save' | 'cancel' | 'confirm' | 'back' | 'forward' | 'up' | 'down' | 'left' | 'right' | 'check' | 'error' | 'warning' | 'info' | 'home' | 'user' | 'bell' | 'star' | 'heart' | 'settings' | 'spin' | 'loading';
+export type IconType = 'add' | 'delete' | 'close' | 'edit' | 'search' | 'save' | 'cancel' | 'confirm' | 'back' | 'forward' | 'up' | 'down' | 'left' | 'right' | 'check' | 'error' | 'warning' | 'info' | 'home' | 'user' | 'bell' | 'star' | 'heart' | 'settings' | 'spin' | 'loading' | 'github';
 
 export type AlertType = 'success' | 'info' | 'warning' | 'error';
 

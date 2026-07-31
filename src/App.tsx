@@ -4,6 +4,7 @@ import { PC, Mobile } from './index';
 import { getGitCommits } from './utils/git';
 import type { GitCommit } from './utils/git';
 import DemoBlock from './components/DemoBlock/DemoBlock';
+import Icon from './components/pc/Icon/Icon';
 import ButtonDemo from './components/pc/Button/demo';
 import InputDemo from './components/pc/Input/demo';
 import TabsDemo from './components/pc/Tabs/demo';
@@ -45,6 +46,7 @@ type Platform = 'pc' | 'mobile';
 function App() {
   const [activeMenuItem, setActiveMenuItem] = useState<string>('button');
   const [activePlatform, setActivePlatform] = useState<Platform>('pc');
+  const [activeTopNav, setActiveTopNav] = useState<'design' | 'components'>('components');
   const [gitCommits, setGitCommits] = useState<GitCommit[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -447,11 +449,42 @@ function App() {
 
   return (
     <div className="app-container">
+      {/* 顶部导航 */}
+      <header className="app-top-header">
+        <div className="app-top-header-inner">
+          <div className="app-top-header-left">
+            <span className="app-top-header-logo">Zdy Design</span>
+          </div>
+          <div className="app-top-header-right">
+            <nav className="app-top-header-nav">
+              <button
+                className={`app-top-header-nav-item ${activeTopNav === 'design' ? 'active' : ''}`}
+                onClick={() => setActiveTopNav('design')}
+              >
+                设计
+              </button>
+              <button
+                className={`app-top-header-nav-item ${activeTopNav === 'components' ? 'active' : ''}`}
+                onClick={() => setActiveTopNav('components')}
+              >
+                组件
+              </button>
+            </nav>
+            <a
+              className="app-top-header-github"
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="GitHub"
+            >
+              <Icon type="github" size={20} color="currentColor" />
+            </a>
+          </div>
+        </div>
+      </header>
+
       {/* 左侧菜单 */}
       <aside className="app-sidebar">
-        <div className="sidebar-header">
-          <h2>📦 组件库</h2>
-        </div>
         
         <nav className="sidebar-nav">
           {menuGroups.map((group) => (
