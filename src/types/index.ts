@@ -658,3 +658,11 @@ export interface AnchorProps extends BaseComponentProps {
     link: { title: React.ReactNode; href: string }
   ) => void;
 }
+
+// Empty组件类型定义
+export interface EmptyProps extends BaseComponentProps {
+  image?: React.ReactNode;
+  description?: React.ReactNode;
+  imageStyle?: React.CSSProperties;
+  children?: React.ReactNode;
+}

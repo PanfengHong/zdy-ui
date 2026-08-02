@@ -36,6 +36,7 @@ import TransferDemo from './components/pc/Transfer/demo';
 import TagDemo from './components/pc/Tag/demo';
 import StepsDemo from './components/pc/Steps/demo';
 import AnchorDemo from './components/pc/Anchor/demo';
+import EmptyDemo from './components/pc/Empty/demo';
 import SkeletonDemo from './components/pc/Skeleton/demo';
 import ProgressDemo from './components/pc/Progress/demo';
 import './App.css';
@@ -214,6 +215,7 @@ function App() {
       Tag: TagDemo,
       Steps: StepsDemo,
       Anchor: AnchorDemo,
+      Empty: EmptyDemo,
       Skeleton: SkeletonDemo,
       Progress: ProgressDemo,
     };
