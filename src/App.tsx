@@ -41,6 +41,7 @@ import TreeDemo from './components/pc/Tree/demo';
 import SkeletonDemo from './components/pc/Skeleton/demo';
 import ProgressDemo from './components/pc/Progress/demo';
 import CollapseDemo from './components/pc/Collapse/demo';
+import ColorPickerDemo from './components/pc/ColorPicker/demo';
 import SliderDemo from './components/pc/Slider/demo';
 import './App.css';
 
@@ -223,6 +224,7 @@ function App() {
       Skeleton: SkeletonDemo,
       Progress: ProgressDemo,
       Collapse: CollapseDemo,
+      ColorPicker: ColorPickerDemo,
       Slider: SliderDemo,
     };
     
