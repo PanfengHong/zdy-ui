@@ -38,9 +38,11 @@ const InputDemo = () => {
 <Input placeholder="Large" size="large" />
           `.trim()}
         >
-          <Input placeholder="Small" size="small" />
-          <Input placeholder="Medium" size="medium" />
-          <Input placeholder="Large" size="large" />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+            <Input placeholder="Small" size="small" />
+            <Input placeholder="Medium" size="medium" />
+            <Input placeholder="Large" size="large" />
+          </div>
         </DemoBlock>
       </div>
       <div className="component-group" style={{ marginTop: '32px' }}>

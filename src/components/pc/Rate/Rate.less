@@ -1,3 +1,129 @@
-.rate {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-rate {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: @text-color-secondary;
+
+  // ======== 星星 ========
+  &-star {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.15s ease;
+    color: #e8e8e8;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+
+    &--active {
+      color: #fadb14;
+    }
+
+    &-icon {
+      display: block;
+      transition: color 0.2s ease;
+    }
+
+    // tooltip
+    &-tip {
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      margin-bottom: 6px;
+      padding: 4px 8px;
+      background-color: rgba(0, 0, 0, 0.75);
+      color: #fff;
+      font-size: 12px;
+      white-space: nowrap;
+      border-radius: 4px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+      z-index: @z-index-tooltip;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        border: 4px solid transparent;
+        border-top-color: rgba(0, 0, 0, 0.75);
+      }
+    }
+
+    &--has-tip:hover {
+      .zdy-rate-star-tip {
+        opacity: 1;
+      }
+    }
+  }
+
+  // ======== 自定义字符 ========
+  &-character {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    font-size: inherit;
+    color: #e8e8e8;
+    transition: color 0.2s ease;
+
+    &--filled {
+      color: #fadb14;
+    }
+  }
+
+  // ======== 尺寸 ========
+  &--small {
+    .zdy-rate-star {
+      width: 16px;
+      height: 16px;
+    }
+    .zdy-rate-character {
+      font-size: 14px;
+    }
+  }
+
+  &--default {
+    .zdy-rate-star {
+      width: 20px;
+      height: 20px;
+    }
+    .zdy-rate-character {
+      font-size: 18px;
+    }
+  }
+
+  &--large {
+    .zdy-rate-star {
+      width: 28px;
+      height: 28px;
+    }
+    .zdy-rate-character {
+      font-size: 26px;
+    }
+  }
+
+  // ======== 禁用状态 ========
+  &--disabled {
+    .zdy-rate-star {
+      cursor: not-allowed;
+
+      &:hover {
+        transform: none;
+      }
+    }
+    opacity: 0.6;
+  }
 }

@@ -31,6 +31,7 @@ import MenuDemo from './components/pc/Menu/demo';
 import BreadcrumbDemo from './components/pc/Breadcrumb/demo';
 import PaginationDemo from './components/pc/Pagination/demo';
 import CalendarDemo from './components/pc/Calendar/demo';
+import RateDemo from './components/pc/Rate/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -166,6 +167,7 @@ function App() {
   // 渲染通用组件展示
   const renderComponentDemo = () => {
     const componentId = getCurrentMenuItem().component || '';
+    const componentTitle = getCurrentMenuItem().label || '';  
     const sectionClass = activePlatform === 'pc' ? '' : 'mobile-section';
     const platformComponents = activePlatform === 'pc' ? PC : Mobile;
     
@@ -211,6 +213,7 @@ function App() {
       Breadcrumb: BreadcrumbDemo,
       Pagination: PaginationDemo,
       Calendar: CalendarDemo,
+      Rate: RateDemo,
     };
     
     const DemoComponent = demoComponents[componentName];
@@ -218,7 +221,7 @@ function App() {
     if (DemoComponent) {
       return (
         <section className={`component-section ${sectionClass}`}>
-          <h2>{componentName}组件</h2>
+          <h2>{componentTitle}</h2>
           <DemoComponent />
         </section>
       );
@@ -499,7 +502,6 @@ function App() {
 
       {/* 左侧菜单 */}
       <aside className="app-sidebar">
-        
         <nav className="sidebar-nav">
           {menuGroups.map((group) => (
             <div key={group.id} className="menu-group">
