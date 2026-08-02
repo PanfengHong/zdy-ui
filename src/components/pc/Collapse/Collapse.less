@@ -1,3 +1,132 @@
-.collapse {
-  // 组件样式
+.zdy-collapse {
+  font-size: 14px;
+  color: #333;
+  background-color: #fff;
+  border-radius: 4px;
+
+  // 带边框模式
+  &--bordered {
+    border: 1px solid #f0f0f0;
+
+    > .zdy-collapse-item {
+      border-bottom: 1px solid #f0f0f0;
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  // 幽灵模式
+  &--ghost {
+    background-color: transparent;
+    border: none;
+
+    > .zdy-collapse-item {
+      border-bottom: none;
+    }
+
+    > .zdy-collapse-item > .zdy-collapse-header {
+      padding-left: 0;
+    }
+
+    > .zdy-collapse-item > .zdy-collapse-content > .zdy-collapse-content-box {
+      padding-left: 0;
+    }
+  }
+
+  // 折叠项
+  &-item {
+    &--disabled {
+      .zdy-collapse-header {
+        color: rgba(0, 0, 0, 0.25);
+        cursor: not-allowed;
+      }
+
+      .zdy-collapse-arrow {
+        color: rgba(0, 0, 0, 0.25);
+      }
+    }
+  }
+
+  // 头部
+  &-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 16px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 14px;
+    line-height: 1.5;
+    cursor: default;
+    transition: background-color 0.2s ease;
+
+    &--clickable {
+      cursor: pointer;
+
+      &:hover {
+        background-color: #f5f7fa;
+      }
+
+      &:focus-visible {
+        outline: 2px solid #2587ff;
+        outline-offset: -2px;
+      }
+    }
+
+    &--end {
+      flex-direction: row-reverse;
+      justify-content: flex-start;
+
+      .zdy-collapse-header-text {
+        flex: 1;
+        margin-right: 8px;
+      }
+    }
+  }
+
+  &-header-text {
+    flex: 1;
+    word-break: break-all;
+  }
+
+  // 展开箭头
+  &-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 8px;
+    color: rgba(0, 0, 0, 0.45);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+
+    &--active {
+      transform: rotate(90deg);
+    }
+  }
+
+  &-header--end &-arrow {
+    margin-right: 0;
+  }
+
+  // 右侧额外内容
+  &-extra {
+    margin-left: 16px;
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  // 内容容器
+  &-content {
+    overflow: hidden;
+    transition: height 0.3s ease;
+
+    &--hidden {
+      display: none;
+    }
+  }
+
+  &-content-box {
+    padding: 16px;
+    color: rgba(0, 0, 0, 0.65);
+    line-height: 1.5;
+  }
 }

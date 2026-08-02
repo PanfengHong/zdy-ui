@@ -3,7 +3,6 @@ import DemoBlock from '../../DemoBlock/DemoBlock';
 import ApiTable from '../../ApiTable/ApiTable';
 import Slider from './Slider';
 import Input from '../Input/Input';
-import InputNumber from '../InputNumber/InputNumber';
 
 const SliderDemo = () => {
   const [basicValue, setBasicValue] = useState(30);

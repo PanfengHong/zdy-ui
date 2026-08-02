@@ -40,6 +40,8 @@ import EmptyDemo from './components/pc/Empty/demo';
 import TreeDemo from './components/pc/Tree/demo';
 import SkeletonDemo from './components/pc/Skeleton/demo';
 import ProgressDemo from './components/pc/Progress/demo';
+import CollapseDemo from './components/pc/Collapse/demo';
+import SliderDemo from './components/pc/Slider/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -220,6 +222,8 @@ function App() {
       Tree: TreeDemo,
       Skeleton: SkeletonDemo,
       Progress: ProgressDemo,
+      Collapse: CollapseDemo,
+      Slider: SliderDemo,
     };
     
     const DemoComponent = demoComponents[componentName];

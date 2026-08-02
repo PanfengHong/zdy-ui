@@ -714,3 +714,31 @@ export interface TreeProps extends BaseComponentProps {
   onDragEnd?: (info: { node: TreeNodeData }) => void;
   onDrop?: (info: { node: TreeNodeData; dragNode: TreeNodeData; dropPosition: number; dropToGap: boolean }) => void;
 }
+
+// Collapse组件类型定义
+export type CollapseExpandIconPosition = 'start' | 'end';
+export type CollapseCollapsible = 'header' | 'disabled' | false;
+
+export interface CollapsePanelProps extends BaseComponentProps {
+  panelKey: string;
+  header?: React.ReactNode;
+  disabled?: boolean;
+  extra?: React.ReactNode;
+  forceRender?: boolean;
+  showArrow?: boolean;
+  collapsible?: CollapseCollapsible;
+  children?: React.ReactNode;
+}
+
+export interface CollapseProps extends BaseComponentProps {
+  activeKey?: string[] | string;
+  defaultActiveKey?: string[] | string;
+  accordion?: boolean;
+  bordered?: boolean;
+  ghost?: boolean;
+  expandIcon?: React.ReactNode;
+  expandIconPosition?: CollapseExpandIconPosition;
+  destroyInactivePanel?: boolean;
+  onChange?: (key: string[]) => void;
+  children?: React.ReactNode;
+}
