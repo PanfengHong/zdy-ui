@@ -35,6 +35,7 @@ import RateDemo from './components/pc/Rate/demo';
 import TransferDemo from './components/pc/Transfer/demo';
 import TagDemo from './components/pc/Tag/demo';
 import StepsDemo from './components/pc/Steps/demo';
+import AnchorDemo from './components/pc/Anchor/demo';
 import SkeletonDemo from './components/pc/Skeleton/demo';
 import ProgressDemo from './components/pc/Progress/demo';
 import './App.css';
@@ -125,8 +126,8 @@ function App() {
         { id: 'list', label: 'List 列表', icon: '📝', type: 'component', component: 'List' },
         { id: 'breadcrumb', label: 'Breadcrumb 面包屑', icon: '🍞', type: 'component', component: 'Breadcrumb' },
         { id: 'steps', label: 'Steps 步骤条', icon: '📶', type: 'component', component: 'Steps' },
-        { id: 'pagination', label: 'Pagination 分页', icon: '📄', type: 'component', component: 'Pagination' },
         { id: 'anchor', label: 'Anchor 锚点', icon: '⚓', type: 'component', component: 'Anchor' },
+        { id: 'pagination', label: 'Pagination 分页', icon: '📄', type: 'component', component: 'Pagination' },
         { id: 'tabs', label: 'Tabs 标签页', icon: '📑', type: 'component', component: 'Tabs' },
         { id: 'tree', label: 'Tree 树形控件', icon: '🌳', type: 'component', component: 'Tree' },
         { id: 'calendar', label: 'Calendar 日历', icon: '📅', type: 'component', component: 'Calendar' },
@@ -212,6 +213,7 @@ function App() {
       Transfer: TransferDemo,
       Tag: TagDemo,
       Steps: StepsDemo,
+      Anchor: AnchorDemo,
       Skeleton: SkeletonDemo,
       Progress: ProgressDemo,
     };

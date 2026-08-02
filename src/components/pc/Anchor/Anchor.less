@@ -1,3 +1,125 @@
-.anchor {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+@anchor-color: @text-color;
+@anchor-color-active: @primary-color;
+@anchor-bg: #fff;
+@anchor-ink-bg: #f0f0f0;
+@anchor-ink-width: 2px;
+@anchor-ink-ball-height: 21px;
+@anchor-link-padding: 6px 16px 6px 0;
+
+.zdy-anchor {
+  position: relative;
+  color: @anchor-color;
+  font-size: @pc-font-size-small;
+  line-height: 1.5;
+
+  // ======== 左侧 ink 轨道（仅垂直方向） ========
+  &-ink {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: @anchor-ink-width;
+    background-color: @anchor-ink-bg;
+    transform: translateX(-50%);
+    display: none;
+  }
+
+  // 线条指示器：高度随激活项变化，主色填充
+  &-ink-ball {
+    position: absolute;
+    left: 50%;
+    width: @anchor-ink-width;
+    height: @anchor-ink-ball-height;
+    background-color: @anchor-color-active;
+    border-radius: 1px;
+    transform: translate(-50%, 0);
+    transition: top 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  }
+
+  // ======== 垂直方向 ========
+  &--vertical {
+    padding-left: 4px;
+
+    .zdy-anchor-ink {
+      display: block;
+      left: 0;
+    }
+
+    .zdy-anchor-list {
+      padding-left: 8px;
+    }
+  }
+
+  // ======== 水平方向 ========
+  &--horizontal {
+    .zdy-anchor-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .zdy-anchor-link {
+      padding: 0;
+
+      &--nested {
+        margin-left: 12px;
+      }
+
+      &-children {
+        display: none;
+      }
+    }
+
+    .zdy-anchor-ink {
+      display: none;
+    }
+  }
+
+  // ======== 链接项 ========
+  &-link {
+    padding: @anchor-link-padding;
+    line-height: 1.5;
+    transition: all 0.2s ease;
+
+    &--nested {
+      padding-left: 16px;
+    }
+
+    a {
+      display: inline-block;
+      color: @anchor-color;
+      text-decoration: none;
+      cursor: pointer;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: @anchor-color-active;
+      }
+    }
+
+    // 激活态
+    &--active {
+      a {
+        color: @anchor-color-active;
+        font-weight: 500;
+      }
+    }
+
+    // 子链接容器
+    &-children {
+      margin-top: 4px;
+    }
+  }
+
+  // ======== 固定模式 ========
+  &--affix {
+    z-index: 10;
+  }
+
+  // ======== 始终显示 ink（即便 affix） ========
+  &--ink-fixed &-ink {
+    display: block !important;
+  }
 }
