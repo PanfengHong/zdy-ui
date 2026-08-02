@@ -492,3 +492,23 @@ export interface BreadcrumbProps extends BaseComponentProps {
   items?: { title: React.ReactNode; href?: string; icon?: React.ReactNode; onClick?: () => void }[];
   children?: React.ReactNode;
 }
+
+// Pagination组件类型定义
+export type PaginationSize = 'default' | 'small';
+
+export interface PaginationProps extends BaseComponentProps {
+  current?: number;
+  defaultCurrent?: number;
+  pageSize?: number;
+  defaultPageSize?: number;
+  total?: number;
+  showSizeChanger?: boolean;
+  showQuickJumper?: boolean;
+  showTotal?: (total: number, range: [number, number]) => React.ReactNode;
+  pageSizeOptions?: number[];
+  size?: PaginationSize;
+  disabled?: boolean;
+  simple?: boolean;
+  onChange?: (page: number, pageSize: number) => void;
+  onShowSizeChange?: (current: number, size: number) => void;
+}
