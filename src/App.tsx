@@ -32,6 +32,7 @@ import BreadcrumbDemo from './components/pc/Breadcrumb/demo';
 import PaginationDemo from './components/pc/Pagination/demo';
 import CalendarDemo from './components/pc/Calendar/demo';
 import RateDemo from './components/pc/Rate/demo';
+import TransferDemo from './components/pc/Transfer/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -214,6 +215,7 @@ function App() {
       Pagination: PaginationDemo,
       Calendar: CalendarDemo,
       Rate: RateDemo,
+      Transfer: TransferDemo,
     };
     
     const DemoComponent = demoComponents[componentName];
@@ -229,7 +231,7 @@ function App() {
     
     return (
         <section className={`component-section ${sectionClass}`}>
-          <h2>{componentName}组件</h2>
+          <h2>{componentTitle}</h2>
           <div className="component-group">
             <h3>基础示例</h3>
             <DemoBlock
