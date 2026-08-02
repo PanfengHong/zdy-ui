@@ -848,3 +848,69 @@ export interface PopoverProps extends BaseComponentProps {
   getPopupContainer?: (triggerNode: HTMLElement) => HTMLElement;
   onVisibleChange?: (visible: boolean) => void;
 }
+
+// Intro引导组件类型定义
+export type IntroPlacement =
+  | 'top'
+  | 'topLeft'
+  | 'topRight'
+  | 'bottom'
+  | 'bottomLeft'
+  | 'bottomRight'
+  | 'left'
+  | 'right';
+
+export interface IntroStep {
+  target: string | HTMLElement | (() => HTMLElement | null);
+  title?: React.ReactNode;
+  content?: React.ReactNode;
+  placement?: IntroPlacement;
+  // 透传给目标元素的类名（在引导激活时）
+  className?: string;
+  // 引导激活时为目标元素附加的 style
+  style?: React.CSSProperties;
+  // 是否允许跳过本步骤点击目标元素
+  allowClickTarget?: boolean;
+  // 自定义按钮文本
+  nextBtnText?: string;
+  prevBtnText?: string;
+  doneBtnText?: string;
+  // 是否隐藏上一步按钮
+  hidePrev?: boolean;
+  // 是否隐藏下一步按钮（仅显示 Done）
+  hideNext?: boolean;
+}
+
+export interface IntroProps extends BaseComponentProps {
+  steps: IntroStep[];
+  defaultOpen?: boolean;
+  open?: boolean;
+  current?: number;
+  defaultCurrent?: number;
+  mask?: boolean;
+  maskClosable?: boolean;
+  showSteps?: boolean;
+  showSkip?: boolean;
+  allowKeyboard?: boolean;
+  padding?: number;
+  borderRadius?: number;
+  scrollIntoView?: boolean;
+  highlightColor?: string;
+  zIndex?: number;
+  onOpenChange?: (open: boolean) => void;
+  onCurrentChange?: (current: number) => void;
+  onChange?: (current: number) => void;
+  onClose?: () => void;
+  onDone?: () => void;
+  onSkip?: () => void;
+  onNext?: (current: number) => void;
+  onPrev?: (current: number) => void;
+  renderButtons?: (ctx: {
+    current: number;
+    total: number;
+    next: () => void;
+    prev: () => void;
+    skip: () => void;
+    done: () => void;
+  }) => React.ReactNode;
+}

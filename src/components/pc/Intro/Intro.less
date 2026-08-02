@@ -1,3 +1,199 @@
-.intro {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+@intro-arrow-size: 8px;
+
+.zdy-intro-mask {
+  position: absolute;
+  inset: 0;
+  cursor: auto;
+}
+
+.zdy-intro-highlight {
+  position: absolute;
+  pointer-events: none;
+}
+
+// ============ Tooltip ============
+.zdy-intro-tooltip {
+  position: absolute;
+  max-width: 360px;
+  min-width: 240px;
+  background: #fff;
+  border-radius: @border-radius;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+  font-size: @pc-font-size-base;
+  color: @text-color;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: auto;
+
+  // 方向 origin
+  &--top,
+  &--topLeft,
+  &--topRight {
+    transform-origin: center bottom;
+  }
+  &--bottom,
+  &--bottomLeft,
+  &--bottomRight {
+    transform-origin: center top;
+  }
+  &--left {
+    transform-origin: right center;
+  }
+  &--right {
+    transform-origin: left center;
+  }
+
+  // 触发可见状态由 JS 控制 inline style，这里仅做兜底
+  &-inner {
+    position: relative;
+    padding: 14px 16px;
+  }
+
+  &-steps {
+    display: inline-block;
+    font-size: @pc-font-size-small;
+    color: @primary-color;
+    background: @primary-color-light;
+    border-radius: 10px;
+    padding: 1px 8px;
+    margin-bottom: 8px;
+    line-height: 18px;
+    height: 20px;
+  }
+
+  &-title {
+    font-size: @pc-font-size-large;
+    font-weight: 500;
+    color: @text-color;
+    margin-bottom: 6px;
+    line-height: 1.4;
+  }
+
+  &-content {
+    font-size: @pc-font-size-base;
+    color: @text-color-secondary;
+    line-height: 1.6;
+    margin-bottom: 14px;
+    word-break: break-word;
+  }
+
+  // 箭头
+  &-arrow {
+    position: absolute;
+    width: @intro-arrow-size * 2;
+    height: @intro-arrow-size * 2;
+    background: #fff;
+    transform: rotate(45deg);
+    z-index: -1;
+    box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.06);
+  }
+
+  &--top &-arrow {
+    bottom: -@intro-arrow-size;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  &--topLeft &-arrow {
+    bottom: -@intro-arrow-size;
+    left: 16px;
+    transform: rotate(45deg);
+  }
+  &--topRight &-arrow {
+    bottom: -@intro-arrow-size;
+    right: 16px;
+    transform: rotate(45deg);
+  }
+
+  &--bottom &-arrow {
+    top: -@intro-arrow-size;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+  &--bottomLeft &-arrow {
+    top: -@intro-arrow-size;
+    left: 16px;
+    transform: rotate(45deg);
+  }
+  &--bottomRight &-arrow {
+    top: -@intro-arrow-size;
+    right: 16px;
+    transform: rotate(45deg);
+  }
+
+  &--left &-arrow {
+    right: -@intro-arrow-size;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+  &--right &-arrow {
+    left: -@intro-arrow-size;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+  }
+}
+
+// Tooltip 显示状态（由 JS 控制透明度，这里加默认可见兜底）
+.zdy-intro-tooltip {
+  opacity: 1;
+  transform: scale(1);
+}
+
+// ============ 按钮区 ============
+.zdy-intro-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 4px;
+
+  &-right {
+    display: flex;
+    gap: 8px;
+    margin-left: auto;
+  }
+}
+
+.zdy-intro-btn {
+  padding: 4px 14px;
+  font-size: @pc-font-size-small;
+  color: @text-color;
+  background: #fff;
+  border: 1px solid @border-color;
+  border-radius: @border-radius;
+  cursor: pointer;
+  transition: all 0.15s;
+  line-height: 20px;
+  height: 28px;
+
+  &:hover {
+    color: @primary-color;
+    border-color: @primary-color;
+  }
+
+  &--primary {
+    color: #fff;
+    background: @primary-color;
+    border-color: @primary-color;
+
+    &:hover {
+      background: lighten(@primary-color, 8%);
+      border-color: lighten(@primary-color, 8%);
+      color: #fff;
+    }
+  }
+
+  &--text {
+    border: none;
+    background: transparent;
+    color: @text-color-secondary;
+
+    &:hover {
+      color: @text-color;
+      background: transparent;
+      border: none;
+    }
+  }
 }
