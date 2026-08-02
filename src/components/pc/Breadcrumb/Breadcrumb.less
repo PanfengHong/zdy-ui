@@ -1,3 +1,122 @@
-.breadcrumb {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-breadcrumb {
+  font-size: @pc-font-size-base;
+  color: @text-color-secondary;
+  line-height: 1.5;
+
+  &-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  // ======== Item ========
+  &-item {
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    color: @text-color-secondary;
+
+    &:last-child {
+      .zdy-breadcrumb-separator {
+        display: none;
+      }
+
+      .zdy-breadcrumb-item-link {
+        color: @text-color;
+        font-weight: 500;
+      }
+    }
+
+    &-link {
+      display: inline-flex;
+      align-items: center;
+      color: @text-color-secondary;
+      text-decoration: none;
+      cursor: default;
+      transition: color 0.2s ease;
+      padding: 2px 0;
+
+      a& {
+        cursor: pointer;
+
+        &:hover {
+          color: @primary-color;
+        }
+      }
+    }
+
+    &-clickable {
+      cursor: pointer;
+
+      &:hover {
+        color: @primary-color;
+      }
+    }
+
+    &-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 4px;
+      font-size: 14px;
+    }
+
+    &-arrow {
+      margin-left: 4px;
+      font-size: 10px;
+      color: @text-color-secondary;
+    }
+
+    &-overlay-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+
+  // ======== Separator ========
+  &-separator {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 8px;
+    color: @text-color-secondary;
+    font-size: @pc-font-size-base;
+    user-select: none;
+  }
+
+  // ======== Overlay (dropdown) ========
+  &-overlay {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 120px;
+    padding: 4px 0;
+    background-color: #fff;
+    border-radius: @border-radius-sm;
+    box-shadow: @box-shadow;
+    z-index: @z-index-dropdown;
+    margin-top: 4px;
+
+    a,
+    span {
+      display: block;
+      padding: 6px 16px;
+      color: @text-color-secondary;
+      text-decoration: none;
+      font-size: @pc-font-size-base;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background-color: @background-color-hover;
+        color: @primary-color;
+      }
+    }
+  }
 }
