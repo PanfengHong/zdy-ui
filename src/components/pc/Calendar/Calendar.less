@@ -1,3 +1,308 @@
-.calendar {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-calendar {
+  background-color: #fff;
+  font-size: @pc-font-size-base;
+  color: @text-color;
+  border-radius: 5px;
+
+  // ======== 头部 ========
+  &-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-bottom: 1px solid @border-color;
+
+    &-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    &-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    &-title {
+      font-size: 16px;
+      font-weight: 500;
+      color: @text-color;
+      min-width: 120px;
+      text-align: center;
+    }
+  }
+
+  &-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid @border-color;
+    border-radius: @border-radius-sm;
+    background-color: #fff;
+    color: @text-color;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+
+    &:hover {
+      border-color: @primary-color;
+      color: @primary-color;
+    }
+  }
+
+  &-today-btn {
+    height: 28px;
+    padding: 0 12px;
+    border: 1px solid @border-color;
+    border-radius: @border-radius-sm;
+    background-color: #fff;
+    color: @text-color;
+    font-size: @pc-font-size-base;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: @primary-color;
+      color: @primary-color;
+    }
+  }
+
+  &-mode-switch {
+    display: inline-flex;
+    border: 1px solid @border-color;
+    border-radius: @border-radius-sm;
+    overflow: hidden;
+  }
+
+  &-mode-btn {
+    height: 28px;
+    padding: 0 12px;
+    border: none;
+    background-color: #fff;
+    color: @text-color-secondary;
+    font-size: @pc-font-size-base;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      color: @primary-color;
+    }
+
+    &--active {
+      background-color: @primary-color;
+      color: #fff;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  // ======== 月视图 ========
+  &-body {
+    padding: 12px;
+  }
+
+  &-week-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    border-bottom: 1px solid @border-color;
+    padding-bottom: 8px;
+    margin-bottom: 4px;
+  }
+
+  &-week-day {
+    text-align: center;
+    font-size: @pc-font-size-small;
+    color: @text-color-secondary;
+    font-weight: 500;
+    padding: 4px 0;
+  }
+
+  &-date-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+  }
+
+  // ======== 日期单元格 ========
+  &-date-cell {
+    position: relative;
+    min-height: 80px;
+    padding: 4px 8px;
+    border-right: 1px solid @border-color;
+    border-bottom: 1px solid @border-color;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:nth-child(7n) {
+      border-right: none;
+    }
+
+    &:hover:not(.zdy-calendar-date-cell--disabled) {
+      background-color: @background-color-hover;
+    }
+
+    &--other-month {
+      .zdy-calendar-date-value {
+        color: @text-color-disabled;
+      }
+    }
+
+    &--today {
+      .zdy-calendar-date-value {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background-color: @primary-color;
+        color: #fff;
+        font-weight: 500;
+      }
+    }
+
+    &--selected {
+      background-color: fade(@primary-color, 10%);
+
+      .zdy-calendar-date-value {
+        color: @primary-color;
+        font-weight: 600;
+      }
+
+      &.zdy-calendar-date-cell--today {
+        .zdy-calendar-date-value {
+          background-color: darken(@primary-color, 5%);
+        }
+      }
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.4;
+    }
+  }
+
+  &-date-value {
+    font-size: @pc-font-size-base;
+    color: @text-color;
+    line-height: 24px;
+  }
+
+  &-date-content {
+    margin-top: 2px;
+    font-size: @pc-font-size-small;
+    color: @text-color-secondary;
+    overflow: hidden;
+  }
+
+  // ======== 年视图 ========
+  &-year-body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    padding: 16px;
+  }
+
+  &-month-cell {
+    height: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid @border-color;
+    border-radius: @border-radius-base;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: @primary-color;
+      color: @primary-color;
+    }
+
+    &--selected {
+      background-color: @primary-color;
+      border-color: @primary-color;
+
+      .zdy-calendar-month-value {
+        color: #fff;
+      }
+
+      &:hover {
+        color: #fff;
+      }
+    }
+
+    &--current {
+      border-color: @primary-color;
+
+      .zdy-calendar-month-value {
+        color: @primary-color;
+        font-weight: 500;
+      }
+    }
+  }
+
+  &-month-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: @text-color;
+  }
+
+  &-month-content {
+    margin-top: 4px;
+    font-size: @pc-font-size-small;
+    color: @text-color-secondary;
+  }
+
+  // ======== 全屏模式 ========
+  &--fullscreen {
+    width: 100%;
+
+    .zdy-calendar-date-cell {
+      min-height: 100px;
+    }
+  }
+
+  // ======== 卡片模式 ========
+  &--card {
+    max-width: 350px;
+    border: 1px solid @border-color;
+    overflow: hidden;
+
+    .zdy-calendar-date-cell {
+      min-height: 44px;
+      padding: 2px 4px;
+      border-right: 1px solid @border-color;
+      border-bottom: 1px solid @border-color;
+    }
+
+    .zdy-calendar-date-content {
+      display: none;
+    }
+
+    .zdy-calendar-week-header {
+      padding-bottom: 4px;
+      margin-bottom: 0;
+    }
+
+    .zdy-calendar-body {
+      padding: 8px;
+    }
+
+    .zdy-calendar-year-body {
+      padding: 12px;
+      gap: 8px;
+    }
+
+    .zdy-calendar-month-cell {
+      height: 56px;
+    }
+  }
 }

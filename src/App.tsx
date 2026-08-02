@@ -30,6 +30,7 @@ import ListDemo from './components/pc/List/demo';
 import MenuDemo from './components/pc/Menu/demo';
 import BreadcrumbDemo from './components/pc/Breadcrumb/demo';
 import PaginationDemo from './components/pc/Pagination/demo';
+import CalendarDemo from './components/pc/Calendar/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -209,6 +210,7 @@ function App() {
       Menu: MenuDemo,
       Breadcrumb: BreadcrumbDemo,
       Pagination: PaginationDemo,
+      Calendar: CalendarDemo,
     };
     
     const DemoComponent = demoComponents[componentName];
