@@ -1,3 +1,173 @@
-.tag {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 8px 8px 0;
+  padding: 0 7px;
+  height: 24px;
+  line-height: 22px;
+  font-size: @pc-font-size-small;
+  border: 1px solid @border-color;
+  border-radius: @border-radius-sm;
+  background-color: #fafafa;
+  color: @text-color;
+  white-space: nowrap;
+  user-select: none;
+  transition: all 0.2s ease;
+
+  // ======== 尺寸 ========
+  &--size-small {
+    height: 20px;
+    line-height: 18px;
+    padding: 0 5px;
+    font-size: 12px;
+  }
+
+  &--size-default {
+    height: 24px;
+    line-height: 22px;
+    padding: 0 7px;
+    font-size: @pc-font-size-small;
+  }
+
+  &--size-large {
+    height: 32px;
+    line-height: 30px;
+    padding: 0 11px;
+    font-size: @pc-font-size-base;
+  }
+
+  // ======== 边框 ========
+  &--bordered {
+    border-width: 1px;
+    border-style: solid;
+  }
+
+  &:not(&--bordered) {
+    border-color: transparent !important;
+  }
+
+  // ======== 可点击 ========
+  &--clickable {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &:active {
+      opacity: 0.75;
+    }
+  }
+
+  // ======== 预设颜色（与内联 style 配合使用） ========
+  // 颜色样式通过内联 style 注入，这里只做 hover 增强
+  &--color-default:hover {
+    background-color: #f0f0f0 !important;
+  }
+
+  // ======== 状态点（status 属性） ========
+  &-status-dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: currentColor;
+    margin-right: 2px;
+  }
+
+  &--status-processing &-status-dot {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 1px solid currentColor;
+      opacity: 0;
+      animation: zdy-tag-status-dot 1.5s infinite ease-in-out;
+    }
+  }
+
+  // ======== 图标 ========
+  &-icon {
+    display: inline-flex;
+    align-items: center;
+    font-size: 1em;
+    line-height: 1;
+  }
+
+  // ======== 内容 ========
+  &-content {
+    display: inline-block;
+  }
+
+  // ======== 关闭按钮 ========
+  &-close-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 2px;
+    padding: 1px;
+    font-size: 10px;
+    cursor: pointer;
+    border-radius: 2px;
+    opacity: 0.6;
+    transition: all 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+      background-color: fade(#000, 6%);
+    }
+
+    &-svg {
+      display: block;
+    }
+  }
+
+  &--closable {
+    padding-right: 5px;
+  }
+
+  // ======== CheckableTag ========
+  &-checkable {
+    background-color: #fafafa;
+    border: 1px solid @border-color;
+    color: @text-color;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: #f0f0f0;
+    }
+
+    &--checked {
+      background-color: @primary-color;
+      border-color: @primary-color;
+      color: #fff;
+
+      &:hover {
+        background-color: darken(@primary-color, 8%);
+        border-color: darken(@primary-color, 8%);
+      }
+    }
+  }
+}
+
+// 状态点动画
+@keyframes zdy-tag-status-dot {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  100% {
+    transform: scale(2.4);
+    opacity: 0;
+  }
 }

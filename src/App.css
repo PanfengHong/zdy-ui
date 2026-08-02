@@ -426,8 +426,6 @@
   flex: 1;
   margin-left: 240px;
   margin-top: 56px;
-  padding: 20px;
-  background-color: #ecf0f1;
   min-height: calc(100vh - 56px);
 }
 
@@ -458,7 +456,6 @@
 
 .component-section {
   background-color: #fff;
-  border-radius: 8px;
   padding: 30px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }

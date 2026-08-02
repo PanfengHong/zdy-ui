@@ -33,6 +33,7 @@ import PaginationDemo from './components/pc/Pagination/demo';
 import CalendarDemo from './components/pc/Calendar/demo';
 import RateDemo from './components/pc/Rate/demo';
 import TransferDemo from './components/pc/Transfer/demo';
+import TagDemo from './components/pc/Tag/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -84,74 +85,74 @@ function App() {
       id: 'general',
       label: '通用',
       items: [
-        { id: 'button', label: 'Button 按钮', icon: '🔘', type: 'component', component: 'button' },
-        { id: 'icon', label: 'Icon 图标', icon: '🎨', type: 'component', component: 'icon' },
+        { id: 'button', label: 'Button 按钮', icon: '🔘', type: 'component', component: 'Button' },
+        { id: 'icon', label: 'Icon 图标', icon: '🎨', type: 'component', component: 'Icon' },
       ],
     },
     {
       id: 'layout',
       label: '布局',
       items: [
-        { id: 'layout', label: 'Layout 布局', icon: '📐', type: 'component', component: 'layout' },
-        { id: 'grid', label: 'Grid 栅格', icon: '🔲', type: 'component', component: 'grid' },
-        { id: 'masonry', label: 'Masonry 瀑布流', icon: '🧱', type: 'component', component: 'masonry' },
+        { id: 'layout', label: 'Layout 布局', icon: '📐', type: 'component', component: 'Layout' },
+        { id: 'grid', label: 'Grid 栅格', icon: '🔲', type: 'component', component: 'Grid' },
+        { id: 'masonry', label: 'Masonry 瀑布流', icon: '🧱', type: 'component', component: 'Masonry' },
       ],
     },
     {
       id: 'feedback',
       label: '反馈',
       items: [
-        { id: 'dialog', label: 'Dialog 弹框', icon: '💬', type: 'component', component: 'dialog' },
-        { id: 'alert', label: 'Alert 提醒', icon: '⚠️', type: 'component', component: 'alert' },
-        { id: 'message', label: 'Message 消息', icon: '📨', type: 'component', component: 'message' },
-        { id: 'notification', label: 'Notification 通知', icon: '🔔', type: 'component', component: 'notification' },
-        { id: 'loading', label: 'Loading 加载', icon: '⏳', type: 'component', component: 'loading' },
-        { id: 'skeleton', label: 'Skeleton 骨架屏', icon: '💀', type: 'component', component: 'skeleton' },
-        { id: 'watermark', label: 'Watermark 水印', icon: '💧', type: 'component', component: 'watermark' },
-        { id: 'progress', label: 'Progress 进度条', icon: '📊', type: 'component', component: 'progress' },
+        { id: 'dialog', label: 'Dialog 弹框', icon: '💬', type: 'component', component: 'Dialog' },
+        { id: 'alert', label: 'Alert 提醒', icon: '⚠️', type: 'component', component: 'Alert' },
+        { id: 'message', label: 'Message 消息', icon: '📨', type: 'component', component: 'Message' },
+        { id: 'notification', label: 'Notification 通知', icon: '🔔', type: 'component', component: 'Notification' },
+        { id: 'loading', label: 'Loading 加载', icon: '⏳', type: 'component', component: 'Loading' },
+        { id: 'skeleton', label: 'Skeleton 骨架屏', icon: '💀', type: 'component', component: 'Skeleton' },
+        { id: 'watermark', label: 'Watermark 水印', icon: '💧', type: 'component', component: 'Watermark' },
+        { id: 'progress', label: 'Progress 进度条', icon: '📊', type: 'component', component: 'Progress' },
       ],
     },
     {
       id: 'display',
       label: '展示',
       items: [
-        { id: 'menu', label: 'Menu 菜单', icon: '📋', type: 'component', component: 'menu' },
-        { id: 'carousel', label: 'Carousel 走马灯', icon: '🎠', type: 'component', component: 'carousel' },
-        { id: 'table', label: 'Table 表格', icon: '📋', type: 'component', component: 'table' },
-        { id: 'list', label: 'List 列表', icon: '📝', type: 'component', component: 'list' },
-        { id: 'breadcrumb', label: 'Breadcrumb 面包屑', icon: '🍞', type: 'component', component: 'breadcrumb' },
-        { id: 'steps', label: 'Steps 步骤条', icon: '📶', type: 'component', component: 'steps' },
-        { id: 'pagination', label: 'Pagination 分页', icon: '📄', type: 'component', component: 'pagination' },
-        { id: 'anchor', label: 'Anchor 锚点', icon: '⚓', type: 'component', component: 'anchor' },
-        { id: 'tabs', label: 'Tabs 标签页', icon: '📑', type: 'component', component: 'tabs' },
-        { id: 'tree', label: 'Tree 树形控件', icon: '🌳', type: 'component', component: 'tree' },
-        { id: 'calendar', label: 'Calendar 日历', icon: '📅', type: 'component', component: 'calendar' },
-        { id: 'empty', label: 'Empty 空状态', icon: '📭', type: 'component', component: 'empty' },
-        { id: 'popover', label: 'Popover 气泡', icon: '💭', type: 'component', component: 'popover' },
-        { id: 'collapse', label: 'Collapse 折叠面板', icon: '📁', type: 'component', component: 'collapse' },
-        { id: 'intro', label: 'Intro 引导', icon: '🎯', type: 'component', component: 'intro' },
-        { id: 'tag', label: 'Tag 标签', icon: '🏷️', type: 'component', component: 'tag' },
-        { id: 'board', label: 'Board 看板', icon: '📊', type: 'component', component: 'board' },
-        { id: 'echarts', label: 'ECharts 图表', icon: '📈', type: 'component', component: 'echarts' },
+        { id: 'menu', label: 'Menu 菜单', icon: '📋', type: 'component', component: 'Menu' },
+        { id: 'carousel', label: 'Carousel 走马灯', icon: '🎠', type: 'component', component: 'Carousel' },
+        { id: 'table', label: 'Table 表格', icon: '📋', type: 'component', component: 'Table' },
+        { id: 'list', label: 'List 列表', icon: '📝', type: 'component', component: 'List' },
+        { id: 'breadcrumb', label: 'Breadcrumb 面包屑', icon: '🍞', type: 'component', component: 'Breadcrumb' },
+        { id: 'steps', label: 'Steps 步骤条', icon: '📶', type: 'component', component: 'Steps' },
+        { id: 'pagination', label: 'Pagination 分页', icon: '📄', type: 'component', component: 'Pagination' },
+        { id: 'anchor', label: 'Anchor 锚点', icon: '⚓', type: 'component', component: 'Anchor' },
+        { id: 'tabs', label: 'Tabs 标签页', icon: '📑', type: 'component', component: 'Tabs' },
+        { id: 'tree', label: 'Tree 树形控件', icon: '🌳', type: 'component', component: 'Tree' },
+        { id: 'calendar', label: 'Calendar 日历', icon: '📅', type: 'component', component: 'Calendar' },
+        { id: 'empty', label: 'Empty 空状态', icon: '📭', type: 'component', component: 'Empty' },
+        { id: 'popover', label: 'Popover 气泡', icon: '💭', type: 'component', component: 'Popover' },
+        { id: 'collapse', label: 'Collapse 折叠面板', icon: '📁', type: 'component', component: 'Collapse' },
+        { id: 'intro', label: 'Intro 引导', icon: '🎯', type: 'component', component: 'Intro' },
+        { id: 'tag', label: 'Tag 标签', icon: '🏷️', type: 'component', component: 'Tag' },
+        { id: 'board', label: 'Board 看板', icon: '📊', type: 'component', component: 'Board' },
+        { id: 'echarts', label: 'ECharts 图表', icon: '📈', type: 'component', component: 'ECharts' },
       ],
     },
     {
       id: 'form',
       label: '表单',
       items: [
-        { id: 'input', label: 'Input 输入框', icon: '📝', type: 'component', component: 'input' },
-        { id: 'textarea', label: 'Textarea 文本域', icon: '📄', type: 'component', component: 'textarea' },
-        { id: 'select', label: 'Select 下拉选择', icon: '📋', type: 'component', component: 'select' },
-        { id: 'radio', label: 'Radio 单选框', icon: '⭕', type: 'component', component: 'radio' },
-        { id: 'checkbox', label: 'Checkbox 多选框', icon: '☑️', type: 'component', component: 'checkbox' },
-        { id: 'upload', label: 'Upload 上传', icon: '📤', type: 'component', component: 'upload' },
-        { id: 'switch', label: 'Switch 开关', icon: '🔘', type: 'component', component: 'switch' },
-        { id: 'datetimepicker', label: 'DateTimePicker 日期时间选择器', icon: '📅', type: 'component', component: 'datetimepicker' },
-        { id: 'colorpicker', label: 'ColorPicker 颜色选择器', icon: '🎨', type: 'component', component: 'colorpicker' },
-        { id: 'form', label: 'Form 表单', icon: '📋', type: 'component', component: 'form' },
-        { id: 'transfer', label: 'Transfer 穿梭框', icon: '↔️', type: 'component', component: 'transfer' },
-        { id: 'slider', label: 'Slider 滑块', icon: '🎚️', type: 'component', component: 'slider' },
-        { id: 'rate', label: 'Rate 评分', icon: '⭐', type: 'component', component: 'rate' },
+        { id: 'input', label: 'Input 输入框', icon: '📝', type: 'component', component: 'Input' },
+        { id: 'textarea', label: 'Textarea 文本域', icon: '📄', type: 'component', component: 'Textarea' },
+        { id: 'select', label: 'Select 下拉选择', icon: '📋', type: 'component', component: 'Select' },
+        { id: 'radio', label: 'Radio 单选框', icon: '⭕', type: 'component', component: 'Radio' },
+        { id: 'checkbox', label: 'Checkbox 多选框', icon: '☑️', type: 'component', component: 'Checkbox' },
+        { id: 'upload', label: 'Upload 上传', icon: '📤', type: 'component', component: 'Upload' },
+        { id: 'switch', label: 'Switch 开关', icon: '🔘', type: 'component', component: 'Switch' },
+        { id: 'datetimepicker', label: 'DateTimePicker 日期时间选择器', icon: '📅', type: 'component', component: 'DateTimePicker' },
+        { id: 'colorpicker', label: 'ColorPicker 颜色选择器', icon: '🎨', type: 'component', component: 'ColorPicker' },
+        { id: 'form', label: 'Form 表单', icon: '📋', type: 'component', component: 'Form' },
+        { id: 'transfer', label: 'Transfer 穿梭框', icon: '↔️', type: 'component', component: 'Transfer' },
+        { id: 'slider', label: 'Slider 滑块', icon: '🎚️', type: 'component', component: 'Slider' },
+        { id: 'rate', label: 'Rate 评分', icon: '⭐', type: 'component', component: 'Rate' },
       ],
     },
   ];
@@ -167,25 +168,15 @@ function App() {
 
   // 渲染通用组件展示
   const renderComponentDemo = () => {
-    const componentId = getCurrentMenuItem().component || '';
-    const componentTitle = getCurrentMenuItem().label || '';  
+    const currentMenuItem = getCurrentMenuItem();
+    const componentTitle = currentMenuItem.label || '';
+    // component 字段直接存储实际组件名（PascalCase）
+    const componentName = currentMenuItem.component || '';
     const sectionClass = activePlatform === 'pc' ? '' : 'mobile-section';
     const platformComponents = activePlatform === 'pc' ? PC : Mobile;
     
-    // 获取组件名称（首字母大写）
-    const componentName = componentId.charAt(0).toUpperCase() + componentId.slice(1);
-    
     // 动态获取组件
     const Component = (platformComponents as any)[componentName];
-    
-    if (!Component) {
-      return (
-        <section className={`component-section ${sectionClass}`}>
-          <h2>组件开发中</h2>
-          <p>该组件正在开发中，敬请期待...</p>
-        </section>
-      );
-    }
     
     const demoComponents: Record<string, React.ComponentType> = {
       Button: ButtonDemo,
@@ -216,15 +207,16 @@ function App() {
       Calendar: CalendarDemo,
       Rate: RateDemo,
       Transfer: TransferDemo,
+      Tag: TagDemo,
     };
     
     const DemoComponent = demoComponents[componentName];
-    
-    if (DemoComponent) {
+
+    if (!Component || !DemoComponent) {
       return (
         <section className={`component-section ${sectionClass}`}>
-          <h2>{componentTitle}</h2>
-          <DemoComponent />
+          <h2>组件开发中</h2>
+          <p>该组件正在开发中，敬请期待...</p>
         </section>
       );
     }
@@ -232,16 +224,7 @@ function App() {
     return (
         <section className={`component-section ${sectionClass}`}>
           <h2>{componentTitle}</h2>
-          <div className="component-group">
-            <h3>基础示例</h3>
-            <DemoBlock
-              code={`
-<${componentName}>基础示例</${componentName}>
-              `.trim()}
-            >
-              <Component>基础示例</Component>
-            </DemoBlock>
-          </div>
+          <DemoComponent />
         </section>
       );
     };
@@ -528,26 +511,6 @@ function App() {
 
       {/* 主内容区域 */}
       <div className="app-content">
-        {/* 平台切换选项卡 - 仅在组件页面显示 */}
-        {getCurrentMenuItem().type === 'component' && (
-          <div className="platform-tabs">
-            <button
-              className={`platform-tab ${activePlatform === 'pc' ? 'active' : ''}`}
-              onClick={() => setActivePlatform('pc')}
-            >
-              <span className="tab-icon">🖥️</span>
-              <span className="tab-label">PC端</span>
-            </button>
-            <button
-              className={`platform-tab ${activePlatform === 'mobile' ? 'active' : ''}`}
-              onClick={() => setActivePlatform('mobile')}
-            >
-              <span className="tab-icon">📱</span>
-              <span className="tab-label">移动端</span>
-            </button>
-          </div>
-        )}
-
         <main className="app-main">
           {getCurrentMenuItem().type === 'overview' && renderOverview()}
           {getCurrentMenuItem().type === 'changelog' && renderChangelog()}
