@@ -34,6 +34,9 @@ import CalendarDemo from './components/pc/Calendar/demo';
 import RateDemo from './components/pc/Rate/demo';
 import TransferDemo from './components/pc/Transfer/demo';
 import TagDemo from './components/pc/Tag/demo';
+import StepsDemo from './components/pc/Steps/demo';
+import SkeletonDemo from './components/pc/Skeleton/demo';
+import ProgressDemo from './components/pc/Progress/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -208,6 +211,9 @@ function App() {
       Rate: RateDemo,
       Transfer: TransferDemo,
       Tag: TagDemo,
+      Steps: StepsDemo,
+      Skeleton: SkeletonDemo,
+      Progress: ProgressDemo,
     };
     
     const DemoComponent = demoComponents[componentName];

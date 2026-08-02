@@ -1,3 +1,339 @@
-.steps {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+@steps-icon-size: 32px;
+@steps-icon-size-sm: 24px;
+@steps-color-wait: #bfbfbf;
+@steps-color-process: @primary-color;
+@steps-color-finish: @primary-color;
+@steps-color-error: #ff4d4f;
+
+.zdy-steps {
+  display: flex;
+  font-size: @pc-font-size-base;
+  color: @text-color;
+
+  // ======== 方向 ========
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  &--vertical {
+    flex-direction: column;
+  }
+
+  // ======== 尺寸 ========
+  &--small {
+    .zdy-steps-item-icon {
+      width: @steps-icon-size-sm;
+      height: @steps-icon-size-sm;
+      line-height: @steps-icon-size-sm;
+      font-size: 12px;
+    }
+
+    .zdy-steps-item-title {
+      font-size: @pc-font-size-small;
+      line-height: @steps-icon-size-sm;
+    }
+
+    .zdy-steps-item-description {
+      font-size: 12px;
+    }
+  }
+
+  // ======== 水平方向步骤项 ========
+  &--horizontal {
+    .zdy-steps-item {
+      flex: 1;
+      position: relative;
+      min-height: @steps-icon-size;
+      text-align: center;
+    }
+
+    .zdy-steps-item-container {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      vertical-align: top;
+    }
+
+    .zdy-steps-item-content {
+      display: inline-block;
+      margin-left: 8px;
+      vertical-align: top;
+    }
+
+    // 默认连接线：从图标右边缘到下一个步骤图标左边缘，左右各留 8px 间隙
+    .zdy-steps-item-tail {
+      position: absolute;
+      top: calc((@steps-icon-size - 1px) / 2);
+      left: calc(50% + @steps-icon-size / 2 + 8px);
+      right: calc(-50% + @steps-icon-size / 2 + 8px);
+      height: 1px;
+      transition: background-color 0.3s ease;
+      pointer-events: none;
+    }
+  }
+
+  // ======== 垂直方向 ========
+  &--vertical {
+    .zdy-steps-item {
+      position: relative;
+      display: block;
+
+      &:last-child {
+        padding-bottom: 0;
+      }
+    }
+
+    // 图标在左，内容在右
+    .zdy-steps-item-container {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .zdy-steps-item-content {
+      margin-left: 8px;
+      flex: 1;
+      min-height: @steps-icon-size;
+    }
+
+    .zdy-steps-item-title {
+      line-height: @steps-icon-size;
+    }
+
+    // 连接线：从当前图标中心延伸到下一个图标中心
+    .zdy-steps-item-tail {
+      position: absolute;
+      top: @steps-icon-size; // 从当前图标底部开始
+      bottom: 0;
+      left: calc(@steps-icon-size / 2);
+      width: 1px;
+      padding-bottom: 24px; // 给下一个步骤的 padding-bottom 留空
+      pointer-events: none;
+
+      &::after {
+        content: '';
+        display: block;
+        width: 1px;
+        height: 100%;
+        background-color: @border-color-split;
+        transition: background-color 0.3s ease;
+      }
+    }
+
+    // 小尺寸连接线对齐小图标中心
+    &.zdy-steps--small .zdy-steps-item-tail {
+      top: @steps-icon-size-sm;
+      left: calc(@steps-icon-size-sm / 2);
+    }
+  }
+
+  // ======== 步骤项 ========
+  &-item {
+    &-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: @steps-icon-size;
+      height: @steps-icon-size;
+      line-height: @steps-icon-size;
+      border-radius: 50%;
+      border: 1px solid @steps-color-wait;
+      background-color: #fff;
+      color: @steps-color-wait;
+      font-size: @pc-font-size-base;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    &-title {
+      display: inline-block;
+      font-size: @pc-font-size-base;
+      line-height: @steps-icon-size;
+      color: @text-color;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    &-description {
+      font-size: @pc-font-size-small;
+      color: @text-color-secondary;
+      max-width: 140px;
+      white-space: normal;
+      margin-top: 4px;
+      line-height: 1.5;
+    }
+
+    &-tail {
+      background-color: @border-color-split;
+    }
+
+    // ======== 状态：wait ========
+    &--wait {
+      .zdy-steps-item-icon {
+        border-color: @border-color-split;
+        color: @text-color-secondary;
+      }
+
+      .zdy-steps-item-title {
+        color: @text-color-secondary;
+      }
+    }
+
+    // ======== 状态：process ========
+    &--process {
+      .zdy-steps-item-icon {
+        border-color: @steps-color-process;
+        background-color: @steps-color-process;
+        color: #fff;
+      }
+
+      .zdy-steps-item-title {
+        color: @text-color;
+        font-weight: 500;
+      }
+    }
+
+    // ======== 状态：finish ========
+    &--finish {
+      .zdy-steps-item-icon {
+        border-color: @steps-color-finish;
+        color: @steps-color-finish;
+      }
+
+      .zdy-steps-item-title {
+        color: @text-color;
+      }
+    }
+
+    &--finish + .zdy-steps-item--finish,
+    &--finish + .zdy-steps-item--process,
+    &--finish + .zdy-steps-item--wait,
+    &--process + .zdy-steps-item--finish,
+    &--process + .zdy-steps-item--process {
+      .zdy-steps-item-tail {
+        background-color: @steps-color-finish;
+      }
+
+      .zdy-steps-item-tail::after {
+        background-color: @steps-color-finish;
+      }
+    }
+
+    // ======== 状态：error ========
+    &--error {
+      .zdy-steps-item-icon {
+        border-color: @steps-color-error;
+        color: @steps-color-error;
+      }
+
+      .zdy-steps-item-title {
+        color: @steps-color-error;
+      }
+    }
+
+    // ======== 自定义图标 ========
+    &--custom-icon {
+      .zdy-steps-item-icon {
+        border: none;
+        background: transparent;
+        width: auto;
+        height: auto;
+        line-height: 1;
+        font-size: @steps-icon-size;
+      }
+    }
+
+    // ======== 可点击 ========
+    &--clickable {
+      cursor: pointer;
+
+      &:hover {
+        .zdy-steps-item-title {
+          color: @primary-color;
+        }
+      }
+    }
+
+    // ======== 禁用 ========
+    &--disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  }
+
+  // ======== 图标 ========
+  &-icon-svg {
+    display: block;
+    font-size: 16px;
+  }
+
+  // ======== 进度环 ========
+  &-progress {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    line-height: 1;
+
+    &-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 12px;
+      color: @text-color-secondary;
+    }
+  }
+
+  // ======== 导航模式 ========
+  &--navigation {
+    .zdy-steps-item {
+      flex: 1;
+      text-align: center;
+      cursor: pointer;
+      padding: 8px 0;
+
+      &-container {
+        display: inline-block;
+      }
+
+      &-content {
+        margin-left: 8px;
+      }
+
+      &-tail {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: -50%;
+        transform: translateY(-50%);
+        height: 1px;
+        pointer-events: none;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          width: 0;
+          height: 0;
+          border-left: 6px solid @border-color-split;
+          border-top: 4px solid transparent;
+          border-bottom: 4px solid transparent;
+          transform: translateY(-50%);
+        }
+      }
+
+      &:last-child .zdy-steps-item-tail {
+        display: none;
+      }
+
+      &:hover {
+        .zdy-steps-item-title {
+          color: @primary-color;
+        }
+      }
+    }
+  }
 }
