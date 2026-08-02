@@ -1,3 +1,205 @@
-.popover {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+@popover-arrow-size: 8px;
+@popover-bg: #fff;
+@popover-border-color: #f0f0f0;
+
+.zdy-popover {
+  position: absolute;
+  max-width: 400px;
+  background: @popover-bg;
+  border: 1px solid @popover-border-color;
+  border-radius: @border-radius;
+  box-shadow: @box-shadow;
+  font-size: @pc-font-size-base;
+  color: @text-color;
+  opacity: 0;
+  transform: scale(0.9);
+  transform-origin: center bottom;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  pointer-events: none;
+
+  &--visible {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+  }
+
+  &--hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+  }
+
+  // ============ 方向对应的 transform-origin ============
+  &--top,
+  &--topLeft,
+  &--topRight {
+    transform-origin: center bottom;
+  }
+  &--bottom,
+  &--bottomLeft,
+  &--bottomRight {
+    transform-origin: center top;
+  }
+  &--left,
+  &--leftTop,
+  &--leftBottom {
+    transform-origin: right center;
+  }
+  &--right,
+  &--rightTop,
+  &--rightBottom {
+    transform-origin: left center;
+  }
+
+  // ============ 箭头 ============
+  &-arrow {
+    position: absolute;
+    width: @popover-arrow-size * 2;
+    height: @popover-arrow-size * 2;
+    background: @popover-bg;
+    border: 1px solid @popover-border-color;
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+
+  &--top &-arrow {
+    bottom: -@popover-arrow-size;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    border-top: none;
+    border-left: none;
+  }
+  &--topLeft &-arrow {
+    bottom: -@popover-arrow-size;
+    left: @popover-arrow-size + 4;
+    transform: rotate(45deg);
+    border-top: none;
+    border-left: none;
+  }
+  &--topRight &-arrow {
+    bottom: -@popover-arrow-size;
+    right: @popover-arrow-size + 4;
+    transform: rotate(45deg);
+    border-top: none;
+    border-left: none;
+  }
+
+  &--bottom &-arrow {
+    top: -@popover-arrow-size;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    border-bottom: none;
+    border-right: none;
+  }
+  &--bottomLeft &-arrow {
+    top: -@popover-arrow-size;
+    left: @popover-arrow-size + 4;
+    transform: rotate(45deg);
+    border-bottom: none;
+    border-right: none;
+  }
+  &--bottomRight &-arrow {
+    top: -@popover-arrow-size;
+    right: @popover-arrow-size + 4;
+    transform: rotate(45deg);
+    border-bottom: none;
+    border-right: none;
+  }
+
+  &--left &-arrow {
+    right: -@popover-arrow-size;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    border-left: none;
+    border-bottom: none;
+  }
+  &--leftTop &-arrow {
+    right: -@popover-arrow-size;
+    top: @popover-arrow-size + 4;
+    transform: rotate(45deg);
+    border-left: none;
+    border-bottom: none;
+  }
+  &--leftBottom &-arrow {
+    right: -@popover-arrow-size;
+    bottom: @popover-arrow-size + 4;
+    transform: rotate(45deg);
+    border-left: none;
+    border-bottom: none;
+  }
+
+  &--right &-arrow {
+    left: -@popover-arrow-size;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    border-right: none;
+    border-top: none;
+  }
+  &--rightTop &-arrow {
+    left: -@popover-arrow-size;
+    top: @popover-arrow-size + 4;
+    transform: rotate(45deg);
+    border-right: none;
+    border-top: none;
+  }
+  &--rightBottom &-arrow {
+    left: -@popover-arrow-size;
+    bottom: @popover-arrow-size + 4;
+    transform: rotate(45deg);
+    border-right: none;
+    border-top: none;
+  }
+
+  &--no-arrow &-arrow {
+    display: none;
+  }
+
+  // ============ 内容 ============
+  &-inner {
+    position: relative;
+    padding: 12px 16px;
+    word-break: break-word;
+  }
+
+  &-title {
+    font-size: @pc-font-size-base;
+    font-weight: 500;
+    color: @text-color;
+    margin-bottom: 4px;
+    min-width: 60px;
+  }
+
+  &-content {
+    font-size: @pc-font-size-small;
+    color: @text-color-secondary;
+    line-height: 1.5;
+  }
+
+  &-title + &-content {
+    margin-top: 4px;
+  }
+
+  &-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background 0.15s;
+
+    &:hover {
+      background: #f0f0f0;
+    }
+  }
+}
+
+.zdy-popover-trigger {
+  display: inline-block;
 }

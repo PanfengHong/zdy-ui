@@ -44,6 +44,7 @@ import CollapseDemo from './components/pc/Collapse/demo';
 import ColorPickerDemo from './components/pc/ColorPicker/demo';
 import SliderDemo from './components/pc/Slider/demo';
 import BoardDemo from './components/pc/Board/demo';
+import PopoverDemo from './components/pc/Popover/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -228,6 +229,7 @@ function App() {
       ColorPicker: ColorPickerDemo,
       Slider: SliderDemo,
       Board: BoardDemo,
+      Popover: PopoverDemo,
     };
     
     const DemoComponent = demoComponents[componentName];
