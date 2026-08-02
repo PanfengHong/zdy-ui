@@ -1,3 +1,275 @@
-.tree {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+@tree-node-height: 28px;
+@tree-indent: 18px;
+@tree-switcher-size: 18px;
+@tree-checkbox-size: 16px;
+@tree-primary: @primary-color;
+@tree-text: @text-color;
+@tree-text-secondary: @text-color-secondary;
+@tree-border: #d9d9d9;
+@tree-selected-bg: @primary-color-light;
+
+.zdy-tree {
+  font-size: @pc-font-size-base;
+  color: @tree-text;
+  user-select: none;
+
+  &--disabled {
+    color: @tree-text-secondary;
+    cursor: not-allowed;
+  }
+
+  // 节点
+  &-node {
+    position: relative;
+    outline: none;
+
+    &--disabled {
+      color: @tree-text-secondary;
+      cursor: not-allowed;
+
+      .zdy-tree-title {
+        cursor: not-allowed;
+      }
+    }
+
+    &--dragging {
+      opacity: 0.4;
+    }
+
+    &--drag-over {
+      .zdy-tree-node-content {
+        background-color: fade(@tree-primary, 8%);
+      }
+    }
+
+    &--drag-before {
+      > .zdy-tree-node-content::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: @tree-primary;
+        z-index: 1;
+      }
+    }
+
+    &--drag-after {
+      > .zdy-tree-node-content::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background-color: @tree-primary;
+        z-index: 1;
+      }
+    }
+  }
+
+  &-node-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    min-height: @tree-node-height;
+    padding: 0 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: @tree-selected-bg;
+    }
+
+    .zdy-tree-node--selected & {
+      background-color: fade(@tree-primary, 12%);
+    }
+
+    .zdy-tree--disabled & {
+      cursor: not-allowed;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  // switcher 展开收起图标
+  &-switcher {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: @tree-switcher-size;
+    height: @tree-switcher-size;
+    flex-shrink: 0;
+    color: @tree-text-secondary;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+      color: @tree-primary;
+    }
+
+    &--leaf {
+      cursor: default;
+
+      &:hover {
+        color: @tree-text-secondary;
+      }
+    }
+
+    &-icon {
+      display: inline-block;
+      transition: transform 0.2s ease;
+    }
+
+    &-line {
+      width: 1px;
+      height: 100%;
+      background-color: #d9d9d9;
+    }
+  }
+
+  // show-line 模式
+  &--show-line {
+    .zdy-tree-switcher {
+      &--leaf::before {
+        content: '';
+        display: inline-block;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background-color: #d9d9d9;
+      }
+    }
+  }
+
+  // checkbox
+  &-checkbox {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+    width: @tree-checkbox-size;
+    height: @tree-checkbox-size;
+    flex-shrink: 0;
+    cursor: pointer;
+
+    &-inner {
+      position: relative;
+      width: @tree-checkbox-size;
+      height: @tree-checkbox-size;
+      border: 1px solid @tree-border;
+      border-radius: 2px;
+      background-color: #fff;
+      transition: all 0.2s;
+
+      // 对勾
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 4px;
+        height: 8px;
+        border-right: 1.5px solid #fff;
+        border-bottom: 1.5px solid #fff;
+        transform: translate(-50%, -65%) rotate(45deg) scale(0);
+        transition: transform 0.2s;
+      }
+    }
+
+    &:hover &-inner {
+      border-color: @tree-primary;
+    }
+
+    &--checked &-inner {
+      background-color: @tree-primary;
+      border-color: @tree-primary;
+
+      &::after {
+        transform: translate(-50%, -65%) rotate(45deg) scale(1);
+      }
+    }
+
+    // 半选
+    &--indeterminate &-inner {
+      background-color: @tree-primary;
+      border-color: @tree-primary;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 8px;
+        height: 1.5px;
+        background-color: #fff;
+        border: none;
+        transform: translate(-50%, -50%) scale(1);
+      }
+    }
+
+    &--disabled {
+      cursor: not-allowed;
+
+      &-inner {
+        background-color: #f5f5f5;
+        border-color: #d9d9d9;
+      }
+
+      &:hover &-inner {
+        border-color: #d9d9d9;
+      }
+    }
+  }
+
+  // 自定义图标
+  &-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 4px;
+    flex-shrink: 0;
+  }
+
+  // 标题
+  &-title {
+    display: inline-block;
+    padding: 0 4px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: color 0.2s;
+
+    &:hover {
+      color: @tree-primary;
+    }
+
+    &--block {
+      flex: 1;
+    }
+
+    .zdy-tree-node--selected & {
+      color: @tree-primary;
+      font-weight: 500;
+    }
+
+    .zdy-tree-node--disabled & {
+      color: @tree-text-secondary;
+      cursor: not-allowed;
+
+      &:hover {
+        color: @tree-text-secondary;
+      }
+    }
+  }
+
+  // 子节点容器
+  &-children {
+    position: relative;
+  }
 }

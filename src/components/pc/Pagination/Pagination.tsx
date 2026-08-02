@@ -1,6 +1,7 @@
 import React, { useState, useMemo } from 'react';
 import classNames from 'classnames';
 import type { PaginationProps } from '../../../types';
+import Icon from '../Icon/Icon';
 
 import './Pagination.less';
 
@@ -114,7 +115,7 @@ const Pagination: React.FC<PaginationProps> = ({
           onClick={goPrev}
           disabled={disabled || current <= 1}
         >
-          ‹
+          <Icon type="left" size={14} color="currentColor" />
         </button>
         <span className="zdy-pagination-simple-pager">
           <input
@@ -137,7 +138,7 @@ const Pagination: React.FC<PaginationProps> = ({
           onClick={goNext}
           disabled={disabled || current >= totalPages}
         >
-          ›
+          <Icon type="right" size={14} color="currentColor" />
         </button>
       </div>
     );
@@ -158,7 +159,7 @@ const Pagination: React.FC<PaginationProps> = ({
         onClick={goPrev}
         disabled={disabled || current <= 1}
       >
-        ‹
+        <Icon type="left" size={14} color="currentColor" />
       </button>
 
       {/* 页码列表 */}
@@ -192,7 +193,7 @@ const Pagination: React.FC<PaginationProps> = ({
         onClick={goNext}
         disabled={disabled || current >= totalPages}
       >
-        ›
+        <Icon type="right" size={14} color="currentColor" />
       </button>
 
       {/* 每页条数选择器 */}

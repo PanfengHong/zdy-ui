@@ -117,18 +117,6 @@ const IconSvg = ({ type, size, color }: { type: string; size: number; color: str
           <polyline points="16 10 10 16 8 14" />
         </svg>
       );
-    case 'back':
-      return (
-        <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="15 18 9 12 15 6" />
-        </svg>
-      );
-    case 'forward':
-      return (
-        <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-          <polyline points="9 18 15 12 9 6" />
-        </svg>
-      );
     case 'up':
       return (
         <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -151,6 +139,30 @@ const IconSvg = ({ type, size, color }: { type: string; size: number; color: str
       return (
         <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
           <polyline points="9 18 15 12 9 6" />
+        </svg>
+      );
+    case 'caret-up':
+      return (
+        <svg width={iconSize} height={iconSize} viewBox="0 0 1024 1024" fill={color}>
+          <path d="M858.9 689L530.5 308.2c-9.4-10.9-27.5-10.9-37 0L165.1 689c-12.2 14.2-1.2 35 18.5 35h656.8c19.7 0 30.7-20.8 18.5-35z" />
+        </svg>
+      );
+    case 'caret-down':
+      return (
+        <svg width={iconSize} height={iconSize} viewBox="0 0 1024 1024" fill={color}>
+          <path d="M840.4 300H183.6c-19.7 0-30.7 20.8-18.5 35l328.4 380.8c9.4 10.9 27.5 10.9 37 0L840.4 335c12.2-14.2 1.2-35-18.5-35z" />
+        </svg>
+      );
+    case 'caret-left':
+      return (
+        <svg width={iconSize} height={iconSize} viewBox="0 0 1024 1024" fill={color}>
+          <path d="M689 165.1L308.2 493.5c-10.9 9.4-10.9 27.5 0 37L689 858.9c14.2 12.2 35 1.2 35-18.5V183.6c0-19.7-20.8-30.7-35-18.5z" />
+        </svg>
+      );
+    case 'caret-right':
+      return (
+        <svg width={iconSize} height={iconSize} viewBox="0 0 1024 1024" fill={color}>
+          <path d="M715.8 493.5L335 165.1c-14.2-12.2-35-1.2-35 18.5v656.8c0 19.7 20.8 30.7 35 18.5l380.8-328.4c10.9-9.4 10.9-27.5 0-37z" />
         </svg>
       );
     case 'check':

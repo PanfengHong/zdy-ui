@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import type { BaseSelectProps } from '../../../types';
+import Icon from '../Icon/Icon';
 
 import './Select.less';
 
@@ -154,9 +155,7 @@ const Select = ({
         <div className="zdy-select-trigger" onClick={handleToggle}>
           <span className="zdy-select-value">{displayValue}</span>
           <span className="zdy-select-arrow">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M6 9l6 6 6-6" />
-            </svg>
+            <Icon type="down" size={14} color="currentColor" />
           </span>
         </div>
       </div>

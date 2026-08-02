@@ -70,14 +70,6 @@ const IconDemo = () => {
         >
           <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="back" />
-              <span style={{ fontSize: '12px', color: '#999' }}>back</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="forward" />
-              <span style={{ fontSize: '12px', color: '#999' }}>forward</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
               <Icon type="up" />
               <span style={{ fontSize: '12px', color: '#999' }}>up</span>
             </div>
@@ -92,6 +84,37 @@ const IconDemo = () => {
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
               <Icon type="right" />
               <span style={{ fontSize: '12px', color: '#999' }}>right</span>
+            </div>
+          </div>
+        </DemoBlock>
+      </div>
+
+      <div className="component-group">
+        <h3>三角箭头</h3>
+        <DemoBlock
+          code={`
+<Icon type="caret-up" />
+<Icon type="caret-down" />
+<Icon type="caret-left" />
+<Icon type="caret-right" />
+          `.trim()}
+        >
+          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+              <Icon type="caret-up" />
+              <span style={{ fontSize: '12px', color: '#999' }}>caret-up</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+              <Icon type="caret-down" />
+              <span style={{ fontSize: '12px', color: '#999' }}>caret-down</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+              <Icon type="caret-left" />
+              <span style={{ fontSize: '12px', color: '#999' }}>caret-left</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+              <Icon type="caret-right" />
+              <span style={{ fontSize: '12px', color: '#999' }}>caret-right</span>
             </div>
           </div>
         </DemoBlock>
