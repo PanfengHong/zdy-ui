@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext, useRef, useEffect } from 'react';
 import classNames from 'classnames';
-import type { BaseCheckboxProps, BaseCheckboxGroupProps } from '../../../types';
+import type { BaseCheckboxProps, BaseCheckboxGroupProps } from './types';
 
 import './Checkbox.less';
 

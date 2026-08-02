@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import classNames from 'classnames';
-import type { BaseInputProps } from '../../../types';
+import type { BaseInputProps } from './types';
 
 import './Input.less';
 const Input = forwardRef<HTMLInputElement, BaseInputProps>(({

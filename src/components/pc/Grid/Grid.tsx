@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import type { BaseRowProps, BaseColProps, ColSpanType } from '../../../types';
+import type { BaseRowProps, BaseColProps, ColSpanType } from './types';
 
 import './Grid.less';
 

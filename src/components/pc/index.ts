@@ -37,7 +37,6 @@ export { default as Collapse } from './Collapse';
 export { default as Intro } from './Intro';
 export { default as Tag } from './Tag';
 export { default as Board } from './Board';
-export { default as ECharts } from './ECharts';
 
 // 表单组件
 export { default as Input } from './Input';

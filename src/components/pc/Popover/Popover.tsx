@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import type { PopoverProps, PopoverPlacement } from '../../../types';
+import type { PopoverProps, PopoverPlacement } from './types';
 import Icon from '../Icon/Icon';
 
 import './Popover.less';

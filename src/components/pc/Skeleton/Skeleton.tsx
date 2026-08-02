@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import type { BaseSkeletonProps } from '../../../types';
+import type { BaseSkeletonProps } from './types';
 
 import './Skeleton.less';
 

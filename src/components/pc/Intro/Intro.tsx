@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect, useCallback, useLayoutEffect } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import type { IntroProps, IntroStep, IntroPlacement } from '../../../types';
+import type { IntroProps, IntroStep, IntroPlacement } from './types';
 
 import './Intro.less';
 

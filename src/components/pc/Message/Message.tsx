@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import classNames from 'classnames';
-import type { MessageType, MessageConfig } from '../../../types';
+import type { MessageType, MessageConfig } from './types';
 
 import './Message.less';
 

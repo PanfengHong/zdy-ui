@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
-import type { BaseTabsProps } from '../../../types';
+import type { BaseTabsProps } from './types';
 import TabPane from './TabPane';
-import type { TabPaneProps } from '../../../types';
+import type { TabPaneProps } from './types';
 
 import './Tabs.less';
 

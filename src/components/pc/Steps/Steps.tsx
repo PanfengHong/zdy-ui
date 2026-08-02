@@ -1,6 +1,6 @@
 import React, { Children, isValidElement } from 'react';
 import classNames from 'classnames';
-import type { StepsProps, StepProps, StepStatus } from '../../../types';
+import type { StepsProps, StepProps, StepItem, StepStatus } from './types';
 
 import './Steps.less';
 

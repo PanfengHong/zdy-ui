@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
 import ApiTable from '../../ApiTable/ApiTable';
 import Tree from './Tree';
-import type { TreeNodeData } from '../../../types';
+import type { TreeNodeData } from './types';
 
 // 示例数据
 const treeData: TreeNodeData[] = [

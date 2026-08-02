@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import type { BaseAlertProps, AlertType } from '../../../types';
+import type { BaseAlertProps, AlertType } from './types';
 
 import './Alert.less';
 

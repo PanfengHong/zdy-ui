@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect, useCallback, useMemo } from 'react';
 import classNames from 'classnames';
-import type { BaseMasonryProps } from '../../../types';
+import type { BaseMasonryProps } from './types';
 
 import './Masonry.less';
 

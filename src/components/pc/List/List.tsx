@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import classNames from 'classnames';
-import type { BaseListProps, ListItemProps } from '../../../types';
+import type { BaseListProps, ListItemProps } from './types';
 
 import './List.less';
 

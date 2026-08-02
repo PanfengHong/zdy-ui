@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import type { BaseButtonProps } from '../../../types';
+import type { BaseButtonProps } from './types';
 
 import './Button.less';
 const Button: React.FC<BaseButtonProps> = ({

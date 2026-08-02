@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import classNames from 'classnames';
-import type { BaseCarouselProps } from '../../../types';
+import type { BaseCarouselProps } from './types';
 
 import './Carousel.less';
 

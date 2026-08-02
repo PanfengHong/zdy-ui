@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import type { BaseIconProps } from '../../../types';
+import type { BaseIconProps } from './types';
 
 import './Icon.less';
 

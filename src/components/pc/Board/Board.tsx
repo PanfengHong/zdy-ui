@@ -5,7 +5,7 @@ import type {
   BoardColumnData,
   BoardCardData,
   BoardPriority,
-} from '../../../types';
+} from './types';
 import Icon from '../Icon/Icon';
 
 import './Board.less';

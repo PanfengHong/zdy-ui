@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback, useRef } from 'react';
 import classNames from 'classnames';
-import type { TreeProps, TreeNodeData } from '../../../types';
+import type { TreeProps, TreeNodeData } from './types';
 import Icon from '../Icon/Icon';
 
 import './Tree.less';

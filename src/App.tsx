@@ -145,7 +145,6 @@ function App() {
         { id: 'intro', label: 'Intro 引导', icon: '🎯', type: 'component', component: 'Intro' },
         { id: 'tag', label: 'Tag 标签', icon: '🏷️', type: 'component', component: 'Tag' },
         { id: 'board', label: 'Board 看板', icon: '📊', type: 'component', component: 'Board' },
-        { id: 'echarts', label: 'ECharts 图表', icon: '📈', type: 'component', component: 'ECharts' },
       ],
     },
     {

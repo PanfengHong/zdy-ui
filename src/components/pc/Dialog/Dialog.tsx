@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import type { BaseDialogProps } from '../../../types';
+import type { BaseDialogProps } from './types';
 import Icon from '../Icon';
 
 import './Dialog.less';

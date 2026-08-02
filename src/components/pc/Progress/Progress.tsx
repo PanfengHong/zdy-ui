@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import type { BaseProgressProps } from '../../../types';
+import type { BaseProgressProps } from './types';
 
 import './Progress.less';
 

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import classNames from 'classnames';
-import type { BaseUploadProps, UploadFile } from '../../../types';
+import type { BaseUploadProps, UploadFile } from './types';
 
 import './Upload.less';
 

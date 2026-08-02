@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
-import type { BaseWatermarkProps, WatermarkFontConfig } from '../../../types';
+import type { BaseWatermarkProps, WatermarkFontConfig } from './types';
 
 import './Watermark.less';
 

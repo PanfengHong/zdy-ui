@@ -1,6 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import classNames from 'classnames';
-import type { PaginationProps } from '../../../types';
+import type { PaginationProps } from './types';
 import Icon from '../Icon/Icon';
 
 import './Pagination.less';

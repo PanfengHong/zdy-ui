@@ -8,7 +8,7 @@ import React, {
   isValidElement,
 } from 'react';
 import classNames from 'classnames';
-import type { AnchorProps, AnchorLinkProps, AnchorLinkBaseProps } from '../../../types';
+import type { AnchorProps, AnchorLinkProps, AnchorLinkBaseProps } from './types';
 
 import './Anchor.less';
 

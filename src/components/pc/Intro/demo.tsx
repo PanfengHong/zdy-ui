@@ -2,7 +2,7 @@ import { useState, useRef } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
 import ApiTable from '../../ApiTable/ApiTable';
 import Intro from './Intro';
-import type { IntroStep } from '../../../types';
+import type { IntroStep } from './types';
 
 const sharedBtnStyle: React.CSSProperties = {
   padding: '4px 14px',

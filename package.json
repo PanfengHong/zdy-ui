@@ -77,11 +77,6 @@
       "require": "./dist/pc/Dialog.umd.js",
       "types": "./dist/pc/Dialog.d.ts"
     },
-    "./pc/ECharts": {
-      "import": "./dist/pc/ECharts.js",
-      "require": "./dist/pc/ECharts.umd.js",
-      "types": "./dist/pc/ECharts.d.ts"
-    },
     "./pc/Empty": {
       "import": "./dist/pc/Empty.js",
       "require": "./dist/pc/Empty.umd.js",
@@ -296,11 +291,6 @@
       "import": "./dist/mobile/Dialog.js",
       "require": "./dist/mobile/Dialog.umd.js",
       "types": "./dist/mobile/Dialog.d.ts"
-    },
-    "./mobile/ECharts": {
-      "import": "./dist/mobile/ECharts.js",
-      "require": "./dist/mobile/ECharts.umd.js",
-      "types": "./dist/mobile/ECharts.d.ts"
     },
     "./mobile/Empty": {
       "import": "./dist/mobile/Empty.js",

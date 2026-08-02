@@ -34,7 +34,7 @@
 | 布局 | Layout 布局、Grid 栅格、Masonry 瀑布流 |
 | 表单 | Input 输入框、Textarea 文本域、Select 下拉选择、Radio 单选框、Checkbox 多选框、Switch 开关、Slider 滑块、Rate 评分、Upload 上传、DateTimePicker 日期时间选择器、ColorPicker 颜色选择器、Form 表单、Transfer 穿梭框 |
 | 反馈 | Dialog 弹框、Alert 提醒、Message 消息、Notification 通知、Loading 加载、Skeleton 骨架屏、Watermark 水印、Progress 进度条 |
-| 展示 | Menu 菜单、Carousel 走马灯、Table 表格、List 列表、Breadcrumb 面包屑、Steps 步骤条、Anchor 锚点、Pagination 分页、Tabs 标签页、Tree 树形控件、Calendar 日历、Empty 空状态、Popover 气泡、Collapse 折叠面板、Tag 标签、Intro 引导、Board 看板、ECharts 图表 |
+| 展示 | Menu 菜单、Carousel 走马灯、Table 表格、List 列表、Breadcrumb 面包屑、Steps 步骤条、Anchor 锚点、Pagination 分页、Tabs 标签页、Tree 树形控件、Calendar 日历、Empty 空状态、Popover 气泡、Collapse 折叠面板、Tag 标签、Intro 引导、Board 看板 |
 
 ### 移动端组件
 

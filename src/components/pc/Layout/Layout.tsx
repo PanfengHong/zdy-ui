@@ -1,6 +1,6 @@
 import React, { useState, Children } from 'react';
 import classNames from 'classnames';
-import type { LayoutProps, LayoutHeaderProps, LayoutContentProps, LayoutFooterProps, LayoutSiderProps } from '../../../types';
+import type { LayoutProps, LayoutHeaderProps, LayoutContentProps, LayoutFooterProps, LayoutSiderProps } from './types';
 
 import './Layout.less';
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import type { BaseSelectProps } from '../../../types';
+import type { BaseSelectProps } from './types';
 import Icon from '../Icon/Icon';
 
 import './Select.less';

@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import classNames from 'classnames';
-import type { TagProps, CheckableTagProps, TagColor, TagStatus } from '../../../types';
+import type { TagProps, CheckableTagProps, TagColor, TagStatus } from './types';
 
 import './Tag.less';
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import type { EmptyProps } from '../../../types';
+import type { EmptyProps } from './types';
 
 import './Empty.less';
 

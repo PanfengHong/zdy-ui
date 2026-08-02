@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
-import type { MenuProps, MenuItemProps, SubMenuProps, MenuMode, MenuTheme } from '../../../types';
+import type { MenuProps, MenuItemProps, SubMenuProps, MenuMode, MenuTheme } from './types';
 
 import './Menu.less';
 

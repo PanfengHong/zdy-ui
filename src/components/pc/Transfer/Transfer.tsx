@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import classNames from 'classnames';
-import type { TransferProps, TransferItem } from '../../../types';
+import type { TransferProps, TransferItem } from './types';
 
 import './Transfer.less';
 

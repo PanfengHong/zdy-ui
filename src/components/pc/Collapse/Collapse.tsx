@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import classNames from 'classnames';
-import type { CollapseProps, CollapsePanelProps } from '../../../types';
+import type { CollapseProps, CollapsePanelProps } from './types';
 import Icon from '../Icon/Icon';
 
 import './Collapse.less';

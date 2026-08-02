@@ -1,6 +1,6 @@
 import React, { useState, useContext, createContext } from 'react';
 import classNames from 'classnames';
-import type { BaseRadioProps, BaseRadioGroupProps } from '../../../types';
+import type { BaseRadioProps, BaseRadioGroupProps } from './types';
 
 import './Radio.less';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import classNames from 'classnames';
-import type { BaseLoadingProps, LoadingConfig } from '../../../types';
+import type { BaseLoadingProps, LoadingConfig } from './types';
 
 import './Loading.less';
 

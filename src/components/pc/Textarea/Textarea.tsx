@@ -1,6 +1,6 @@
 import { forwardRef, useRef, useEffect, useState } from 'react';
 import classNames from 'classnames';
-import type { BaseTextareaProps } from '../../../types';
+import type { BaseTextareaProps } from './types';
 
 import './Textarea.less';
 

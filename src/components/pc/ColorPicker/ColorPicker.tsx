@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
-import type { ColorPickerProps, ColorInfo, ColorPickerFormat } from '../../../types';
+import type { ColorPickerProps, ColorInfo, ColorPickerFormat } from './types';
 import Icon from '../Icon/Icon';
 
 import './ColorPicker.less';

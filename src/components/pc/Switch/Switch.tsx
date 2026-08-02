@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import classNames from 'classnames';
-import type { BaseSwitchProps } from '../../../types';
+import type { BaseSwitchProps } from './types';
 
 import './Switch.less';
 

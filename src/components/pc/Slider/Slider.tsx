@@ -1,6 +1,6 @@
 import React, { useState, useRef, useCallback } from 'react';
 import classNames from 'classnames';
-import type { BaseSliderProps, SliderMark } from '../../../types';
+import type { BaseSliderProps, SliderMark } from './types';
 
 import './Slider.less';
 

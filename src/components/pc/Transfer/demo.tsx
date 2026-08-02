@@ -2,7 +2,7 @@ import { useState } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
 import ApiTable from '../../ApiTable/ApiTable';
 import Transfer from './Transfer';
-import type { TransferItem } from '../../../types';
+import type { TransferItem } from './types';
 
 const mockData: TransferItem[] = [
   { key: '1', title: '张三', description: '前端工程师' },

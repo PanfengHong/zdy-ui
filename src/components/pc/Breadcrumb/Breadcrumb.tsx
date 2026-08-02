@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import classNames from 'classnames';
-import type { BreadcrumbProps, BreadcrumbItemProps } from '../../../types';
+import type { BreadcrumbProps, BreadcrumbItemProps } from './types';
 
 import './Breadcrumb.less';
 

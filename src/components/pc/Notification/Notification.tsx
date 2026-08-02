@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import classNames from 'classnames';
-import type { NotificationType, NotificationConfig, NotificationPlacement } from '../../../types';
+import type { NotificationConfig, NotificationType, NotificationPlacement } from './types';
 
 import './Notification.less';
 

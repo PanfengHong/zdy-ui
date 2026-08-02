@@ -2,7 +2,7 @@ import { useState } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
 import ApiTable from '../../ApiTable/ApiTable';
 import Board from './Board';
-import type { BoardColumnData } from '../../../types';
+import type { BoardColumnData } from './types';
 
 const defaultColumns: BoardColumnData[] = [
   {
