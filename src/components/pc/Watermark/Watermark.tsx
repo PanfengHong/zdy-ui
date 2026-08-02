@@ -65,7 +65,6 @@ const Watermark: React.FC<BaseWatermarkProps> = ({
   gap = [100, 100],
   offset = [0, 0],
   font,
-  inherit = false,
   children,
   className,
   style

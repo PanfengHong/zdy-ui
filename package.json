@@ -5,16 +5,481 @@
   "description": "A React component library with PC and mobile versions",
   "type": "module",
   "main": "./dist/react-ui-component-library.umd.js",
-  "module": "./dist/react-ui-component-library.es.js",
+  "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "sideEffects": [
+    "**/*.less"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/react-ui-component-library.umd.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./styles.css": "./dist/react-ui-component-library.css",
+    "./pc/Alert": {
+      "import": "./dist/pc/Alert.js",
+      "require": "./dist/pc/Alert.umd.js",
+      "types": "./dist/pc/Alert.d.ts"
+    },
+    "./pc/Anchor": {
+      "import": "./dist/pc/Anchor.js",
+      "require": "./dist/pc/Anchor.umd.js",
+      "types": "./dist/pc/Anchor.d.ts"
+    },
+    "./pc/Board": {
+      "import": "./dist/pc/Board.js",
+      "require": "./dist/pc/Board.umd.js",
+      "types": "./dist/pc/Board.d.ts"
+    },
+    "./pc/Breadcrumb": {
+      "import": "./dist/pc/Breadcrumb.js",
+      "require": "./dist/pc/Breadcrumb.umd.js",
+      "types": "./dist/pc/Breadcrumb.d.ts"
+    },
+    "./pc/Button": {
+      "import": "./dist/pc/Button.js",
+      "require": "./dist/pc/Button.umd.js",
+      "types": "./dist/pc/Button.d.ts"
+    },
+    "./pc/Calendar": {
+      "import": "./dist/pc/Calendar.js",
+      "require": "./dist/pc/Calendar.umd.js",
+      "types": "./dist/pc/Calendar.d.ts"
+    },
+    "./pc/Carousel": {
+      "import": "./dist/pc/Carousel.js",
+      "require": "./dist/pc/Carousel.umd.js",
+      "types": "./dist/pc/Carousel.d.ts"
+    },
+    "./pc/Checkbox": {
+      "import": "./dist/pc/Checkbox.js",
+      "require": "./dist/pc/Checkbox.umd.js",
+      "types": "./dist/pc/Checkbox.d.ts"
+    },
+    "./pc/Collapse": {
+      "import": "./dist/pc/Collapse.js",
+      "require": "./dist/pc/Collapse.umd.js",
+      "types": "./dist/pc/Collapse.d.ts"
+    },
+    "./pc/ColorPicker": {
+      "import": "./dist/pc/ColorPicker.js",
+      "require": "./dist/pc/ColorPicker.umd.js",
+      "types": "./dist/pc/ColorPicker.d.ts"
+    },
+    "./pc/DateTimePicker": {
+      "import": "./dist/pc/DateTimePicker.js",
+      "require": "./dist/pc/DateTimePicker.umd.js",
+      "types": "./dist/pc/DateTimePicker.d.ts"
+    },
+    "./pc/Dialog": {
+      "import": "./dist/pc/Dialog.js",
+      "require": "./dist/pc/Dialog.umd.js",
+      "types": "./dist/pc/Dialog.d.ts"
+    },
+    "./pc/ECharts": {
+      "import": "./dist/pc/ECharts.js",
+      "require": "./dist/pc/ECharts.umd.js",
+      "types": "./dist/pc/ECharts.d.ts"
+    },
+    "./pc/Empty": {
+      "import": "./dist/pc/Empty.js",
+      "require": "./dist/pc/Empty.umd.js",
+      "types": "./dist/pc/Empty.d.ts"
+    },
+    "./pc/Form": {
+      "import": "./dist/pc/Form.js",
+      "require": "./dist/pc/Form.umd.js",
+      "types": "./dist/pc/Form.d.ts"
+    },
+    "./pc/Grid": {
+      "import": "./dist/pc/Grid.js",
+      "require": "./dist/pc/Grid.umd.js",
+      "types": "./dist/pc/Grid.d.ts"
+    },
+    "./pc/Icon": {
+      "import": "./dist/pc/Icon.js",
+      "require": "./dist/pc/Icon.umd.js",
+      "types": "./dist/pc/Icon.d.ts"
+    },
+    "./pc/Input": {
+      "import": "./dist/pc/Input.js",
+      "require": "./dist/pc/Input.umd.js",
+      "types": "./dist/pc/Input.d.ts"
+    },
+    "./pc/Intro": {
+      "import": "./dist/pc/Intro.js",
+      "require": "./dist/pc/Intro.umd.js",
+      "types": "./dist/pc/Intro.d.ts"
+    },
+    "./pc/Layout": {
+      "import": "./dist/pc/Layout.js",
+      "require": "./dist/pc/Layout.umd.js",
+      "types": "./dist/pc/Layout.d.ts"
+    },
+    "./pc/List": {
+      "import": "./dist/pc/List.js",
+      "require": "./dist/pc/List.umd.js",
+      "types": "./dist/pc/List.d.ts"
+    },
+    "./pc/Loading": {
+      "import": "./dist/pc/Loading.js",
+      "require": "./dist/pc/Loading.umd.js",
+      "types": "./dist/pc/Loading.d.ts"
+    },
+    "./pc/Masonry": {
+      "import": "./dist/pc/Masonry.js",
+      "require": "./dist/pc/Masonry.umd.js",
+      "types": "./dist/pc/Masonry.d.ts"
+    },
+    "./pc/Menu": {
+      "import": "./dist/pc/Menu.js",
+      "require": "./dist/pc/Menu.umd.js",
+      "types": "./dist/pc/Menu.d.ts"
+    },
+    "./pc/Message": {
+      "import": "./dist/pc/Message.js",
+      "require": "./dist/pc/Message.umd.js",
+      "types": "./dist/pc/Message.d.ts"
+    },
+    "./pc/Notification": {
+      "import": "./dist/pc/Notification.js",
+      "require": "./dist/pc/Notification.umd.js",
+      "types": "./dist/pc/Notification.d.ts"
+    },
+    "./pc/Pagination": {
+      "import": "./dist/pc/Pagination.js",
+      "require": "./dist/pc/Pagination.umd.js",
+      "types": "./dist/pc/Pagination.d.ts"
+    },
+    "./pc/Popover": {
+      "import": "./dist/pc/Popover.js",
+      "require": "./dist/pc/Popover.umd.js",
+      "types": "./dist/pc/Popover.d.ts"
+    },
+    "./pc/Progress": {
+      "import": "./dist/pc/Progress.js",
+      "require": "./dist/pc/Progress.umd.js",
+      "types": "./dist/pc/Progress.d.ts"
+    },
+    "./pc/Radio": {
+      "import": "./dist/pc/Radio.js",
+      "require": "./dist/pc/Radio.umd.js",
+      "types": "./dist/pc/Radio.d.ts"
+    },
+    "./pc/Rate": {
+      "import": "./dist/pc/Rate.js",
+      "require": "./dist/pc/Rate.umd.js",
+      "types": "./dist/pc/Rate.d.ts"
+    },
+    "./pc/Select": {
+      "import": "./dist/pc/Select.js",
+      "require": "./dist/pc/Select.umd.js",
+      "types": "./dist/pc/Select.d.ts"
+    },
+    "./pc/Skeleton": {
+      "import": "./dist/pc/Skeleton.js",
+      "require": "./dist/pc/Skeleton.umd.js",
+      "types": "./dist/pc/Skeleton.d.ts"
+    },
+    "./pc/Slider": {
+      "import": "./dist/pc/Slider.js",
+      "require": "./dist/pc/Slider.umd.js",
+      "types": "./dist/pc/Slider.d.ts"
+    },
+    "./pc/Steps": {
+      "import": "./dist/pc/Steps.js",
+      "require": "./dist/pc/Steps.umd.js",
+      "types": "./dist/pc/Steps.d.ts"
+    },
+    "./pc/Switch": {
+      "import": "./dist/pc/Switch.js",
+      "require": "./dist/pc/Switch.umd.js",
+      "types": "./dist/pc/Switch.d.ts"
+    },
+    "./pc/Table": {
+      "import": "./dist/pc/Table.js",
+      "require": "./dist/pc/Table.umd.js",
+      "types": "./dist/pc/Table.d.ts"
+    },
+    "./pc/Tabs": {
+      "import": "./dist/pc/Tabs.js",
+      "require": "./dist/pc/Tabs.umd.js",
+      "types": "./dist/pc/Tabs.d.ts"
+    },
+    "./pc/Tag": {
+      "import": "./dist/pc/Tag.js",
+      "require": "./dist/pc/Tag.umd.js",
+      "types": "./dist/pc/Tag.d.ts"
+    },
+    "./pc/Textarea": {
+      "import": "./dist/pc/Textarea.js",
+      "require": "./dist/pc/Textarea.umd.js",
+      "types": "./dist/pc/Textarea.d.ts"
+    },
+    "./pc/Transfer": {
+      "import": "./dist/pc/Transfer.js",
+      "require": "./dist/pc/Transfer.umd.js",
+      "types": "./dist/pc/Transfer.d.ts"
+    },
+    "./pc/Tree": {
+      "import": "./dist/pc/Tree.js",
+      "require": "./dist/pc/Tree.umd.js",
+      "types": "./dist/pc/Tree.d.ts"
+    },
+    "./pc/Upload": {
+      "import": "./dist/pc/Upload.js",
+      "require": "./dist/pc/Upload.umd.js",
+      "types": "./dist/pc/Upload.d.ts"
+    },
+    "./pc/Watermark": {
+      "import": "./dist/pc/Watermark.js",
+      "require": "./dist/pc/Watermark.umd.js",
+      "types": "./dist/pc/Watermark.d.ts"
+    },
+    "./mobile/Alert": {
+      "import": "./dist/mobile/Alert.js",
+      "require": "./dist/mobile/Alert.umd.js",
+      "types": "./dist/mobile/Alert.d.ts"
+    },
+    "./mobile/Anchor": {
+      "import": "./dist/mobile/Anchor.js",
+      "require": "./dist/mobile/Anchor.umd.js",
+      "types": "./dist/mobile/Anchor.d.ts"
+    },
+    "./mobile/Board": {
+      "import": "./dist/mobile/Board.js",
+      "require": "./dist/mobile/Board.umd.js",
+      "types": "./dist/mobile/Board.d.ts"
+    },
+    "./mobile/Breadcrumb": {
+      "import": "./dist/mobile/Breadcrumb.js",
+      "require": "./dist/mobile/Breadcrumb.umd.js",
+      "types": "./dist/mobile/Breadcrumb.d.ts"
+    },
+    "./mobile/Button": {
+      "import": "./dist/mobile/Button.js",
+      "require": "./dist/mobile/Button.umd.js",
+      "types": "./dist/mobile/Button.d.ts"
+    },
+    "./mobile/Calendar": {
+      "import": "./dist/mobile/Calendar.js",
+      "require": "./dist/mobile/Calendar.umd.js",
+      "types": "./dist/mobile/Calendar.d.ts"
+    },
+    "./mobile/Carousel": {
+      "import": "./dist/mobile/Carousel.js",
+      "require": "./dist/mobile/Carousel.umd.js",
+      "types": "./dist/mobile/Carousel.d.ts"
+    },
+    "./mobile/Checkbox": {
+      "import": "./dist/mobile/Checkbox.js",
+      "require": "./dist/mobile/Checkbox.umd.js",
+      "types": "./dist/mobile/Checkbox.d.ts"
+    },
+    "./mobile/Collapse": {
+      "import": "./dist/mobile/Collapse.js",
+      "require": "./dist/mobile/Collapse.umd.js",
+      "types": "./dist/mobile/Collapse.d.ts"
+    },
+    "./mobile/ColorPicker": {
+      "import": "./dist/mobile/ColorPicker.js",
+      "require": "./dist/mobile/ColorPicker.umd.js",
+      "types": "./dist/mobile/ColorPicker.d.ts"
+    },
+    "./mobile/DateTimePicker": {
+      "import": "./dist/mobile/DateTimePicker.js",
+      "require": "./dist/mobile/DateTimePicker.umd.js",
+      "types": "./dist/mobile/DateTimePicker.d.ts"
+    },
+    "./mobile/Dialog": {
+      "import": "./dist/mobile/Dialog.js",
+      "require": "./dist/mobile/Dialog.umd.js",
+      "types": "./dist/mobile/Dialog.d.ts"
+    },
+    "./mobile/ECharts": {
+      "import": "./dist/mobile/ECharts.js",
+      "require": "./dist/mobile/ECharts.umd.js",
+      "types": "./dist/mobile/ECharts.d.ts"
+    },
+    "./mobile/Empty": {
+      "import": "./dist/mobile/Empty.js",
+      "require": "./dist/mobile/Empty.umd.js",
+      "types": "./dist/mobile/Empty.d.ts"
+    },
+    "./mobile/Form": {
+      "import": "./dist/mobile/Form.js",
+      "require": "./dist/mobile/Form.umd.js",
+      "types": "./dist/mobile/Form.d.ts"
+    },
+    "./mobile/Grid": {
+      "import": "./dist/mobile/Grid.js",
+      "require": "./dist/mobile/Grid.umd.js",
+      "types": "./dist/mobile/Grid.d.ts"
+    },
+    "./mobile/Icon": {
+      "import": "./dist/mobile/Icon.js",
+      "require": "./dist/mobile/Icon.umd.js",
+      "types": "./dist/mobile/Icon.d.ts"
+    },
+    "./mobile/Input": {
+      "import": "./dist/mobile/Input.js",
+      "require": "./dist/mobile/Input.umd.js",
+      "types": "./dist/mobile/Input.d.ts"
+    },
+    "./mobile/Intro": {
+      "import": "./dist/mobile/Intro.js",
+      "require": "./dist/mobile/Intro.umd.js",
+      "types": "./dist/mobile/Intro.d.ts"
+    },
+    "./mobile/Layout": {
+      "import": "./dist/mobile/Layout.js",
+      "require": "./dist/mobile/Layout.umd.js",
+      "types": "./dist/mobile/Layout.d.ts"
+    },
+    "./mobile/List": {
+      "import": "./dist/mobile/List.js",
+      "require": "./dist/mobile/List.umd.js",
+      "types": "./dist/mobile/List.d.ts"
+    },
+    "./mobile/Loading": {
+      "import": "./dist/mobile/Loading.js",
+      "require": "./dist/mobile/Loading.umd.js",
+      "types": "./dist/mobile/Loading.d.ts"
+    },
+    "./mobile/Masonry": {
+      "import": "./dist/mobile/Masonry.js",
+      "require": "./dist/mobile/Masonry.umd.js",
+      "types": "./dist/mobile/Masonry.d.ts"
+    },
+    "./mobile/Menu": {
+      "import": "./dist/mobile/Menu.js",
+      "require": "./dist/mobile/Menu.umd.js",
+      "types": "./dist/mobile/Menu.d.ts"
+    },
+    "./mobile/Message": {
+      "import": "./dist/mobile/Message.js",
+      "require": "./dist/mobile/Message.umd.js",
+      "types": "./dist/mobile/Message.d.ts"
+    },
+    "./mobile/Notification": {
+      "import": "./dist/mobile/Notification.js",
+      "require": "./dist/mobile/Notification.umd.js",
+      "types": "./dist/mobile/Notification.d.ts"
+    },
+    "./mobile/Pagination": {
+      "import": "./dist/mobile/Pagination.js",
+      "require": "./dist/mobile/Pagination.umd.js",
+      "types": "./dist/mobile/Pagination.d.ts"
+    },
+    "./mobile/Popover": {
+      "import": "./dist/mobile/Popover.js",
+      "require": "./dist/mobile/Popover.umd.js",
+      "types": "./dist/mobile/Popover.d.ts"
+    },
+    "./mobile/Progress": {
+      "import": "./dist/mobile/Progress.js",
+      "require": "./dist/mobile/Progress.umd.js",
+      "types": "./dist/mobile/Progress.d.ts"
+    },
+    "./mobile/Radio": {
+      "import": "./dist/mobile/Radio.js",
+      "require": "./dist/mobile/Radio.umd.js",
+      "types": "./dist/mobile/Radio.d.ts"
+    },
+    "./mobile/Rate": {
+      "import": "./dist/mobile/Rate.js",
+      "require": "./dist/mobile/Rate.umd.js",
+      "types": "./dist/mobile/Rate.d.ts"
+    },
+    "./mobile/Select": {
+      "import": "./dist/mobile/Select.js",
+      "require": "./dist/mobile/Select.umd.js",
+      "types": "./dist/mobile/Select.d.ts"
+    },
+    "./mobile/Skeleton": {
+      "import": "./dist/mobile/Skeleton.js",
+      "require": "./dist/mobile/Skeleton.umd.js",
+      "types": "./dist/mobile/Skeleton.d.ts"
+    },
+    "./mobile/Slider": {
+      "import": "./dist/mobile/Slider.js",
+      "require": "./dist/mobile/Slider.umd.js",
+      "types": "./dist/mobile/Slider.d.ts"
+    },
+    "./mobile/Steps": {
+      "import": "./dist/mobile/Steps.js",
+      "require": "./dist/mobile/Steps.umd.js",
+      "types": "./dist/mobile/Steps.d.ts"
+    },
+    "./mobile/Switch": {
+      "import": "./dist/mobile/Switch.js",
+      "require": "./dist/mobile/Switch.umd.js",
+      "types": "./dist/mobile/Switch.d.ts"
+    },
+    "./mobile/Table": {
+      "import": "./dist/mobile/Table.js",
+      "require": "./dist/mobile/Table.umd.js",
+      "types": "./dist/mobile/Table.d.ts"
+    },
+    "./mobile/Tabs": {
+      "import": "./dist/mobile/Tabs.js",
+      "require": "./dist/mobile/Tabs.umd.js",
+      "types": "./dist/mobile/Tabs.d.ts"
+    },
+    "./mobile/Tag": {
+      "import": "./dist/mobile/Tag.js",
+      "require": "./dist/mobile/Tag.umd.js",
+      "types": "./dist/mobile/Tag.d.ts"
+    },
+    "./mobile/Textarea": {
+      "import": "./dist/mobile/Textarea.js",
+      "require": "./dist/mobile/Textarea.umd.js",
+      "types": "./dist/mobile/Textarea.d.ts"
+    },
+    "./mobile/Transfer": {
+      "import": "./dist/mobile/Transfer.js",
+      "require": "./dist/mobile/Transfer.umd.js",
+      "types": "./dist/mobile/Transfer.d.ts"
+    },
+    "./mobile/Tree": {
+      "import": "./dist/mobile/Tree.js",
+      "require": "./dist/mobile/Tree.umd.js",
+      "types": "./dist/mobile/Tree.d.ts"
+    },
+    "./mobile/Upload": {
+      "import": "./dist/mobile/Upload.js",
+      "require": "./dist/mobile/Upload.umd.js",
+      "types": "./dist/mobile/Upload.d.ts"
+    },
+    "./mobile/Watermark": {
+      "import": "./dist/mobile/Watermark.js",
+      "require": "./dist/mobile/Watermark.umd.js",
+      "types": "./dist/mobile/Watermark.d.ts"
+    },
+    "./pc": {
+      "import": "./dist/pc/index.js",
+      "types": "./dist/pc/index.d.ts"
+    },
+    "./mobile": {
+      "import": "./dist/mobile/index.js",
+      "types": "./dist/mobile/index.d.ts"
+    },
+    "./types": {
+      "types": "./dist/types/index.d.ts"
+    }
+  },
   "files": [
     "dist"
   ],
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && BUILD_FORMAT=umd vite build && npm run build:types && node scripts/generate-barrels.mjs",
+    "build:es": "vite build",
+    "build:umd": "BUILD_FORMAT=umd vite build",
     "build:types": "tsc -p tsconfig.types.json",
-    "build:all": "npm run build && npm run build:types",
+    "build:barrels": "node scripts/generate-barrels.mjs",
+    "build:all": "npm run build",
     "lint": "eslint .",
     "preview": "vite preview"
   },

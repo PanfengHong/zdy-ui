@@ -5,7 +5,19 @@
     "noEmit": false,
     "emitDeclarationOnly": true,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "rootDir": "./src"
   },
-  "include": ["src/index.ts"]
+  "include": [
+    "src/index.ts",
+    "src/types/index.ts",
+    "src/components/pc/**/index.ts",
+    "src/components/pc/**/*.tsx",
+    "src/components/mobile/**/index.ts",
+    "src/components/mobile/**/*.tsx"
+  ],
+  "exclude": [
+    "**/demo.tsx",
+    "**/dist/**"
+  ]
 }

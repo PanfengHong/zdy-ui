@@ -33,7 +33,7 @@ const Masonry: React.FC<BaseMasonryProps> = ({
   const itemRefs = useRef<Map<string | number, HTMLDivElement>>(new Map());
   const [positions, setPositions] = useState<Map<string | number, LayoutPosition>>(new Map());
   const [containerHeight, setContainerHeight] = useState(0);
-  const [currentColumns, setCurrentColumns] = useState(
+  const [, setCurrentColumns] = useState(
     columns || DEFAULT_BREAKPOINTS[1200]
   );
 
@@ -83,7 +83,7 @@ const Masonry: React.FC<BaseMasonryProps> = ({
     const columnHeights = new Array(colCount).fill(0);
     const newPositions = new Map<string | number, LayoutPosition>();
 
-    items.forEach(({ key }, index) => {
+    items.forEach(({ key }) => {
       const itemEl = itemRefs.current.get(key);
       if (!itemEl) return;
 

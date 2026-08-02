@@ -27,6 +27,7 @@ import WatermarkDemo from './components/pc/Watermark/demo';
 import MasonryDemo from './components/pc/Masonry/demo';
 import CarouselDemo from './components/pc/Carousel/demo';
 import ListDemo from './components/pc/List/demo';
+import MenuDemo from './components/pc/Menu/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -203,6 +204,7 @@ function App() {
       Masonry: MasonryDemo,
       Carousel: CarouselDemo,
       List: ListDemo,
+      Menu: MenuDemo,
     };
     
     const DemoComponent = demoComponents[componentName];

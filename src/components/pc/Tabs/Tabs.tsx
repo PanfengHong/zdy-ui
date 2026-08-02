@@ -44,7 +44,8 @@ const Tabs: React.FC<BaseTabsProps> & {
   const getDefaultActiveKey = () => {
     const panes = getTabPanes();
     if (panes.length > 0 && React.isValidElement(panes[0])) {
-      return panes[0].props.tabKey;
+      const tabPane = panes[0] as React.ReactElement<TabPaneProps>;
+      return tabPane.props.tabKey;
     }
     return undefined;
   };
@@ -58,7 +59,8 @@ const Tabs: React.FC<BaseTabsProps> & {
         <div className="zdy-tabs-nav-wrap">
           {tabs.map((tab) => {
             if (!React.isValidElement(tab)) return null;
-            const { tabKey, title } = tab.props;
+            const tabPane = tab as React.ReactElement<TabPaneProps>;
+            const { tabKey, title } = tabPane.props;
             const isActive = tabKey === activeKeyFinal;
             return (
               <div
@@ -76,7 +78,8 @@ const Tabs: React.FC<BaseTabsProps> & {
       <div className="zdy-tabs-content">
         {tabs.map((tab) => {
           if (!React.isValidElement(tab)) return null;
-          const { tabKey, children: tabChildren } = tab.props;
+          const tabPane = tab as React.ReactElement<TabPaneProps>;
+          const { tabKey, children: tabChildren } = tabPane.props;
           const isActive = tabKey === activeKeyFinal;
           return (
             <div

@@ -1,4 +1,4 @@
-import React, { Children } from 'react';
+import React from 'react';
 import classNames from 'classnames';
 import type { LayoutProps, LayoutHeaderProps, LayoutContentProps, LayoutFooterProps } from '../../../types';
 

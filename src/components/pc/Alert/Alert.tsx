@@ -22,13 +22,6 @@ const Alert: React.FC<BaseAlertProps> = ({
     onClose?.();
   };
 
-  const iconMap: Record<AlertType, string> = {
-    success: 'check',
-    info: 'info',
-    warning: 'warning',
-    error: 'error'
-  };
-
   const iconColorMap: Record<AlertType, string> = {
     success: '#52c41a',
     info: '#1890ff',
