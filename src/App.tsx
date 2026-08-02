@@ -43,6 +43,7 @@ import ProgressDemo from './components/pc/Progress/demo';
 import CollapseDemo from './components/pc/Collapse/demo';
 import ColorPickerDemo from './components/pc/ColorPicker/demo';
 import SliderDemo from './components/pc/Slider/demo';
+import BoardDemo from './components/pc/Board/demo';
 import './App.css';
 
 // 定义菜单数据类型
@@ -226,6 +227,7 @@ function App() {
       Collapse: CollapseDemo,
       ColorPicker: ColorPickerDemo,
       Slider: SliderDemo,
+      Board: BoardDemo,
     };
     
     const DemoComponent = demoComponents[componentName];
