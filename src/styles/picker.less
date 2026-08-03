@@ -1,0 +1,392 @@
+@import './variables.less';
+
+// ============================================================
+// DatePicker / TimePicker / DateTimePicker 共享样式
+// ============================================================
+
+.zdy-picker {
+  display: inline-flex;
+  align-items: center;
+  width: 100%;
+  max-width: 240px;
+  height: 32px;
+  padding: 0 8px 0 12px;
+  border: 1px solid @border-color;
+  border-radius: @border-radius-sm;
+  background-color: #fff;
+  color: @text-color;
+  font-size: @pc-font-size-base;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  box-sizing: border-box;
+
+  &:hover:not(.zdy-picker--disabled) {
+    border-color: @primary-color;
+  }
+
+  &--open {
+    border-color: @primary-color;
+    box-shadow: 0 0 0 2px fade(@primary-color, 20%);
+  }
+
+  &--disabled {
+    background-color: @background-color-hover;
+    color: @text-color-disabled;
+    cursor: not-allowed;
+  }
+
+  &--small {
+    height: 24px;
+    font-size: @pc-font-size-small;
+  }
+
+  &--large {
+    height: 40px;
+    font-size: @pc-font-size-large;
+  }
+
+  .zdy-picker-input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    padding: 0;
+
+    &::placeholder {
+      color: @placeholder-color;
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+
+  .zdy-picker-suffix {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+    color: @text-color-secondary;
+  }
+
+  .zdy-picker-clear {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: @text-color-secondary;
+    color: #fff;
+    font-size: 12px;
+    line-height: 1;
+    cursor: pointer;
+
+    &:hover {
+      background-color: @text-color;
+    }
+  }
+}
+
+// ======== 下拉面板容器 ========
+.zdy-picker-dropdown {
+  background-color: #fff;
+  border-radius: @border-radius-base;
+  box-shadow: @shadow-md;
+  z-index: @z-index-dropdown;
+
+  &--datetime {
+    max-width: 480px;
+  }
+}
+
+.zdy-picker-panel {
+  background-color: #fff;
+  font-size: @pc-font-size-base;
+  color: @text-color;
+  user-select: none;
+}
+
+// ======== 日期面板 ========
+.zdy-picker-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid @border-color-split;
+}
+
+.zdy-picker-panel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: @border-radius-sm;
+  background: transparent;
+  color: @text-color-secondary;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    color: @primary-color;
+    background-color: @background-color-hover;
+  }
+}
+
+.zdy-picker-panel-title {
+  font-size: @pc-font-size-base;
+  font-weight: 500;
+  color: @text-color;
+  min-width: 100px;
+  text-align: center;
+}
+
+.zdy-picker-panel-body {
+  padding: 8px 12px;
+}
+
+.zdy-picker-week-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  padding-bottom: 4px;
+  border-bottom: 1px solid @border-color-split;
+  margin-bottom: 4px;
+}
+
+.zdy-picker-week-day {
+  text-align: center;
+  font-size: @pc-font-size-small;
+  color: @text-color-secondary;
+  padding: 4px 0;
+}
+
+.zdy-picker-date-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.zdy-picker-date-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  border-radius: @border-radius-sm;
+  font-size: @pc-font-size-base;
+  color: @text-color;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover:not(.zdy-picker-date-cell--disabled):not(.zdy-picker-date-cell--selected) {
+    background-color: @background-color-hover;
+  }
+
+  &--other {
+    color: @text-color-disabled;
+  }
+
+  &--today {
+    border: 1px solid @primary-color;
+    color: @primary-color;
+  }
+
+  &--selected {
+    background-color: @primary-color;
+    color: #fff;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  &--disabled {
+    color: @text-color-disabled;
+    cursor: not-allowed;
+  }
+}
+
+.zdy-picker-panel-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 6px 12px;
+  border-top: 1px solid @border-color-split;
+}
+
+.zdy-picker-footer-btn {
+  height: 24px;
+  padding: 0 8px;
+  border: 1px solid @border-color;
+  border-radius: @border-radius-sm;
+  background-color: #fff;
+  color: @text-color;
+  font-size: @pc-font-size-small;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: @primary-color;
+    color: @primary-color;
+  }
+
+  &--primary {
+    background-color: @primary-color;
+    border-color: @primary-color;
+    color: #fff;
+
+    &:hover {
+      color: #fff;
+      background-color: darken(@primary-color, 5%);
+    }
+  }
+}
+
+// ======== 时间面板 ========
+.zdy-picker-time-body {
+  display: flex;
+  gap: 1px;
+  background-color: @border-color-split;
+}
+
+.zdy-picker-time-list {
+  flex: 1;
+  height: 200px;
+  overflow-y: auto;
+  background-color: #fff;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.15);
+    border-radius: 3px;
+  }
+}
+
+.zdy-picker-time-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  font-size: @pc-font-size-base;
+  color: @text-color;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: @background-color-hover;
+  }
+
+  &--selected {
+    background-color: fade(@primary-color, 15%);
+    color: @primary-color;
+    font-weight: 500;
+  }
+}
+
+.zdy-picker-time-header {
+  display: flex;
+  padding: 6px 0;
+  background-color: #fff;
+  border-bottom: 1px solid @border-color-split;
+}
+
+.zdy-picker-time-header-cell {
+  flex: 1;
+  text-align: center;
+  font-size: @pc-font-size-small;
+  color: @text-color-secondary;
+}
+
+.zdy-picker-panel-divider {
+  height: 1px;
+  background-color: @border-color-split;
+  margin: 0;
+}
+
+.zdy-picker-datetime-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+// ======== DateTimePicker 顶部时间条 ========
+.zdy-picker-datetime-timebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  border-bottom: 1px solid @border-color-split;
+  background-color: @background-color-hover;
+}
+
+.zdy-picker-datetime-time-label {
+  font-size: @pc-font-size-small;
+  color: @text-color-secondary;
+}
+
+.zdy-picker-datetime-time-box {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 4px 0 8px;
+  border: 1px solid @border-color;
+  border-radius: @border-radius-sm;
+  background-color: #fff;
+  transition: border-color 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    border-color: @primary-color;
+  }
+}
+
+.zdy-picker-datetime-time-input {
+  width: 64px;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: @text-color;
+  font-size: @pc-font-size-small;
+  text-align: center;
+  padding: 0;
+}
+
+.zdy-picker-datetime-time-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: @text-color-secondary;
+  cursor: pointer;
+  border-radius: @border-radius-sm;
+  transition: all 0.2s;
+
+  &:hover {
+    color: @primary-color;
+    background-color: @background-color-hover;
+  }
+}
+
+.zdy-picker-datetime-time-popover {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  z-index: @z-index-dropdown + 1;
+  background-color: #fff;
+  border-radius: @border-radius-base;
+  box-shadow: @shadow-md;
+  overflow: hidden;
+}

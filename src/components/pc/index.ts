@@ -46,6 +46,8 @@ export { default as Radio } from './Radio';
 export { default as Checkbox } from './Checkbox';
 export { default as Upload } from './Upload';
 export { default as Switch } from './Switch';
+export { default as DatePicker } from './DatePicker';
+export { default as TimePicker } from './TimePicker';
 export { default as DateTimePicker } from './DateTimePicker';
 export { default as ColorPicker } from './ColorPicker';
 export { default as Form } from './Form';

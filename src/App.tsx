@@ -5,47 +5,7 @@ import { getGitCommits } from './utils/git';
 import type { GitCommit } from './utils/git';
 import DemoBlock from './components/DemoBlock/DemoBlock';
 import Icon from './components/pc/Icon/Icon';
-import ButtonDemo from './components/pc/Button/demo';
-import InputDemo from './components/pc/Input/demo';
-import TabsDemo from './components/pc/Tabs/demo';
-import SwitchDemo from './components/pc/Switch/demo';
-import DialogDemo from './components/pc/Dialog/demo';
-import IconDemo from './components/pc/Icon/demo';
-import LayoutDemo from './components/pc/Layout/demo';
-import GridDemo from './components/pc/Grid/demo';
-import AlertDemo from './components/pc/Alert/demo';
-import RadioDemo from './components/pc/Radio/demo';
-import CheckboxDemo from './components/pc/Checkbox/demo';
-import SelectDemo from './components/pc/Select/demo';
-import UploadDemo from './components/pc/Upload/demo';
-import TextareaDemo from './components/pc/Textarea/demo';
-import MessageDemo from './components/pc/Message/demo';
-import NotificationDemo from './components/pc/Notification/demo';
-import LoadingDemo from './components/pc/Loading/demo';
-import TableDemo from './components/pc/Table/demo';
-import WatermarkDemo from './components/pc/Watermark/demo';
-import MasonryDemo from './components/pc/Masonry/demo';
-import CarouselDemo from './components/pc/Carousel/demo';
-import ListDemo from './components/pc/List/demo';
-import MenuDemo from './components/pc/Menu/demo';
-import BreadcrumbDemo from './components/pc/Breadcrumb/demo';
-import PaginationDemo from './components/pc/Pagination/demo';
-import CalendarDemo from './components/pc/Calendar/demo';
-import RateDemo from './components/pc/Rate/demo';
-import TransferDemo from './components/pc/Transfer/demo';
-import TagDemo from './components/pc/Tag/demo';
-import StepsDemo from './components/pc/Steps/demo';
-import AnchorDemo from './components/pc/Anchor/demo';
-import EmptyDemo from './components/pc/Empty/demo';
-import TreeDemo from './components/pc/Tree/demo';
-import SkeletonDemo from './components/pc/Skeleton/demo';
-import ProgressDemo from './components/pc/Progress/demo';
-import CollapseDemo from './components/pc/Collapse/demo';
-import ColorPickerDemo from './components/pc/ColorPicker/demo';
-import SliderDemo from './components/pc/Slider/demo';
-import BoardDemo from './components/pc/Board/demo';
-import PopoverDemo from './components/pc/Popover/demo';
-import IntroDemo from './components/pc/Intro/demo';
+import { demoComponents } from './components/pc/demos';
 import './App.css';
 
 // 定义菜单数据类型
@@ -158,7 +118,9 @@ function App() {
         { id: 'checkbox', label: 'Checkbox 多选框', icon: '☑️', type: 'component', component: 'Checkbox' },
         { id: 'upload', label: 'Upload 上传', icon: '📤', type: 'component', component: 'Upload' },
         { id: 'switch', label: 'Switch 开关', icon: '🔘', type: 'component', component: 'Switch' },
-        { id: 'datetimepicker', label: 'DateTimePicker 日期时间选择器', icon: '📅', type: 'component', component: 'DateTimePicker' },
+        { id: 'datepicker', label: 'DatePicker 日期选择器', icon: '📅', type: 'component', component: 'DatePicker' },
+        { id: 'timepicker', label: 'TimePicker 时间选择器', icon: '⏰', type: 'component', component: 'TimePicker' },
+        { id: 'datetimepicker', label: 'DateTimePicker 日期时间选择器', icon: '🗓️', type: 'component', component: 'DateTimePicker' },
         { id: 'colorpicker', label: 'ColorPicker 颜色选择器', icon: '🎨', type: 'component', component: 'ColorPicker' },
         { id: 'form', label: 'Form 表单', icon: '📋', type: 'component', component: 'Form' },
         { id: 'transfer', label: 'Transfer 穿梭框', icon: '↔️', type: 'component', component: 'Transfer' },
@@ -188,51 +150,7 @@ function App() {
     
     // 动态获取组件
     const Component = (platformComponents as any)[componentName];
-    
-    const demoComponents: Record<string, React.ComponentType> = {
-      Button: ButtonDemo,
-      Input: InputDemo,
-      Tabs: TabsDemo,
-      Switch: SwitchDemo,
-      Dialog: DialogDemo,
-      Icon: IconDemo,
-      Layout: LayoutDemo,
-      Grid: GridDemo,
-      Alert: AlertDemo,
-      Radio: RadioDemo,
-      Checkbox: CheckboxDemo,
-      Select: SelectDemo,
-      Upload: UploadDemo,
-      Textarea: TextareaDemo,
-      Message: MessageDemo,
-      Notification: NotificationDemo,
-      Loading: LoadingDemo,
-      Table: TableDemo,
-      Watermark: WatermarkDemo,
-      Masonry: MasonryDemo,
-      Carousel: CarouselDemo,
-      List: ListDemo,
-      Menu: MenuDemo,
-      Breadcrumb: BreadcrumbDemo,
-      Pagination: PaginationDemo,
-      Calendar: CalendarDemo,
-      Rate: RateDemo,
-      Transfer: TransferDemo,
-      Tag: TagDemo,
-      Steps: StepsDemo,
-      Anchor: AnchorDemo,
-      Empty: EmptyDemo,
-      Tree: TreeDemo,
-      Skeleton: SkeletonDemo,
-      Progress: ProgressDemo,
-      Collapse: CollapseDemo,
-      ColorPicker: ColorPickerDemo,
-      Slider: SliderDemo,
-      Board: BoardDemo,
-      Popover: PopoverDemo,
-      Intro: IntroDemo,
-    };
-    
+
     const DemoComponent = demoComponents[componentName];
 
     if (!Component || !DemoComponent) {
