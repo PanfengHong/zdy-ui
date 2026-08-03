@@ -44,6 +44,7 @@ import IntroDemo from './Intro/demo';
 import DatePickerDemo from './DatePicker/demo';
 import TimePickerDemo from './TimePicker/demo';
 import DateTimePickerDemo from './DateTimePicker/demo';
+import FormDemo from './Form/demo';
 
 // 各组件 demo 的统一注册表
 export const demoComponents: Record<string, React.ComponentType> = {
@@ -54,6 +55,7 @@ export const demoComponents: Record<string, React.ComponentType> = {
   DatePicker: DatePickerDemo,
   TimePicker: TimePickerDemo,
   DateTimePicker: DateTimePickerDemo,
+  Form: FormDemo,
   Dialog: DialogDemo,
   Icon: IconDemo,
   Layout: LayoutDemo,

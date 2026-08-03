@@ -1,3 +1,127 @@
-.form {
-  // 组件样式
+@import '../../../styles/variables.less';
+
+.zdy-form {
+  font-size: @pc-font-size-base;
+  color: @text-color;
+
+  &--horizontal {
+    .zdy-form-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 18px;
+    }
+    .zdy-form-item-label {
+      flex-shrink: 0;
+      padding: 5px 12px 5px 0;
+      line-height: 1.5;
+      box-sizing: border-box;
+    }
+    .zdy-form-item-control {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  &--vertical {
+    .zdy-form-item {
+      display: block;
+      margin-bottom: 18px;
+    }
+    .zdy-form-item-label {
+      display: block;
+      padding: 0 0 6px 0;
+      line-height: 1.5;
+    }
+  }
+
+  &--inline {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    .zdy-form-item {
+      display: inline-flex;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+    .zdy-form-item-label {
+      flex-shrink: 0;
+      padding: 5px 8px 5px 0;
+      line-height: 1.5;
+    }
+    .zdy-form-item-control {
+      flex: 1;
+      min-width: 0;
+    }
+  }
+
+  &--disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &--small {
+    font-size: @pc-font-size-small;
+  }
+
+  &--large {
+    font-size: @pc-font-size-large;
+  }
+}
+
+.zdy-form-item {
+  &--error {
+    .zdy-form-item-content {
+      .zdy-input-wrapper,
+      .zdy-select,
+      .zdy-textarea-wrapper {
+        border-color: @error-color !important;
+      }
+    }
+  }
+}
+
+.zdy-form-item-label {
+  font-size: @pc-font-size-base;
+  color: @text-color;
+  overflow: hidden;
+  white-space: nowrap;
+  box-sizing: border-box;
+}
+
+.zdy-form-item-required {
+  color: @error-color;
+  margin-right: 4px;
+  font-family: SimSun, sans-serif;
+}
+
+.zdy-form-item-control {
+  position: relative;
+}
+
+.zdy-form-item-content {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.zdy-form-item-explain {
+  margin-top: 4px;
+  min-height: 18px;
+  font-size: @pc-font-size-small;
+  color: @text-color-secondary;
+  line-height: 1.5;
+  transition: color 0.2s;
+
+  &--error {
+    color: @error-color;
+  }
+}
+
+.zdy-form-item-extra {
+  margin-top: 2px;
+  font-size: @pc-font-size-small;
+  color: @text-color-secondary;
+  line-height: 1.5;
 }
