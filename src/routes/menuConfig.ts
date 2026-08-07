@@ -46,6 +46,7 @@ export const menuGroups: MenuGroup[] = [
     items: [
       { id: 'button', label: 'Button 按钮', icon: '🔘', type: 'component', component: 'Button', path: '/components/Button', thumbnail: 'button' },
       { id: 'icon', label: 'Icon 图标', icon: '🎨', type: 'component', component: 'Icon', path: '/components/Icon', thumbnail: 'icon' },
+      { id: 'avatar', label: 'Avatar 头像', icon: '🙂', type: 'component', component: 'Avatar', path: '/components/Avatar', thumbnail: 'avatar' },
     ],
   },
   {

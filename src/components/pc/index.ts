@@ -3,6 +3,7 @@
 // 通用组件
 export { default as Button } from './Button';
 export { default as Icon } from './Icon';
+export { default as Avatar } from './Avatar';
 
 // 布局组件
 export { default as Layout } from './Layout';

@@ -4,6 +4,7 @@ import type React from 'react';
 // 公共基础类型（全局通用，不归属于具体组件）
 // ============================================================
 
+// 通用尺寸类型
 export type SizeType = 'small' | 'medium' | 'large';
 
 // 通用 Props
@@ -20,6 +21,7 @@ export interface BaseComponentProps {
 // ============================================================
 
 export * from '../components/pc/Alert/types';
+export * from '../components/pc/Avatar/types';
 export * from '../components/pc/Anchor/types';
 export * from '../components/pc/Board/types';
 export * from '../components/pc/Breadcrumb/types';

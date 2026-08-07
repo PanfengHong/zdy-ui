@@ -1,0 +1,138 @@
+@import '../../../styles/variables.less';
+
+// ============== 头像容器 ==============
+.zdy-avatar-wrapper {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+// ============== 头像主体 ==============
+.zdy-avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  white-space: nowrap;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #ccc;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1;
+  user-select: none;
+  box-sizing: border-box;
+
+  // ======== 形状 ========
+  &--circle {
+    border-radius: 50%;
+  }
+
+  &--square {
+    border-radius: @border-radius;
+  }
+
+  // ======== 可点击 ========
+  &--clickable {
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.85;
+    }
+
+    &:active {
+      opacity: 0.75;
+    }
+  }
+
+  // ======== 图片 ========
+  &-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  // ======== 图标 ========
+  &-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1em;
+    line-height: 1;
+  }
+
+  // ======== 文字 ========
+  &-text {
+    display: inline-block;
+    font-weight: normal;
+    line-height: 1;
+    transform-origin: center center;
+    transition: transform 0.2s ease;
+  }
+}
+
+// ============== 状态点 ==============
+.zdy-avatar-status {
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+  width: 28%;
+  height: 28%;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-sizing: content-box;
+  z-index: 1;
+
+  // 方形头像的状态点位置调整
+  .zdy-avatar--square + & {
+    right: 0;
+    bottom: 0;
+    transform: translate(-15%, -15%);
+  }
+}
+
+// ============== Avatar.Group ==============
+.zdy-avatar-group {
+  display: inline-flex;
+  align-items: center;
+
+  .zdy-avatar-wrapper {
+    margin-right: 0;
+    margin-left: -12px;
+    transition: margin-left 0.2s ease;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:hover {
+      z-index: 1;
+      margin-left: 0;
+      margin-right: 4px;
+
+      &:not(:first-child) {
+        margin-left: -4px;
+      }
+    }
+  }
+
+  // 超出计数头像
+  .zdy-avatar--excess {
+    background-color: #f0f0f0;
+    color: @text-color-secondary;
+    border: 1px solid #fff;
+    margin-left: -12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    white-space: nowrap;
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}

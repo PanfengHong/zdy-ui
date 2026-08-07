@@ -1,6 +1,7 @@
 import type React from 'react';
 
 import ButtonDemo from './Button/demo';
+import AvatarDemo from './Avatar/demo';
 import InputDemo from './Input/demo';
 import TabsDemo from './Tabs/demo';
 import SwitchDemo from './Switch/demo';
@@ -49,6 +50,7 @@ import FormDemo from './Form/demo';
 // 各组件 demo 的统一注册表
 export const demoComponents: Record<string, React.ComponentType> = {
   Button: ButtonDemo,
+  Avatar: AvatarDemo,
   Input: InputDemo,
   Tabs: TabsDemo,
   Switch: SwitchDemo,
