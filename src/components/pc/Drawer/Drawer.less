@@ -1,0 +1,155 @@
+@import '../../../styles/variables.less';
+
+// ============== 根容器 ==============
+.zdy-drawer-root {
+  z-index: @z-index-dropdown;
+}
+
+// ============== 遮罩 ==============
+.zdy-drawer-mask {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.45);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: @z-index-dropdown;
+
+  &--open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+// ============== 抽屉面板 ==============
+.zdy-drawer-panel {
+  position: fixed;
+  background-color: #fff;
+  box-shadow: -6px 0 16px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  z-index: @z-index-dropdown + 1;
+  pointer-events: none;
+  transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+
+  &--open {
+    pointer-events: auto;
+  }
+
+  // ======== 方向：右 ========
+  &--right {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transform: translateX(100%);
+
+    &.zdy-drawer-panel--open {
+      transform: translateX(0);
+    }
+
+    .zdy-drawer-header {
+      flex-direction: row;
+    }
+  }
+
+  // ======== 方向：左 ========
+  &--left {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+
+    &.zdy-drawer-panel--open {
+      transform: translateX(0);
+    }
+
+    .zdy-drawer-header {
+      flex-direction: row;
+    }
+  }
+
+  // ======== 方向：上 ========
+  &--top {
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(-100%);
+
+    &.zdy-drawer-panel--open {
+      transform: translateY(0);
+    }
+  }
+
+  // ======== 方向：下 ========
+  &--bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(100%);
+
+    &.zdy-drawer-panel--open {
+      transform: translateY(0);
+    }
+  }
+}
+
+// ============== 头部 ==============
+.zdy-drawer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-bottom: 1px solid @border-color-split;
+  flex-shrink: 0;
+}
+
+.zdy-drawer-title {
+  margin: 0;
+  font-size: @pc-font-size-large;
+  font-weight: 500;
+  color: @text-color;
+  line-height: 24px;
+}
+
+.zdy-drawer-close {
+  width: 28px;
+  height: 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: @text-color-secondary;
+  cursor: pointer;
+  border-radius: @border-radius;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+
+  &:hover {
+    color: @text-color;
+    background-color: @background-color-hover;
+  }
+}
+
+// ============== 内容区 ==============
+.zdy-drawer-body {
+  flex: 1;
+  min-height: 0;
+  padding: 24px;
+  font-size: @pc-font-size-base;
+  color: @text-color;
+  line-height: 1.6;
+  overflow-y: auto;
+}
+
+// ============== 底部 ==============
+.zdy-drawer-footer {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 10px 16px;
+  border-top: 1px solid @border-color-split;
+  background-color: #fafafa;
+}

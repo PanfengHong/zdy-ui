@@ -63,6 +63,7 @@ export const menuGroups: MenuGroup[] = [
     label: '反馈',
     items: [
       { id: 'dialog', label: 'Dialog 弹框', icon: '💬', type: 'component', component: 'Dialog', path: '/components/Dialog', thumbnail: 'dialog' },
+      { id: 'drawer', label: 'Drawer 抽屉', icon: '🗄️', type: 'component', component: 'Drawer', path: '/components/Drawer', thumbnail: 'drawer' },
       { id: 'alert', label: 'Alert 提醒', icon: '⚠️', type: 'component', component: 'Alert', path: '/components/Alert', thumbnail: 'alert' },
       { id: 'message', label: 'Message 消息', icon: '📨', type: 'component', component: 'Message', path: '/components/Message', thumbnail: 'message' },
       { id: 'notification', label: 'Notification 通知', icon: '🔔', type: 'component', component: 'Notification', path: '/components/Notification', thumbnail: 'notification' },

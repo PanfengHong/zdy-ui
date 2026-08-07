@@ -34,6 +34,7 @@ export * from '../components/pc/ColorPicker/types';
 export * from '../components/pc/DatePicker/types';
 export * from '../components/pc/DateTimePicker/types';
 export * from '../components/pc/Dialog/types';
+export * from '../components/pc/Drawer/types';
 export * from '../components/pc/Empty/types';
 export * from '../components/pc/Grid/types';
 export * from '../components/pc/Form/types';

@@ -6,6 +6,7 @@ import InputDemo from './Input/demo';
 import TabsDemo from './Tabs/demo';
 import SwitchDemo from './Switch/demo';
 import DialogDemo from './Dialog/demo';
+import DrawerDemo from './Drawer/demo';
 import IconDemo from './Icon/demo';
 import LayoutDemo from './Layout/demo';
 import GridDemo from './Grid/demo';
@@ -59,6 +60,7 @@ export const demoComponents: Record<string, React.ComponentType> = {
   DateTimePicker: DateTimePickerDemo,
   Form: FormDemo,
   Dialog: DialogDemo,
+  Drawer: DrawerDemo,
   Icon: IconDemo,
   Layout: LayoutDemo,
   Grid: GridDemo,

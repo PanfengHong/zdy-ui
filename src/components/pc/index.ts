@@ -12,6 +12,7 @@ export { default as Masonry } from './Masonry';
 
 // 反馈组件
 export { default as Dialog } from './Dialog';
+export { default as Drawer } from './Drawer';
 export { default as Alert } from './Alert';
 export { default as Message } from './Message';
 export { default as Notification } from './Notification';
