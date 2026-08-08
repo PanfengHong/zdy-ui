@@ -2,40 +2,54 @@ import { defineConfig, type UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { readdirSync, statSync, existsSync } from 'fs';
-import { exec } from 'child_process';
+import { execSync } from 'child_process';
 
 import { fileURLToPath } from 'node:url';
 const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
 
+// Shared logic: run `git log` and parse into commit objects
+function getGitLogData(count: number = 50) {
+  try {
+    const output = execSync(
+      `git log --pretty=format:'%H|%ad|%s|%an' --date=short -n ${count}`,
+      { cwd: dirname, encoding: 'utf-8' }
+    );
+    return output.trim().split('\n').map(line => {
+      const [hash, date, message, author] = line.split('|');
+      return {
+        hash: hash?.substring(0, 7) || '',
+        date: date || '',
+        message: message || '',
+        author: author || '',
+      };
+    }).filter(commit => commit.hash);
+  } catch {
+    return [];
+  }
+}
+
 const gitLogPlugin = () => ({
   name: 'git-log-plugin',
+  // Dev mode: serve as API middleware
   configureServer(server: any) {
     server.middlewares.use('/api/git-log', (req: any, res: any) => {
       res.setHeader('Content-Type', 'application/json');
-
       const count = parseInt(req.url?.split('?count=')[1] || '20', 10);
-
-      exec(`git log --pretty=format:'%H|%ad|%s|%an' --date=short -n ${count}`, { cwd: dirname }, (error, stdout) => {
-        if (error) {
-          res.statusCode = 500;
-          res.end(JSON.stringify({ error: error.message }));
-          return;
-        }
-
-        const commits = stdout.trim().split('\n').map(line => {
-          const [hash, date, message, author] = line.split('|');
-          return {
-            hash: hash?.substring(0, 7) || '',
-            date: date || '',
-            message: message || '',
-            author: author || ''
-          };
-        }).filter(commit => commit.hash);
-
-        res.end(JSON.stringify(commits));
-      });
+      res.end(JSON.stringify(getGitLogData(count)));
     });
-  }
+  },
+  // Build mode: provide git data via virtual module so it's baked into the bundle
+  resolveId(id: string) {
+    if (id === 'virtual:git-log') return '\0virtual:git-log';
+    return null;
+  },
+  load(id: string) {
+    if (id === '\0virtual:git-log') {
+      const commits = getGitLogData(50);
+      return `export default ${JSON.stringify(commits)}`;
+    }
+    return null;
+  },
 });
 
 function getComponentEntries(dir: string, prefix: string): Record<string, string> {
