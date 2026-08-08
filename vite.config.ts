@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig, type UserConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { readdirSync, statSync, existsSync } from 'fs';
@@ -12,16 +12,16 @@ const gitLogPlugin = () => ({
   configureServer(server: any) {
     server.middlewares.use('/api/git-log', (req: any, res: any) => {
       res.setHeader('Content-Type', 'application/json');
-      
+
       const count = parseInt(req.url?.split('?count=')[1] || '20', 10);
-      
+
       exec(`git log --pretty=format:'%H|%ad|%s|%an' --date=short -n ${count}`, { cwd: dirname }, (error, stdout) => {
         if (error) {
           res.statusCode = 500;
           res.end(JSON.stringify({ error: error.message }));
           return;
         }
-        
+
         const commits = stdout.trim().split('\n').map(line => {
           const [hash, date, message, author] = line.split('|');
           return {
@@ -31,7 +31,7 @@ const gitLogPlugin = () => ({
             author: author || ''
           };
         }).filter(commit => commit.hash);
-        
+
         res.end(JSON.stringify(commits));
       });
     });
@@ -57,6 +57,7 @@ function getComponentEntries(dir: string, prefix: string): Record<string, string
 }
 
 const isUMDBuild = process.env.BUILD_FORMAT === 'umd';
+const isDemoBuild = process.env.BUILD_MODE === 'demo';
 
 const pcComponentEntries = getComponentEntries('src/components/pc', 'pc');
 const mobileComponentEntries = getComponentEntries('src/components/mobile', 'mobile');
@@ -70,45 +71,67 @@ const esEntry = {
 
 const umdEntry = path.resolve(dirname, 'src/index.ts');
 
-export default defineConfig({
-  plugins: [react(), gitLogPlugin()],
-  resolve: {
-    alias: {
-      '@': path.resolve(dirname, './src'),
-    },
-  },
-  build: {
-    emptyOutDir: !isUMDBuild,
-    cssCodeSplit: !isUMDBuild,
-    lib: {
-      entry: isUMDBuild ? umdEntry : esEntry,
-      name: 'ReactUiComponentLibrary',
-      fileName: (format: string, entryName: string) => {
-        if (format === 'es') {
-          return `${entryName}.js`;
-        }
-        if (format === 'umd') {
-          return 'react-ui-component-library.umd.js';
-        }
-        return `${entryName}.${format}.js`;
-      },
-      formats: isUMDBuild ? ['umd'] : ['es'],
-    },
-    rollupOptions: {
-      external: ['react', 'react-dom'],
-      output: {
-        exports: 'named',
-        globals: {
-          react: 'React',
-          'react-dom': 'ReactDOM',
-        },
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name && assetInfo.name.endsWith('.css')) {
-            return assetInfo.name.replace(/assets\//, '');
-          }
-          return 'assets/[name]-[hash][extname]';
+// GitHub Pages base: <repo-name>/ (project site), auto-override via BASE_URL env in CI
+// e.g. https://PanfengHong.github.io/zdy-ui/  =>  base = /zdy-ui/
+const pagesBase = process.env.BASE_URL ||
+  process.env.BASE ||
+  (isDemoBuild ? '/zdy-ui/' : '/');
+
+export default defineConfig((): UserConfig => {
+  // ============== Demo (SPA) build for GitHub Pages ==============
+  if (isDemoBuild) {
+    return {
+      plugins: [react(), gitLogPlugin()],
+      base: pagesBase,
+      resolve: {
+        alias: {
+          '@': path.resolve(dirname, './src'),
         },
       },
+      build: {
+        emptyOutDir: true,
+        outDir: path.resolve(dirname, 'dist-demo'),
+      },
+    };
+  }
+
+  // ============== Library build ==============
+  return {
+    plugins: [react(), gitLogPlugin()],
+    resolve: {
+      alias: {
+        '@': path.resolve(dirname, './src'),
+      },
     },
-  },
+    build: {
+      emptyOutDir: !isUMDBuild,
+      cssCodeSplit: !isUMDBuild,
+      lib: {
+        entry: isUMDBuild ? umdEntry : esEntry,
+        name: 'ReactUiComponentLibrary',
+        fileName: (format: string, entryName: string) => {
+          if (format === 'es') return `${entryName}.js`;
+          if (format === 'umd') return 'react-ui-component-library.umd.js';
+          return `${entryName}.${format}.js`;
+        },
+        formats: isUMDBuild ? ['umd'] : ['es'],
+      },
+      rollupOptions: {
+        external: ['react', 'react-dom'],
+        output: {
+          exports: 'named' as const,
+          globals: {
+            react: 'React',
+            'react-dom': 'ReactDOM',
+          },
+          assetFileNames: (assetInfo: { name?: string }) => {
+            if (assetInfo.name && assetInfo.name.endsWith('.css')) {
+              return assetInfo.name.replace(/assets\//, '');
+            }
+            return 'assets/[name]-[hash][extname]';
+          },
+        },
+      },
+    },
+  };
 });

@@ -180,6 +180,12 @@ npm run lint
 
 # 预览构建产物
 npm run preview
+
+# 构建到 dist-demo/
+npm run build:demo  
+
+ # 本地预览（端口 4173），模拟 GitHub Pages 环境
+npm run preview:demo   
 ```
 
 ## 目录结构

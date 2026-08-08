@@ -471,7 +471,9 @@
     "build:barrels": "node scripts/generate-barrels.mjs",
     "build:all": "npm run build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "build:demo": "BUILD_MODE=demo vite build",
+    "preview": "vite preview",
+    "preview:demo": "vite preview --distDir dist-demo --port 4173"
   },
   "dependencies": {
     "classnames": "^2.5.1",
