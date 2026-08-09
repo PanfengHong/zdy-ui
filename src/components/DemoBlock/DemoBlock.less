@@ -52,7 +52,6 @@
     width: 0;
     overflow: hidden;
     transition: width 0.3s ease;
-    background-color: #f5f7fa;
     display: none;
 
     &.expanded {
@@ -69,10 +68,18 @@
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
     font-size: 13px;
     line-height: 1.6;
-    color: #333;
     white-space: pre-wrap;
     word-break: break-all;
     overflow-y: auto;
     flex: 1;
+    // VS Code Light+ theme
+    background-color: #ffffff;
+    color: #333333;
+
+    .tok-tag { color: #800000; }        // tags: <Input, />, >
+    .tok-attr { color: #ff0000; }       // attributes: placeholder, size
+    .tok-string { color: #a31515; }     // strings: "请输入内容"
+    .tok-brace { color: #0000ff; }      // braces { }
+    .tok-comment { color: #008000; font-style: italic; }  // comments
   }
 }

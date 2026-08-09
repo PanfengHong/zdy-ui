@@ -20,6 +20,8 @@ const IconDemo = () => {
         <h3>基础用法</h3>
         <DemoBlock
           code={`
+<Icon type="user" />
+<Icon type="home" />
 <Icon type="add" />
 <Icon type="delete" />
 <Icon type="close" />
@@ -29,6 +31,14 @@ const IconDemo = () => {
           `.trim()}
         >
           <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+              <Icon type="user" />
+              <span style={{ fontSize: '12px', color: '#999' }}>user</span>
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+              <Icon type="home" />
+              <span style={{ fontSize: '12px', color: '#999' }}>home</span>
+            </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
               <Icon type="add" />
               <span style={{ fontSize: '12px', color: '#999' }}>add</span>
@@ -171,15 +181,15 @@ const IconDemo = () => {
         >
           <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" size="small" />
+              <Icon type="add" size="s" />
               <span style={{ fontSize: '12px', color: '#999' }}>small</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" size="medium" />
+              <Icon type="add" size="m" />
               <span style={{ fontSize: '12px', color: '#999' }}>medium</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Icon type="add" size="large" />
+              <Icon type="add" size="l" />
               <span style={{ fontSize: '12px', color: '#999' }}>large</span>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>

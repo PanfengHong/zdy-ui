@@ -21,6 +21,15 @@ const IconSvg = ({ type, size, color }: { type: string; size: number; color: str
           <circle cx="12" cy="7" r="4" />
         </svg>
       );
+    case 'people':
+      return (
+        <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+          <circle cx="9" cy="7" r="4" />
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+          <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+        </svg>
+      );
     case 'bell':
       return (
         <svg width={iconSize} height={iconSize} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -208,16 +217,17 @@ const IconSvg = ({ type, size, color }: { type: string; size: number; color: str
 
 const Icon = ({
   type = 'add',
-  size = 'medium',
+  size = 'm',
   color = '#666',
   spin = false,
   className,
   style
 }: BaseIconProps) => {
   const sizeMap = {
-    small: 14,
-    medium: 16,
-    large: 24
+    xs: 14,
+    s: 16,
+    m: 18,
+    l: 24
   };
   const iconSize = typeof size === 'number' ? size : sizeMap[size];
 

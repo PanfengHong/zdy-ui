@@ -2,8 +2,9 @@ import React from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
 import ApiTable from '../../ApiTable/ApiTable';
 import Input from './Input';
+import Icon from '../Icon/Icon';
 
-const InputDemo = () => {
+const InputDemo: React.FC = () => {
   const apiData = [
     { prop: 'type', desc: '输入框类型', type: 'string', default: 'text' },
     { prop: 'value', desc: '当前值', type: 'string | number', default: '-' },
@@ -17,34 +18,44 @@ const InputDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
+  const demos = [
+    {
+      title: '基础示例',
+      code: `<Input placeholder="请输入内容" />`,
+      render: <Input placeholder="请输入内容" />,
+    },
+    {
+      title: '输入框尺寸',
+      code: `<Input placeholder="Small" size="small" />\n<Input placeholder="Medium" size="medium" />\n<Input placeholder="Large" size="large" />`,
+      render: (
+        <div className="input-group">
+          <Input placeholder="Small" size="small" />
+          <Input placeholder="Medium" size="medium" />
+          <Input placeholder="Large" size="large" />
+        </div>
+      ),
+    },
+    {
+      title: '前后缀',
+      code: `<Input placeholder="Small" prefix={<Icon type="user" />} />\n<Input placeholder="Large" suffix={<Icon type="search" />} />\n<Input placeholder="Medium" prefix="¥" suffix="元" />`,
+      render: (
+        <div className="input-group">
+          <Input placeholder="Small" prefix={<Icon type="user" />} />
+          <Input placeholder="Large" suffix={<Icon type="search" />} />
+          <Input placeholder="Medium" prefix="¥" suffix="元" />
+        </div>
+      ),
+    },
+  ];
+
   return (
     <>
-      <div className="component-group">
-        <h3>基础示例</h3>
-        <DemoBlock
-          code={`
-<Input placeholder="请输入内容" />
-          `.trim()}
-        >
-          <Input placeholder="请输入内容" />
-        </DemoBlock>
-      </div>
-      <div className="component-group">
-        <h3>输入框尺寸</h3>
-        <DemoBlock
-          code={`
-<Input placeholder="Small" size="small" />
-<Input placeholder="Medium" size="medium" />
-<Input placeholder="Large" size="large" />
-          `.trim()}
-        >
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-            <Input placeholder="Small" size="small" />
-            <Input placeholder="Medium" size="medium" />
-            <Input placeholder="Large" size="large" />
-          </div>
-        </DemoBlock>
-      </div>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />

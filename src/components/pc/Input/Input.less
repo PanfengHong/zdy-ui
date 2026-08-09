@@ -59,16 +59,6 @@
     pointer-events: none;
   }
   
-  // 有前缀时的输入框内边距
-  &.zdy-input-wrapper--prefix .zdy-input {
-    padding-left: 30px;
-  }
-  
-  // 有后缀时的输入框内边距
-  &.zdy-input-wrapper--suffix .zdy-input {
-    padding-right: 30px;
-  }
-  
   // 尺寸样式
   &.zdy-input-wrapper--small .zdy-input {
     height: 24px;
@@ -87,6 +77,16 @@
     padding: 6px 11px;
     font-size: @pc-font-size-large;
   }
+
+  // 有前缀时的输入框内边距
+  &.zdy-input-wrapper--prefix .zdy-input {
+    padding-left: 30px;
+  }
+  
+  // 有后缀时的输入框内边距
+  &.zdy-input-wrapper--suffix .zdy-input {
+    padding-right: 30px;
+  }
   
   // 禁用状态
   &.zdy-input-wrapper--disabled {
@@ -102,4 +102,10 @@
       color: @text-color-secondary;
     }
   }
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
