@@ -22,12 +22,11 @@ const TableDemo = () => {
     { name: '王五', age: 28, gender: '男' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础示例</h3>
-        <DemoBlock
-          code={`
+
+  const demos = [
+    {
+      title: '基础示例',
+      code: `
 const demoColumns = [
     { title: '姓名', dataIndex: 'name' },
     { title: '年龄', dataIndex: 'age' },
@@ -41,13 +40,24 @@ const demoColumns = [
   ];
 
 <Table columns={demoColumns} dataSource={demoData} />
-          `.trim()}
-        >
-          <div className="table-group">
-            <Table columns={demoColumns} dataSource={demoData} />
-          </div>
-        </DemoBlock>
-      </div>
+          `.trim(),
+      render: (
+        <div className="table-group">
+          <Table columns={demoColumns} dataSource={demoData} />
+        </div>
+      )
+    }
+  ]
+
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
+      
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />

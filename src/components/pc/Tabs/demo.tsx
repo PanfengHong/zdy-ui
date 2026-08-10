@@ -21,12 +21,10 @@ const TabsDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础示例</h3>
-        <DemoBlock
-          code={`
+  const demos = [
+    {
+      title: '基础示例',  
+      code:`
 <Tabs defaultActiveKey="1">
   <Tabs.TabPane tabKey="1" title="Tab 1">
     Tab 1 content
@@ -38,9 +36,9 @@ const TabsDemo = () => {
     Tab 3 content
   </Tabs.TabPane>
 </Tabs>
-          `.trim()}
-        >
-          <Tabs defaultActiveKey="1">
+          `.trim(),
+          render: (
+            <Tabs defaultActiveKey="1">
             <Tabs.TabPane tabKey="1" title="Tab 1">
               Tab 1 content
             </Tabs.TabPane>
@@ -51,12 +49,11 @@ const TabsDemo = () => {
               Tab 3 content
             </Tabs.TabPane>
           </Tabs>
-        </DemoBlock>
-      </div>
-      <div className="component-group">
-        <h3>胶囊型页签</h3>
-        <DemoBlock
-          code={`
+          )
+    },
+    {
+      title: '胶囊型页签',
+      code: `
 <Tabs type="capsule" defaultActiveKey="1">
   <Tabs.TabPane tabKey="1" title="Tab 1">
     Tab 1 content
@@ -68,9 +65,9 @@ const TabsDemo = () => {
     Tab 3 content
   </Tabs.TabPane>
 </Tabs>
-          `.trim()}
-        >
-          <Tabs type="capsule" defaultActiveKey="1">
+          `.trim(),
+          render: (
+            <Tabs type="capsule" defaultActiveKey="1">
             <Tabs.TabPane tabKey="1" title="Tab 1">
               Tab 1 content
             </Tabs.TabPane>
@@ -81,12 +78,11 @@ const TabsDemo = () => {
               Tab 3 content
             </Tabs.TabPane>
           </Tabs>
-        </DemoBlock>
-      </div>
-      <div className="component-group">
-        <h3>药丸型页签</h3>
-        <DemoBlock
-          code={`
+          )
+    },
+    {
+      title: '药丸型页签',
+      code: `
 <Tabs type="pill" defaultActiveKey="1">
   <Tabs.TabPane tabKey="1" title="Tab 1">
     Tab 1 content
@@ -98,9 +94,9 @@ const TabsDemo = () => {
     Tab 3 content
   </Tabs.TabPane>
 </Tabs>
-          `.trim()}
-        >
-          <Tabs type="pill" defaultActiveKey="1">
+          `.trim(),
+          render: (
+            <Tabs type="pill" defaultActiveKey="1">
             <Tabs.TabPane tabKey="1" title="Tab 1">
               Tab 1 content
             </Tabs.TabPane>
@@ -111,8 +107,18 @@ const TabsDemo = () => {
               Tab 3 content
             </Tabs.TabPane>
           </Tabs>
-        </DemoBlock>
-      </div>
+          )
+    }
+  ]
+
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Tabs API</h3>
         <ApiTable dataSource={apiData} />

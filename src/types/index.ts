@@ -5,7 +5,7 @@ import type React from 'react';
 // ============================================================
 
 // 通用尺寸类型
-export type SizeType = 'xs' | 's' | 'm' | 'l';
+export type SizeType = 'small' | 'medium' | 'large';
 
 // 通用 Props
 export interface BaseComponentProps {

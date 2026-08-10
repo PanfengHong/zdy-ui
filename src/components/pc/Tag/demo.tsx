@@ -2,6 +2,7 @@ import { useState } from 'react';
 import DemoBlock from '../../DemoBlock/DemoBlock';
 import ApiTable from '../../ApiTable/ApiTable';
 import Tag from './Tag';
+import Icon from '../Icon/Icon';
 
 const presetColors = [
   'magenta', 'red', 'volcano', 'orange', 'gold',
@@ -52,103 +53,109 @@ const TagDemo = () => {
     { prop: 'onClick', desc: '点击回调', type: '(e) => void', default: '-' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <DemoBlock code={`<Tag>标签一</Tag>\n<Tag>标签二</Tag>\n<Tag>标签三</Tag>`}>
+  const demos = [
+    {
+      title: '基础用法',
+      code: `<Tag>标签一</Tag>\n<Tag>标签二</Tag>\n<Tag>标签三</Tag>`,
+      render: (
+        <>
           <Tag>标签一</Tag>
           <Tag>标签二</Tag>
           <Tag>标签三</Tag>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>预设颜色</h3>
-        <DemoBlock code={`<Tag color="magenta">magenta</Tag>\n<Tag color="red">red</Tag>\n<Tag color="volcano">volcano</Tag>`}>
+        </>
+      ),
+    },
+    {
+      title: '预设颜色',
+      code: `<Tag color="magenta">magenta</Tag>\n<Tag color="red">red</Tag>\n<Tag color="volcano">volcano</Tag>`,
+      render: (
+        <>
           {presetColors.map((c) => (
             <Tag key={c} color={c as any}>{c}</Tag>
           ))}
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>语义色</h3>
-        <DemoBlock code={`<Tag color="success">成功</Tag>\n<Tag color="processing">处理中</Tag>\n<Tag color="error">错误</Tag>`}>
+        </>
+      ),
+    },
+    {
+      title: '语义色',
+      code: `<Tag color="success">成功</Tag>\n<Tag color="processing">处理中</Tag>\n<Tag color="error">错误</Tag>`,
+      render: (
+        <>
           <Tag color="success">成功</Tag>
           <Tag color="processing">处理中</Tag>
           <Tag color="error">错误</Tag>
           <Tag color="default">默认</Tag>
           <Tag color="warning">警告</Tag>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>状态点（status 属性）</h3>
-        <DemoBlock code={`<Tag status="success">成功</Tag>\n<Tag status="processing">处理中</Tag>`}>
+        </>
+      ),
+    },
+    {
+      title: '状态点（status 属性）',
+      code: `<Tag status="success">成功</Tag>\n<Tag status="processing">处理中</Tag>`,
+      render: (
+        <>
           {statusList.map(({ status, text }) => (
             <Tag key={status} status={status}>{text}</Tag>
           ))}
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义颜色</h3>
-        <DemoBlock code={`<Tag color="#f50">#f50</Tag>\n<Tag color="#2db7f5">#2db7f5</Tag>\n<Tag color="#87d068">#87d068</Tag>`}>
+        </>
+      ),
+    },
+    {
+      title: '自定义颜色',
+      code: `<Tag color="#f50">#f50</Tag>\n<Tag color="#2db7f5">#2db7f5</Tag>\n<Tag color="#87d068">#87d068</Tag>`,
+      render: (
+        <>
           <Tag color="#f50">#f50</Tag>
           <Tag color="#2db7f5">#2db7f5</Tag>
           <Tag color="#87d068">#87d068</Tag>
           <Tag color="rgb(255, 0, 128)">rgb(255, 0, 128)</Tag>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>不同尺寸</h3>
-        <DemoBlock code={`<Tag size="small">small</Tag>\n<Tag size="default">default</Tag>\n<Tag size="large">large</Tag>`}>
-          <Tag size="small">small</Tag>
-          <Tag size="default">default</Tag>
-          <Tag size="large">large</Tag>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>无边框</h3>
-        <DemoBlock code={`<Tag color="blue" bordered={false}>无边框</Tag>`}>
-          <Tag color="blue" bordered={false}>无边框</Tag>
-          <Tag color="green" bordered={false}>无边框</Tag>
-          <Tag color="orange" bordered={false}>无边框</Tag>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>前置图标</h3>
-        <DemoBlock code={`<Tag icon="🌟">带图标</Tag>`}>
-          <Tag icon="🌟">带图标</Tag>
-          <Tag icon="✅" color="success">已完成</Tag>
-          <Tag icon="⚠️" color="warning">注意</Tag>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>可关闭</h3>
-        <DemoBlock code={`<Tag closable onClose={handleClose}>可关闭</Tag>`}>
-          <Tag closable onClose={handleClose}>标签一</Tag>
-          <Tag closable color="blue" onClose={handleClose}>标签二</Tag>
-          <Tag closable color="red" onClose={handleClose}>标签三</Tag>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义关闭图标</h3>
-        <DemoBlock code={`<Tag closable closeIcon="×">自定义关闭</Tag>`}>
-          <Tag closable closeIcon="×">自定义关闭</Tag>
-          <Tag closable closeIcon="✕" color="purple">自定义关闭</Tag>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>受控显示/隐藏</h3>
-        <div style={{ marginBottom: 12 }}>
+        </>
+      ),
+    },
+    {
+      title: '不同尺寸',
+      code: `<Tag size="small">小尺寸</Tag>\n<Tag size="default">默认尺寸</Tag>\n<Tag size="large">大尺寸</Tag>`,
+      render: (
+        <>
+          <Tag size="small">小尺寸</Tag>
+          <Tag size="default">默认尺寸</Tag>
+          <Tag size="large">大尺寸</Tag>
+        </>
+      ),
+    },
+    {
+      title: '无边框',
+      code: `<Tag bordered={false}>无边框标签</Tag>`,
+      render: <Tag bordered={false}>无边框标签</Tag>,
+    },
+    {
+      title: '前置图标',
+      code: `<Tag icon={<Icon type="check" />}>检查</Tag>`,
+      render: <Tag icon={<Icon type="check" />}>检查</Tag>,
+    },
+      {
+        title: '可关闭',
+        code: `<Tag closable>可关闭标签</Tag>`,
+        render: (
+          <>
+            <Tag closable>可关闭标签</Tag>
+          </>
+        ),
+      },
+      {
+        title: '自定义关闭图标',
+        code: `<Tag closable closeIcon={<Icon type="close" />}>可关闭标签</Tag>`,
+        render: (
+          <>
+            <Tag closable closeIcon={<Icon type="close" />}>可关闭标签</Tag>
+          </>
+        ),
+      },
+      {
+        title: '受控显示/隐藏',
+        code: `const [visible, setVisible] = useState(true);\n\n<Tag visible={visible} closable onChange={(v) => setVisible(v)}>受控标签</Tag>`,
+        prepend: (
+          <div style={{ marginBottom: 12 }}>
           <button
             onClick={() => setVisible((v) => !v)}
             style={{
@@ -162,20 +169,26 @@ const TagDemo = () => {
             {visible ? '隐藏' : '显示'}标签
           </button>
         </div>
-        <DemoBlock code={`const [visible, setVisible] = useState(true);\n\n<Tag visible={visible} closable onChange={(v) => setVisible(v)}>受控标签</Tag>`}>
-          <Tag visible={visible} closable onChange={(v) => setVisible(v)}>受控标签</Tag>
+        ),
+        render: (
+          <>
+            <Tag visible={visible} closable onChange={(v) => setVisible(v)}>受控标签</Tag>
           {!visible && <span style={{ color: '#999', marginLeft: 8 }}>标签已隐藏</span>}
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>CheckableTag 可勾选</h3>
-        <div style={{ marginBottom: 12 }}>
+          </>
+        )
+      },
+      {
+        title: 'CheckableTag 可勾选',
+        code: `<Tag.CheckableTag checked={checked} onChange={(c) => setChecked(c)}>标签</Tag.CheckableTag>`,
+        prepend:(
+          <div style={{ marginBottom: 12 }}>
           <span>已选：</span>
           <strong style={{ color: '#1890ff' }}>{checkedTags.join(', ') || '无'}</strong>
         </div>
-        <DemoBlock code={`<Tag.CheckableTag checked={checked} onChange={(c) => setChecked(c)}>标签</Tag.CheckableTag>`}>
-          {['Apple', 'Banana', 'Orange', 'Mango'].map((tag) => (
+        ),
+        render: (
+          <>
+            {['Apple', 'Banana', 'Orange', 'Mango'].map((tag) => (
             <Tag.CheckableTag
               key={tag}
               checked={checkedTags.includes(tag)}
@@ -184,8 +197,20 @@ const TagDemo = () => {
               {tag}
             </Tag.CheckableTag>
           ))}
-        </DemoBlock>
-      </div>
+          </>
+        ),
+      }
+  ]
+
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          {demo.prepend}
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
 
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Tag API</h3>

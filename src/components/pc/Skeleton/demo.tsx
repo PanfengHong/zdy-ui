@@ -45,100 +45,50 @@ const SkeletonDemo = () => {
     { prop: 'shape', desc: '头像形状', type: "'circle' | 'square'", default: 'circle' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <DemoBlock
-          code={`
-<Skeleton active />
-          `.trim()}
-        >
-          <Skeleton active />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>无动画效果</h3>
-        <DemoBlock
-          code={`
-<Skeleton active={false} />
-          `.trim()}
-        >
-          <Skeleton active={false} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>有头像的骨架屏</h3>
-        <DemoBlock
-          code={`
-<Skeleton avatar active />
-          `.trim()}
-        >
-          <Skeleton avatar active />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义头像尺寸</h3>
-        <DemoBlock
-          code={`
-<Skeleton avatar={{ size: 56, shape: 'circle' }} active />
-          `.trim()}
-        >
-          <Skeleton avatar={{ size: 56, shape: 'circle' }} active />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>方形头像</h3>
-        <DemoBlock
-          code={`
-<Skeleton avatar={{ size: 48, shape: 'square' }} active />
-          `.trim()}
-        >
-          <Skeleton avatar={{ size: 48, shape: 'square' }} active />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义标题宽度</h3>
-        <DemoBlock
-          code={`
-<Skeleton title={{ width: '60%' }} active />
-          `.trim()}
-        >
-          <Skeleton title={{ width: '60%' }} active />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义段落</h3>
-        <DemoBlock
-          code={`
-<Skeleton paragraph={{ rows: 4, width: ['100%', '100%', '80%', '60%'] }} active />
-          `.trim()}
-        >
-          <Skeleton paragraph={{ rows: 4, width: ['100%', '100%', '80%', '60%'] }} active />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>仅显示段落</h3>
-        <DemoBlock
-          code={`
-<Skeleton avatar={false} title={false} paragraph active />
-          `.trim()}
-        >
-          <Skeleton avatar={false} title={false} paragraph active />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>包裹模式</h3>
-        <DemoBlock
-          code={`
+  const demos = [
+    {
+      title: '基础用法',
+      code: `<Skeleton active />`.trim(),
+      render: <Skeleton active />
+    },
+    {
+      title: '无动画效果',
+      code: `<Skeleton active={false} />`.trim(),
+      render: <Skeleton active={false} />
+    },
+    {
+      title: '有头像的骨架屏',
+      code: `<Skeleton avatar active />`.trim(),
+      render: <Skeleton avatar active />
+    },
+    {
+      title: '自定义头像尺寸',
+      code: `<Skeleton avatar={{ size: 56, shape: 'circle' }} active />`.trim(),
+      render: <Skeleton avatar={{ size: 56, shape: 'circle' }} active />
+    },
+    {
+      title: '方形头像',
+      code: `<Skeleton avatar={{ size: 48, shape: 'square' }} active />`.trim(),
+      render: <Skeleton avatar={{ size: 48, shape: 'square' }} active />
+    },
+    {
+      title: '自定义标题宽度',
+      code: `<Skeleton title={{ width: '60%' }} active />`.trim(),
+      render: <Skeleton title={{ width: '60%' }} active />
+    },
+    {
+      title: '自定义段落',
+      code: `<Skeleton paragraph={{ rows: 4, width: ['100%', '100%', '80%', '60%'] }} active />`.trim(),
+      render: <Skeleton paragraph={{ rows: 4, width: ['100%', '100%', '80%', '60%'] }} active />
+    },
+    {
+      title: '仅显示段落',
+      code: `<Skeleton paragraph active />`.trim(),
+      render: <Skeleton paragraph active />
+    },
+    {
+      title: '包裹模式',
+      code: `
 const [loading, setLoading] = useState(true);
 
 // 2秒后显示内容
@@ -154,27 +104,24 @@ useEffect(() => {
     <p>骨架屏在数据加载完成后会自动消失。</p>
   </div>
 </Skeleton>
-          `.trim()}
-        >
-          <Skeleton loading={loading} avatar active>
+          `.trim(),
+      render: <Skeleton loading={loading} avatar active>
             <div style={{ padding: '16px 0' }}>
               <h3>实现完成的内容</h3>
               <p>这是加载完成后显示的实际内容。</p>
               <p>骨架屏在数据加载完成后会自动消失。</p>
             </div>
-          </Skeleton>
-        </DemoBlock>
-        <div style={{ marginTop: 12 }}>
-          <Button size="small" onClick={() => { setLoading(true); setTimeout(() => setLoading(false), 2000); }}>
-            重新加载
-          </Button>
-        </div>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义加载内容</h3>
-        <DemoBlock
-          code={`
+          </Skeleton>,
+          actions: [
+            {
+              label: '重新加载',
+              onClick: () => { setLoading(true); setTimeout(() => setLoading(false), 2000); }
+            }
+          ]
+    },
+    {
+      title: '自定义加载内容',
+      code: `
 const [loadData, setLoadData] = useState(true);
 
 <Skeleton loading={loadData} active>
@@ -185,9 +132,9 @@ const [loadData, setLoadData] = useState(true);
     <p>职业：前端工程师</p>
   </div>
 </Skeleton>
-          `.trim()}
-        >
-          <Skeleton loading={loadData} active avatar>
+          `.trim(),
+      render: (
+        <Skeleton loading={loadData} active avatar>
             <div style={{ padding: '16px 0' }}>
               <h3>用户信息</h3>
               <p>姓名：张三</p>
@@ -195,13 +142,33 @@ const [loadData, setLoadData] = useState(true);
               <p>职业：前端工程师</p>
             </div>
           </Skeleton>
-        </DemoBlock>
-        <div style={{ marginTop: 12 }}>
-          <Button size="small" onClick={() => { setLoadData(true); setTimeout(() => setLoadData(false), 2000); }}>
-            重新加载
-          </Button>
+      ),
+      actions: [
+        {
+          label: '重新加载',
+          onClick: () => { setLoadData(true); setTimeout(() => setLoadData(false), 2000); }
+        }
+      ]
+    }
+  ];
+
+  return (
+    <>
+    {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+          {demo.actions && (
+            <div style={{ marginTop: 12 }}>
+              {demo.actions.map((action) => (
+                <Button key={action.label} onClick={action.onClick} type="primary">
+                  {action.label}
+                </Button>
+              ))}
+            </div>
+          )}
         </div>
-      </div>
+      ))}
 
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>

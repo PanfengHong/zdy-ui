@@ -15,51 +15,58 @@ const SwitchDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <DemoBlock
-          code={`
+  const demos = [
+    {
+      title: '基础用法',
+      code: `
 <Switch defaultChecked />
 <Switch />
 <Switch disabled />
 <Switch disabled defaultChecked />
-          `.trim()}
-        >
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <Switch defaultChecked />
-            <Switch />
-            <Switch disabled />
-            <Switch disabled defaultChecked />
-          </div>
-        </DemoBlock>
-      </div>
-      <div className="component-group">
-        <h3>开关尺寸</h3>
-        <DemoBlock
-          code={`
+          `.trim(),
+      render: (
+        <div style={{ display: 'flex', gap: '16px' }}>
+          <Switch defaultChecked />
+          <Switch />
+          <Switch disabled />
+          <Switch disabled defaultChecked />
+        </div>
+      )
+    },
+    {
+      title: '开关尺寸',
+      code: `
 <Switch size="small" />
 <Switch size="medium" />
 <Switch size="large" />
-          `.trim()}
-        >
-          <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Switch size="small" />
-              <span style={{ fontSize: '12px', color: '#999' }}>Small</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Switch size="medium" />
-              <span style={{ fontSize: '12px', color: '#999' }}>Medium</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-              <Switch size="large" />
-              <span style={{ fontSize: '12px', color: '#999' }}>Large</span>
-            </div>
+          `.trim(),
+      render: (
+        <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+            <Switch size="small" />
+            <span style={{ fontSize: '12px', color: '#999' }}>Small</span>
           </div>
-        </DemoBlock>
-      </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+            <Switch size="medium" />
+            <span style={{ fontSize: '12px', color: '#999' }}>Medium</span>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
+            <Switch size="large" />
+            <span style={{ fontSize: '12px', color: '#999' }}>Large</span>
+          </div>
+        </div>
+      )
+    }
+  ]
+
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />
