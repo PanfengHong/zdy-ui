@@ -140,15 +140,15 @@ const IconDemo = () => {
       render: (
         <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Icon type="add" size="s" />
+            <Icon type="add" size="sm" />
             <span style={{ fontSize: '12px', color: '#999' }}>small</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Icon type="add" size="m" />
+            <Icon type="add" size="md" />
             <span style={{ fontSize: '12px', color: '#999' }}>medium</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>
-            <Icon type="add" size="l" />
+            <Icon type="add" size="lg" />
             <span style={{ fontSize: '12px', color: '#999' }}>large</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '8px' }}>

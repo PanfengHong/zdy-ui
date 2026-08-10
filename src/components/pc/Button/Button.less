@@ -145,6 +145,10 @@
       background-color: darken(@success-color, 15%);
       border-color: darken(@success-color, 15%);
     }
+
+    .zdy-button--loading-icon {
+      color: #fff;
+    }
   }  
   // 警告按钮 - 橙色
   &--warning {
@@ -252,9 +256,23 @@
   &--loading {
     opacity: 0.8;
     cursor: not-allowed;
-    
+
     &-icon {
       margin-right: 4px;
+      display: inline-flex;
+      align-items: center;
     }
+  }
+
+  &-prefix {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 4px;
+  }
+
+  &-suffix {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 4px;
   }
 }

@@ -11,5 +11,7 @@ export interface BaseButtonProps extends BaseComponentProps {
   shape?: ButtonShape;
   disabled?: boolean;
   loading?: boolean;
+  prefix?: React.ReactNode;
+  suffix?: React.ReactNode;
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }

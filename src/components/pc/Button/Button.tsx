@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import type { BaseButtonProps } from './types';
+import Icon from '../Icon/Icon';
 
 import './Button.less';
 const Button: React.FC<BaseButtonProps> = ({
@@ -9,6 +10,8 @@ const Button: React.FC<BaseButtonProps> = ({
   shape,
   disabled = false,
   loading = false,
+  prefix,
+  suffix,
   onClick,
   className = '',
   style,
@@ -30,8 +33,10 @@ const Button: React.FC<BaseButtonProps> = ({
       disabled={disabled || loading}
       onClick={onClick}
     >
-      {loading && <span className="zdy-button-loading-icon">⏳</span>}
+      {loading && <Icon type="loading" size={20} spin className="zdy-button--loading-icon" />}
+      {prefix && <span className="zdy-button-prefix">{prefix}</span>}
       {children}
+      {suffix && <span className="zdy-button-suffix">{suffix}</span>}
     </button>
   );
 };
