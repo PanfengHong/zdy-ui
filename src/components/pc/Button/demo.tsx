@@ -76,13 +76,10 @@ const ButtonDemo = () => {
     },
     {
       title: '按钮加载中',
-      code: `<Button type="primary" loading>Loading</Button>\n<Button type="default" loading>Loading</Button>\n<Button type="success" loading>Loading</Button>\n<Button type="danger" loading>Loading</Button>`,
+      code: `<Button type="primary" loading>Loading</Button>`,
       render: (
         <div className="button-group">
           <Button type="primary" loading>Loading</Button>
-          <Button type="default" loading>Loading</Button>
-          <Button type="success" loading>Loading</Button>
-          <Button type="danger" loading>Loading</Button>
         </div>
       ),
     },
@@ -94,7 +91,7 @@ const ButtonDemo = () => {
           <Button type="primary" prefix={<Icon type="add" size={14} color="#fff" />}>新增</Button>
           <Button type="default" prefix={<Icon type="search" size={14} />}>搜索</Button>
           <Button type="default" suffix={<Icon type="caret-down" size={14} />}>下拉</Button>
-          <Button type="primary" prefix={<Icon type="back" size={14} color="#fff" />} suffix={<Icon type="forward" size={14} color="#fff" />}>导航</Button>
+          <Button type="primary" prefix={<Icon type="left" size={14} color="#fff" />} suffix={<Icon type="right" size={14} color="#fff" />}>导航</Button>
         </div>
       ),
     },

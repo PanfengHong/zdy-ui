@@ -224,9 +224,9 @@ const Icon = ({
   style
 }: BaseIconProps) => {
   const sizeMap = {
-    xs: 14,
+    xs: 12,
     sm: 16,
-    md: 18,
+    md: 20,
     lg: 24,
     xl: 32
   };
