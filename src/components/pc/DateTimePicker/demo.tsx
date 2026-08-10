@@ -26,72 +26,69 @@ const DateTimePickerDemo = () => {
     { prop: 'onOpenChange', desc: '面板展开状态变化回调', type: '(open: boolean) => void', default: '-' },
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
+  const demos = [
+    {
+      title: '基础用法',
+      description: (
         <div style={{ marginBottom: 12 }}>
           <span>选中值：</span>
           <strong style={{ color: '#1890ff' }}>{fmt(value)}</strong>
         </div>
-        <DemoBlock code={`<DateTimePicker onChange={(v) => setValue(v)} />`}>
-          <DateTimePicker onChange={(v) => setValue(v)} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>受控用法</h3>
+      ),
+      code: `<DateTimePicker onChange={(v) => setValue(v)} />`,
+      render: <DateTimePicker onChange={(v) => setValue(v)} />,
+    },
+    {
+      title: '受控用法',
+      description: (
         <div style={{ marginBottom: 12 }}>
           <span>当前值：</span>
           <strong style={{ color: '#1890ff' }}>{fmt(controlled)}</strong>
         </div>
-        <DemoBlock
-          code={`const [val, setVal] = useState(new Date(2025, 5, 15, 9, 30, 0));
+      ),
+      code: `const [val, setVal] = useState(new Date(2025, 5, 15, 9, 30, 0));\n\n<DateTimePicker value={val} onChange={(v) => setVal(v)} />`,
+      render: <DateTimePicker value={controlled} onChange={(v) => setControlled(v)} />,
+    },
+    {
+      title: '仅日期（showTime=false）',
+      code: `<DateTimePicker showTime={false} />`,
+      render: <DateTimePicker showTime={false} />,
+    },
+    {
+      title: '禁用日期',
+      code: `<DateTimePicker\n  disabledDate={(date) => {\n    const day = date.getDay();\n    return day === 0 || day === 6;\n  }}\n/>`,
+      render: (
+        <DateTimePicker
+          disabledDate={(date) => {
+            const day = date.getDay();
+            return day === 0 || day === 6;
+          }}
+        />
+      ),
+    },
+    {
+      title: '禁用与尺寸',
+      code: `<DateTimePicker disabled /><DateTimePicker size="small" /><DateTimePicker size="large" />`,
+      render: (
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+          <DateTimePicker disabled />
+          <DateTimePicker size="small" />
+          <DateTimePicker size="large" />
+        </div>
+      ),
+    },
+  ];
 
-<DateTimePicker value={val} onChange={(v) => setVal(v)} />`}
-        >
-          <DateTimePicker value={controlled} onChange={(v) => setControlled(v)} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>仅日期（showTime=false）</h3>
-        <DemoBlock code={`<DateTimePicker showTime={false} />`}>
-          <DateTimePicker showTime={false} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用日期</h3>
-        <DemoBlock
-          code={`<DateTimePicker
-  disabledDate={(date) => {
-    const day = date.getDay();
-    return day === 0 || day === 6;
-  }}
-/>`}
-        >
-          <DateTimePicker
-            disabledDate={(date) => {
-              const day = date.getDay();
-              return day === 0 || day === 6;
-            }}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用与尺寸</h3>
-        <DemoBlock code={`<DateTimePicker disabled /><DateTimePicker size="small" /><DateTimePicker size="large" />`}>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <DateTimePicker disabled />
-            <DateTimePicker size="small" />
-            <DateTimePicker size="large" />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group" style={{ marginTop: 32 }}>
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          {demo.description}
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
+      <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />
       </div>

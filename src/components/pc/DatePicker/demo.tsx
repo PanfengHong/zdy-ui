@@ -25,72 +25,69 @@ const DatePickerDemo = () => {
     { prop: 'onOpenChange', desc: '面板展开状态变化回调', type: '(open: boolean) => void', default: '-' },
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
+  const demos = [
+    {
+      title: '基础用法',
+      description: (
         <div style={{ marginBottom: 12 }}>
           <span>选中日期：</span>
           <strong style={{ color: '#1890ff' }}>{fmt(value)}</strong>
         </div>
-        <DemoBlock code={`<DatePicker onChange={(d) => setValue(d)} />`}>
-          <DatePicker onChange={(d) => setValue(d)} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>受控用法</h3>
+      ),
+      code: `<DatePicker onChange={(d) => setValue(d)} />`,
+      render: <DatePicker onChange={(d) => setValue(d)} />,
+    },
+    {
+      title: '受控用法',
+      description: (
         <div style={{ marginBottom: 12 }}>
           <span>当前日期：</span>
           <strong style={{ color: '#1890ff' }}>{fmt(controlled)}</strong>
         </div>
-        <DemoBlock
-          code={`const [date, setDate] = useState(new Date(2025, 5, 15));
+      ),
+      code: `const [date, setDate] = useState(new Date(2025, 5, 15));\n\n<DatePicker value={date} onChange={(d) => setDate(d)} />`,
+      render: <DatePicker value={controlled} onChange={(d) => setControlled(d)} />,
+    },
+    {
+      title: '禁用日期',
+      code: `<DatePicker\n  disabledDate={(date) => {\n    const day = date.getDay();\n    return day === 0 || day === 6;\n  }}\n/>`,
+      render: (
+        <DatePicker
+          disabledDate={(date) => {
+            const day = date.getDay();
+            return day === 0 || day === 6;
+          }}
+        />
+      ),
+    },
+    {
+      title: '禁用与尺寸',
+      code: `<DatePicker disabled /><DatePicker size="small" /><DatePicker size="large" />`,
+      render: (
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+          <DatePicker disabled />
+          <DatePicker size="small" />
+          <DatePicker size="large" />
+        </div>
+      ),
+    },
+    {
+      title: '自定义格式',
+      code: `<DatePicker format="YYYY/MM/DD" />`,
+      render: <DatePicker format="YYYY/MM/DD" />,
+    },
+  ];
 
-<DatePicker value={date} onChange={(d) => setDate(d)} />`}
-        >
-          <DatePicker value={controlled} onChange={(d) => setControlled(d)} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用日期</h3>
-        <DemoBlock
-          code={`<DatePicker
-  disabledDate={(date) => {
-    const day = date.getDay();
-    return day === 0 || day === 6;
-  }}
-/>`}
-        >
-          <DatePicker
-            disabledDate={(date) => {
-              const day = date.getDay();
-              return day === 0 || day === 6;
-            }}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用与尺寸</h3>
-        <DemoBlock code={`<DatePicker disabled /><DatePicker size="small" /><DatePicker size="large" />`}>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <DatePicker disabled />
-            <DatePicker size="small" />
-            <DatePicker size="large" />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义格式</h3>
-        <DemoBlock code={`<DatePicker format="YYYY/MM/DD" />`}>
-          <DatePicker format="YYYY/MM/DD" />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group" style={{ marginTop: 32 }}>
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          {demo.description}
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
+      <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />
       </div>

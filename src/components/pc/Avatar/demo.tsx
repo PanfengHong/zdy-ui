@@ -28,84 +28,99 @@ const AvatarDemo = () => {
     { prop: 'shape', desc: '组内头像形状', type: "'circle' | 'square'", default: "'circle'" },
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <DemoBlock code={`<Avatar src="https://i.pravatar.cc/100?u=1" />\n<Avatar text="U" />\n<Avatar text="张" />\n<Avatar icon="👤" />`}>
+  const demos = [
+    {
+      title: '基础用法',
+      code: `<Avatar src="https://i.pravatar.cc/100?u=1" />\n<Avatar text="U" />\n<Avatar text="张" />\n<Avatar icon="👤" />`,
+      render: (
+        <>
           <Avatar src={avatarUrl('1')} />
           <Avatar text="U" />
           <Avatar text="张" />
           <Avatar icon="👤" />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>不同尺寸</h3>
-        <DemoBlock code={`<Avatar size="small" text="S" />\n<Avatar size="medium" text="M" />\n<Avatar size="large" text="L" />\n<Avatar size={64} text="64" />`}>
+        </>
+      ),
+    },
+    {
+      title: '不同尺寸',
+      code: `<Avatar size="small" text="S" />\n<Avatar size="medium" text="M" />\n<Avatar size="large" text="L" />\n<Avatar size={64} text="64" />`,
+      render: (
+        <>
           <Avatar size="small" text="S" />
           <Avatar size="medium" text="M" />
           <Avatar size="large" text="L" />
           <Avatar size={64} text="64" />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>不同形状</h3>
-        <DemoBlock code={`<Avatar shape="circle" text="C" />\n<Avatar shape="square" text="S" />`}>
+        </>
+      ),
+    },
+    {
+      title: '不同形状',
+      code: `<Avatar shape="circle" text="C" />\n<Avatar shape="square" text="S" />`,
+      render: (
+        <>
           <Avatar shape="circle" text="C" />
           <Avatar shape="square" text="S" />
           <Avatar shape="circle" src={avatarUrl('2')} />
           <Avatar shape="square" src={avatarUrl('3')} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>文字头像</h3>
-        <DemoBlock code={`<Avatar text="A" />\n<Avatar text="张三" />\n<Avatar text="Hello" />\n<Avatar text="王" style={{ backgroundColor: '#f56a00' }} />`}>
+        </>
+      ),
+    },
+    {
+      title: '文字头像',
+      code: `<Avatar text="A" />\n<Avatar text="张三" />\n<Avatar text="Hello" />\n<Avatar text="王" style={{ backgroundColor: '#f56a00' }} />`,
+      render: (
+        <>
           <Avatar text="A" />
           <Avatar text="张三" />
           <Avatar text="Hello" />
           <Avatar text="王" style={{ backgroundColor: '#f56a00' }} />
           <Avatar text="李" style={{ backgroundColor: '#87d068' }} />
           <Avatar text="赵" style={{ backgroundColor: '#00a2ae' }} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>图标头像</h3>
-        <DemoBlock code={`<Avatar icon="👤" style={{ backgroundColor: '#87d068' }} />\n<Avatar icon="👨" style={{ backgroundColor: '#f56a00' }} />`}>
+        </>
+      ),
+    },
+    {
+      title: '图标头像',
+      code: `<Avatar icon="👤" style={{ backgroundColor: '#87d068' }} />\n<Avatar icon="👨" style={{ backgroundColor: '#f56a00' }} />`,
+      render: (
+        <>
           <Avatar icon="👤" style={{ backgroundColor: '#87d068' }} />
           <Avatar icon="👨" style={{ backgroundColor: '#f56a00' }} />
           <Avatar icon="👩" style={{ backgroundColor: '#fde0dc' }} />
           <Avatar icon="🧑" style={{ backgroundColor: '#00a2ae' }} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>状态点</h3>
-        <DemoBlock code={`<Avatar src="..." status="online" />\n<Avatar text="A" status="busy" />`}>
+        </>
+      ),
+    },
+    {
+      title: '状态点',
+      code: `<Avatar src="..." status="online" />\n<Avatar text="A" status="busy" />`,
+      render: (
+        <>
           <Avatar src={avatarUrl('4')} status="online" />
           <Avatar src={avatarUrl('5')} status="busy" />
           <Avatar src={avatarUrl('6')} status="away" />
           <Avatar src={avatarUrl('7')} status="offline" />
           <Avatar text="A" status="online" />
           <Avatar text="B" status="busy" />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义状态点颜色</h3>
-        <DemoBlock code={`<Avatar text="A" status="online" statusColor="#722ed1" />`}>
+        </>
+      ),
+    },
+    {
+      title: '自定义状态点颜色',
+      code: `<Avatar text="A" status="online" statusColor="#722ed1" />`,
+      render: (
+        <>
           <Avatar text="A" status="online" statusColor="#722ed1" />
           <Avatar text="B" status="busy" statusColor="#13c2c2" />
           <Avatar src={avatarUrl('8')} status="online" statusColor="#eb2f96" />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>图片加载失败回退</h3>
-        <DemoBlock code={`<Avatar src="broken-url" text="Fallback" />`}>
+        </>
+      ),
+    },
+    {
+      title: '图片加载失败回退',
+      code: `<Avatar src="broken-url" text="Fallback" />`,
+      render: (
+        <>
           <Avatar src="https://broken-url.example.com/avatar.png" text="FB" />
           <Avatar src="https://broken-url.example.com/avatar.png" text="张" />
           <Avatar src="https://broken-url.example.com/avatar.png" icon="👤" />
@@ -114,12 +129,14 @@ const AvatarDemo = () => {
             onError={() => { console.log('图片加载失败'); return false; }}
             text="自定义"
           />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>可点击头像</h3>
-        <DemoBlock code={`<Avatar text="A" onClick={(e) => console.log('点击', e)} />`}>
+        </>
+      ),
+    },
+    {
+      title: '可点击头像',
+      code: `<Avatar text="A" onClick={(e) => console.log('点击', e)} />`,
+      render: (
+        <>
           <Avatar
             text="点"
             onClick={() => alert('头像被点击了！')}
@@ -129,68 +146,77 @@ const AvatarDemo = () => {
             src={avatarUrl('9')}
             onClick={() => alert('头像被点击了！')}
           />
-        </DemoBlock>
-      </div>
+        </>
+      ),
+    },
+    {
+      title: '头像组（Avatar.Group）',
+      code: `<Avatar.Group>\n  <Avatar src="..." />\n  <Avatar text="A" />\n  <Avatar text="B" />\n</Avatar.Group>`,
+      render: (
+        <Avatar.Group>
+          <Avatar src={avatarUrl('10')} />
+          <Avatar text="A" style={{ backgroundColor: '#f56a00' }} />
+          <Avatar text="B" style={{ backgroundColor: '#87d068' }} />
+          <Avatar text="C" style={{ backgroundColor: '#00a2ae' }} />
+        </Avatar.Group>
+      ),
+    },
+    {
+      title: '头像组 - 最大数量限制',
+      code: `<Avatar.Group maxCount={3}>\n  <Avatar src="..." />\n  ...\n</Avatar.Group>`,
+      render: (
+        <Avatar.Group maxCount={3}>
+          <Avatar src={avatarUrl('11')} />
+          <Avatar src={avatarUrl('12')} />
+          <Avatar src={avatarUrl('13')} />
+          <Avatar src={avatarUrl('14')} />
+          <Avatar src={avatarUrl('15')} />
+          <Avatar src={avatarUrl('16')} />
+        </Avatar.Group>
+      ),
+    },
+    {
+      title: '头像组 - 统一尺寸与形状',
+      code: `<Avatar.Group size="large" shape="square">\n  ...\n</Avatar.Group>`,
+      render: (
+        <Avatar.Group size="large" shape="square">
+          <Avatar text="甲" style={{ backgroundColor: '#f56a00' }} />
+          <Avatar text="乙" style={{ backgroundColor: '#87d068' }} />
+          <Avatar text="丙" style={{ backgroundColor: '#00a2ae' }} />
+          <Avatar text="丁" style={{ backgroundColor: '#722ed1' }} />
+        </Avatar.Group>
+      ),
+    },
+    {
+      title: '头像组 - 自定义超出样式',
+      code: `<Avatar.Group maxCount={2} maxStyle={{ backgroundColor: '#1890ff', color: '#fff' }}>`,
+      render: (
+        <Avatar.Group
+          maxCount={2}
+          maxStyle={{ backgroundColor: '#1890ff', color: '#fff' }}
+        >
+          <Avatar src={avatarUrl('17')} />
+          <Avatar src={avatarUrl('18')} />
+          <Avatar src={avatarUrl('19')} />
+          <Avatar src={avatarUrl('20')} />
+          <Avatar src={avatarUrl('21')} />
+        </Avatar.Group>
+      ),
+    },
+  ];
 
-      <div className="component-group">
-        <h3>头像组（Avatar.Group）</h3>
-        <DemoBlock code={`<Avatar.Group>\n  <Avatar src="..." />\n  <Avatar text="A" />\n  <Avatar text="B" />\n</Avatar.Group>`}>
-          <Avatar.Group>
-            <Avatar src={avatarUrl('10')} />
-            <Avatar text="A" style={{ backgroundColor: '#f56a00' }} />
-            <Avatar text="B" style={{ backgroundColor: '#87d068' }} />
-            <Avatar text="C" style={{ backgroundColor: '#00a2ae' }} />
-          </Avatar.Group>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>头像组 - 最大数量限制</h3>
-        <DemoBlock code={`<Avatar.Group maxCount={3}>\n  <Avatar src="..." />\n  ...\n</Avatar.Group>`}>
-          <Avatar.Group maxCount={3}>
-            <Avatar src={avatarUrl('11')} />
-            <Avatar src={avatarUrl('12')} />
-            <Avatar src={avatarUrl('13')} />
-            <Avatar src={avatarUrl('14')} />
-            <Avatar src={avatarUrl('15')} />
-            <Avatar src={avatarUrl('16')} />
-          </Avatar.Group>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>头像组 - 统一尺寸与形状</h3>
-        <DemoBlock code={`<Avatar.Group size="large" shape="square">\n  ...\n</Avatar.Group>`}>
-          <Avatar.Group size="large" shape="square">
-            <Avatar text="甲" style={{ backgroundColor: '#f56a00' }} />
-            <Avatar text="乙" style={{ backgroundColor: '#87d068' }} />
-            <Avatar text="丙" style={{ backgroundColor: '#00a2ae' }} />
-            <Avatar text="丁" style={{ backgroundColor: '#722ed1' }} />
-          </Avatar.Group>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>头像组 - 自定义超出样式</h3>
-        <DemoBlock code={`<Avatar.Group maxCount={2} maxStyle={{ backgroundColor: '#1890ff', color: '#fff' }}>`}>
-          <Avatar.Group
-            maxCount={2}
-            maxStyle={{ backgroundColor: '#1890ff', color: '#fff' }}
-          >
-            <Avatar src={avatarUrl('17')} />
-            <Avatar src={avatarUrl('18')} />
-            <Avatar src={avatarUrl('19')} />
-            <Avatar src={avatarUrl('20')} />
-            <Avatar src={avatarUrl('21')} />
-          </Avatar.Group>
-        </DemoBlock>
-      </div>
-
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Avatar API</h3>
         <ApiTable dataSource={apiData} />
       </div>
-
       <div className="component-group">
         <h3>Avatar.Group API</h3>
         <ApiTable dataSource={groupApiData} />

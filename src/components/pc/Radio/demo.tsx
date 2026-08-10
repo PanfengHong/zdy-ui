@@ -25,32 +25,21 @@ const RadioDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础示例</h3>
-        <DemoBlock
-          code={`
-<Radio>基础示例</Radio>
-          `.trim()}
-        >
-          <div className="button-group">
-            <Radio>基础示例</Radio>
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>Radio Group</h3>
-        <DemoBlock
-          code={`
-<Radio.Group value={value} onChange={setValue}>
-  <Radio value="a">选项A</Radio>
-  <Radio value="b">选项B</Radio>
-  <Radio value="c">选项C</Radio>
-</Radio.Group>
-          `.trim()}
-        >
+  const demos = [
+    {
+      title: '基础示例',
+      code: `<Radio>基础示例</Radio>`,
+      render: (
+        <div className="button-group">
+          <Radio>基础示例</Radio>
+        </div>
+      ),
+    },
+    {
+      title: 'Radio Group',
+      code: `<Radio.Group value={value} onChange={setValue}>\n  <Radio value="a">选项A</Radio>\n  <Radio value="b">选项B</Radio>\n  <Radio value="c">选项C</Radio>\n</Radio.Group>`,
+      render: (
+        <>
           <Radio.Group value={radioValue} onChange={setRadioValue}>
             <Radio value="a">选项A</Radio>
             <Radio value="b">选项B</Radio>
@@ -59,14 +48,23 @@ const RadioDemo = () => {
           <p style={{ marginTop: '12px', color: '#666', fontSize: '14px' }}>
             当前选中：{radioValue}
           </p>
-        </DemoBlock>
-      </div>
+        </>
+      ),
+    },
+  ];
 
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Radio API</h3>
         <ApiTable dataSource={apiData} />
       </div>
-
       <div className="component-group">
         <h3>Radio.Group API</h3>
         <ApiTable dataSource={groupApiData} />

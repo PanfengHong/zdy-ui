@@ -9,260 +9,16 @@ import Checkbox from '../Checkbox/Checkbox';
 import Radio from '../Radio/Radio';
 import Button from '../Button/Button';
 
-// 基础登录表单
-const BasicFormDemo = () => {
-  const form = useForm();
-  const [result, setResult] = useState<string>('');
-
-  return (
-    <DemoBlock
-      code={`const form = useForm();
-
-<Form
-  form={form}
-  labelWidth={80}
-  onFinish={(v) => console.log(v)}
->
-  <FormItem name="username" label="用户名" rules={[{ required: true }]}>
-    <Input placeholder="请输入用户名" />
-  </FormItem>
-  <FormItem name="password" label="密码" rules={[{ required: true, min: 6 }]}>
-    <Input type="password" placeholder="请输入密码" />
-  </FormItem>
-  <FormItem>
-    <Button type="primary" onClick={() => form.submit()}>登录</Button>
-  </FormItem>
-</Form>`}
-    >
-      <Form
-        form={form}
-        labelWidth={80}
-        onFinish={(v) => setResult(JSON.stringify(v, null, 2))}
-        onFinishFailed={(errs) => setResult('校验失败：' + JSON.stringify(errs))}
-      >
-        <FormItem name="username" label="用户名" rules={[{ required: true, message: '请输入用户名' }]}>
-          <Input placeholder="请输入用户名" />
-        </FormItem>
-        <FormItem name="password" label="密码" rules={[{ required: true, min: 6, message: '密码至少 6 位' }]}>
-          <Input type="password" placeholder="请输入密码" />
-        </FormItem>
-        <FormItem>
-          <Button type="primary" onClick={() => form.submit()}>登录</Button>
-        </FormItem>
-      </Form>
-      {result && (
-        <pre style={{ marginTop: 12, padding: 8, background: '#f5f5f5', borderRadius: 4, fontSize: 12 }}>
-          {result}
-        </pre>
-      )}
-    </DemoBlock>
-  );
-};
-
-// 注册表单（多种控件）
-const RegisterFormDemo = () => {
-  const form = useForm();
-  const [result, setResult] = useState<string>('');
-
-  return (
-    <DemoBlock
-      code={`<Form form={form} labelWidth={80} layout="horizontal">
-  <FormItem name="name" label="姓名" rules={[{ required: true }]}>
-    <Input />
-  </FormItem>
-  <FormItem name="gender" label="性别" rules={[{ required: true }]}>
-    <Radio.Group>
-      <Radio value="male">男</Radio>
-      <Radio value="female">女</Radio>
-    </Radio.Group>
-  </FormItem>
-  <FormItem name="hobbies" label="爱好">
-    <Checkbox.Group>
-      <Checkbox value="music">音乐</Checkbox>
-      <Checkbox value="sport">运动</Checkbox>
-      <Checkbox value="read">阅读</Checkbox>
-    </Checkbox.Group>
-  </FormItem>
-  <FormItem name="city" label="城市" rules={[{ required: true }]}>
-    <Select options={[...]} />
-  </FormItem>
-  <FormItem name="bio" label="简介">
-    <Textarea rows={3} />
-  </FormItem>
-</Form>`}
-    >
-      <Form
-        form={form}
-        labelWidth={80}
-        onFinish={(v) => setResult(JSON.stringify(v, null, 2))}
-        onFinishFailed={(errs) => setResult('校验失败：' + JSON.stringify(errs))}
-      >
-        <FormItem name="name" label="姓名" rules={[{ required: true, message: '请输入姓名' }]}>
-          <Input placeholder="请输入姓名" />
-        </FormItem>
-        <FormItem name="gender" label="性别" rules={[{ required: true, message: '请选择性别' }]}>
-          <Radio.Group>
-            <Radio value="male">男</Radio>
-            <Radio value="female">女</Radio>
-          </Radio.Group>
-        </FormItem>
-        <FormItem name="hobbies" label="爱好">
-          <Checkbox.Group>
-            <Checkbox value="music">音乐</Checkbox>
-            <Checkbox value="sport">运动</Checkbox>
-            <Checkbox value="read">阅读</Checkbox>
-          </Checkbox.Group>
-        </FormItem>
-        <FormItem name="city" label="城市" rules={[{ required: true, message: '请选择城市' }]}>
-          <Select
-            placeholder="请选择城市"
-            options={[
-              { value: 'beijing', label: '北京' },
-              { value: 'shanghai', label: '上海' },
-              { value: 'guangzhou', label: '广州' },
-              { value: 'shenzhen', label: '深圳' },
-            ]}
-          />
-        </FormItem>
-        <FormItem name="bio" label="简介">
-          <Textarea rows={3} placeholder="介绍一下自己" />
-        </FormItem>
-        <FormItem>
-          <Button type="primary" onClick={() => form.submit()}>提交</Button>
-          <Button style={{ marginLeft: 8 }} onClick={() => form.resetFields()}>重置</Button>
-        </FormItem>
-      </Form>
-      {result && (
-        <pre style={{ marginTop: 12, padding: 8, background: '#f5f5f5', borderRadius: 4, fontSize: 12 }}>
-          {result}
-        </pre>
-      )}
-    </DemoBlock>
-  );
-};
-
-// 自定义校验
-const CustomValidateDemo = () => {
-  const form = useForm();
-  const [result, setResult] = useState<string>('');
-
-  return (
-    <DemoBlock
-      code={`<FormItem
-  name="email"
-  label="邮箱"
-  rules={[
-    { required: true, message: '请输入邮箱' },
-    { pattern: /^[^@]+@[^@]+\\.[^@]+$/, message: '邮箱格式不正确' }
-  ]}
->
-  <Input />
-</FormItem>
-
-<FormItem
-  name="confirm"
-  label="确认密码"
-  rules={[
-    { required: true },
-    {
-      validator: (v, data) => ({
-        valid: v === data.password,
-        message: '两次密码不一致'
-      })
-    }
-  ]}
->
-  <Input type="password" />
-</FormItem>`}
-    >
-      <Form
-        form={form}
-        labelWidth={100}
-        onFinish={(v) => setResult(JSON.stringify(v, null, 2))}
-        onFinishFailed={(errs) => setResult('校验失败：' + JSON.stringify(errs))}
-      >
-        <FormItem
-          name="email"
-          label="邮箱"
-          rules={[
-            { required: true, message: '请输入邮箱' },
-            { pattern: /^[^@]+@[^@]+\.[^@]+$/, message: '邮箱格式不正确' },
-          ]}
-        >
-          <Input placeholder="请输入邮箱" />
-        </FormItem>
-        <FormItem name="password" label="密码" rules={[{ required: true, message: '请输入密码' }]}>
-          <Input type="password" placeholder="请输入密码" />
-        </FormItem>
-        <FormItem
-          name="confirm"
-          label="确认密码"
-          rules={[
-            { required: true, message: '请确认密码' },
-            {
-              validator: (v, data) => ({
-                valid: v === data.password,
-                message: '两次密码不一致',
-              }),
-            },
-          ]}
-        >
-          <Input type="password" placeholder="请再次输入密码" />
-        </FormItem>
-        <FormItem>
-          <Button type="primary" onClick={() => form.submit()}>提交</Button>
-        </FormItem>
-      </Form>
-      {result && (
-        <pre style={{ marginTop: 12, padding: 8, background: '#f5f5f5', borderRadius: 4, fontSize: 12 }}>
-          {result}
-        </pre>
-      )}
-    </DemoBlock>
-  );
-};
-
-// 布局演示
-const LayoutDemo = () => {
-  return (
-    <DemoBlock code={`<Form layout="vertical">...</Form>\n<Form layout="inline">...</Form>`}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
-        <div>
-          <h4 style={{ marginBottom: 8 }}>垂直布局（vertical）</h4>
-          <Form layout="vertical" labelWidth={80}>
-            <FormItem name="a" label="字段 A">
-              <Input placeholder="请输入" />
-            </FormItem>
-            <FormItem name="b" label="字段 B">
-              <Input placeholder="请输入" />
-            </FormItem>
-          </Form>
-        </div>
-        <div>
-          <h4 style={{ marginBottom: 8 }}>行内布局（inline）</h4>
-          <Form layout="inline">
-            <FormItem name="kw" label="关键词">
-              <Input placeholder="搜索" />
-            </FormItem>
-            <FormItem name="status" label="状态">
-              <Select
-                options={[
-                  { value: 'all', label: '全部' },
-                  { value: 'active', label: '启用' },
-                ]}
-              />
-            </FormItem>
-            <FormItem>
-              <Button type="primary">查询</Button>
-            </FormItem>
-          </Form>
-        </div>
-      </div>
-    </DemoBlock>
-  );
-};
-
 const FormDemo = () => {
+  const basicForm = useForm();
+  const [basicResult, setBasicResult] = useState<string>('');
+
+  const registerForm = useForm();
+  const [registerResult, setRegisterResult] = useState<string>('');
+
+  const validateForm = useForm();
+  const [validateResult, setValidateResult] = useState<string>('');
+
   const formApi = [
     { prop: 'initialValues', desc: '表单初始值', type: 'Record<string, any>', default: '{}' },
     { prop: 'values', desc: '受控值（受控模式）', type: 'Record<string, any>', default: '-' },
@@ -309,29 +65,254 @@ const FormDemo = () => {
     { prop: 'submit', desc: '提交表单', type: '() => Promise<void>', default: '-' },
   ];
 
+  const demos = [
+    {
+      title: '基础用法',
+      code: `const form = useForm();
+
+<Form
+  form={form}
+  labelWidth={80}
+  onFinish={(v) => console.log(v)}
+>
+  <FormItem name="username" label="用户名" rules={[{ required: true }]}>
+    <Input placeholder="请输入用户名" />
+  </FormItem>
+  <FormItem name="password" label="密码" rules={[{ required: true, min: 6 }]}>
+    <Input type="password" placeholder="请输入密码" />
+  </FormItem>
+  <FormItem>
+    <Button type="primary" onClick={() => form.submit()}>登录</Button>
+  </FormItem>
+</Form>`,
+      render: (
+        <>
+          <Form
+            form={basicForm}
+            labelWidth={80}
+            onFinish={(v) => setBasicResult(JSON.stringify(v, null, 2))}
+            onFinishFailed={(errs) => setBasicResult('校验失败：' + JSON.stringify(errs))}
+          >
+            <FormItem name="username" label="用户名" rules={[{ required: true, message: '请输入用户名' }]}>
+              <Input placeholder="请输入用户名" />
+            </FormItem>
+            <FormItem name="password" label="密码" rules={[{ required: true, min: 6, message: '密码至少 6 位' }]}>
+              <Input type="password" placeholder="请输入密码" />
+            </FormItem>
+            <FormItem>
+              <Button type="primary" onClick={() => basicForm.submit()}>登录</Button>
+            </FormItem>
+          </Form>
+          {basicResult && (
+            <pre style={{ marginTop: 12, padding: 8, background: '#f5f5f5', borderRadius: 4, fontSize: 12 }}>
+              {basicResult}
+            </pre>
+          )}
+        </>
+      ),
+    },
+    {
+      title: '注册表单（多种控件）',
+      code: `<Form form={form} labelWidth={80} layout="horizontal">
+  <FormItem name="name" label="姓名" rules={[{ required: true }]}>
+    <Input />
+  </FormItem>
+  <FormItem name="gender" label="性别" rules={[{ required: true }]}>
+    <Radio.Group>
+      <Radio value="male">男</Radio>
+      <Radio value="female">女</Radio>
+    </Radio.Group>
+  </FormItem>
+  <FormItem name="hobbies" label="爱好">
+    <Checkbox.Group>
+      <Checkbox value="music">音乐</Checkbox>
+      <Checkbox value="sport">运动</Checkbox>
+      <Checkbox value="read">阅读</Checkbox>
+    </Checkbox.Group>
+  </FormItem>
+  <FormItem name="city" label="城市" rules={[{ required: true }]}>
+    <Select options={[...]} />
+  </FormItem>
+  <FormItem name="bio" label="简介">
+    <Textarea rows={3} />
+  </FormItem>
+</Form>`,
+      render: (
+        <>
+          <Form
+            form={registerForm}
+            labelWidth={80}
+            onFinish={(v) => setRegisterResult(JSON.stringify(v, null, 2))}
+            onFinishFailed={(errs) => setRegisterResult('校验失败：' + JSON.stringify(errs))}
+          >
+            <FormItem name="name" label="姓名" rules={[{ required: true, message: '请输入姓名' }]}>
+              <Input placeholder="请输入姓名" />
+            </FormItem>
+            <FormItem name="gender" label="性别" rules={[{ required: true, message: '请选择性别' }]}>
+              <Radio.Group>
+                <Radio value="male">男</Radio>
+                <Radio value="female">女</Radio>
+              </Radio.Group>
+            </FormItem>
+            <FormItem name="hobbies" label="爱好">
+              <Checkbox.Group>
+                <Checkbox value="music">音乐</Checkbox>
+                <Checkbox value="sport">运动</Checkbox>
+                <Checkbox value="read">阅读</Checkbox>
+              </Checkbox.Group>
+            </FormItem>
+            <FormItem name="city" label="城市" rules={[{ required: true, message: '请选择城市' }]}>
+              <Select
+                placeholder="请选择城市"
+                options={[
+                  { value: 'beijing', label: '北京' },
+                  { value: 'shanghai', label: '上海' },
+                  { value: 'guangzhou', label: '广州' },
+                  { value: 'shenzhen', label: '深圳' },
+                ]}
+              />
+            </FormItem>
+            <FormItem name="bio" label="简介">
+              <Textarea rows={3} placeholder="介绍一下自己" />
+            </FormItem>
+            <FormItem>
+              <Button type="primary" onClick={() => registerForm.submit()}>提交</Button>
+              <Button style={{ marginLeft: 8 }} onClick={() => registerForm.resetFields()}>重置</Button>
+            </FormItem>
+          </Form>
+          {registerResult && (
+            <pre style={{ marginTop: 12, padding: 8, background: '#f5f5f5', borderRadius: 4, fontSize: 12 }}>
+              {registerResult}
+            </pre>
+          )}
+        </>
+      ),
+    },
+    {
+      title: '自定义校验',
+      code: `<FormItem
+  name="email"
+  label="邮箱"
+  rules={[
+    { required: true, message: '请输入邮箱' },
+    { pattern: /^[^@]+@[^@]+\\.[^@]+$/, message: '邮箱格式不正确' }
+  ]}
+>
+  <Input />
+</FormItem>
+
+<FormItem
+  name="confirm"
+  label="确认密码"
+  rules={[
+    { required: true },
+    {
+      validator: (v, data) => ({
+        valid: v === data.password,
+        message: '两次密码不一致'
+      })
+    }
+  ]}
+>
+  <Input type="password" />
+</FormItem>`,
+      render: (
+        <>
+          <Form
+            form={validateForm}
+            labelWidth={100}
+            onFinish={(v) => setValidateResult(JSON.stringify(v, null, 2))}
+            onFinishFailed={(errs) => setValidateResult('校验失败：' + JSON.stringify(errs))}
+          >
+            <FormItem
+              name="email"
+              label="邮箱"
+              rules={[
+                { required: true, message: '请输入邮箱' },
+                { pattern: /^[^@]+@[^@]+\.[^@]+$/, message: '邮箱格式不正确' },
+              ]}
+            >
+              <Input placeholder="请输入邮箱" />
+            </FormItem>
+            <FormItem name="password" label="密码" rules={[{ required: true, message: '请输入密码' }]}>
+              <Input type="password" placeholder="请输入密码" />
+            </FormItem>
+            <FormItem
+              name="confirm"
+              label="确认密码"
+              rules={[
+                { required: true, message: '请确认密码' },
+                {
+                  validator: (v, data) => ({
+                    valid: v === data.password,
+                    message: '两次密码不一致',
+                  }),
+                },
+              ]}
+            >
+              <Input type="password" placeholder="请再次输入密码" />
+            </FormItem>
+            <FormItem>
+              <Button type="primary" onClick={() => validateForm.submit()}>提交</Button>
+            </FormItem>
+          </Form>
+          {validateResult && (
+            <pre style={{ marginTop: 12, padding: 8, background: '#f5f5f5', borderRadius: 4, fontSize: 12 }}>
+              {validateResult}
+            </pre>
+          )}
+        </>
+      ),
+    },
+    {
+      title: '布局演示',
+      code: `<Form layout="vertical">...</Form>\n<Form layout="inline">...</Form>`,
+      render: (
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div>
+            <h4 style={{ marginBottom: 8 }}>垂直布局（vertical）</h4>
+            <Form layout="vertical" labelWidth={80}>
+              <FormItem name="a" label="字段 A">
+                <Input placeholder="请输入" />
+              </FormItem>
+              <FormItem name="b" label="字段 B">
+                <Input placeholder="请输入" />
+              </FormItem>
+            </Form>
+          </div>
+          <div>
+            <h4 style={{ marginBottom: 8 }}>行内布局（inline）</h4>
+            <Form layout="inline">
+              <FormItem name="kw" label="关键词">
+                <Input placeholder="搜索" />
+              </FormItem>
+              <FormItem name="status" label="状态">
+                <Select
+                  options={[
+                    { value: 'all', label: '全部' },
+                    { value: 'active', label: '启用' },
+                  ]}
+                />
+              </FormItem>
+              <FormItem>
+                <Button type="primary">查询</Button>
+              </FormItem>
+            </Form>
+          </div>
+        </div>
+      ),
+    },
+  ];
+
   return (
     <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <BasicFormDemo />
-      </div>
-
-      <div className="component-group">
-        <h3>注册表单（多种控件）</h3>
-        <RegisterFormDemo />
-      </div>
-
-      <div className="component-group">
-        <h3>自定义校验</h3>
-        <CustomValidateDemo />
-      </div>
-
-      <div className="component-group">
-        <h3>布局演示</h3>
-        <LayoutDemo />
-      </div>
-
-      <div className="component-group" style={{ marginTop: 32 }}>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
+      <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Form API</h3>
         <ApiTable dataSource={formApi} />
       </div>

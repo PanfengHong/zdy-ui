@@ -21,33 +21,12 @@ const DialogDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <DemoBlock
-          code={`
-const [visible, setVisible] = useState(false);
-
-<Button onClick={() => setVisible(true)}>
-  打开对话框
-</Button>
-
-<Dialog
-  title="对话框标题"
-  visible={visible}
-  onClose={() => setVisible(false)}
-  footer={
-    <>
-      <Button onClick={() => setVisible(false)}>取消</Button>
-      <Button type="primary" onClick={() => setVisible(false)}>确认</Button>
-    </>
-  }
->
-  对话框内容
-</Dialog>
-          `.trim()}
-        >
+  const demos = [
+    {
+      title: '基础用法',
+      code: `const [visible, setVisible] = useState(false);\n\n<Button onClick={() => setVisible(true)}>\n  打开对话框\n</Button>\n\n<Dialog\n  title="对话框标题"\n  visible={visible}\n  onClose={() => setVisible(false)}\n  footer={\n    <>\n      <Button onClick={() => setVisible(false)}>取消</Button>\n      <Button type="primary" onClick={() => setVisible(false)}>确认</Button>\n    </>\n  }\n>\n  对话框内容\n</Dialog>`,
+      render: (
+        <>
           <div style={{ display: 'flex', gap: '16px' }}>
             <Button onClick={() => setVisible1(true)}>
               打开对话框
@@ -66,21 +45,14 @@ const [visible, setVisible] = useState(false);
           >
             对话框内容
           </Dialog>
-        </DemoBlock>
-      </div>
-      <div className="component-group">
-        <h3>无标题对话框</h3>
-        <DemoBlock
-          code={`
-<Dialog
-  visible={visible}
-  onClose={() => setVisible(false)}
-  closable={false}
->
-  无标题对话框内容
-</Dialog>
-          `.trim()}
-        >
+        </>
+      ),
+    },
+    {
+      title: '无标题对话框',
+      code: `<Dialog\n  visible={visible}\n  onClose={() => setVisible(false)}\n  closable={false}\n>\n  无标题对话框内容\n</Dialog>`,
+      render: (
+        <>
           <div style={{ display: 'flex', gap: '16px' }}>
             <Button onClick={() => setVisible2(true)}>
               打开无标题对话框
@@ -93,8 +65,19 @@ const [visible, setVisible] = useState(false);
           >
             无标题对话框内容
           </Dialog>
-        </DemoBlock>
-      </div>
+        </>
+      ),
+    },
+  ];
+
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />

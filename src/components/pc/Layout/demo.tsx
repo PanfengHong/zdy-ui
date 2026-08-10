@@ -4,7 +4,6 @@ import ApiTable from '../../ApiTable/ApiTable';
 import Layout from './Layout';
 
 const LayoutDemo = () => {
-
   const layoutApiData = [
     { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
@@ -37,87 +36,61 @@ const LayoutDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础布局</h3>
-        <DemoBlock
-          code={`
-<Layout style={{ minHeight: '200px' }}>
-  <Layout.Header>Header</Layout.Header>
-  <Layout.Content>Content</Layout.Content>
-  <Layout.Footer>Footer</Layout.Footer>
-</Layout>
-          `.trim()}
-        >
-          <Layout style={{ minHeight: '200px' }}>
+  const demos = [
+    {
+      title: '基础布局',
+      code: `<Layout style={{ minHeight: '200px' }}>\n  <Layout.Header>Header</Layout.Header>\n  <Layout.Content>Content</Layout.Content>\n  <Layout.Footer>Footer</Layout.Footer>\n</Layout>`,
+      render: (
+        <Layout style={{ minHeight: '200px' }}>
+          <Layout.Header>Header</Layout.Header>
+          <Layout.Content>Content</Layout.Content>
+          <Layout.Footer>Footer</Layout.Footer>
+        </Layout>
+      ),
+    },
+    {
+      title: '侧边栏布局',
+      code: `<Layout style={{ minHeight: '240px' }}>\n  <Layout.Sider width={160}>Sider</Layout.Sider>\n  <Layout>\n    <Layout.Header>Header</Layout.Header>\n    <Layout.Content>Content</Layout.Content>\n    <Layout.Footer>Footer</Layout.Footer>\n  </Layout>\n</Layout>`,
+      render: (
+        <Layout style={{ minHeight: '240px' }}>
+          <Layout.Sider width={160}>Sider</Layout.Sider>
+          <Layout>
             <Layout.Header>Header</Layout.Header>
             <Layout.Content>Content</Layout.Content>
             <Layout.Footer>Footer</Layout.Footer>
           </Layout>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>侧边栏布局</h3>
-        <DemoBlock
-          code={`
-<Layout style={{ minHeight: '240px' }}>
-  <Layout.Sider width={160}>Sider</Layout.Sider>
-  <Layout>
-    <Layout.Header>Header</Layout.Header>
-    <Layout.Content>Content</Layout.Content>
-    <Layout.Footer>Footer</Layout.Footer>
-  </Layout>
-</Layout>
-          `.trim()}
-        >
-          <Layout style={{ minHeight: '240px' }}>
-            <Layout.Sider width={160}>Sider</Layout.Sider>
-            <Layout>
-              <Layout.Header>Header</Layout.Header>
-              <Layout.Content>Content</Layout.Content>
-              <Layout.Footer>Footer</Layout.Footer>
-            </Layout>
+        </Layout>
+      ),
+    },
+    {
+      title: '可折叠侧边栏',
+      code: `<Layout style={{ minHeight: '240px' }}>\n  <Layout.Sider\n    collapsible\n    defaultCollapsed={false}\n    width={160}\n  >\n    Sider\n  </Layout.Sider>\n  <Layout>\n    <Layout.Header>Header</Layout.Header>\n    <Layout.Content>Content</Layout.Content>\n  </Layout>\n</Layout>`,
+      render: (
+        <Layout style={{ minHeight: '240px' }}>
+          <Layout.Sider
+            collapsible
+            defaultCollapsed={false}
+            width={160}
+          >
+            Sider
+          </Layout.Sider>
+          <Layout>
+            <Layout.Header>Header</Layout.Header>
+            <Layout.Content>Content</Layout.Content>
           </Layout>
-        </DemoBlock>
-      </div>
+        </Layout>
+      ),
+    },
+  ];
 
-      <div className="component-group">
-        <h3>可折叠侧边栏</h3>
-        <DemoBlock
-          code={`
-<Layout style={{ minHeight: '240px' }}>
-  <Layout.Sider
-    collapsible
-    defaultCollapsed={false}
-    width={160}
-  >
-    Sider
-  </Layout.Sider>
-  <Layout>
-    <Layout.Header>Header</Layout.Header>
-    <Layout.Content>Content</Layout.Content>
-  </Layout>
-</Layout>
-          `.trim()}
-        >
-          <Layout style={{ minHeight: '240px' }}>
-            <Layout.Sider
-              collapsible
-              defaultCollapsed={false}
-              width={160}
-            >
-              Sider
-            </Layout.Sider>
-            <Layout>
-              <Layout.Header>Header</Layout.Header>
-              <Layout.Content>Content</Layout.Content>
-            </Layout>
-          </Layout>
-        </DemoBlock>
-      </div>
-
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Layout API</h3>
         <ApiTable dataSource={layoutApiData} />

@@ -28,53 +28,34 @@ const PaginationDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <DemoBlock
-          code={`<Pagination total={50} defaultCurrent={1} />`}
-        >
-          <Pagination total={50} defaultCurrent={1} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>受控用法</h3>
-        <div style={{ marginBottom: 12 }}>
-          <span>当前页：</span>
-          <strong style={{ color: '#1890ff' }}>{current1}</strong>
-        </div>
-        <DemoBlock
-          code={`const [current, setCurrent] = useState(3);
-
-<Pagination
-  current={current}
-  total={50}
-  onChange={(page) => setCurrent(page)}
-/>`}
-        >
+  const demos = [
+    {
+      title: '基础用法',
+      code: `<Pagination total={50} defaultCurrent={1} />`,
+      render: <Pagination total={50} defaultCurrent={1} />,
+    },
+    {
+      title: '受控用法',
+      code: `const [current, setCurrent] = useState(3);\n\n<Pagination\n  current={current}\n  total={50}\n  onChange={(page) => setCurrent(page)}\n/>`,
+      render: (
+        <>
+          <div style={{ marginBottom: 12 }}>
+            <span>当前页：</span>
+            <strong style={{ color: '#1890ff' }}>{current1}</strong>
+          </div>
           <Pagination
             current={current1}
             total={50}
             onChange={(page) => setCurrent1(page)}
           />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>显示数据总量</h3>
-        <DemoBlock
-          code={`<Pagination
-  total={85}
-  showTotal={(total) => \`共 \${total} 条\`}
-/>
-
-<Pagination
-  total={85}
-  showTotal={(total, range) => \`\${range[0]}-\${range[1]} 共 \${total} 条\`}
-/>`}
-        >
+        </>
+      ),
+    },
+    {
+      title: '显示数据总量',
+      code: `<Pagination\n  total={85}\n  showTotal={(total) => \`共 \${total} 条\`}\n/>\n\n<Pagination\n  total={85}\n  showTotal={(total, range) => \`\${range[0]}-\${range[1]} 共 \${total} 条\`}\n/>`,
+      render: (
+        <>
           <div style={{ marginBottom: 16 }}>
             <Pagination
               total={85}
@@ -85,25 +66,18 @@ const PaginationDemo = () => {
             total={85}
             showTotal={(total, range) => `${range[0]}-${range[1]} 共 ${total} 条`}
           />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>改变每页条数</h3>
-        <div style={{ marginBottom: 12 }}>
-          <span>当前页：</span>
-          <strong style={{ color: '#1890ff' }}>{current2}</strong>
-        </div>
-        <DemoBlock
-          code={`<Pagination
-  total={100}
-  showSizeChanger
-  showQuickJumper
-  current={current}
-  onChange={(page) => setCurrent(page)}
-  onShowSizeChange={(current, size) => console.log(current, size)}
-/>`}
-        >
+        </>
+      ),
+    },
+    {
+      title: '改变每页条数',
+      code: `<Pagination\n  total={100}\n  showSizeChanger\n  showQuickJumper\n  current={current}\n  onChange={(page) => setCurrent(page)}\n  onShowSizeChange={(current, size) => console.log(current, size)}\n/>`,
+      render: (
+        <>
+          <div style={{ marginBottom: 12 }}>
+            <span>当前页：</span>
+            <strong style={{ color: '#1890ff' }}>{current2}</strong>
+          </div>
           <Pagination
             total={100}
             showSizeChanger
@@ -112,77 +86,72 @@ const PaginationDemo = () => {
             onChange={(page) => setCurrent2(page)}
             onShowSizeChange={(c, s) => console.log('pageSize changed:', c, s)}
           />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>大量数据（省略号）</h3>
-        <div style={{ marginBottom: 12 }}>
-          <span>当前页：</span>
-          <strong style={{ color: '#1890ff' }}>{current3}</strong>
-        </div>
-        <DemoBlock
-          code={`<Pagination
-  total={500}
-  current={5}
-  showQuickJumper
-  onChange={(page) => setCurrent(page)}
-/>`}
-        >
+        </>
+      ),
+    },
+    {
+      title: '大量数据（省略号）',
+      code: `<Pagination\n  total={500}\n  current={5}\n  showQuickJumper\n  onChange={(page) => setCurrent(page)}\n/>`,
+      render: (
+        <>
+          <div style={{ marginBottom: 12 }}>
+            <span>当前页：</span>
+            <strong style={{ color: '#1890ff' }}>{current3}</strong>
+          </div>
           <Pagination
             total={500}
             current={current3}
             showQuickJumper
             onChange={(page) => setCurrent3(page)}
           />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>小尺寸</h3>
-        <DemoBlock
-          code={`<Pagination total={50} size="small" defaultCurrent={1} />
-<Pagination total={100} size="small" showSizeChanger showQuickJumper defaultCurrent={3} />`}
-        >
+        </>
+      ),
+    },
+    {
+      title: '小尺寸',
+      code: `<Pagination total={50} size="small" defaultCurrent={1} />\n<Pagination total={100} size="small" showSizeChanger showQuickJumper defaultCurrent={3} />`,
+      render: (
+        <>
           <div style={{ marginBottom: 16 }}>
             <Pagination total={50} size="small" defaultCurrent={1} />
           </div>
           <Pagination total={100} size="small" showSizeChanger showQuickJumper defaultCurrent={3} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>简洁模式</h3>
-        <div style={{ marginBottom: 12 }}>
-          <span>当前页：</span>
-          <strong style={{ color: '#1890ff' }}>{current4}</strong>
-        </div>
-        <DemoBlock
-          code={`<Pagination
-  simple
-  total={50}
-  current={current}
-  onChange={(page) => setCurrent(page)}
-/>`}
-        >
+        </>
+      ),
+    },
+    {
+      title: '简洁模式',
+      code: `<Pagination\n  simple\n  total={50}\n  current={current}\n  onChange={(page) => setCurrent(page)}\n/>`,
+      render: (
+        <>
+          <div style={{ marginBottom: 12 }}>
+            <span>当前页：</span>
+            <strong style={{ color: '#1890ff' }}>{current4}</strong>
+          </div>
           <Pagination
             simple
             total={50}
             current={current4}
             onChange={(page) => setCurrent4(page)}
           />
-        </DemoBlock>
-      </div>
+        </>
+      ),
+    },
+    {
+      title: '禁用状态',
+      code: `<Pagination total={50} disabled defaultCurrent={3} />`,
+      render: <Pagination total={50} disabled defaultCurrent={3} />,
+    },
+  ];
 
-      <div className="component-group">
-        <h3>禁用状态</h3>
-        <DemoBlock
-          code={`<Pagination total={50} disabled defaultCurrent={3} />`}
-        >
-          <Pagination total={50} disabled defaultCurrent={3} />
-        </DemoBlock>
-      </div>
-
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />

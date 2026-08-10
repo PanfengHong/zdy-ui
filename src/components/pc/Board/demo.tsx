@@ -80,23 +80,17 @@ const BoardDemo = () => {
     { prop: 'wip', desc: '在制品数量上限（超出会高亮）', type: 'number', default: '-' },
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
+  const demos = [
+    {
+      title: '基础用法',
+      description: (
         <p style={{ color: '#666', margin: '8px 0' }}>
           支持拖拽卡片在列间移动、点击列标题编辑、新增/删除列与卡片。
         </p>
-        <DemoBlock
-          code={`
-const [columns, setColumns] = useState(defaultColumns);
-<Board
-  columns={columns}
-  onColumnsChange={setColumns}
-  onCardMove={(id, from, to, idx) => console.log(id, from, to, idx)}
-/>
-          `.trim()}
-        >
+      ),
+      code: `const [columns, setColumns] = useState(defaultColumns);\n<Board\n  columns={columns}\n  onColumnsChange={setColumns}\n  onCardMove={(id, from, to, idx) => console.log(id, from, to, idx)}\n/>`,
+      render: (
+        <>
           <div style={{ maxHeight: 460, overflow: 'hidden' }}>
             <Board
               columns={columns}
@@ -112,169 +106,134 @@ const [columns, setColumns] = useState(defaultColumns);
               {log.map((t, i) => <div key={i}>{t}</div>)}
             </div>
           )}
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>非受控用法</h3>
-        <DemoBlock
-          code={`
-<Board
-  defaultColumns={[
-    { id: 'todo', title: '待办', cards: [{ id: '1', title: '任务一' }] },
-    { id: 'done', title: '已完成', cards: [] }
-  ]}
-/>
-          `.trim()}
-        >
-          <div style={{ maxHeight: 360, overflow: 'hidden' }}>
-            <Board
-              defaultColumns={[
-                { id: 'todo', title: '待办', color: '#1890ff', cards: [{ id: '1', title: '任务一' }, { id: '2', title: '任务二' }] },
-                { id: 'done', title: '已完成', color: '#52c41a', cards: [] },
-              ]}
-            />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用拖拽</h3>
-        <DemoBlock
-          code={`
-<Board draggable={false} defaultColumns={columns} />
-          `.trim()}
-        >
-          <div style={{ maxHeight: 360, overflow: 'hidden' }}>
-            <Board
-              draggable={false}
-              showAddColumn={false}
-              showAddCard={false}
-              allowRemoveColumn={false}
-              allowRemoveCard={false}
-              defaultColumns={[
-                {
-                  id: 'todo', title: '待办', color: '#1890ff',
-                  cards: [{ id: '1', title: '只读卡片 A' }, { id: '2', title: '只读卡片 B' }],
-                },
-                {
-                  id: 'done', title: '已完成', color: '#52c41a',
-                  cards: [{ id: '3', title: '只读卡片 C' }],
-                },
-              ]}
-            />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>WIP 限制</h3>
+        </>
+      ),
+    },
+    {
+      title: '非受控用法',
+      code: `<Board\n  defaultColumns={[\n    { id: 'todo', title: '待办', cards: [{ id: '1', title: '任务一' }] },\n    { id: 'done', title: '已完成', cards: [] }\n  ]}\n/>`,
+      render: (
+        <div style={{ maxHeight: 360, overflow: 'hidden' }}>
+          <Board
+            defaultColumns={[
+              { id: 'todo', title: '待办', color: '#1890ff', cards: [{ id: '1', title: '任务一' }, { id: '2', title: '任务二' }] },
+              { id: 'done', title: '已完成', color: '#52c41a', cards: [] },
+            ]}
+          />
+        </div>
+      ),
+    },
+    {
+      title: '禁用拖拽',
+      code: `<Board draggable={false} defaultColumns={columns} />`,
+      render: (
+        <div style={{ maxHeight: 360, overflow: 'hidden' }}>
+          <Board
+            draggable={false}
+            showAddColumn={false}
+            showAddCard={false}
+            allowRemoveColumn={false}
+            allowRemoveCard={false}
+            defaultColumns={[
+              {
+                id: 'todo', title: '待办', color: '#1890ff',
+                cards: [{ id: '1', title: '只读卡片 A' }, { id: '2', title: '只读卡片 B' }],
+              },
+              {
+                id: 'done', title: '已完成', color: '#52c41a',
+                cards: [{ id: '3', title: '只读卡片 C' }],
+              },
+            ]}
+          />
+        </div>
+      ),
+    },
+    {
+      title: 'WIP 限制',
+      description: (
         <p style={{ color: '#666', margin: '8px 0' }}>
           为列设置 <code>wip</code> 可限制在制品数量，超出时计数会高亮显示。
         </p>
-        <DemoBlock
-          code={`
-<Board
-  defaultColumns={[
-    { id: 'doing', title: '进行中（WIP=2）', wip: 2, cards: [
-      { id: '1', title: '任务 1' }, { id: '2', title: '任务 2' }, { id: '3', title: '任务 3' }
-    ]},
-    { id: 'done', title: '已完成', cards: [] }
-  ]}
-/>
-          `.trim()}
-        >
-          <div style={{ maxHeight: 360, overflow: 'hidden' }}>
-            <Board
-              defaultColumns={[
-                {
-                  id: 'doing', title: '进行中（WIP=2）', color: '#fa541c', wip: 2,
-                  cards: [
-                    { id: '1', title: '任务 1' },
-                    { id: '2', title: '任务 2' },
-                    { id: '3', title: '任务 3（超出限制）' },
-                  ],
-                },
-                { id: 'done', title: '已完成', color: '#52c41a', cards: [] },
-              ]}
-            />
-          </div>
-        </DemoBlock>
-      </div>
+      ),
+      code: `<Board\n  defaultColumns={[\n    { id: 'doing', title: '进行中（WIP=2）', wip: 2, cards: [\n      { id: '1', title: '任务 1' }, { id: '2', title: '任务 2' }, { id: '3', title: '任务 3' }\n    ]},\n    { id: 'done', title: '已完成', cards: [] }\n  ]}\n/>`,
+      render: (
+        <div style={{ maxHeight: 360, overflow: 'hidden' }}>
+          <Board
+            defaultColumns={[
+              {
+                id: 'doing', title: '进行中（WIP=2）', color: '#fa541c', wip: 2,
+                cards: [
+                  { id: '1', title: '任务 1' },
+                  { id: '2', title: '任务 2' },
+                  { id: '3', title: '任务 3（超出限制）' },
+                ],
+              },
+              { id: 'done', title: '已完成', color: '#52c41a', cards: [] },
+            ]}
+          />
+        </div>
+      ),
+    },
+    {
+      title: '自定义卡片渲染',
+      code: `<Board\n  defaultColumns={columns}\n  renderCard={(card) => (\n    <div style={{ padding: 8, background: 'linear-gradient(135deg, #722ed1, #eb2f96)', color: '#fff', borderRadius: 4 }}>\n      <strong>{card.title}</strong>\n    </div>\n  )}\n/>`,
+      render: (
+        <div style={{ maxHeight: 360, overflow: 'hidden' }}>
+          <Board
+            showAddCard={false}
+            defaultColumns={[
+              {
+                id: 'c1', title: '自定义卡片', color: '#722ed1',
+                cards: [
+                  { id: '1', title: '渐变卡片 1' },
+                  { id: '2', title: '渐变卡片 2' },
+                  { id: '3', title: '渐变卡片 3' },
+                ],
+              },
+            ]}
+            renderCard={(card) => (
+              <div
+                style={{
+                  padding: 10,
+                  background: 'linear-gradient(135deg, #722ed1, #eb2f96)',
+                  color: '#fff',
+                  borderRadius: 4,
+                  fontSize: 13,
+                  cursor: 'grab',
+                }}
+              >
+                <strong>{card.title}</strong>
+                <div style={{ fontSize: 11, opacity: 0.8, marginTop: 2 }}>自定义渲染示例</div>
+              </div>
+            )}
+          />
+        </div>
+      ),
+    },
+    {
+      title: '点击卡片回调',
+      code: `const [selected, setSelected] = useState(null);\n<Board\n  defaultColumns={columns}\n  allowRemoveCard={false}\n  onCardClick={(card) => setSelected(card)}\n/>`,
+      render: <ClickBoardDemo />,
+    },
+  ];
 
-      <div className="component-group">
-        <h3>自定义卡片渲染</h3>
-        <DemoBlock
-          code={`
-<Board
-  defaultColumns={columns}
-  renderCard={(card) => (
-    <div style={{ padding: 8, background: 'linear-gradient(135deg, #722ed1, #eb2f96)', color: '#fff', borderRadius: 4 }}>
-      <strong>{card.title}</strong>
-    </div>
-  )}
-/>
-          `.trim()}
-        >
-          <div style={{ maxHeight: 360, overflow: 'hidden' }}>
-            <Board
-              showAddCard={false}
-              defaultColumns={[
-                {
-                  id: 'c1', title: '自定义卡片', color: '#722ed1',
-                  cards: [
-                    { id: '1', title: '渐变卡片 1' },
-                    { id: '2', title: '渐变卡片 2' },
-                    { id: '3', title: '渐变卡片 3' },
-                  ],
-                },
-              ]}
-              renderCard={(card) => (
-                <div
-                  style={{
-                    padding: 10,
-                    background: 'linear-gradient(135deg, #722ed1, #eb2f96)',
-                    color: '#fff',
-                    borderRadius: 4,
-                    fontSize: 13,
-                    cursor: 'grab',
-                  }}
-                >
-                  <strong>{card.title}</strong>
-                  <div style={{ fontSize: 11, opacity: 0.8, marginTop: 2 }}>自定义渲染示例</div>
-                </div>
-              )}
-            />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>点击卡片回调</h3>
-        <DemoBlock
-          code={`
-const [selected, setSelected] = useState(null);
-<Board
-  defaultColumns={columns}
-  allowRemoveCard={false}
-  onCardClick={(card) => setSelected(card)}
-/>
-          `.trim()}
-        >
-          <ClickBoardDemo />
-        </DemoBlock>
-      </div>
-
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          {'description' in demo && demo.description}
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API - Board</h3>
         <ApiTable dataSource={apiData} />
       </div>
-
       <div className="component-group">
         <h3>API - BoardColumnData</h3>
         <ApiTable dataSource={columnApiData} />
       </div>
-
       <div className="component-group">
         <h3>API - BoardCardData</h3>
         <ApiTable dataSource={cardApiData} />

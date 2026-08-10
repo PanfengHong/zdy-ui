@@ -28,106 +28,82 @@ const CalendarDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
+  const demos = [
+    {
+      title: '基础用法',
+      description: (
         <div style={{ marginBottom: 12 }}>
           <span>选中日期：</span>
           <strong style={{ color: '#1890ff' }}>{formatDate(selectedDate)}</strong>
         </div>
-        <DemoBlock
-          code={`<Calendar
-  onSelect={(date) => console.log(date)}
-/>`}
-        >
-          <Calendar onSelect={(date) => setSelectedDate(date)} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>卡片模式</h3>
-        <DemoBlock
-          code={`<Calendar fullscreen={false} />`}
-        >
-          <Calendar fullscreen={false} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>受控用法</h3>
+      ),
+      code: `<Calendar\n  onSelect={(date) => console.log(date)}\n/>`,
+      render: <Calendar onSelect={(date) => setSelectedDate(date)} />,
+    },
+    {
+      title: '卡片模式',
+      code: `<Calendar fullscreen={false} />`,
+      render: <Calendar fullscreen={false} />,
+    },
+    {
+      title: '受控用法',
+      description: (
         <div style={{ marginBottom: 12 }}>
           <span>当前日期：</span>
           <strong style={{ color: '#1890ff' }}>{formatDate(controlledDate)}</strong>
         </div>
-        <DemoBlock
-          code={`const [date, setDate] = useState(new Date(2025, 0, 15));
+      ),
+      code: `const [date, setDate] = useState(new Date(2025, 0, 15));\n\n<Calendar\n  value={date}\n  onChange={(d) => setDate(d)}\n/>`,
+      render: (
+        <Calendar
+          value={controlledDate}
+          onChange={(d) => setControlledDate(d)}
+        />
+      ),
+    },
+    {
+      title: '禁用日期',
+      code: `<Calendar\n  disabledDate={(date) => {\n    const day = date.getDay();\n    return day === 0 || day === 6;\n  }}\n/>`,
+      render: (
+        <Calendar
+          disabledDate={(date) => {
+            const day = date.getDay();
+            return day === 0 || day === 6;
+          }}
+        />
+      ),
+    },
+    {
+      title: '自定义日期单元格',
+      code: `<Calendar\n  dateCellRender={(date) => {\n    const day = date.getDate();\n    if (day === 1) return <span style={{ color: '#1890ff' }}>💰</span>;\n    if (day === 15) return <span style={{ color: '#f5222d' }}>📌</span>;\n    if (day === 20) return <span style={{ color: '#52c41a' }}>✅</span>;\n    return null;\n  }}\n/>`,
+      render: (
+        <Calendar
+          dateCellRender={(date) => {
+            const day = date.getDate();
+            if (day === 1) return <span style={{ color: '#1890ff' }}>💰 工资日</span>;
+            if (day === 15) return <span style={{ color: '#f5222d' }}>📌 会议</span>;
+            if (day === 20) return <span style={{ color: '#52c41a' }}>✅ 发布</span>;
+            return null;
+          }}
+        />
+      ),
+    },
+    {
+      title: '年视图',
+      code: `<Calendar mode="year" />`,
+      render: <Calendar mode="year" />,
+    },
+  ];
 
-<Calendar
-  value={date}
-  onChange={(d) => setDate(d)}
-/>`}
-        >
-          <Calendar
-            value={controlledDate}
-            onChange={(d) => setControlledDate(d)}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用日期</h3>
-        <DemoBlock
-          code={`<Calendar
-  disabledDate={(date) => {
-    const day = date.getDay();
-    return day === 0 || day === 6;
-  }}
-/>`}
-        >
-          <Calendar
-            disabledDate={(date) => {
-              const day = date.getDay();
-              return day === 0 || day === 6;
-            }}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义日期单元格</h3>
-        <DemoBlock
-          code={`<Calendar
-  dateCellRender={(date) => {
-    const day = date.getDate();
-    if (day === 1) return <span style={{ color: '#1890ff' }}>💰</span>;
-    if (day === 15) return <span style={{ color: '#f5222d' }}>📌</span>;
-    if (day === 20) return <span style={{ color: '#52c41a' }}>✅</span>;
-    return null;
-  }}
-/>`}
-        >
-          <Calendar
-            dateCellRender={(date) => {
-              const day = date.getDate();
-              if (day === 1) return <span style={{ color: '#1890ff' }}>💰 工资日</span>;
-              if (day === 15) return <span style={{ color: '#f5222d' }}>📌 会议</span>;
-              if (day === 20) return <span style={{ color: '#52c41a' }}>✅ 发布</span>;
-              return null;
-            }}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>年视图</h3>
-        <DemoBlock
-          code={`<Calendar mode="year" />`}
-        >
-          <Calendar mode="year" />
-        </DemoBlock>
-      </div>
-
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          {'description' in demo && demo.description}
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />

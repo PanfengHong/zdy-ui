@@ -190,29 +190,26 @@ const TreeDemo = () => {
     { prop: 'icon', desc: '自定义图标', type: 'ReactNode', default: '-' },
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <DemoBlock code={`<Tree treeData={treeData} defaultExpandAll />`}>
-          <Tree treeData={treeData} defaultExpandAll />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>默认展开指定节点</h3>
-        <DemoBlock code={`<Tree treeData={treeData} defaultExpandedKeys={['1', '1-1']} />`}>
-          <Tree treeData={treeData} defaultExpandedKeys={['1', '1-1']} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>带选择（受控）</h3>
-        <div style={{ marginBottom: 8 }}>
-          <span>当前选中：</span>
-          <strong style={{ color: '#1890ff' }}>{selectedKeys.join(', ') || '无'}</strong>
-        </div>
-        <DemoBlock code={`<Tree\n  treeData={treeData}\n  selectedKeys={selectedKeys}\n  onSelect={onSelect}\n/>`}>
+  const demos = [
+    {
+      title: '基础用法',
+      code: `<Tree treeData={treeData} defaultExpandAll />`,
+      render: <Tree treeData={treeData} defaultExpandAll />,
+    },
+    {
+      title: '默认展开指定节点',
+      code: `<Tree treeData={treeData} defaultExpandedKeys={['1', '1-1']} />`,
+      render: <Tree treeData={treeData} defaultExpandedKeys={['1', '1-1']} />,
+    },
+    {
+      title: '带选择（受控）',
+      code: `<Tree\n  treeData={treeData}\n  selectedKeys={selectedKeys}\n  onSelect={onSelect}\n/>`,
+      render: (
+        <>
+          <div style={{ marginBottom: 8 }}>
+            <span>当前选中：</span>
+            <strong style={{ color: '#1890ff' }}>{selectedKeys.join(', ') || '无'}</strong>
+          </div>
           <Tree
             treeData={treeData}
             defaultExpandedKeys={['1']}
@@ -222,23 +219,23 @@ const TreeDemo = () => {
               setInfo(`选择节点：${info.node.title}（${info.selected ? '选中' : '取消'}）`);
             }}
           />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>多选</h3>
-        <DemoBlock code={`<Tree treeData={treeData} multiple defaultExpandAll />`}>
-          <Tree treeData={treeData} multiple defaultExpandAll />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>带勾选（级联）</h3>
-        <div style={{ marginBottom: 8 }}>
-          <span>当前勾选：</span>
-          <strong style={{ color: '#1890ff' }}>{checkedKeys.join(', ') || '无'}</strong>
-        </div>
-        <DemoBlock code={`<Tree treeData={treeData} checkable defaultExpandAll />`}>
+        </>
+      ),
+    },
+    {
+      title: '多选',
+      code: `<Tree treeData={treeData} multiple defaultExpandAll />`,
+      render: <Tree treeData={treeData} multiple defaultExpandAll />,
+    },
+    {
+      title: '带勾选（级联）',
+      code: `<Tree treeData={treeData} checkable defaultExpandAll />`,
+      render: (
+        <>
+          <div style={{ marginBottom: 8 }}>
+            <span>当前勾选：</span>
+            <strong style={{ color: '#1890ff' }}>{checkedKeys.join(', ') || '无'}</strong>
+          </div>
           <Tree
             treeData={treeData}
             checkable
@@ -249,103 +246,97 @@ const TreeDemo = () => {
               setInfo(`勾选：${(keys as (string | number)[]).join(', ')}`);
             }}
           />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>严格模式（父子不关联）</h3>
-        <DemoBlock code={`<Tree treeData={treeData} checkable checkStrictly defaultExpandAll />`}>
-          <Tree treeData={treeData} checkable checkStrictly defaultExpandAll />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用节点</h3>
-        <DemoBlock code={`<Tree treeData={treeDataDisabled} defaultExpandAll />`}>
-          <Tree treeData={treeDataDisabled} defaultExpandAll />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用单个 checkbox</h3>
-        <DemoBlock code={`<Tree treeData={treeDataDisableCheckbox} checkable defaultExpandAll />`}>
-          <Tree treeData={treeDataDisableCheckbox} checkable defaultExpandAll />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>整体禁用</h3>
-        <DemoBlock code={`<Tree treeData={treeData} disabled defaultExpandAll />`}>
-          <Tree treeData={treeData} disabled defaultExpandAll />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义图标</h3>
-        <DemoBlock code={`<Tree treeData={treeDataWithIcon} showIcon defaultExpandAll />`}>
-          <Tree treeData={treeDataWithIcon} showIcon defaultExpandAll />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>显示连接线</h3>
-        <DemoBlock code={`<Tree treeData={treeData} showLine defaultExpandAll />`}>
-          <Tree treeData={treeData} showLine defaultExpandAll />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义展开图标</h3>
-        <DemoBlock code={`<Tree treeData={treeData} switcherIcon={<span>▶</span>} defaultExpandAll />`}>
-          <Tree treeData={treeData} switcherIcon={<span style={{ fontSize: 10 }}>▶</span>} defaultExpandAll />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义标题渲染</h3>
-        <DemoBlock code={`<Tree treeData={treeData} defaultExpandAll titleRender={(node) => <span>📎 {node.title}</span>} />`}>
-          <Tree
-            treeData={treeData}
-            defaultExpandAll
-            titleRender={(node) => (
-              <span>
-                <span style={{ marginRight: 4 }}>📎</span>
-                {node.title}
-              </span>
-            )}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>节点占满整行</h3>
-        <DemoBlock code={`<Tree treeData={treeData} blockNode defaultExpandAll />`}>
-          <Tree treeData={treeData} blockNode defaultExpandAll />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>可拖拽（支持间隙和内部放置）</h3>
-        <div style={{ marginBottom: 8, color: '#666' }}>
-          提示：拖动节点到目标节点的上/下边缘可插入间隙，拖到中间可放入内部
-        </div>
-        <DemoBlock code={`<Tree treeData={treeData} draggable onDrop={handleDrop} />`}>
+        </>
+      ),
+    },
+    {
+      title: '严格模式（父子不关联）',
+      code: `<Tree treeData={treeData} checkable checkStrictly defaultExpandAll />`,
+      render: <Tree treeData={treeData} checkable checkStrictly defaultExpandAll />,
+    },
+    {
+      title: '禁用节点',
+      code: `<Tree treeData={treeDataDisabled} defaultExpandAll />`,
+      render: <Tree treeData={treeDataDisabled} defaultExpandAll />,
+    },
+    {
+      title: '禁用单个 checkbox',
+      code: `<Tree treeData={treeDataDisableCheckbox} checkable defaultExpandAll />`,
+      render: <Tree treeData={treeDataDisableCheckbox} checkable defaultExpandAll />,
+    },
+    {
+      title: '整体禁用',
+      code: `<Tree treeData={treeData} disabled defaultExpandAll />`,
+      render: <Tree treeData={treeData} disabled defaultExpandAll />,
+    },
+    {
+      title: '自定义图标',
+      code: `<Tree treeData={treeDataWithIcon} showIcon defaultExpandAll />`,
+      render: <Tree treeData={treeDataWithIcon} showIcon defaultExpandAll />,
+    },
+    {
+      title: '显示连接线',
+      code: `<Tree treeData={treeData} showLine defaultExpandAll />`,
+      render: <Tree treeData={treeData} showLine defaultExpandAll />,
+    },
+    {
+      title: '自定义展开图标',
+      code: `<Tree treeData={treeData} switcherIcon={<span>▶</span>} defaultExpandAll />`,
+      render: <Tree treeData={treeData} switcherIcon={<span style={{ fontSize: 10 }}>▶</span>} defaultExpandAll />,
+    },
+    {
+      title: '自定义标题渲染',
+      code: `<Tree treeData={treeData} defaultExpandAll titleRender={(node) => <span>📎 {node.title}</span>} />`,
+      render: (
+        <Tree
+          treeData={treeData}
+          defaultExpandAll
+          titleRender={(node) => (
+            <span>
+              <span style={{ marginRight: 4 }}>📎</span>
+              {node.title}
+            </span>
+          )}
+        />
+      ),
+    },
+    {
+      title: '节点占满整行',
+      code: `<Tree treeData={treeData} blockNode defaultExpandAll />`,
+      render: <Tree treeData={treeData} blockNode defaultExpandAll />,
+    },
+    {
+      title: '可拖拽（支持间隙和内部放置）',
+      code: `<Tree treeData={treeData} draggable onDrop={handleDrop} />`,
+      render: (
+        <>
+          <div style={{ marginBottom: 8, color: '#666' }}>
+            提示：拖动节点到目标节点的上/下边缘可插入间隙，拖到中间可放入内部
+          </div>
           <Tree treeData={dragData} draggable defaultExpandAll onDrop={handleDrop} />
-        </DemoBlock>
-      </div>
+        </>
+      ),
+    },
+  ];
 
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group">
         <h3>事件信息</h3>
         <div style={{ padding: 12, background: '#f5f5f5', borderRadius: 4, minHeight: 40 }}>
           {info}
         </div>
       </div>
-
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Tree API</h3>
         <ApiTable dataSource={apiData} />
       </div>
-
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>TreeNodeData</h3>
         <ApiTable dataSource={nodeApiData} />

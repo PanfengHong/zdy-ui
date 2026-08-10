@@ -59,6 +59,34 @@ const stepApiData = [
 ];
 
 const IntroDemo = () => {
+  const demos = [
+    {
+      title: '非受控用法',
+      code: `<Intro steps={steps} defaultOpen />`,
+      render: <NonControlledDemo />,
+    },
+    {
+      title: '自定义按钮文本',
+      code: `const steps = [\n  { target, title, content, nextBtnText: '前进', prevBtnText: '后退', doneBtnText: '结束' }\n];\n<Intro steps={steps} open={open} onOpenChange={setOpen} />`,
+      render: <CustomTextDemo />,
+    },
+    {
+      title: '不同位置',
+      code: `const steps = [\n  { target, placement: 'right' },\n  { target, placement: 'top' },\n  { target, placement: 'left' },\n];\n<Intro steps={steps} open={open} onOpenChange={setOpen} />`,
+      render: <PlacementDemo />,
+    },
+    {
+      title: '事件回调',
+      code: `<Intro\n  steps={steps}\n  open={open}\n  onOpenChange={setOpen}\n  onNext={(c) => console.log('next', c)}\n  onPrev={(c) => console.log('prev', c)}\n  onDone={() => console.log('done')}\n  onSkip={() => console.log('skip')}\n/>`,
+      render: <EventDemo />,
+    },
+    {
+      title: '无遮罩 & 自定义高亮色',
+      code: `<Intro steps={steps} mask={false} highlightColor="#722ed1" />`,
+      render: <NoMaskDemo />,
+    },
+  ];
+
   return (
     <>
       <div className="component-group">
@@ -67,96 +95,18 @@ const IntroDemo = () => {
           通过 ref 或选择器指定目标元素，点击按钮启动引导。
         </p>
         <DemoBlock
-          code={`
-const [open, setOpen] = useState(false);
-const btn1 = useRef(null);
-const btn2 = useRef(null);
-const btn3 = useRef(null);
-
-const steps = [
-  { target: () => btn1.current, title: '第一步', content: '...', placement: 'bottom' },
-  { target: () => btn2.current, title: '第二步', content: '...', placement: 'bottom' },
-  { target: () => btn3.current, title: '最后一步', content: '...', placement: 'top' },
-];
-
-<Intro steps={steps} open={open} onOpenChange={setOpen} />
-<button onClick={() => setOpen(true)}>开始引导</button>
-          `.trim()}
+          code={`const [open, setOpen] = useState(false);\nconst btn1 = useRef(null);\nconst btn2 = useRef(null);\nconst btn3 = useRef(null);\n\nconst steps = [\n  { target: () => btn1.current, title: '第一步', content: '...', placement: 'bottom' },\n  { target: () => btn2.current, title: '第二步', content: '...', placement: 'bottom' },\n  { target: () => btn3.current, title: '最后一步', content: '...', placement: 'top' },\n];\n\n<Intro steps={steps} open={open} onOpenChange={setOpen} />\n<button onClick={() => setOpen(true)}>开始引导</button>`}
         >
           <BasicDemo />
         </DemoBlock>
       </div>
 
-      <div className="component-group">
-        <h3>非受控用法</h3>
-        <DemoBlock
-          code={`
-<Intro steps={steps} defaultOpen />
-          `.trim()}
-        >
-          <NonControlledDemo />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义按钮文本</h3>
-        <DemoBlock
-          code={`
-const steps = [
-  { target, title, content, nextBtnText: '前进', prevBtnText: '后退', doneBtnText: '结束' }
-];
-<Intro steps={steps} open={open} onOpenChange={setOpen} />
-          `.trim()}
-        >
-          <CustomTextDemo />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>不同位置</h3>
-        <DemoBlock
-          code={`
-const steps = [
-  { target, placement: 'right' },
-  { target, placement: 'top' },
-  { target, placement: 'left' },
-];
-<Intro steps={steps} open={open} onOpenChange={setOpen} />
-          `.trim()}
-        >
-          <PlacementDemo />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>事件回调</h3>
-        <DemoBlock
-          code={`
-<Intro
-  steps={steps}
-  open={open}
-  onOpenChange={setOpen}
-  onNext={(c) => console.log('next', c)}
-  onPrev={(c) => console.log('prev', c)}
-  onDone={() => console.log('done')}
-  onSkip={() => console.log('skip')}
-/>
-          `.trim()}
-        >
-          <EventDemo />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>无遮罩 & 自定义高亮色</h3>
-        <DemoBlock
-          code={`
-<Intro steps={steps} mask={false} highlightColor="#722ed1" />
-          `.trim()}
-        >
-          <NoMaskDemo />
-        </DemoBlock>
-      </div>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
 
       <div className="component-group">
         <h3>键盘控制</h3>
@@ -164,9 +114,7 @@ const steps = [
           引导打开时：按 <kbd>→</kbd> 下一步，<kbd>←</kbd> 上一步，<kbd>Esc</kbd> 关闭。
         </p>
         <DemoBlock
-          code={`
-<Intro steps={steps} allowKeyboard open={open} onOpenChange={setOpen} />
-          `.trim()}
+          code={`<Intro steps={steps} allowKeyboard open={open} onOpenChange={setOpen} />`}
         >
           <KeyboardDemo />
         </DemoBlock>

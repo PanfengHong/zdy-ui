@@ -39,95 +39,109 @@ const MenuDemo = () => {
     { prop: 'children', desc: '子菜单内容', type: 'ReactNode', default: '-' }
   ];
 
+  const demos = [
+    {
+      title: '纵向菜单（vertical）',
+      code: `<Menu mode="vertical" defaultSelectedKeys={['1']}>\n  <Menu.Item itemKey="1" icon={<HomeIcon />}>首页</Menu.Item>\n  <Menu.Item itemKey="2" icon={<UserIcon />}>个人中心</Menu.Item>\n  <Menu.Item itemKey="3" icon={<SettingIcon />}>设置</Menu.Item>\n</Menu>`,
+      render: (
+        <Menu mode="vertical" defaultSelectedKeys={['1']} style={{ width: 200 }}>
+          <Menu.Item itemKey="1" icon={<span>🏠</span>}>首页</Menu.Item>
+          <Menu.Item itemKey="2" icon={<span>👤</span>}>个人中心</Menu.Item>
+          <Menu.Item itemKey="3" icon={<span>⚙️</span>}>设置</Menu.Item>
+        </Menu>
+      ),
+    },
+    {
+      title: '横向菜单（horizontal）',
+      code: `<Menu mode="horizontal" defaultSelectedKeys={['mail']}>\n  <Menu.Item itemKey="mail">邮箱</Menu.Item>\n  <Menu.Item itemKey="app">应用</Menu.Item>\n  <Menu.SubMenu itemKey="sub1" title="更多">\n    <Menu.Item itemKey="sub1-1">子项1</Menu.Item>\n    <Menu.Item itemKey="sub1-2">子项2</Menu.Item>\n  </Menu.SubMenu>\n</Menu>`,
+      render: (
+        <Menu mode="horizontal" defaultSelectedKeys={['mail']}>
+          <Menu.Item itemKey="mail">邮箱</Menu.Item>
+          <Menu.Item itemKey="app">应用</Menu.Item>
+          <Menu.SubMenu itemKey="sub1" title="更多">
+            <Menu.Item itemKey="sub1-1">子项1</Menu.Item>
+            <Menu.Item itemKey="sub1-2">子项2</Menu.Item>
+          </Menu.SubMenu>
+        </Menu>
+      ),
+    },
+    {
+      title: '内联折叠菜单（inline）',
+      code: `<Menu\n  mode="inline"\n  defaultSelectedKeys={['1']}\n  defaultOpenKeys={['sub1']}\n>\n  <Menu.Item itemKey="1" icon={<HomeIcon />}>首页</Menu.Item>\n  <Menu.SubMenu itemKey="sub1" icon={<BoxIcon />} title="商品管理">\n    <Menu.Item itemKey="1-1">商品列表</Menu.Item>\n    <Menu.Item itemKey="1-2">商品分类</Menu.Item>\n    <Menu.Item itemKey="1-3">商品规格</Menu.Item>\n  </Menu.SubMenu>\n  <Menu.SubMenu itemKey="sub2" icon={<OrderIcon />} title="订单管理">\n    <Menu.Item itemKey="2-1">订单列表</Menu.Item>\n    <Menu.Item itemKey="2-2">退款管理</Menu.Item>\n  </Menu.SubMenu>\n</Menu>`,
+      render: (
+        <Menu
+          mode="inline"
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['sub1']}
+          style={{ width: 220 }}
+        >
+          <Menu.Item itemKey="1" icon={<span>🏠</span>}>首页</Menu.Item>
+          <Menu.SubMenu itemKey="sub1" icon={<span>📦</span>} title="商品管理">
+            <Menu.Item itemKey="1-1">商品列表</Menu.Item>
+            <Menu.Item itemKey="1-2">商品分类</Menu.Item>
+            <Menu.Item itemKey="1-3">商品规格</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.SubMenu itemKey="sub2" icon={<span>📋</span>} title="订单管理">
+            <Menu.Item itemKey="2-1">订单列表</Menu.Item>
+            <Menu.Item itemKey="2-2">退款管理</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.SubMenu itemKey="sub3" icon={<span>👥</span>} title="用户管理">
+            <Menu.Item itemKey="3-1">用户列表</Menu.Item>
+            <Menu.Item itemKey="3-2">角色管理</Menu.Item>
+            <Menu.SubMenu itemKey="sub3-1" title="权限设置">
+              <Menu.Item itemKey="3-1-1">权限列表</Menu.Item>
+              <Menu.Item itemKey="3-1-2">权限分配</Menu.Item>
+            </Menu.SubMenu>
+          </Menu.SubMenu>
+        </Menu>
+      ),
+    },
+    {
+      title: '深色主题（dark）',
+      code: `<Menu\n  mode="inline"\n  theme="dark"\n  defaultSelectedKeys={['1']}\n  defaultOpenKeys={['darkSub1']}\n>\n  <Menu.Item itemKey="1" icon={<HomeIcon />}>首页</Menu.Item>\n  <Menu.SubMenu itemKey="darkSub1" icon={<BoxIcon />} title="商品管理">\n    <Menu.Item itemKey="1-1">商品列表</Menu.Item>\n    <Menu.Item itemKey="1-2">商品分类</Menu.Item>\n  </Menu.SubMenu>\n  <Menu.SubMenu itemKey="darkSub2" icon={<OrderIcon />} title="订单管理">\n    <Menu.Item itemKey="2-1">订单列表</Menu.Item>\n    <Menu.Item itemKey="2-2">退款管理</Menu.Item>\n  </Menu.SubMenu>\n  <Menu.Item itemKey="3" icon={<SettingIcon />}>系统设置</Menu.Item>\n</Menu>`,
+      render: (
+        <Menu
+          mode="inline"
+          theme="dark"
+          defaultSelectedKeys={['1']}
+          defaultOpenKeys={['darkSub1']}
+          style={{ width: 220 }}
+        >
+          <Menu.Item itemKey="1" icon={<span>🏠</span>}>首页</Menu.Item>
+          <Menu.SubMenu itemKey="darkSub1" icon={<span>📦</span>} title="商品管理">
+            <Menu.Item itemKey="1-1">商品列表</Menu.Item>
+            <Menu.Item itemKey="1-2">商品分类</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.SubMenu itemKey="darkSub2" icon={<span>📋</span>} title="订单管理">
+            <Menu.Item itemKey="2-1">订单列表</Menu.Item>
+            <Menu.Item itemKey="2-2">退款管理</Menu.Item>
+          </Menu.SubMenu>
+          <Menu.Item itemKey="3" icon={<span>⚙️</span>}>系统设置</Menu.Item>
+        </Menu>
+      ),
+    },
+    {
+      title: '选中与禁用状态',
+      code: `<Menu mode="vertical" defaultSelectedKeys={['1']}>\n  <Menu.Item itemKey="1">已选中</Menu.Item>\n  <Menu.Item itemKey="2" disabled>禁用项</Menu.Item>\n  <Menu.Item itemKey="3" danger>危险操作</Menu.Item>\n  <Menu.Item itemKey="4">普通项</Menu.Item>\n</Menu>`,
+      render: (
+        <Menu mode="vertical" defaultSelectedKeys={['1']} style={{ width: 200 }}>
+          <Menu.Item itemKey="1">已选中</Menu.Item>
+          <Menu.Item itemKey="2" disabled>禁用项</Menu.Item>
+          <Menu.Item itemKey="3" danger>危险操作</Menu.Item>
+          <Menu.Item itemKey="4">普通项</Menu.Item>
+        </Menu>
+      ),
+    },
+  ];
+
   return (
     <>
-      <div className="component-group">
-        <h3>纵向菜单（vertical）</h3>
-        <DemoBlock
-          code={`<Menu mode="vertical" defaultSelectedKeys={['1']}>
-  <Menu.Item itemKey="1" icon={<HomeIcon />}>首页</Menu.Item>
-  <Menu.Item itemKey="2" icon={<UserIcon />}>个人中心</Menu.Item>
-  <Menu.Item itemKey="3" icon={<SettingIcon />}>设置</Menu.Item>
-</Menu>`}
-        >
-          <Menu mode="vertical" defaultSelectedKeys={['1']} style={{ width: 200 }}>
-            <Menu.Item itemKey="1" icon={<span>🏠</span>}>首页</Menu.Item>
-            <Menu.Item itemKey="2" icon={<span>👤</span>}>个人中心</Menu.Item>
-            <Menu.Item itemKey="3" icon={<span>⚙️</span>}>设置</Menu.Item>
-          </Menu>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>横向菜单（horizontal）</h3>
-        <DemoBlock
-          code={`<Menu mode="horizontal" defaultSelectedKeys={['mail']}>
-  <Menu.Item itemKey="mail">邮箱</Menu.Item>
-  <Menu.Item itemKey="app">应用</Menu.Item>
-  <Menu.SubMenu itemKey="sub1" title="更多">
-    <Menu.Item itemKey="sub1-1">子项1</Menu.Item>
-    <Menu.Item itemKey="sub1-2">子项2</Menu.Item>
-  </Menu.SubMenu>
-</Menu>`}
-        >
-          <Menu mode="horizontal" defaultSelectedKeys={['mail']}>
-            <Menu.Item itemKey="mail">邮箱</Menu.Item>
-            <Menu.Item itemKey="app">应用</Menu.Item>
-            <Menu.SubMenu itemKey="sub1" title="更多">
-              <Menu.Item itemKey="sub1-1">子项1</Menu.Item>
-              <Menu.Item itemKey="sub1-2">子项2</Menu.Item>
-            </Menu.SubMenu>
-          </Menu>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>内联折叠菜单（inline）</h3>
-        <DemoBlock
-          code={`<Menu
-  mode="inline"
-  defaultSelectedKeys={['1']}
-  defaultOpenKeys={['sub1']}
->
-  <Menu.Item itemKey="1" icon={<HomeIcon />}>首页</Menu.Item>
-  <Menu.SubMenu itemKey="sub1" icon={<BoxIcon />} title="商品管理">
-    <Menu.Item itemKey="1-1">商品列表</Menu.Item>
-    <Menu.Item itemKey="1-2">商品分类</Menu.Item>
-    <Menu.Item itemKey="1-3">商品规格</Menu.Item>
-  </Menu.SubMenu>
-  <Menu.SubMenu itemKey="sub2" icon={<OrderIcon />} title="订单管理">
-    <Menu.Item itemKey="2-1">订单列表</Menu.Item>
-    <Menu.Item itemKey="2-2">退款管理</Menu.Item>
-  </Menu.SubMenu>
-</Menu>`}
-        >
-          <Menu
-            mode="inline"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['sub1']}
-            style={{ width: 220 }}
-          >
-            <Menu.Item itemKey="1" icon={<span>🏠</span>}>首页</Menu.Item>
-            <Menu.SubMenu itemKey="sub1" icon={<span>📦</span>} title="商品管理">
-              <Menu.Item itemKey="1-1">商品列表</Menu.Item>
-              <Menu.Item itemKey="1-2">商品分类</Menu.Item>
-              <Menu.Item itemKey="1-3">商品规格</Menu.Item>
-            </Menu.SubMenu>
-            <Menu.SubMenu itemKey="sub2" icon={<span>📋</span>} title="订单管理">
-              <Menu.Item itemKey="2-1">订单列表</Menu.Item>
-              <Menu.Item itemKey="2-2">退款管理</Menu.Item>
-            </Menu.SubMenu>
-            <Menu.SubMenu itemKey="sub3" icon={<span>👥</span>} title="用户管理">
-              <Menu.Item itemKey="3-1">用户列表</Menu.Item>
-              <Menu.Item itemKey="3-2">角色管理</Menu.Item>
-              <Menu.SubMenu itemKey="sub3-1" title="权限设置">
-                <Menu.Item itemKey="3-1-1">权限列表</Menu.Item>
-                <Menu.Item itemKey="3-1-2">权限分配</Menu.Item>
-              </Menu.SubMenu>
-            </Menu.SubMenu>
-          </Menu>
-        </DemoBlock>
-      </div>
+      {demos.slice(0, 3).map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
 
       <div className="component-group">
         <h3>折叠内联菜单（inlineCollapsed）</h3>
@@ -146,19 +160,7 @@ const MenuDemo = () => {
           </button>
         </div>
         <DemoBlock
-          code={`<Menu
-  mode="inline"
-  inlineCollapsed={collapsed}
-  defaultSelectedKeys={['1']}
->
-  <Menu.Item itemKey="1" icon={<HomeIcon />}>首页</Menu.Item>
-  <Menu.SubMenu itemKey="sub1" icon={<BoxIcon />} title="商品管理">
-    <Menu.Item itemKey="1-1">商品列表</Menu.Item>
-    <Menu.Item itemKey="1-2">商品分类</Menu.Item>
-  </Menu.SubMenu>
-  <Menu.Item itemKey="2" icon={<span>📊</span>}>数据统计</Menu.Item>
-  <Menu.Item itemKey="3" icon={<span>⚙️</span>}>系统设置</Menu.Item>
-</Menu>`}
+          code={`<Menu\n  mode="inline"\n  inlineCollapsed={collapsed}\n  defaultSelectedKeys={['1']}\n>\n  <Menu.Item itemKey="1" icon={<HomeIcon />}>首页</Menu.Item>\n  <Menu.SubMenu itemKey="sub1" icon={<BoxIcon />} title="商品管理">\n    <Menu.Item itemKey="1-1">商品列表</Menu.Item>\n    <Menu.Item itemKey="1-2">商品分类</Menu.Item>\n  </Menu.SubMenu>\n  <Menu.Item itemKey="2" icon={<span>📊</span>}>数据统计</Menu.Item>\n  <Menu.Item itemKey="3" icon={<span>⚙️</span>}>系统设置</Menu.Item>\n</Menu>`}
         >
           <Menu
             mode="inline"
@@ -176,66 +178,12 @@ const MenuDemo = () => {
         </DemoBlock>
       </div>
 
-      <div className="component-group">
-        <h3>深色主题（dark）</h3>
-        <DemoBlock
-          code={`<Menu
-  mode="inline"
-  theme="dark"
-  defaultSelectedKeys={['1']}
-  defaultOpenKeys={['darkSub1']}
->
-  <Menu.Item itemKey="1" icon={<HomeIcon />}>首页</Menu.Item>
-  <Menu.SubMenu itemKey="darkSub1" icon={<BoxIcon />} title="商品管理">
-    <Menu.Item itemKey="1-1">商品列表</Menu.Item>
-    <Menu.Item itemKey="1-2">商品分类</Menu.Item>
-  </Menu.SubMenu>
-  <Menu.SubMenu itemKey="darkSub2" icon={<OrderIcon />} title="订单管理">
-    <Menu.Item itemKey="2-1">订单列表</Menu.Item>
-    <Menu.Item itemKey="2-2">退款管理</Menu.Item>
-  </Menu.SubMenu>
-  <Menu.Item itemKey="3" icon={<SettingIcon />}>系统设置</Menu.Item>
-</Menu>`}
-        >
-          <Menu
-            mode="inline"
-            theme="dark"
-            defaultSelectedKeys={['1']}
-            defaultOpenKeys={['darkSub1']}
-            style={{ width: 220 }}
-          >
-            <Menu.Item itemKey="1" icon={<span>🏠</span>}>首页</Menu.Item>
-            <Menu.SubMenu itemKey="darkSub1" icon={<span>📦</span>} title="商品管理">
-              <Menu.Item itemKey="1-1">商品列表</Menu.Item>
-              <Menu.Item itemKey="1-2">商品分类</Menu.Item>
-            </Menu.SubMenu>
-            <Menu.SubMenu itemKey="darkSub2" icon={<span>📋</span>} title="订单管理">
-              <Menu.Item itemKey="2-1">订单列表</Menu.Item>
-              <Menu.Item itemKey="2-2">退款管理</Menu.Item>
-            </Menu.SubMenu>
-            <Menu.Item itemKey="3" icon={<span>⚙️</span>}>系统设置</Menu.Item>
-          </Menu>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>选中与禁用状态</h3>
-        <DemoBlock
-          code={`<Menu mode="vertical" defaultSelectedKeys={['1']}>
-  <Menu.Item itemKey="1">已选中</Menu.Item>
-  <Menu.Item itemKey="2" disabled>禁用项</Menu.Item>
-  <Menu.Item itemKey="3" danger>危险操作</Menu.Item>
-  <Menu.Item itemKey="4">普通项</Menu.Item>
-</Menu>`}
-        >
-          <Menu mode="vertical" defaultSelectedKeys={['1']} style={{ width: 200 }}>
-            <Menu.Item itemKey="1">已选中</Menu.Item>
-            <Menu.Item itemKey="2" disabled>禁用项</Menu.Item>
-            <Menu.Item itemKey="3" danger>危险操作</Menu.Item>
-            <Menu.Item itemKey="4">普通项</Menu.Item>
-          </Menu>
-        </DemoBlock>
-      </div>
+      {demos.slice(3).map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
 
       <div className="component-group">
         <h3>受控菜单</h3>
@@ -246,22 +194,7 @@ const MenuDemo = () => {
           <strong style={{ color: '#2587ff' }}>{openKeys.join(', ') || '无'}</strong>
         </div>
         <DemoBlock
-          code={`const [selectedKey, setSelectedKey] = useState('1');
-const [openKeys, setOpenKeys] = useState(['sub1']);
-
-<Menu
-  mode="inline"
-  selectedKeys={[selectedKey]}
-  openKeys={openKeys}
-  onSelect={(key) => setSelectedKey(key)}
-  onOpenChange={(keys) => setOpenKeys(keys)}
->
-  <Menu.Item itemKey="1">菜单项 1</Menu.Item>
-  <Menu.SubMenu itemKey="sub1" title="子菜单">
-    <Menu.Item itemKey="1-1">子项 1</Menu.Item>
-    <Menu.Item itemKey="1-2">子项 2</Menu.Item>
-  </Menu.SubMenu>
-</Menu>`}
+          code={`const [selectedKey, setSelectedKey] = useState('1');\nconst [openKeys, setOpenKeys] = useState(['sub1']);\n\n<Menu\n  mode="inline"\n  selectedKeys={[selectedKey]}\n  openKeys={openKeys}\n  onSelect={(key) => setSelectedKey(key)}\n  onOpenChange={(keys) => setOpenKeys(keys)}\n>\n  <Menu.Item itemKey="1">菜单项 1</Menu.Item>\n  <Menu.SubMenu itemKey="sub1" title="子菜单">\n    <Menu.Item itemKey="1-1">子项 1</Menu.Item>\n    <Menu.Item itemKey="1-2">子项 2</Menu.Item>\n  </Menu.SubMenu>\n</Menu>`}
         >
           <Menu
             mode="inline"

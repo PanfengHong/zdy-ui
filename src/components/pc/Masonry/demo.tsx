@@ -87,186 +87,144 @@ const MasonryDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' },
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法 - children</h3>
-        <DemoBlock
-          code={`<Masonry columns={4} gap={16}>
-  <div style={{ background: '#f0f5ff', height: 120 }}>卡片1</div>
-  <div style={{ background: '#f6ffed', height: 180 }}>卡片2</div>
-  <div style={{ background: '#fff7e6', height: 150 }}>卡片3</div>
-  <div style={{ background: '#fff1f0', height: 200 }}>卡片4</div>
-  <div style={{ background: '#f9f0ff', height: 140 }}>卡片5</div>
-  <div style={{ background: '#e6fffb', height: 160 }}>卡片6</div>
-  <div style={{ background: '#fcffe6', height: 130 }}>卡片7</div>
-  <div style={{ background: '#fff0f6', height: 190 }}>卡片8</div>
-</Masonry>`}
-        >
-          <Masonry columns={4} gap={16}>
-            {[
-              { h: 120, bg: '#f0f5ff', label: '卡片1' },
-              { h: 180, bg: '#f6ffed', label: '卡片2' },
-              { h: 150, bg: '#fff7e6', label: '卡片3' },
-              { h: 200, bg: '#fff1f0', label: '卡片4' },
-              { h: 140, bg: '#f9f0ff', label: '卡片5' },
-              { h: 160, bg: '#e6fffb', label: '卡片6' },
-              { h: 130, bg: '#fcffe6', label: '卡片7' },
-              { h: 190, bg: '#fff0f6', label: '卡片8' },
-            ].map((item, i) => (
+  const demos = [
+    {
+      title: '基础用法 - children',
+      code: `<Masonry columns={4} gap={16}>\n  <div style={{ background: '#f0f5ff', height: 120 }}>卡片1</div>\n  <div style={{ background: '#f6ffed', height: 180 }}>卡片2</div>\n  <div style={{ background: '#fff7e6', height: 150 }}>卡片3</div>\n  <div style={{ background: '#fff1f0', height: 200 }}>卡片4</div>\n  <div style={{ background: '#f9f0ff', height: 140 }}>卡片5</div>\n  <div style={{ background: '#e6fffb', height: 160 }}>卡片6</div>\n  <div style={{ background: '#fcffe6', height: 130 }}>卡片7</div>\n  <div style={{ background: '#fff0f6', height: 190 }}>卡片8</div>\n</Masonry>`,
+      render: (
+        <Masonry columns={4} gap={16}>
+          {[
+            { h: 120, bg: '#f0f5ff', label: '卡片1' },
+            { h: 180, bg: '#f6ffed', label: '卡片2' },
+            { h: 150, bg: '#fff7e6', label: '卡片3' },
+            { h: 200, bg: '#fff1f0', label: '卡片4' },
+            { h: 140, bg: '#f9f0ff', label: '卡片5' },
+            { h: 160, bg: '#e6fffb', label: '卡片6' },
+            { h: 130, bg: '#fcffe6', label: '卡片7' },
+            { h: 190, bg: '#fff0f6', label: '卡片8' },
+          ].map((item, i) => (
+            <div
+              key={i}
+              style={{
+                background: item.bg,
+                height: item.h,
+                borderRadius: 8,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                fontSize: 18,
+                fontWeight: 600,
+                color: '#333',
+              }}
+            >
+              {item.label}
+            </div>
+          ))}
+        </Masonry>
+      ),
+    },
+    {
+      title: '使用 data + renderItem',
+      code: `<Masonry\n  columns={4}\n  gap={16}\n  data={imageItems}\n  renderItem={(item) => (\n    <div>\n      <div style={{ background: imgColors[item.id - 1], height: item.height }} />\n      <div style={{ padding: 12 }}>\n        <h4>{item.title}</h4>\n        <span>{item.tag}</span>\n      </div>\n    </div>\n  )}\n/>`,
+      render: (
+        <Masonry
+          columns={4}
+          gap={16}
+          data={imageItems}
+          renderItem={(item: any) => (
+            <div>
               <div
-                key={i}
                 style={{
-                  background: item.bg,
-                  height: item.h,
-                  borderRadius: 8,
+                  background: imgColors[(item.id - 1) % imgColors.length],
+                  height: item.height,
+                  borderRadius: '8px 8px 0 0',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  fontSize: 18,
+                  color: '#fff',
+                  fontSize: 24,
                   fontWeight: 600,
-                  color: '#333',
                 }}
               >
-                {item.label}
+                {item.id}
               </div>
-            ))}
-          </Masonry>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>使用 data + renderItem</h3>
-        <DemoBlock
-          code={`<Masonry
-  columns={4}
-  gap={16}
-  data={imageItems}
-  renderItem={(item) => (
-    <div>
-      <div style={{ background: imgColors[item.id - 1], height: item.height }} />
-      <div style={{ padding: 12 }}>
-        <h4>{item.title}</h4>
-        <span>{item.tag}</span>
-      </div>
-    </div>
-  )}
-/>`}
-        >
-          <Masonry
-            columns={4}
-            gap={16}
-            data={imageItems}
-            renderItem={(item: any) => (
-              <div>
-                <div
+              <div style={{ padding: 12 }}>
+                <h4 style={{ margin: '0 0 4px', fontSize: 14, color: '#333' }}>
+                  {item.title}
+                </h4>
+                <span
                   style={{
-                    background: imgColors[(item.id - 1) % imgColors.length],
-                    height: item.height,
-                    borderRadius: '8px 8px 0 0',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    color: '#fff',
-                    fontSize: 24,
-                    fontWeight: 600,
+                    display: 'inline-block',
+                    padding: '2px 8px',
+                    borderRadius: 4,
+                    fontSize: 12,
+                    background: '#e6f7ff',
+                    color: '#1890ff',
                   }}
                 >
-                  {item.id}
-                </div>
-                <div style={{ padding: 12 }}>
-                  <h4 style={{ margin: '0 0 4px', fontSize: 14, color: '#333' }}>
-                    {item.title}
-                  </h4>
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '2px 8px',
-                      borderRadius: 4,
-                      fontSize: 12,
-                      background: '#e6f7ff',
-                      color: '#1890ff',
-                    }}
-                  >
-                    {item.tag}
-                  </span>
-                </div>
+                  {item.tag}
+                </span>
               </div>
-            )}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>文字卡片</h3>
-        <DemoBlock
-          code={`<Masonry
-  columns={3}
-  gap={16}
-  data={textItems}
-  renderItem={(item) => (
-    <div>
-      <div style={{ padding: 16 }}>
-        <span>{item.tag}</span>
-        <h4>{item.title}</h4>
-        <p>{item.text}</p>
-      </div>
-    </div>
-  )}
-/>`}
-        >
-          <Masonry
-            columns={3}
-            gap={16}
-            data={textItems}
-            renderItem={(item: any) => (
-              <div>
-                <div style={{ padding: 16 }}>
-                  <span
-                    style={{
-                      display: 'inline-block',
-                      padding: '2px 8px',
-                      borderRadius: 4,
-                      fontSize: 12,
-                      background: '#e6f7ff',
-                      color: '#1890ff',
-                      marginBottom: 8,
-                    }}
-                  >
-                    {item.tag}
-                  </span>
-                  <h4
-                    style={{
-                      margin: '0 0 8px',
-                      fontSize: 14,
-                      fontWeight: 600,
-                      color: '#333',
-                    }}
-                  >
-                    {item.title}
-                  </h4>
-                  <p
-                    style={{
-                      margin: 0,
-                      fontSize: 13,
-                      color: '#666',
-                      lineHeight: 1.6,
-                    }}
-                  >
-                    {item.text}
-                  </p>
-                </div>
+            </div>
+          )}
+        />
+      ),
+    },
+    {
+      title: '文字卡片',
+      code: `<Masonry\n  columns={3}\n  gap={16}\n  data={textItems}\n  renderItem={(item) => (\n    <div>\n      <div style={{ padding: 16 }}>\n        <span>{item.tag}</span>\n        <h4>{item.title}</h4>\n        <p>{item.text}</p>\n      </div>\n    </div>\n  )}\n/>`,
+      render: (
+        <Masonry
+          columns={3}
+          gap={16}
+          data={textItems}
+          renderItem={(item: any) => (
+            <div>
+              <div style={{ padding: 16 }}>
+                <span
+                  style={{
+                    display: 'inline-block',
+                    padding: '2px 8px',
+                    borderRadius: 4,
+                    fontSize: 12,
+                    background: '#e6f7ff',
+                    color: '#1890ff',
+                    marginBottom: 8,
+                  }}
+                >
+                  {item.tag}
+                </span>
+                <h4
+                  style={{
+                    margin: '0 0 8px',
+                    fontSize: 14,
+                    fontWeight: 600,
+                    color: '#333',
+                  }}
+                >
+                  {item.title}
+                </h4>
+                <p
+                  style={{
+                    margin: 0,
+                    fontSize: 13,
+                    color: '#666',
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {item.text}
+                </p>
               </div>
-            )}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义列数和间距</h3>
-        <DemoBlock
-          code={`<Masonry columns={colCount} gap={gap} data={imageItems} renderItem={...} />`}
-        >
+            </div>
+          )}
+        />
+      ),
+    },
+    {
+      title: '自定义列数和间距',
+      code: `<Masonry columns={colCount} gap={gap} data={imageItems} renderItem={...} />`,
+      render: (
+        <>
           <div style={{ marginBottom: 16, display: 'flex', gap: 24, alignItems: 'center' }}>
             <span>列数: {colCount}</span>
             <input
@@ -326,9 +284,19 @@ const MasonryDemo = () => {
               </div>
             )}
           />
-        </DemoBlock>
-      </div>
+        </>
+      ),
+    },
+  ];
 
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group">
         <h3>响应式断点</h3>
         <p style={{ color: '#666', marginBottom: 12 }}>
@@ -383,8 +351,7 @@ const MasonryDemo = () => {
           />
         </DemoBlock>
       </div>
-
-      <div className="component-group">
+      <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />
       </div>

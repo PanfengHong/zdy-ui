@@ -25,87 +25,61 @@ const SelectDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础示例</h3>
-        <DemoBlock
-          code={`
-const options = [
-  { value: 'apple', label: '苹果' },
-  { value: 'orange', label: '橙子' },
-  { value: 'banana', label: '香蕉' }
-];
-
-<Select options={options} placeholder="请选择水果" />
-          `.trim()}
-        >
-          <Select options={[
-            { value: 'apple', label: '苹果' },
-            { value: 'orange', label: '橙子' },
-            { value: 'banana', label: '香蕉' }
-          ]} placeholder="请选择水果" />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>默认选中</h3>
-        <DemoBlock
-          code={`
-<Select options={options} defaultValue="orange" placeholder="请选择水果" />
-          `.trim()}
-        >
-          <Select options={options} defaultValue="orange" placeholder="请选择水果" />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>受控模式</h3>
-        <DemoBlock
-          code={`
-const [value, setValue] = useState('orange');
-
-<Select options={options} value={value} onChange={setValue} placeholder="请选择水果" />
-<p>当前选中：{value || '无'}</p>
-          `.trim()}
-        >
+  const demos = [
+    {
+      title: '基础示例',
+      code: `const options = [\n  { value: 'apple', label: '苹果' },\n  { value: 'orange', label: '橙子' },\n  { value: 'banana', label: '香蕉' }\n];\n\n<Select options={options} placeholder="请选择水果" />`,
+      render: (
+        <Select options={[
+          { value: 'apple', label: '苹果' },
+          { value: 'orange', label: '橙子' },
+          { value: 'banana', label: '香蕉' }
+        ]} placeholder="请选择水果" />
+      ),
+    },
+    {
+      title: '默认选中',
+      code: `<Select options={options} defaultValue="orange" placeholder="请选择水果" />`,
+      render: <Select options={options} defaultValue="orange" placeholder="请选择水果" />,
+    },
+    {
+      title: '受控模式',
+      code: `const [value, setValue] = useState('orange');\n\n<Select options={options} value={value} onChange={setValue} placeholder="请选择水果" />\n<p>当前选中：{value || '无'}</p>`,
+      render: (
+        <>
           <Select options={options} value={value} onChange={setValue} placeholder="请选择水果" />
           <p style={{ marginTop: '12px', color: '#666', fontSize: '14px' }}>
             当前选中：{value || '无'}
           </p>
-        </DemoBlock>
-      </div>
+        </>
+      ),
+    },
+    {
+      title: '禁用状态',
+      code: `<Select options={options} disabled placeholder="禁用状态" />`,
+      render: <Select options={options} disabled placeholder="禁用状态" />,
+    },
+    {
+      title: '禁用选项',
+      code: `<Select options={[\n  { value: 'apple', label: '苹果' },\n  { value: 'orange', label: '橙子（禁用）', disabled: true },\n  { value: 'banana', label: '香蕉' }\n]} placeholder="禁用选项" />`,
+      render: (
+        <Select options={[
+          { value: 'apple', label: '苹果' },
+          { value: 'orange', label: '橙子（禁用）', disabled: true },
+          { value: 'banana', label: '香蕉' }
+        ]} placeholder="禁用选项" />
+      ),
+    },
+  ];
 
-      <div className="component-group">
-        <h3>禁用状态</h3>
-        <DemoBlock
-          code={`
-<Select options={options} disabled placeholder="禁用状态" />
-          `.trim()}
-        >
-          <Select options={options} disabled placeholder="禁用状态" />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用选项</h3>
-        <DemoBlock
-          code={`
-<Select options={[
-  { value: 'apple', label: '苹果' },
-  { value: 'orange', label: '橙子（禁用）', disabled: true },
-  { value: 'banana', label: '香蕉' }
-]} placeholder="禁用选项" />
-          `.trim()}
-        >
-          <Select options={[
-            { value: 'apple', label: '苹果' },
-            { value: 'orange', label: '橙子（禁用）', disabled: true },
-            { value: 'banana', label: '香蕉' }
-          ]} placeholder="禁用选项" />
-        </DemoBlock>
-      </div>
-
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />

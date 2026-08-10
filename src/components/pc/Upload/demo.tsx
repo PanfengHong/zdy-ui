@@ -25,128 +25,77 @@ const UploadDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
+  const demos = [
+    {
+      title: '基础示例',
+      code: `<Upload action="/api/upload" />`,
+      render: <Upload action="/api/upload" />,
+    },
+    {
+      title: '限制文件类型',
+      code: `<Upload action="/api/upload" accept=".jpg,.png,.gif" />`,
+      render: <Upload action="/api/upload" accept=".jpg,.png,.gif" />,
+    },
+    {
+      title: '限制文件大小（2MB）',
+      code: `<Upload action="/api/upload" maxFileSize={2 * 1024 * 1024} />`,
+      render: <Upload action="/api/upload" maxFileSize={2 * 1024 * 1024} />,
+    },
+    {
+      title: '限制上传数量',
+      code: `<Upload action="/api/upload" maxCount={3} />`,
+      render: <Upload action="/api/upload" maxCount={3} />,
+    },
+    {
+      title: '禁用状态',
+      code: `<Upload action="/api/upload" disabled />`,
+      render: <Upload action="/api/upload" disabled />,
+    },
+    {
+      title: '自定义回调',
+      code: `<Upload \n  action="/api/upload"\n  onProgress={(percent, file) => console.log('进度:', percent, file)}\n  onSuccess={(response, file) => console.log('成功:', response, file)}\n  onError={(error, file) => console.log('失败:', error, file)}\n  onChange={(fileList) => console.log('文件列表:', fileList)}\n  onRemove={(file) => console.log('移除:', file)}\n/>`,
+      render: (
+        <Upload
+          action="/api/upload"
+          onProgress={(percent, file) => console.log('进度:', percent, file)}
+          onSuccess={(response, file) => console.log('成功:', response, file)}
+          onError={(error, file) => console.log('失败:', error, file)}
+          onChange={(fileList) => console.log('文件列表:', fileList)}
+          onRemove={(file) => console.log('移除:', file)}
+        />
+      ),
+    },
+    {
+      title: '上传前校验',
+      code: `<Upload \n  action="/api/upload"\n  beforeUpload={(file) => {\n    if (file.size > 5 * 1024 * 1024) {\n      alert('文件大小不能超过 5MB');\n      return false;\n    }\n    return true;\n  }}\n/>`,
+      render: (
+        <Upload
+          action="/api/upload"
+          beforeUpload={(file) => {
+            if (file.size > 5 * 1024 * 1024) {
+              alert('文件大小不能超过 5MB');
+              return false;
+            }
+            return true;
+          }}
+        />
+      ),
+    },
+    {
+      title: '不显示上传列表',
+      code: `<Upload action="/api/upload" showUploadList={false} />`,
+      render: <Upload action="/api/upload" showUploadList={false} />,
+    },
+  ];
+
   return (
     <>
-      <div className="component-group">
-        <h3>基础示例</h3>
-        <DemoBlock
-          code={`
-<Upload action="/api/upload" />
-          `.trim()}
-        >
-          <Upload action="/api/upload" />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>限制文件类型</h3>
-        <DemoBlock
-          code={`
-<Upload action="/api/upload" accept=".jpg,.png,.gif" />
-          `.trim()}
-        >
-          <Upload action="/api/upload" accept=".jpg,.png,.gif" />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>限制文件大小（2MB）</h3>
-        <DemoBlock
-          code={`
-<Upload action="/api/upload" maxFileSize={2 * 1024 * 1024} />
-          `.trim()}
-        >
-          <Upload action="/api/upload" maxFileSize={2 * 1024 * 1024} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>限制上传数量</h3>
-        <DemoBlock
-          code={`
-<Upload action="/api/upload" maxCount={3} />
-          `.trim()}
-        >
-          <Upload action="/api/upload" maxCount={3} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用状态</h3>
-        <DemoBlock
-          code={`
-<Upload action="/api/upload" disabled />
-          `.trim()}
-        >
-          <Upload action="/api/upload" disabled />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义回调</h3>
-        <DemoBlock
-          code={`
-<Upload 
-  action="/api/upload"
-  onProgress={(percent, file) => console.log('进度:', percent, file)}
-  onSuccess={(response, file) => console.log('成功:', response, file)}
-  onError={(error, file) => console.log('失败:', error, file)}
-  onChange={(fileList) => console.log('文件列表:', fileList)}
-  onRemove={(file) => console.log('移除:', file)}
-/>
-          `.trim()}
-        >
-          <Upload 
-            action="/api/upload"
-            onProgress={(percent, file) => console.log('进度:', percent, file)}
-            onSuccess={(response, file) => console.log('成功:', response, file)}
-            onError={(error, file) => console.log('失败:', error, file)}
-            onChange={(fileList) => console.log('文件列表:', fileList)}
-            onRemove={(file) => console.log('移除:', file)}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>上传前校验</h3>
-        <DemoBlock
-          code={`
-<Upload 
-  action="/api/upload"
-  beforeUpload={(file) => {
-    if (file.size > 5 * 1024 * 1024) {
-      alert('文件大小不能超过 5MB');
-      return false;
-    }
-    return true;
-  }}
-/>
-          `.trim()}
-        >
-          <Upload 
-            action="/api/upload"
-            beforeUpload={(file) => {
-              if (file.size > 5 * 1024 * 1024) {
-                alert('文件大小不能超过 5MB');
-                return false;
-              }
-              return true;
-            }}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>不显示上传列表</h3>
-        <DemoBlock
-          code={`
-<Upload action="/api/upload" showUploadList={false} />
-          `.trim()}
-        >
-          <Upload action="/api/upload" showUploadList={false} />
-        </DemoBlock>
-      </div>
-
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />

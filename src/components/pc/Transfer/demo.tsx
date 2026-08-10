@@ -44,141 +44,97 @@ const TransferDemo = () => {
     { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <DemoBlock
-          code={`const mockData = [
-  { key: '1', title: '张三', description: '前端工程师' },
-  { key: '2', title: '李四', description: '后端工程师' },
-  // ...
-];
-
-<Transfer dataSource={mockData} />`}
-        >
-          <Transfer dataSource={mockData} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>带搜索</h3>
-        <DemoBlock
-          code={`<Transfer dataSource={mockData} showSearch />`}
-        >
-          <Transfer dataSource={mockData} showSearch />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>受控用法</h3>
-        <div style={{ marginBottom: 12 }}>
-          <span>目标列表：</span>
-          <strong style={{ color: '#1890ff' }}>{targetKeys.join(', ') || '空'}</strong>
-        </div>
-        <DemoBlock
-          code={`const [targetKeys, setTargetKeys] = useState(['2', '5']);
-
-<Transfer
-  dataSource={mockData}
-  targetKeys={targetKeys}
-  onChange={(keys) => setTargetKeys(keys)}
-/>`}
-        >
+  const demos = [
+    {
+      title: '基础用法',
+      code: `const mockData = [\n  { key: '1', title: '张三', description: '前端工程师' },\n  { key: '2', title: '李四', description: '后端工程师' },\n  // ...\n];\n\n<Transfer dataSource={mockData} />`,
+      render: <Transfer dataSource={mockData} />,
+    },
+    {
+      title: '带搜索',
+      code: `<Transfer dataSource={mockData} showSearch />`,
+      render: <Transfer dataSource={mockData} showSearch />,
+    },
+    {
+      title: '受控用法',
+      code: `const [targetKeys, setTargetKeys] = useState(['2', '5']);\n\n<Transfer\n  dataSource={mockData}\n  targetKeys={targetKeys}\n  onChange={(keys) => setTargetKeys(keys)}\n/>`,
+      render: (
+        <>
+          <div style={{ marginBottom: 12 }}>
+            <span>目标列表：</span>
+            <strong style={{ color: '#1890ff' }}>{targetKeys.join(', ') || '空'}</strong>
+          </div>
           <Transfer
             dataSource={mockData}
             targetKeys={targetKeys}
             onChange={(keys) => setTargetKeys(keys)}
           />
-        </DemoBlock>
-      </div>
+        </>
+      ),
+    },
+    {
+      title: '自定义标题和操作',
+      code: `<Transfer\n  dataSource={mockData}\n  titles={['未选择', '已选择']}\n  operations={['添加', '移除']}\n/>`,
+      render: (
+        <Transfer
+          dataSource={mockData}
+          titles={['未选择', '已选择']}
+          operations={['添加', '移除']}
+        />
+      ),
+    },
+    {
+      title: '自定义渲染',
+      code: `<Transfer\n  dataSource={mockData}\n  render={(item) => (\n    <span>\n      {item.title} - <small style={{ color: '#999' }}>{item.description}</small>\n    </span>\n  )}\n/>`,
+      render: (
+        <Transfer
+          dataSource={mockData}
+          render={(item) => (
+            <span>
+              {item.title} - <small style={{ color: '#999' }}>{item.description}</small>
+            </span>
+          )}
+        />
+      ),
+    },
+    {
+      title: '单向模式',
+      code: `<Transfer dataSource={mockData} oneWay />`,
+      render: <Transfer dataSource={mockData} oneWay />,
+    },
+    {
+      title: '禁用状态',
+      code: `<Transfer dataSource={mockData} disabled defaultTargetKeys={['1', '3']} />`,
+      render: <Transfer dataSource={mockData} disabled defaultTargetKeys={['1', '3']} />,
+    },
+    {
+      title: '自定义底部',
+      code: `<Transfer\n  dataSource={mockData}\n  footer={({ direction }) => (\n    <span style={{ fontSize: 12, color: '#999' }}>\n      {direction === 'left' ? '左侧列表' : '右侧列表'}底部\n    </span>\n  )}\n/>`,
+      render: (
+        <Transfer
+          dataSource={mockData}
+          footer={({ direction }) => (
+            <span style={{ fontSize: 12, color: '#999' }}>
+              {direction === 'left' ? '左侧列表' : '右侧列表'}底部
+            </span>
+          )}
+        />
+      ),
+    },
+  ];
 
-      <div className="component-group">
-        <h3>自定义标题和操作</h3>
-        <DemoBlock
-          code={`<Transfer
-  dataSource={mockData}
-  titles={['未选择', '已选择']}
-  operations={['添加', '移除']}
-/>`}
-        >
-          <Transfer
-            dataSource={mockData}
-            titles={['未选择', '已选择']}
-            operations={['添加', '移除']}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义渲染</h3>
-        <DemoBlock
-          code={`<Transfer
-  dataSource={mockData}
-  render={(item) => (
-    <span>
-      {item.title} - <small style={{ color: '#999' }}>{item.description}</small>
-    </span>
-  )}
-/>`}
-        >
-          <Transfer
-            dataSource={mockData}
-            render={(item) => (
-              <span>
-                {item.title} - <small style={{ color: '#999' }}>{item.description}</small>
-              </span>
-            )}
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>单向模式</h3>
-        <DemoBlock
-          code={`<Transfer dataSource={mockData} oneWay />`}
-        >
-          <Transfer dataSource={mockData} oneWay />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用状态</h3>
-        <DemoBlock
-          code={`<Transfer dataSource={mockData} disabled defaultTargetKeys={['1', '3']} />`}
-        >
-          <Transfer dataSource={mockData} disabled defaultTargetKeys={['1', '3']} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义底部</h3>
-        <DemoBlock
-          code={`<Transfer
-  dataSource={mockData}
-  footer={({ direction }) => (
-    <span style={{ fontSize: 12, color: '#999' }}>
-      {direction === 'left' ? '左侧列表' : '右侧列表'}底部
-    </span>
-  )}
-/>`}
-        >
-          <Transfer
-            dataSource={mockData}
-            footer={({ direction }) => (
-              <span style={{ fontSize: 12, color: '#999' }}>
-                {direction === 'left' ? '左侧列表' : '右侧列表'}底部
-              </span>
-            )}
-          />
-        </DemoBlock>
-      </div>
-
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Transfer API</h3>
         <ApiTable dataSource={apiData} />
       </div>
-
       <div className="component-group">
         <h3>TransferItem API</h3>
         <ApiTable dataSource={itemApiData} />

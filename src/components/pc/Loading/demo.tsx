@@ -33,172 +33,123 @@ const LoadingDemo = () => {
     { prop: 'Loading.hide()', desc: '隐藏全屏加载', type: 'function', default: '-' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <DemoBlock
-          code={`
-<Loading loading={loading}>
-  <div style={{ padding: 24, background: '#fff' }}>
-    内容区域
-  </div>
-</Loading>
-          `.trim()}
-        >
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-            <div style={{ width: 200 }}>
-              <Loading loading={loading1}>
-                <div style={{ padding: 24, background: '#fafafa', height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  内容区域
-                </div>
-              </Loading>
-              <div style={{ marginTop: 8, textAlign: 'center' }}>
-                <Button size="small" onClick={() => setLoading1(!loading1)}>
-                  {loading1 ? '关闭' : '开启'}
-                </Button>
-              </div>
-            </div>
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>不同尺寸</h3>
-        <DemoBlock
-          code={`
-<Loading loading size="small">小</Loading>
-<Loading loading size="medium">中</Loading>
-<Loading loading size="large">大</Loading>
-          `.trim()}
-        >
-          <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-              <Loading loading size="small">
-                <div style={{ width: 80, height: 80, background: '#fafafa' }} />
-              </Loading>
-              <span style={{ fontSize: 12, color: '#999' }}>Small</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-              <Loading loading size="medium">
-                <div style={{ width: 100, height: 100, background: '#fafafa' }} />
-              </Loading>
-              <span style={{ fontSize: 12, color: '#999' }}>Medium</span>
-            </div>
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
-              <Loading loading size="large">
-                <div style={{ width: 120, height: 120, background: '#fafafa' }} />
-              </Loading>
-              <span style={{ fontSize: 12, color: '#999' }}>Large</span>
-            </div>
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>带文字提示</h3>
-        <DemoBlock
-          code={`
-<Loading loading tip="加载中...">
-  <div style={{ padding: 24 }}>内容区域</div>
-</Loading>
-          `.trim()}
-        >
-          <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
-            <div style={{ width: 200 }}>
-              <Loading loading={loading2} tip="加载中...">
-                <div style={{ padding: 24, background: '#fafafa', height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  内容区域
-                </div>
-              </Loading>
-              <div style={{ marginTop: 8, textAlign: 'center' }}>
-                <Button size="small" onClick={() => setLoading2(!loading2)}>
-                  {loading2 ? '关闭' : '开启'}
-                </Button>
-              </div>
-            </div>
-            <div style={{ width: 200 }}>
-              <Loading loading={loading3} tip="数据加载中，请稍候..." size="large">
-                <div style={{ padding: 24, background: '#fafafa', height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                  加载更多内容
-                </div>
-              </Loading>
-              <div style={{ marginTop: 8, textAlign: 'center' }}>
-                <Button size="small" onClick={() => setLoading3(!loading3)}>
-                  {loading3 ? '关闭' : '开启'}
-                </Button>
-              </div>
-            </div>
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>自定义指示器</h3>
-        <DemoBlock
-          code={`
-const customIndicator = (
-  <svg viewBox="0 0 24 24" style={{ animation: 'spin 1s linear infinite' }}>
-    <path d="M12 2 L15 10 L12 8 L9 10 Z" fill="#1890ff" />
-  </svg>
-);
-
-<Loading loading indicator={customIndicator}>
-  <div style={{ padding: 24 }}>自定义加载动画</div>
-</Loading>
-          `.trim()}
-        >
+  const demos = [
+    {
+      title: '基础用法',
+      code: `<Loading loading={loading}>\n  <div style={{ padding: 24, background: '#fff' }}>\n    内容区域\n  </div>\n</Loading>`,
+      render: (
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
           <div style={{ width: 200 }}>
-            <Loading loading indicator={
-              <svg width="32" height="32" viewBox="0 0 24 24" style={{ animation: 'loadingSpin 1s linear infinite' }}>
-                <path d="M12 2 L15 10 L12 8 L9 10 Z" fill="#1890ff" />
-              </svg>
-            } tip="加载中...">
+            <Loading loading={loading1}>
               <div style={{ padding: 24, background: '#fafafa', height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                自定义加载动画
+                内容区域
               </div>
             </Loading>
+            <div style={{ marginTop: 8, textAlign: 'center' }}>
+              <Button size="small" onClick={() => setLoading1(!loading1)}>
+                {loading1 ? '关闭' : '开启'}
+              </Button>
+            </div>
           </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>全屏加载</h3>
-        <DemoBlock
-          code={`
-// 显示全屏加载
-Loading.show({ tip: '加载中...' });
-
-// 隐藏全屏加载
-Loading.hide();
-          `.trim()}
-        >
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-            <Button type="primary" onClick={() => {
-              Loading.show({ tip: '加载中...' });
-              setTimeout(() => Loading.hide(), 2000);
-            }}>显示2秒</Button>
-            <Button onClick={() => {
-              Loading.show({ tip: '数据处理中，请稍候...', size: 'large' });
-            }}>显示（手动关闭）</Button>
-            <Button type="error" onClick={() => Loading.hide()}>关闭</Button>
+        </div>
+      ),
+    },
+    {
+      title: '不同尺寸',
+      code: `<Loading loading size="small">小</Loading>\n<Loading loading size="medium">中</Loading>\n<Loading loading size="large">大</Loading>`,
+      render: (
+        <div style={{ display: 'flex', gap: '32px', alignItems: 'center' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+            <Loading loading size="small">
+              <div style={{ width: 80, height: 80, background: '#fafafa' }} />
+            </Loading>
+            <span style={{ fontSize: 12, color: '#999' }}>Small</span>
           </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>卡片加载</h3>
-        <DemoBlock
-          code={`
-<Loading loading={loading}>
-  <Card title="用户信息">
-    <p>姓名: 张三</p>
-    <p>年龄: 28</p>
-    <p>地址: 北京市朝阳区</p>
-  </Card>
-</Loading>
-          `.trim()}
-        >
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+            <Loading loading size="medium">
+              <div style={{ width: 100, height: 100, background: '#fafafa' }} />
+            </Loading>
+            <span style={{ fontSize: 12, color: '#999' }}>Medium</span>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 8 }}>
+            <Loading loading size="large">
+              <div style={{ width: 120, height: 120, background: '#fafafa' }} />
+            </Loading>
+            <span style={{ fontSize: 12, color: '#999' }}>Large</span>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: '带文字提示',
+      code: `<Loading loading tip="加载中...">\n  <div style={{ padding: 24 }}>内容区域</div>\n</Loading>`,
+      render: (
+        <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+          <div style={{ width: 200 }}>
+            <Loading loading={loading2} tip="加载中...">
+              <div style={{ padding: 24, background: '#fafafa', height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                内容区域
+              </div>
+            </Loading>
+            <div style={{ marginTop: 8, textAlign: 'center' }}>
+              <Button size="small" onClick={() => setLoading2(!loading2)}>
+                {loading2 ? '关闭' : '开启'}
+              </Button>
+            </div>
+          </div>
+          <div style={{ width: 200 }}>
+            <Loading loading={loading3} tip="数据加载中，请稍候..." size="large">
+              <div style={{ padding: 24, background: '#fafafa', height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                加载更多内容
+              </div>
+            </Loading>
+            <div style={{ marginTop: 8, textAlign: 'center' }}>
+              <Button size="small" onClick={() => setLoading3(!loading3)}>
+                {loading3 ? '关闭' : '开启'}
+              </Button>
+            </div>
+          </div>
+        </div>
+      ),
+    },
+    {
+      title: '自定义指示器',
+      code: `const customIndicator = (\n  <svg viewBox="0 0 24 24" style={{ animation: 'spin 1s linear infinite' }}>\n    <path d="M12 2 L15 10 L12 8 L9 10 Z" fill="#1890ff" />\n  </svg>\n);\n\n<Loading loading indicator={customIndicator}>\n  <div style={{ padding: 24 }}>自定义加载动画</div>\n</Loading>`,
+      render: (
+        <div style={{ width: 200 }}>
+          <Loading loading indicator={
+            <svg width="32" height="32" viewBox="0 0 24 24" style={{ animation: 'loadingSpin 1s linear infinite' }}>
+              <path d="M12 2 L15 10 L12 8 L9 10 Z" fill="#1890ff" />
+            </svg>
+          } tip="加载中...">
+            <div style={{ padding: 24, background: '#fafafa', height: 100, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              自定义加载动画
+            </div>
+          </Loading>
+        </div>
+      ),
+    },
+    {
+      title: '全屏加载',
+      code: `// 显示全屏加载\nLoading.show({ tip: '加载中...' });\n\n// 隐藏全屏加载\nLoading.hide();`,
+      render: (
+        <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+          <Button type="primary" onClick={() => {
+            Loading.show({ tip: '加载中...' });
+            setTimeout(() => Loading.hide(), 2000);
+          }}>显示2秒</Button>
+          <Button onClick={() => {
+            Loading.show({ tip: '数据处理中，请稍候...', size: 'large' });
+          }}>显示（手动关闭）</Button>
+          <Button type="error" onClick={() => Loading.hide()}>关闭</Button>
+        </div>
+      ),
+    },
+    {
+      title: '卡片加载',
+      code: `<Loading loading={loading}>\n  <Card title="用户信息">\n    <p>姓名: 张三</p>\n    <p>年龄: 28</p>\n    <p>地址: 北京市朝阳区</p>\n  </Card>\n</Loading>`,
+      render: (
+        <>
           <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
             <div style={{ width: 280, border: '1px solid #f0f0f0', borderRadius: 4 }}>
               <div style={{ padding: 12, borderBottom: '1px solid #f0f0f0', fontWeight: 'bold' }}>用户信息</div>
@@ -236,9 +187,19 @@ Loading.hide();
               切换所有加载状态
             </Button>
           </div>
-        </DemoBlock>
-      </div>
+        </>
+      ),
+    },
+  ];
 
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>组件属性</h3>
         <ApiTable dataSource={apiData} />

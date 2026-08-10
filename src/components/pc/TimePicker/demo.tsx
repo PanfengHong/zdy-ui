@@ -32,69 +32,71 @@ const TimePickerDemo = () => {
     { prop: 'onOpenChange', desc: '面板展开状态变化回调', type: '(open: boolean) => void', default: '-' },
   ];
 
+  const demos = [
+    {
+      title: '基础用法',
+      code: `<TimePicker onChange={(t) => setValue(t)} />`,
+      render: (
+        <>
+          <div style={{ marginBottom: 12 }}>
+            <span>选中时间：</span>
+            <strong style={{ color: '#1890ff' }}>{fmt(value)}</strong>
+          </div>
+          <TimePicker onChange={(t) => setValue(t)} />
+        </>
+      ),
+    },
+    {
+      title: '受控用法',
+      code: `const [time, setTime] = useState(new Date(2025, 0, 1, 9, 30, 0));\n\n<TimePicker value={time} onChange={(t) => setTime(t)} />`,
+      render: (
+        <>
+          <div style={{ marginBottom: 12 }}>
+            <span>当前时间：</span>
+            <strong style={{ color: '#1890ff' }}>{fmt(controlled)}</strong>
+          </div>
+          <TimePicker value={controlled} onChange={(t) => setControlled(t)} />
+        </>
+      ),
+    },
+    {
+      title: '步长',
+      code: `<TimePicker hourStep={2} minuteStep={15} secondStep={10} />`,
+      render: <TimePicker hourStep={2} minuteStep={15} secondStep={10} />,
+    },
+    {
+      title: '禁用选项',
+      code: `<TimePicker\n  disabledHours={() => [0, 1, 2, 3, 4, 5]}\n  disabledMinutes={(h) => (h === 9 ? [30, 31, 32] : [])}\n/>`,
+      render: (
+        <TimePicker
+          disabledHours={() => [0, 1, 2, 3, 4, 5]}
+          disabledMinutes={(h) => (h === 9 ? [30, 31, 32] : [])}
+          hideDisabledOptions
+        />
+      ),
+    },
+    {
+      title: '禁用与尺寸',
+      code: `<TimePicker disabled /><TimePicker size="small" /><TimePicker size="large" />`,
+      render: (
+        <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
+          <TimePicker disabled />
+          <TimePicker size="small" />
+          <TimePicker size="large" />
+        </div>
+      ),
+    },
+  ];
+
   return (
     <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <div style={{ marginBottom: 12 }}>
-          <span>选中时间：</span>
-          <strong style={{ color: '#1890ff' }}>{fmt(value)}</strong>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
         </div>
-        <DemoBlock code={`<TimePicker onChange={(t) => setValue(t)} />`}>
-          <TimePicker onChange={(t) => setValue(t)} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>受控用法</h3>
-        <div style={{ marginBottom: 12 }}>
-          <span>当前时间：</span>
-          <strong style={{ color: '#1890ff' }}>{fmt(controlled)}</strong>
-        </div>
-        <DemoBlock
-          code={`const [time, setTime] = useState(new Date(2025, 0, 1, 9, 30, 0));
-
-<TimePicker value={time} onChange={(t) => setTime(t)} />`}
-        >
-          <TimePicker value={controlled} onChange={(t) => setControlled(t)} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>步长</h3>
-        <DemoBlock code={`<TimePicker hourStep={2} minuteStep={15} secondStep={10} />`}>
-          <TimePicker hourStep={2} minuteStep={15} secondStep={10} />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用选项</h3>
-        <DemoBlock
-          code={`<TimePicker
-  disabledHours={() => [0, 1, 2, 3, 4, 5]}
-  disabledMinutes={(h) => (h === 9 ? [30, 31, 32] : [])}
-/>`}
-        >
-          <TimePicker
-            disabledHours={() => [0, 1, 2, 3, 4, 5]}
-            disabledMinutes={(h) => (h === 9 ? [30, 31, 32] : [])}
-            hideDisabledOptions
-          />
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>禁用与尺寸</h3>
-        <DemoBlock code={`<TimePicker disabled /><TimePicker size="small" /><TimePicker size="large" />`}>
-          <div style={{ display: 'flex', gap: 12, alignItems: 'center', flexWrap: 'wrap' }}>
-            <TimePicker disabled />
-            <TimePicker size="small" />
-            <TimePicker size="large" />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group" style={{ marginTop: 32 }}>
+      ))}
+      <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />
       </div>

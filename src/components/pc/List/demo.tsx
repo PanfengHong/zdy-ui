@@ -110,167 +110,117 @@ const ListDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' },
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础用法</h3>
-        <DemoBlock
-          code={`<List
-  header={<div>头部内容</div>}
-  dataSource={data}
-  renderItem={item => <List.Item ... />}
-/>`}
-        >
-          <div style={{ maxWidth: 640 }}>
-            <List
-              header={<div>用户列表</div>}
-              dataSource={defaultData}
-              renderItem={(item) => (
-                <div className="zdy-list-item zdy-list-item--horizontal" style={{ display: 'flex', padding: '16px 24px', borderBottom: '1px solid #f0f0f0' }}>
-                  <div style={{ marginRight: 16, flexShrink: 0 }}>{item.avatar}</div>
-                  <div style={{ flex: 1, minWidth: 0 }}>
-                    <div style={{ display: 'flex', alignItems: 'baseline', marginBottom: 4 }}>
-                      <span style={{ fontSize: 16, fontWeight: 500, color: 'rgba(0,0,0,0.85)', marginRight: 8 }}>{item.title}</span>
-                      <span style={{ fontSize: 14, color: 'rgba(0,0,0,0.45)' }}>{item.description}</span>
-                    </div>
-                    <div style={{ fontSize: 14, color: 'rgba(0,0,0,0.65)', marginTop: 8, lineHeight: 1.6 }}>{item.content}</div>
+  const demos = [
+    {
+      title: '基础用法',
+      code: `<List\n  header={<div>头部内容</div>}\n  dataSource={data}\n  renderItem={item => <List.Item ... />}\n/>`,
+      render: (
+        <div style={{ maxWidth: 640 }}>
+          <List
+            header={<div>用户列表</div>}
+            dataSource={defaultData}
+            renderItem={(item) => (
+              <div className="zdy-list-item zdy-list-item--horizontal" style={{ display: 'flex', padding: '16px 24px', borderBottom: '1px solid #f0f0f0' }}>
+                <div style={{ marginRight: 16, flexShrink: 0 }}>{item.avatar}</div>
+                <div style={{ flex: 1, minWidth: 0 }}>
+                  <div style={{ display: 'flex', alignItems: 'baseline', marginBottom: 4 }}>
+                    <span style={{ fontSize: 16, fontWeight: 500, color: 'rgba(0,0,0,0.85)', marginRight: 8 }}>{item.title}</span>
+                    <span style={{ fontSize: 14, color: 'rgba(0,0,0,0.45)' }}>{item.description}</span>
                   </div>
-                  <div style={{ flexShrink: 0, marginLeft: 16, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-                    <span style={{ fontSize: 14, color: 'rgba(0,0,0,0.45)' }}>2024-01-01</span>
-                  </div>
+                  <div style={{ fontSize: 14, color: 'rgba(0,0,0,0.65)', marginTop: 8, lineHeight: 1.6 }}>{item.content}</div>
                 </div>
-              )}
-            />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>使用 dataSource 和 renderItem</h3>
-        <DemoBlock
-          code={`<List
-  dataSource={data}
-  renderItem={item => (
-    <List.Item
-      title={item.title}
-      description={item.description}
-      avatar={item.avatar}
-      content={item.content}
-    />
-  )}
-/>`}
-        >
-          <div style={{ maxWidth: 640 }}>
-            <List
-              dataSource={defaultData}
-            />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>垂直布局</h3>
-        <DemoBlock
-          code={`<List
-  itemLayout="vertical"
-  dataSource={data}
-/>`}
-        >
-          <div style={{ maxWidth: 640 }}>
-            <List
-              itemLayout="vertical"
-              dataSource={defaultData}
-            />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>栅格列表</h3>
-        <DemoBlock
-          code={`<List
-  grid={{ column: 3, gutter: 16 }}
-  dataSource={data}
-/>`}
-        >
-          <div style={{ maxWidth: 800 }}>
-            <List
-              grid={{ column: 3, gutter: 16 }}
-              dataSource={gridData}
-            />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>带分页</h3>
-        <DemoBlock
-          code={`<List
-  pagination={{ pageSize: 5 }}
-  dataSource={data}
-/>`}
-        >
-          <div style={{ maxWidth: 640 }}>
-            <List
-              pagination={{ pageSize: 5 }}
-              dataSource={paginationData}
-            />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>加载中</h3>
-        <DemoBlock
-          code={`<List loading={true} dataSource={[]} />`}
-        >
-          <div style={{ maxWidth: 640 }}>
-            <List loading={true} dataSource={[]} />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>空状态</h3>
-        <DemoBlock
-          code={`<List dataSource={[]} />`}
-        >
-          <div style={{ maxWidth: 640 }}>
-            <List dataSource={[]} />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>带头部和底部</h3>
-        <DemoBlock
-          code={`<List
-  header={<div>通知列表</div>}
-  footer={<a>查看更多</a>}
-  dataSource={data}
-/>`}
-        >
-          <div style={{ maxWidth: 640 }}>
-            <List
-              header={<div>通知列表</div>}
-              footer={<a style={{ color: '#1890ff', cursor: 'pointer' }}>查看更多</a>}
-              dataSource={defaultData.slice(0, 2)}
-            />
-          </div>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>回调函数</h3>
-        <DemoBlock
-          code={`<List
-  pagination={{
-    pageSize: 3,
-    onChange: (page) => console.log('当前页', page)
-  }}
-  dataSource={data}
-/>`}
-        >
+                <div style={{ flexShrink: 0, marginLeft: 16, display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+                  <span style={{ fontSize: 14, color: 'rgba(0,0,0,0.45)' }}>2024-01-01</span>
+                </div>
+              </div>
+            )}
+          />
+        </div>
+      ),
+    },
+    {
+      title: '使用 dataSource 和 renderItem',
+      code: `<List\n  dataSource={data}\n  renderItem={item => (\n    <List.Item\n      title={item.title}\n      description={item.description}\n      avatar={item.avatar}\n      content={item.content}\n    />\n  )}\n/>`,
+      render: (
+        <div style={{ maxWidth: 640 }}>
+          <List
+            dataSource={defaultData}
+          />
+        </div>
+      ),
+    },
+    {
+      title: '垂直布局',
+      code: `<List\n  itemLayout="vertical"\n  dataSource={data}\n/>`,
+      render: (
+        <div style={{ maxWidth: 640 }}>
+          <List
+            itemLayout="vertical"
+            dataSource={defaultData}
+          />
+        </div>
+      ),
+    },
+    {
+      title: '栅格列表',
+      code: `<List\n  grid={{ column: 3, gutter: 16 }}\n  dataSource={data}\n/>`,
+      render: (
+        <div style={{ maxWidth: 800 }}>
+          <List
+            grid={{ column: 3, gutter: 16 }}
+            dataSource={gridData}
+          />
+        </div>
+      ),
+    },
+    {
+      title: '带分页',
+      code: `<List\n  pagination={{ pageSize: 5 }}\n  dataSource={data}\n/>`,
+      render: (
+        <div style={{ maxWidth: 640 }}>
+          <List
+            pagination={{ pageSize: 5 }}
+            dataSource={paginationData}
+          />
+        </div>
+      ),
+    },
+    {
+      title: '加载中',
+      code: `<List loading={true} dataSource={[]} />`,
+      render: (
+        <div style={{ maxWidth: 640 }}>
+          <List loading={true} dataSource={[]} />
+        </div>
+      ),
+    },
+    {
+      title: '空状态',
+      code: `<List dataSource={[]} />`,
+      render: (
+        <div style={{ maxWidth: 640 }}>
+          <List dataSource={[]} />
+        </div>
+      ),
+    },
+    {
+      title: '带头部和底部',
+      code: `<List\n  header={<div>通知列表</div>}\n  footer={<a>查看更多</a>}\n  dataSource={data}\n/>`,
+      render: (
+        <div style={{ maxWidth: 640 }}>
+          <List
+            header={<div>通知列表</div>}
+            footer={<a style={{ color: '#1890ff', cursor: 'pointer' }}>查看更多</a>}
+            dataSource={defaultData.slice(0, 2)}
+          />
+        </div>
+      ),
+    },
+    {
+      title: '回调函数',
+      code: `<List\n  pagination={{\n    pageSize: 3,\n    onChange: (page) => console.log('当前页', page)\n  }}\n  dataSource={data}\n/>`,
+      render: (
+        <>
           <div style={{ maxWidth: 640 }}>
             <List
               pagination={{
@@ -281,10 +231,20 @@ const ListDemo = () => {
             />
           </div>
           <p style={{ color: '#999', marginTop: 8 }}>打开浏览器控制台查看翻页回调日志</p>
-        </DemoBlock>
-      </div>
+        </>
+      ),
+    },
+  ];
 
-      <div className="component-group">
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
+      <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>API</h3>
         <ApiTable dataSource={apiData} />
       </div>

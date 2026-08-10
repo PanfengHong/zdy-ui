@@ -26,38 +26,12 @@ const GridDemo = () => {
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
 
-  return (
-    <>
-      <div className="component-group">
-        <h3>基础栅格</h3>
-        <DemoBlock
-          code={`
-<Grid.Row>
-  <Grid.Col span={24}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-24</div>
-  </Grid.Col>
-</Grid.Row>
-<Grid.Row>
-  <Grid.Col span={12}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-12</div>
-  </Grid.Col>
-  <Grid.Col span={12}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-12</div>
-  </Grid.Col>
-</Grid.Row>
-<Grid.Row>
-  <Grid.Col span={8}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8</div>
-  </Grid.Col>
-  <Grid.Col span={8}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8</div>
-  </Grid.Col>
-  <Grid.Col span={8}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8</div>
-  </Grid.Col>
-</Grid.Row>
-          `.trim()}
-        >
+  const demos = [
+    {
+      title: '基础栅格',
+      code: `<Grid.Row>\n  <Grid.Col span={24}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-24</div>\n  </Grid.Col>\n</Grid.Row>\n<Grid.Row>\n  <Grid.Col span={12}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-12</div>\n  </Grid.Col>\n  <Grid.Col span={12}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-12</div>\n  </Grid.Col>\n</Grid.Row>\n<Grid.Row>\n  <Grid.Col span={8}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8</div>\n  </Grid.Col>\n  <Grid.Col span={8}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8</div>\n  </Grid.Col>\n  <Grid.Col span={8}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8</div>\n  </Grid.Col>\n</Grid.Row>`,
+      render: (
+        <>
           <Grid.Row>
             <Grid.Col span={24}>
               <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-24</div>
@@ -82,101 +56,48 @@ const GridDemo = () => {
               <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8</div>
             </Grid.Col>
           </Grid.Row>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>间距栅格</h3>
-        <DemoBlock
-          code={`
-<Grid.Row gutter={16}>
-  <Grid.Col span={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-  </Grid.Col>
-  <Grid.Col span={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-  </Grid.Col>
-  <Grid.Col span={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-  </Grid.Col>
-  <Grid.Col span={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-  </Grid.Col>
-</Grid.Row>
-          `.trim()}
-        >
-          <Grid.Row gutter={16}>
-            <Grid.Col span={6}>
-              <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-            </Grid.Col>
-            <Grid.Col span={6}>
-              <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-            </Grid.Col>
-          </Grid.Row>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>偏移栅格</h3>
-        <DemoBlock
-          code={`
-<Grid.Row>
-  <Grid.Col span={8}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8</div>
-  </Grid.Col>
-  <Grid.Col span={8} offset={8}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8 offset-8</div>
-  </Grid.Col>
-</Grid.Row>
-          `.trim()}
-        >
-          <Grid.Row>
-            <Grid.Col span={8}>
-              <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8</div>
-            </Grid.Col>
-            <Grid.Col span={8} offset={8}>
-              <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8 offset-8</div>
-            </Grid.Col>
-          </Grid.Row>
-        </DemoBlock>
-      </div>
-
-      <div className="component-group">
-        <h3>对齐方式</h3>
-        <DemoBlock
-          code={`
-<Grid.Row justify="center">
-  <Grid.Col span={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-  </Grid.Col>
-  <Grid.Col span={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-  </Grid.Col>
-</Grid.Row>
-<Grid.Row justify="end">
-  <Grid.Col span={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-  </Grid.Col>
-  <Grid.Col span={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-  </Grid.Col>
-</Grid.Row>
-<Grid.Row justify="space-between">
-  <Grid.Col span={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-  </Grid.Col>
-  <Grid.Col span={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
-  </Grid.Col>
-</Grid.Row>
-          `.trim()}
-        >
+        </>
+      ),
+    },
+    {
+      title: '间距栅格',
+      code: `<Grid.Row gutter={16}>\n  <Grid.Col span={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>\n  </Grid.Col>\n  <Grid.Col span={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>\n  </Grid.Col>\n  <Grid.Col span={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>\n  </Grid.Col>\n  <Grid.Col span={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>\n  </Grid.Col>\n</Grid.Row>`,
+      render: (
+        <Grid.Row gutter={16}>
+          <Grid.Col span={6}>
+            <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
+          </Grid.Col>
+          <Grid.Col span={6}>
+            <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
+          </Grid.Col>
+        </Grid.Row>
+      ),
+    },
+    {
+      title: '偏移栅格',
+      code: `<Grid.Row>\n  <Grid.Col span={8}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8</div>\n  </Grid.Col>\n  <Grid.Col span={8} offset={8}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8 offset-8</div>\n  </Grid.Col>\n</Grid.Row>`,
+      render: (
+        <Grid.Row>
+          <Grid.Col span={8}>
+            <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8</div>
+          </Grid.Col>
+          <Grid.Col span={8} offset={8}>
+            <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-8 offset-8</div>
+          </Grid.Col>
+        </Grid.Row>
+      ),
+    },
+    {
+      title: '对齐方式',
+      code: `<Grid.Row justify="center">\n  <Grid.Col span={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>\n  </Grid.Col>\n  <Grid.Col span={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>\n  </Grid.Col>\n</Grid.Row>\n<Grid.Row justify="end">\n  <Grid.Col span={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>\n  </Grid.Col>\n  <Grid.Col span={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>\n  </Grid.Col>\n</Grid.Row>\n<Grid.Row justify="space-between">\n  <Grid.Col span={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>\n  </Grid.Col>\n  <Grid.Col span={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>\n  </Grid.Col>\n</Grid.Row>`,
+      render: (
+        <>
           <Grid.Row justify="center">
             <Grid.Col span={6}>
               <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
@@ -201,46 +122,39 @@ const GridDemo = () => {
               <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>col-6</div>
             </Grid.Col>
           </Grid.Row>
-        </DemoBlock>
-      </div>
+        </>
+      ),
+    },
+    {
+      title: '响应式布局',
+      code: `<Grid.Row>\n  <Grid.Col xs={24} sm={12} md={8} lg={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>\n  </Grid.Col>\n  <Grid.Col xs={24} sm={12} md={8} lg={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>\n  </Grid.Col>\n  <Grid.Col xs={24} sm={12} md={8} lg={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>\n  </Grid.Col>\n  <Grid.Col xs={24} sm={12} md={8} lg={6}>\n    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>\n  </Grid.Col>\n</Grid.Row>`,
+      render: (
+        <Grid.Row>
+          <Grid.Col xs={24} sm={12} md={8} lg={6}>
+            <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
+          </Grid.Col>
+          <Grid.Col xs={24} sm={12} md={8} lg={6}>
+            <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
+          </Grid.Col>
+          <Grid.Col xs={24} sm={12} md={8} lg={6}>
+            <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
+          </Grid.Col>
+          <Grid.Col xs={24} sm={12} md={8} lg={6}>
+            <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
+          </Grid.Col>
+        </Grid.Row>
+      ),
+    },
+  ];
 
-      <div className="component-group">
-        <h3>响应式布局</h3>
-        <DemoBlock
-          code={`
-<Grid.Row>
-  <Grid.Col xs={24} sm={12} md={8} lg={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
-  </Grid.Col>
-  <Grid.Col xs={24} sm={12} md={8} lg={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
-  </Grid.Col>
-  <Grid.Col xs={24} sm={12} md={8} lg={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
-  </Grid.Col>
-  <Grid.Col xs={24} sm={12} md={8} lg={6}>
-    <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
-  </Grid.Col>
-</Grid.Row>
-          `.trim()}
-        >
-          <Grid.Row>
-            <Grid.Col xs={24} sm={12} md={8} lg={6}>
-              <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
-            </Grid.Col>
-            <Grid.Col xs={24} sm={12} md={8} lg={6}>
-              <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
-            </Grid.Col>
-            <Grid.Col xs={24} sm={12} md={8} lg={6}>
-              <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
-            </Grid.Col>
-            <Grid.Col xs={24} sm={12} md={8} lg={6}>
-              <div style={{ backgroundColor: '#f5f5f5', padding: '16px', textAlign: 'center' }}>响应式列</div>
-            </Grid.Col>
-          </Grid.Row>
-        </DemoBlock>
-      </div>
-
+  return (
+    <>
+      {demos.map((demo) => (
+        <div key={demo.title} className="component-group">
+          <h3>{demo.title}</h3>
+          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
+        </div>
+      ))}
       <div className="component-group" style={{ marginTop: '32px' }}>
         <h3>Grid.Row API</h3>
         <ApiTable dataSource={rowApiData} />
