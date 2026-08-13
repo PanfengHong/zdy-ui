@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useCallback } from 'react';
 import classNames from 'classnames';
 import type { CalendarProps, CalendarMode } from './types';
+import Icon from '../Icon/Icon';
 
 import './Calendar.less';
 
@@ -142,9 +143,13 @@ const Calendar: React.FC<CalendarProps> = ({
       ) : (
         <div className="zdy-calendar-header">
           <div className="zdy-calendar-header-left">
-            <button className="zdy-calendar-btn" onClick={goPrev} title="上一个">‹</button>
+            <button className="zdy-calendar-btn" onClick={goPrev} title="上一个">
+              <Icon type="left" size={16} />
+            </button>
             <span className="zdy-calendar-header-title">{headerTitle}</span>
-            <button className="zdy-calendar-btn" onClick={goNext} title="下一个">›</button>
+            <button className="zdy-calendar-btn" onClick={goNext} title="下一个">
+              <Icon type="right" size={16} />
+            </button>
           </div>
           <div className="zdy-calendar-header-right">
             <button className="zdy-calendar-today-btn" onClick={goToday}>今天</button>

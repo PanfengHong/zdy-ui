@@ -172,7 +172,7 @@ const DrawerDemo = () => {
       render: (
         <>
           <button style={btnStyle} onClick={() => setBasicOpen(true)}>参考基础用法</button>
-          <p style={{ color: '#999', fontSize: 13 }}>通过 bodyStyle 自定义内容区样式，如内边距、背景色等。</p>
+          <p style={{ color: '#999', fontSize: 13, marginTop: 12 }}>通过 bodyStyle 自定义内容区样式，如内边距、背景色等。</p>
         </>
       ),
     },

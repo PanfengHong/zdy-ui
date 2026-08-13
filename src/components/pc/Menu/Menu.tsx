@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import classNames from 'classnames';
 import type { MenuProps, MenuItemProps, SubMenuProps, MenuMode, MenuTheme } from './types';
+import Icon from '../Icon/Icon';
 
 import './Menu.less';
 
@@ -236,7 +237,7 @@ const SubMenu: React.FC<SubMenuProps> = ({
         {icon && <span className="zdy-menu-item-icon">{icon}</span>}
         {!inlineCollapsed && <span className="zdy-menu-item-label">{title}</span>}
         <span className="zdy-menu-submenu-arrow">
-          {mode === 'horizontal' ? '▾' : '▸'}
+          {mode === 'horizontal' ? <Icon type="down" size={16} /> : <Icon type="right" size={16} />}
         </span>
       </div>
       {renderChildren()}

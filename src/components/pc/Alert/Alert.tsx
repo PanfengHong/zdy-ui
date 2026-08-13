@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
 import type { BaseAlertProps, AlertType } from './types';
+import Icon from '../Icon/Icon';
+
 
 import './Alert.less';
 
@@ -44,32 +46,10 @@ const Alert: React.FC<BaseAlertProps> = ({
     >
       {showIcon && (
         <span className="zdy-alert-icon" style={{ color: iconColorMap[type] }}>
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            {type === 'success' && (
-              <polyline points="20 6 9 17 4 12" />
-            )}
-            {type === 'info' && (
-              <>
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="16" x2="12" y2="12" />
-                <line x1="12" y1="8" x2="12.01" y2="8" />
-              </>
-            )}
-            {type === 'warning' && (
-              <>
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </>
-            )}
-            {type === 'error' && (
-              <>
-                <circle cx="12" cy="12" r="10" />
-                <line x1="15" y1="9" x2="9" y2="15" />
-                <line x1="9" y1="9" x2="15" y2="15" />
-              </>
-            )}
-          </svg>
+          {type === 'success' && (<Icon type="confirm" size={16} />)}
+          {type === 'info' && (<Icon type="info" size={16} />)}
+          {type === 'warning' && (<Icon type="warning" size={16} />)}
+          {type === 'error' && (<Icon type="error" size={16} />)}
         </span>
       )}
 

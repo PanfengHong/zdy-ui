@@ -3,6 +3,7 @@ import DemoBlock from '../../DemoBlock/DemoBlock';
 import ApiTable from '../../ApiTable/ApiTable';
 import Dialog from './Dialog';
 import Button from '../Button/Button';
+import Icon from '../Icon/Icon';
 
 const DialogDemo = () => {
   const [visible1, setVisible1] = useState(false);
@@ -49,21 +50,22 @@ const DialogDemo = () => {
       ),
     },
     {
-      title: '无标题对话框',
-      code: `<Dialog\n  visible={visible}\n  onClose={() => setVisible(false)}\n  closable={false}\n>\n  无标题对话框内容\n</Dialog>`,
+      title: '带图标对话框',
+      code: `<Dialog\n  visible={visible}\n title="对话框标题"\n icon={<Icon name="home" />}\n  onClose={() => setVisible(false)}\n>\n  对话框内容\n</Dialog>`,
       render: (
         <>
           <div style={{ display: 'flex', gap: '16px' }}>
             <Button onClick={() => setVisible2(true)}>
-              打开无标题对话框
+              打开对话框
             </Button>
           </div>
           <Dialog
             visible={visible2}
+            title="对话框标题"
+            icon={<Icon type="home" />}
             onClose={() => setVisible2(false)}
-            closable={false}
           >
-            无标题对话框内容
+            对话框内容
           </Dialog>
         </>
       ),

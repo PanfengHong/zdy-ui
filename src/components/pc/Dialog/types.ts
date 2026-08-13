@@ -4,6 +4,7 @@ import type { BaseComponentProps } from '../../../types';
 export interface BaseDialogProps extends BaseComponentProps {
   visible?: boolean;
   title?: React.ReactNode;
+  icon?: React.ReactNode;
   width?: string | number;
   closable?: boolean;
   mask?: boolean;

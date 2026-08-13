@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import classNames from 'classnames';
 import type { BaseCarouselProps } from './types';
+import Icon from '../Icon/Icon';
 
 import './Carousel.less';
 
@@ -297,7 +298,9 @@ const Carousel: React.FC<BaseCarouselProps> = ({
             aria-label="上一张"
             type="button"
           >
-            <span className="carousel-arrow-icon">‹</span>
+            <span className="carousel-arrow-icon">
+              <Icon type="left" size={16} />
+            </span>
           </button>
           <button
             className="carousel-arrow carousel-arrow--next"
@@ -305,7 +308,9 @@ const Carousel: React.FC<BaseCarouselProps> = ({
             aria-label="下一张"
             type="button"
           >
-            <span className="carousel-arrow-icon">›</span>
+            <span className="carousel-arrow-icon">
+              <Icon type="right" size={16} />
+            </span>
           </button>
         </>
       )}

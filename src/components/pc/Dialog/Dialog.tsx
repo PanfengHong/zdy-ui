@@ -7,6 +7,7 @@ import './Dialog.less';
 const Dialog = ({
   visible = false,
   title,
+  icon,
   width = 520,
   closable = true,
   mask = true,
@@ -41,6 +42,7 @@ const Dialog = ({
             style={{ ...style, width: widthStyle }}
           >
             <div className="zdy-dialog-header">
+              {icon && <div className="zdy-dialog-icon">{icon}</div>}
               {title && <div className="zdy-dialog-title">{title}</div>}
               {closable && (
                 <button className="zdy-dialog-close" onClick={handleClose}>

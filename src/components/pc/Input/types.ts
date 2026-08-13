@@ -7,9 +7,10 @@ export interface BaseInputProps extends BaseComponentProps {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
   disabled?: boolean;
-  size?: InputSizeType;
+  size?: SizeType;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
+  prepend?: React.ReactNode;
+  append?: React.ReactNode;
+  clearable?: boolean;
 }
-
-export type InputSizeType = 'small' | 'medium' | 'large';

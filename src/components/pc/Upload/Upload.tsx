@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import classNames from 'classnames';
 import type { BaseUploadProps, UploadFile } from './types';
+import Icon from '../Icon/Icon';
 
 import './Upload.less';
 
@@ -267,11 +268,7 @@ const Upload = ({
       />
       
       <div className="zdy-upload-trigger" onClick={handleClick}>
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-          <polyline points="17 8 12 3 7 8" />
-          <line x1="12" y1="3" x2="12" y2="15" />
-        </svg>
+        <Icon type="upload" size="md" />
         <span className="zdy-upload-text">点击或拖拽上传文件</span>
         {accept && <span className="zdy-upload-hint">支持 {accept} 格式</span>}
       </div>

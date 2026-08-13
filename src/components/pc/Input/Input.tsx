@@ -12,6 +12,9 @@ const Input = forwardRef<HTMLInputElement, BaseInputProps>(({
   onChange,
   prefix,
   suffix,
+  prepend,
+  append,
+  clearable = false,
   className = '',
   style
 }, ref) => {
@@ -25,6 +28,7 @@ const Input = forwardRef<HTMLInputElement, BaseInputProps>(({
       {'zdy-input-wrapper--suffix': suffix},
       className
     )} style={style}>
+      {prepend && <span className="zdy-input__prepend">{prepend}</span>}
       {prefix && <span className="zdy-input__prefix">{prefix}</span>}
       <input
         ref={ref}
@@ -35,7 +39,9 @@ const Input = forwardRef<HTMLInputElement, BaseInputProps>(({
         value={value}
         onChange={onChange}
       />
+      {clearable && <span className="zdy-input__clearable">x</span>}
       {suffix && <span className="zdy-input__suffix">{suffix}</span>}
+      {append && <span className="zdy-input__append">{append}</span>}
     </div>
   );
 });

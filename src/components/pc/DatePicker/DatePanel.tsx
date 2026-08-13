@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import classNames from 'classnames';
 import { getMonthDates, isSameDay, isSameMonth, isToday, MONTHS, WEEK_DAYS } from '../../../utils/picker-utils';
+import Icon from '../Icon/Icon';
 
 export interface DatePanelProps {
   viewDate: Date;
@@ -35,9 +36,13 @@ const DatePanel: React.FC<DatePanelProps> = ({
   return (
     <div className={classNames('zdy-picker-panel', 'zdy-picker-date-panel', className)}>
       <div className="zdy-picker-panel-header">
-        <button className="zdy-picker-panel-btn" onClick={goPrev} title="上个月">‹</button>
+        <button className="zdy-picker-panel-btn" onClick={goPrev} title="上个月">
+          <Icon type='left' />
+        </button>
         <span className="zdy-picker-panel-title">{title}</span>
-        <button className="zdy-picker-panel-btn" onClick={goNext} title="下个月">›</button>
+        <button className="zdy-picker-panel-btn" onClick={goNext} title="下个月">
+          <Icon type='right' />
+        </button>
       </div>
       <div className="zdy-picker-panel-body">
         <div className="zdy-picker-week-header">
