@@ -18,7 +18,7 @@ const IconDemo = () => {
 
   const colorArr: string[] = ['#2587ff', '#52c41a', '#faad14', '#ff4d4f'];
 
-  const baseIcons: IconType[] = ['user', 'home', 'add', 'delete', 'close', 'edit', 'search', 'save'];
+  const baseIcons: IconType[] = ['user', 'home', 'add', 'delete', 'close', 'edit', 'search', 'save', 'setting'];
 
   const navIcons: IconType[] = ['up', 'down', 'left', 'right'];
 

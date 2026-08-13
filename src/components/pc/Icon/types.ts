@@ -1,6 +1,6 @@
 import type { BaseComponentProps } from '../../../types';
 
-export type IconType = 'add' | 'delete' | 'close' | 'edit' | 'search' | 'save' | 'cancel' | 'confirm' | 'back' | 'forward' | 'up' | 'down' | 'left' | 'right' | 'caret-up' | 'caret-down' | 'caret-left' | 'caret-right' | 'check' | 'error' | 'warning' | 'info' | 'home' | 'user' | 'people' | 'bell' | 'star' | 'heart' | 'settings' | 'spin' | 'loading' | 'github' | 'upload';
+export type IconType = 'add' | 'delete' | 'close' | 'edit' | 'search' | 'save' | 'setting' | 'cancel' | 'confirm' | 'back' | 'forward' | 'up' | 'down' | 'left' | 'right' | 'caret-up' | 'caret-down' | 'caret-left' | 'caret-right' | 'check' | 'error' | 'warning' | 'info' | 'home' | 'user' | 'people' | 'bell' | 'star' | 'heart' | 'settings' | 'spin' | 'loading' | 'github' | 'upload';
 
 export type IconSizeType = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
