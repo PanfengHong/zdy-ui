@@ -2,6 +2,8 @@
 
 一套基于 React + TypeScript 的跨端组件库，同时提供 PC 端与移动端两套组件实现，覆盖通用、布局、表单、反馈、展示等常用场景，开箱即用。
 
+npm: https://www.npmjs.com/package/zdy-design
+
 ## 特性
 
 - **跨端支持**：同一套 API 设计下提供 PC 端与移动端两套组件实现，按需引入。
