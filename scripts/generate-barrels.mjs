@@ -39,17 +39,23 @@ console.log(`Found ${pcComponents.length} PC components: ${pcComponents.join(', 
 console.log(`Found ${mobileComponents.length} Mobile components: ${mobileComponents.join(', ')}`);
 
 // 1. Generate dist/index.js - main barrel file
-// Only namespace exports (PC, Mobile) to avoid duplicate export names
+// PC components use named (top-level) exports so `import { Alert } from 'zdy-design'` works.
+// Mobile components use namespace `Mobile` to avoid name collision with PC.
 // Types are excluded from JS barrel (no runtime value, only in .d.ts)
 const mainLines = [];
 
-mainLines.push('export * as PC from "./pc/index.js";');
+mainLines.push('// PC components: named exports for top-level destructuring import');
+for (const name of pcComponents) {
+  mainLines.push(`export { default as ${name} } from './pc/${name}.js';`);
+}
+mainLines.push('');
+mainLines.push('// Mobile components: namespaced to avoid colliding with PC exports');
 mainLines.push('export * as Mobile from "./mobile/index.js";');
 mainLines.push('');
 
 const mainContent = mainLines.join('\n');
 writeFileSync(resolve(distDir, 'index.js'), mainContent, 'utf-8');
-console.log('✓ Generated dist/index.js with namespace exports');
+console.log('✓ Generated dist/index.js with PC named exports + Mobile namespace');
 
 // 2. Generate dist/pc/index.js - PC barrel file with named exports
 const pcLines = [];
@@ -77,7 +83,15 @@ function generateTypeReExports(components, platform) {
 
   for (const name of components) {
     const dtsPath = resolve(distPlatformDir, `${name}.d.ts`);
-    const dtsContent = `export * from '../components/${platform}/${name}/index';\n`;
+    // `export *` doesn't re-export `default`, so we must explicitly re-export it.
+    // This allows both:
+    //   import Alert from 'zdy-design/pc/Alert';    (default)
+    //   import { AlertProps } from 'zdy-design/pc/Alert';  (named types)
+    const dtsContent = [
+      `export * from '../components/${platform}/${name}/index';`,
+      `export { default } from '../components/${platform}/${name}/index';`,
+      ''
+    ].join('\n');
     writeFileSync(dtsPath, dtsContent, 'utf-8');
   }
   console.log(`✓ Generated .d.ts re-exports for ${platform}/ components`);
@@ -97,6 +111,30 @@ generateBarrelType('pc');
 generateBarrelType('mobile');
 console.log('✓ Generated index.d.ts for pc/ and mobile/');
 
+// 5.5. Overwrite dist/index.d.ts (types for root entry) to mirror dist/index.js
+// tsc produces dist/index.d.ts from src/index.ts which re-exports ./components/pc etc.
+// Overwrite it so type paths are relative to dist/ (matching barrel JS resolution semantics)
+// and include the PC namespace plus Mobile namespace.
+{
+  const rootDtsLines = [];
+  rootDtsLines.push('// Types for main entry: matches runtime exports in dist/index.js');
+  rootDtsLines.push('');
+  rootDtsLines.push('// PC components: named (top-level) exports');
+  rootDtsLines.push("export * from './components/pc/index';");
+  rootDtsLines.push('');
+  rootDtsLines.push('// PC components (namespace alias)');
+  rootDtsLines.push("export * as PC from './components/pc/index';");
+  rootDtsLines.push('');
+  rootDtsLines.push('// Mobile components: namespaced to avoid collision with PC');
+  rootDtsLines.push("export * as Mobile from './components/mobile/index';");
+  rootDtsLines.push('');
+  rootDtsLines.push('// Shared public types');
+  rootDtsLines.push("export * from './types/index';");
+  rootDtsLines.push('');
+  writeFileSync(resolve(distDir, 'index.d.ts'), rootDtsLines.join('\n'), 'utf-8');
+  console.log('✓ Overwrote dist/index.d.ts to align with dist/index.js exports');
+}
+
 // 6. Generate dist/types/index.d.ts type re-export
 const typesDir = resolve(distDir, 'types');
 if (existsSync(typesDir)) {
@@ -113,17 +151,17 @@ const pkg = JSON.parse(readFileSync(pkgJsonPath, 'utf-8'));
 const exportsObj = {
   '.': {
     import: './dist/index.js',
-    require: './dist/react-ui-component-library.umd.js',
+    require: './dist/zdy-design.umd.js',
     types: './dist/index.d.ts'
   },
-  './styles.css': './dist/react-ui-component-library.css'
+  './styles.css': './dist/zdy-design.css'
 };
 
 // Add subpath exports for each PC component
 for (const name of pcComponents) {
   exportsObj[`./pc/${name}`] = {
     import: `./dist/pc/${name}.js`,
-    require: `./dist/pc/${name}.umd.js`,
+    require: `./dist/pc/${name}.js`,
     types: `./dist/pc/${name}.d.ts`
   };
 }
@@ -132,7 +170,7 @@ for (const name of pcComponents) {
 for (const name of mobileComponents) {
   exportsObj[`./mobile/${name}`] = {
     import: `./dist/mobile/${name}.js`,
-    require: `./dist/mobile/${name}.umd.js`,
+    require: `./dist/mobile/${name}.js`,
     types: `./dist/mobile/${name}.d.ts`
   };
 }
@@ -156,20 +194,31 @@ exportsObj['./types'] = {
 pkg.exports = exportsObj;
 
 // 8. Ensure sideEffects is properly configured
-pkg.sideEffects = ['**/*.less'];
+// CSS 已通过 injectCssIntoJs 插件注入到 JS chunk 中（运行时创建 <style> 标签），
+// 不再需要标记 .less 文件有副作用。设为 false 允许打包器充分 tree-shaking，
+// 组件 chunk 中的 CSS 注入 IIFE 会被打包器识别为副作用而保留。
+pkg.sideEffects = false;
 
 writeFileSync(pkgJsonPath, JSON.stringify(pkg, null, 2) + '\n', 'utf-8');
 console.log('✓ Updated package.json with subpath exports');
 
 console.log('\n✅ All barrel files generated successfully!');
 console.log('\nUsage examples:');
-console.log('  // Namespace import (tree-shakeable via bundler)');
-console.log('  import { PC, Mobile } from "react-ui-component-library";');
+console.log('  // 方式一：整体引入（PC 组件具名导出，可 tree-shaking）');
+console.log('  import { Alert, Button } from "zdy-design";');
+console.log('  <Alert type="info">Hello</Alert>');
+console.log('');
+console.log('  // 方式二：按需引入单个 PC 组件');
+console.log('  import Alert from "zdy-design/pc/Alert";');
+console.log('');
+console.log('  // 额外：命名空间风格');
+console.log('  import { PC, Mobile } from "zdy-design";');
 console.log('  <PC.Button>Click</PC.Button>');
+console.log('  <Mobile.Alert />');
 console.log('');
-console.log('  // Direct component import (fully tree-shakeable, only loads the specific component)');
-console.log('  import Button from "react-ui-component-library/pc/Button";');
+console.log('  // 按需引入单个 Mobile 组件');
+console.log('  import Alert from "zdy-design/mobile/Alert";');
 console.log('');
-console.log('  // TypeScript types');
-console.log('  import type { BaseButtonProps } from "react-ui-component-library";');
-console.log('  import type { BaseButtonProps } from "react-ui-component-library/types";');
+console.log('  // TypeScript 类型');
+console.log('  import type { AlertProps } from "zdy-design";');
+console.log('  import type { AlertProps } from "zdy-design/types";');

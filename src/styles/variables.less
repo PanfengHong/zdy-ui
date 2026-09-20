@@ -1,31 +1,54 @@
-// 全局变量
+// ============================================================
+// LESS 变量 → 指向 global.less 里定义的 CSS 变量
+// 好处：现有组件不用改，自动跟随主题切换
+// 新组件推荐直接用 var(--xxx) 语义化变量
+// ============================================================
+
+// 品牌色（保持 LESS 原有值，这些是纯业务语义）
 @primary-color: #1890ff;
 @success-color: #52c41a;
 @warning-color: #faad14;
 @error-color: #f5222d;
-@text-color: rgba(0, 0, 0, 0.85);
-@text-color-secondary: rgba(0, 0, 0, 0.65);
+
+// ↓↓↓ 下面全部指向 CSS 变量，主题切换自动生效 ↓↓↓
+
+// 文本颜色
+@text-color: var(--foreground);
+@text-color-secondary: var(--muted-foreground);
 @text-color-disabled: rgba(0, 0, 0, 0.4);
-@border-color: #d9d9d9;
+
+// 边框
+@border-color: var(--border);
+@border-color-split: var(--border-subtle);
+
+// 圆角
 @border-radius: 4px;
 @border-radius-sm: 4px;
 @border-radius-base: 5px;
+
+// 阴影
 @box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 @shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+// 占位符
 @placeholder-color: rgba(0, 0, 0, 0.45);
-@background-color-hover: #f5f5f5;
-@primary-color-light: #e6f7ff;
+
+// hover 背景
+@background-color-hover: var(--hover);
+
+// 主色浅色（选中背景等）
+@primary-color-light: var(--selected-bg);
+
+// z-index
 @z-index-dropdown: 1000;
 @z-index-tooltip: 1000;
 
-// PC端变量
+// PC端字体
 @pc-font-size-base: 14px;
 @pc-font-size-large: 16px;
 @pc-font-size-small: 12px;
 
-// 移动端变量
+// 移动端字体
 @mobile-font-size-base: 16px;
 @mobile-font-size-large: 18px;
 @mobile-font-size-small: 14px;
-
-@border-color-split: #e8e8e8;

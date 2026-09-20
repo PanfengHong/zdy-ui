@@ -1,4 +1,92 @@
-@import './variables.less';
+@import "./variables.less";
+
+// ============================================================
+// 主题 tokens (参考 shadcn/ui 规范)
+// 语义化的 CSS 变量，所有组件通过 var(--xxx) 引用
+// 想换主题只要覆盖 :root 下这些变量即可
+// ============================================================
+:root {
+  /* 基础 surface + text */
+  --background: oklch(1 0 0);
+  --foreground: lab(2.75381% 0 0);
+
+  /* 卡片 */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.145 0 0);
+
+  /* 主按钮 / 主色 */
+  --primary: oklch(0.205 0 0);
+  --primary-foreground: oklch(0.985 0 0);
+
+  /* 次级 surface */
+  --secondary: oklch(0.97 0 0);
+  --secondary-foreground: oklch(0.205 0 0);
+
+  /* muted 弱化 */
+  --muted: lab(96.52% -0.0000298023 0.0000119209);
+  --muted-foreground: oklch(0.556 0 0);
+
+  /* accent */
+  --accent: oklch(0.97 0 0);
+  --accent-foreground: oklch(0.205 0 0);
+
+  /* destructive / 删除 */
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.577 0.245 27.325);
+
+  /* 边框 —— shadcn 默认值 */
+  --border: lab(90.952% 0 -0.0000119209);
+  --input: lab(90.952% 0 -0.0000119209);
+
+  /* 分割线 (比 border 更浅一档，用于单元格分隔等) */
+  --border-subtle: oklch(0.922 0 0);
+
+  /* 焦点环 */
+  --ring: oklch(0.556 0.023 264.36);
+
+  /* hover 背景 */
+  --hover: oklch(0.97 0 0);
+
+  /* 圆角 */
+  --radius: 0.5rem;
+
+  /* spacing 基础单位 (shadcn / tailwind 规范) */
+  --spacing: 0.25rem;
+
+  /* 字重 */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* 选中背景 */
+  --selected-bg: rgba(24, 144, 255, 0.06);
+  --selected-bg-hover: rgba(24, 144, 255, 0.1);
+}
+
+/* 暗色主题预留 —— 在 <html> 上加 class="dark" 生效 */
+.dark {
+  --background: oklch(0.145 0 0);
+  --foreground: oklch(0.985 0 0);
+  --card: oklch(0.205 0 0);
+  --card-foreground: oklch(0.985 0 0);
+  --primary: oklch(0.922 0 0);
+  --primary-foreground: oklch(0.205 0 0);
+  --secondary: oklch(0.269 0 0);
+  --secondary-foreground: oklch(0.985 0 0);
+  --muted: oklch(0.269 0 0);
+  --muted-foreground: oklch(0.708 0 0);
+  --accent: oklch(0.269 0 0);
+  --accent-foreground: oklch(0.985 0 0);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.704 0.191 22.216);
+  --border: oklch(0.269 0 0);
+  --input: oklch(0.269 0 0);
+  --border-subtle: oklch(0.269 0 0);
+  --ring: oklch(0.439 0 0);
+  --hover: oklch(0.269 0 0);
+}
 
 * {
   box-sizing: border-box;
@@ -7,9 +95,9 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+    "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: @text-color;
@@ -17,7 +105,12 @@ body {
 }
 
 // 基础元素样式
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
   font-weight: 500;
 }
@@ -38,9 +131,10 @@ a:hover {
   text-decoration: none;
 }
 
-input, textarea {
+input,
+textarea {
   outline: none;
-  border: 1px solid @border-color;
+  border: 1px solid var(--input);
   border-radius: @border-radius;
   padding: 4px 11px;
 }

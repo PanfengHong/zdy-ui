@@ -1,4 +1,3 @@
-import React from 'react';
 import type { BaseComponentProps } from '../../../types';
 
 export interface UploadFile {

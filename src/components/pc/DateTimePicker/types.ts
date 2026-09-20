@@ -1,4 +1,3 @@
-import type React from 'react';
 import type { BaseComponentProps, SizeType } from '../../../types';
 
 export interface DateTimePickerProps extends BaseComponentProps {

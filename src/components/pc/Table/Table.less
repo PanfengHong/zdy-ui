@@ -1,59 +1,282 @@
-@import '../../../styles/variables.less';
+@import "../../../styles/variables.less";
 
 .zdy-table-wrapper {
   width: 100%;
   overflow-x: auto;
   margin-top: 16px;
+  background-color: var(--background);
 
-  &--bordered .zdy-table {
-    border: 1px solid @border-color;
-    border-radius: 4px;
+  // 默认带边框，由 wrapper 负责 border + radius + overflow
+  // 这样 border-collapse: collapse 不会破坏圆角连续性
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+
+  &--bordered {
+    // 默认就是 bordered，这里保留 class 兼容旧用法
   }
 }
 
 .zdy-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13px;
-  color: @text-color;
+  font-size: 14px;
+  color: var(--foreground);
+  table-layout: auto;
 
+  // 通用单元格
   th,
   td {
-    padding: 10px 16px;
+    padding: 12px 16px;
     text-align: left;
-    border-bottom: 1px solid @border-color;
+    border-bottom: 1px solid var(--border-subtle);
+    vertical-align: middle;
+    white-space: nowrap;
   }
 
+  // 表头
   thead {
     th {
-      background-color: #fafafa;
-      font-weight: 600;
-      color: @text-color;
-      white-space: nowrap;
+      background-color: var(--muted);
+      font-weight: var(--font-weight-medium);
+      color: var(--foreground);
+      font-size: 13px;
+      letter-spacing: 0.02em;
+      border-bottom: 1px solid var(--border);
+      user-select: none;
     }
   }
 
+  // 表体行
   tbody {
-    tr:hover {
-      td {
-        background-color: #fafafa;
-      }
-    }
+    tr {
+      transition: background-color 0.15s ease;
 
-    tr:last-child {
+      &:hover td {
+        background-color: var(--hover);
+      }
+
       td {
+        background-color: transparent;
+      }
+
+      &:last-child td {
         border-bottom: none;
       }
+
+      // 选中行
+      &.zdy-table-row--selected td {
+        background-color: var(--selected-bg);
+      }
+      &.zdy-table-row--selected:hover td {
+        background-color: var(--selected-bg-hover);
+      }
+
+      // 拖拽目标行高亮
+      &.zdy-table-row--drag-over td {
+        border-top: 2px solid @primary-color;
+      }
+    }
+
+    // 拖拽源行半透明
+    tr[draggable="true"] {
+      &:active td {
+        opacity: 0.7;
+      }
     }
   }
 
-  td:first-child,
-  th:first-child {
-    padding-left: 16px;
+  // 特殊列宽
+  .zdy-table-col-drag,
+  .zdy-table-cell-drag {
+    width: 40px;
+    min-width: 40px;
+    padding-left: 12px;
+    padding-right: 12px;
   }
 
-  td:last-child,
-  th:last-child {
-    padding-right: 16px;
+  .zdy-table-col-select,
+  .zdy-table-cell-select {
+    width: 48px;
+    min-width: 48px;
+    padding-left: 12px;
+    padding-right: 8px;
+  }
+
+  .zdy-table-col-actions,
+  .zdy-table-cell-actions {
+    width: 56px;
+    min-width: 56px;
+    padding-left: 8px;
+    padding-right: 12px;
+    text-align: right;
+  }
+}
+
+// -------- 拖拽手柄 --------
+.zdy-table-drag-handle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  color: var(--muted-foreground);
+  border-radius: 4px;
+  cursor: grab;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+
+  &:hover {
+    color: var(--foreground);
+    background-color: var(--hover);
+  }
+
+  &:active {
+    cursor: grabbing;
+  }
+}
+
+// -------- 操作菜单按钮 --------
+.zdy-table-more-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  color: var(--muted-foreground);
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    background-color 0.15s ease;
+  padding: 0;
+
+  &:hover,
+  &.is-active {
+    color: var(--foreground);
+    background-color: var(--muted);
+  }
+}
+
+// -------- 操作菜单下拉内容 --------
+// 注意：Popover 外层的 .zdy-popover-inner 自带 padding: 12px 16px，
+// 这里通过 .zdy-table-row-menu-popover 把它清零，让内容容器自己控制 padding
+.zdy-table-row-menu-popover {
+  .zdy-popover-inner {
+    padding: 0;
+  }
+}
+
+.zdy-table-row-actions {
+  min-width: 160px;
+  padding: calc(var(--spacing) * 1);
+  box-sizing: border-box;
+}
+
+.zdy-table-row-action-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--foreground);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.12s ease;
+
+  &:hover:not(:disabled) {
+    background-color: var(--hover);
+  }
+
+  &--danger {
+    color: var(--destructive);
+    &:hover:not(:disabled) {
+      background-color: oklch(0.96 0.02 25);
+    }
+  }
+
+  &--disabled {
+    color: var(--muted-foreground);
+    cursor: not-allowed;
+  }
+}
+
+.zdy-table-row-action-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  font-size: 14px;
+}
+
+.zdy-table-row-actions-divider {
+  height: 1px;
+  background-color: var(--border-subtle);
+  margin: 4px 0;
+}
+
+// -------- 内嵌 Checkbox --------
+.zdy-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+
+  &--disabled {
+    cursor: not-allowed;
+    .zdy-checkbox-box {
+      background-color: var(--muted);
+      border-color: var(--border);
+    }
+  }
+
+  .zdy-checkbox-input {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+  }
+
+  .zdy-checkbox-box {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--input);
+    border-radius: 4px;
+    background-color: var(--background);
+    transition: all 0.15s ease;
+    color: #fff;
+  }
+
+  .zdy-checkbox-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .zdy-checkbox-input:checked + .zdy-checkbox-box {
+    background-color: @primary-color;
+    border-color: @primary-color;
+  }
+
+  .zdy-checkbox-input:focus-visible + .zdy-checkbox-box {
+    box-shadow: 0 0 0 2px color-mix(in oklab, var(--ring) 20%, transparent);
+  }
+
+  &:hover:not(.zdy-checkbox--disabled) .zdy-checkbox-box {
+    border-color: @primary-color;
   }
 }

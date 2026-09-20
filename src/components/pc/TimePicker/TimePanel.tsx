@@ -44,7 +44,7 @@ const TimePanel: React.FC<TimePanelProps> = ({
   disabledHours,
   disabledMinutes,
   disabledSeconds,
-  hideDisabledOptions = false,
+  // hideDisabledOptions = false,
   onSelect,
   className,
 }) => {
@@ -79,6 +79,7 @@ const TimePanel: React.FC<TimePanelProps> = ({
     listMax: number,
     onClick: (val: number) => void
   ) => {
+    console.log('listMax', listMax)
     // 当选中值不在可选列表中（被禁用且 hideDisabledOptions），展示选中态到最接近的值
     return list.map((val) => (
       <div

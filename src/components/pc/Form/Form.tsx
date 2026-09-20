@@ -50,6 +50,7 @@ interface FormStore {
 const createValidateRule =
   (store: FormStore) =>
   async (rule: FormRule, value: any, formData: Record<string, any>): Promise<ValidateResult> => {
+    console.log('store', store)
     if (rule.required) {
       const empty =
         value === undefined ||
