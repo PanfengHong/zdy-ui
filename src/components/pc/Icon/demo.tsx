@@ -4,7 +4,7 @@ import ApiTable from '../../ApiTable/ApiTable';
 import Icon from './Icon';
 import type { IconSizeType, IconType } from './types'
 
-const IconDemo = () => {
+const IconDemo: React.FC = () => {
   const apiData = [
     { prop: 'type', desc: '图标名称', type: 'string', default: '-' },
     { prop: 'size', desc: '图标大小', type: 'number | string', default: 'inherit' },
@@ -18,7 +18,7 @@ const IconDemo = () => {
 
   const colorArr: string[] = ['#2587ff', '#52c41a', '#faad14', '#ff4d4f'];
 
-  const baseIcons: IconType[] = ['user', 'home', 'add', 'delete', 'close', 'edit', 'search', 'save', 'setting'];
+  const baseIcons: IconType[] = ['user', 'home', 'add', 'delete', 'close', 'edit', 'search', 'save', 'setting', 'more-horizontal', 'more-vertical'];
 
   const navIcons: IconType[] = ['up', 'down', 'left', 'right'];
 

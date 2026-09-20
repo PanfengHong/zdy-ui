@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DemoBlock from "../../DemoBlock/DemoBlock";
 import Table from "../Table";
 import type { RowAction } from "../Table/types";
+import ApiTable from "../../ApiTable/ApiTable";
 
 const TableDemo = () => {
   const apiData = [
@@ -369,47 +370,7 @@ const TableDemo = () => {
 
       <div className="component-group" style={{ marginTop: "32px" }}>
         <h3>API</h3>
-        <div style={{ marginTop: 12 }}>
-          <h4 style={{ margin: "16px 0 8px" }}>Table</h4>
-          <table
-            style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}
-          >
-            <thead>
-              <tr style={{ background: "#fafafa" }}>
-                <th style={thStyle}>属性</th>
-                <th style={thStyle}>说明</th>
-                <th style={thStyle}>类型</th>
-                <th style={thStyle}>默认值</th>
-              </tr>
-            </thead>
-            <tbody>
-              {apiData.map((row) => (
-                <tr
-                  key={row.prop}
-                  style={{ borderBottom: "1px solid #f0f0f0" }}
-                >
-                  <td style={tdStyle}>
-                    <code>{row.prop}</code>
-                  </td>
-                  <td style={tdStyle}>{row.desc}</td>
-                  <td style={tdStyle}>
-                    <code
-                      style={{
-                        color: "#c7254e",
-                        background: "#f9f2f4",
-                        padding: "1px 4px",
-                        borderRadius: 3,
-                      }}
-                    >
-                      {row.type}
-                    </code>
-                  </td>
-                  <td style={tdStyle}>{row.default}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <ApiTable dataSource={apiData} />
       </div>
     </>
   );
