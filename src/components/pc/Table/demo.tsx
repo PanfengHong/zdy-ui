@@ -493,36 +493,6 @@ const TableDemo = () => {
       ),
     },
     {
-      title: "完整功能（shadcn 风格）",
-      code: `<Table
-  columns={columns}
-  dataSource={data}
-  draggable
-  rowSelection={{ onChange }}
-  rowActions={[
-    { key: 'edit', label: 'Edit' },
-    { key: 'copy', label: 'Make a copy' },
-    { key: 'delete', label: 'Delete', danger: true },
-  ]}
-  onDragEnd={(f, t, newData) => setData(newData)}
-/>`,
-      render: (
-        <Table
-          rowKey="key"
-          columns={fullDemoColumnsWithTitle as any}
-          dataSource={fullDemoData}
-          draggable
-          rowSelection={{
-            onChange: (keys) => console.log("selected:", keys),
-          }}
-          rowActions={rowActions}
-          onDragEnd={(_from, _to, newData) =>
-            setFullDemoData(newData as typeof fullDemoData)
-          }
-        />
-      ),
-    },
-    {
       title: "分页",
       code: `<Table
   columns={columns}
@@ -550,6 +520,50 @@ const TableDemo = () => {
             showQuickJumper: true,
             onChange: (page, size) => console.log("page:", page, size),
           }}
+        />
+      ),
+    },
+    {
+      title: "完整功能（shadcn 风格）",
+      code: `<Table
+  columns={columns}
+  dataSource={data}
+  draggable
+  rowSelection={{ onChange }}
+  rowActions={[
+    { key: 'edit', label: 'Edit' },
+    { key: 'copy', label: 'Make a copy' },
+    { key: 'delete', label: 'Delete', danger: true },
+  ]}
+    pagination={{
+            defaultPageSize: 5,
+            pageSizeOptions: [5, 10, 20],
+            showSizeChanger: true,
+            showQuickJumper: true,
+            onChange: (page, size) => console.log("page:", page, size),
+          }}
+  onDragEnd={(f, t, newData) => setData(newData)}
+/>`,
+      render: (
+        <Table
+          rowKey="key"
+          columns={fullDemoColumnsWithTitle as any}
+          dataSource={fullDemoData}
+          draggable
+          rowSelection={{
+            onChange: (keys) => console.log("selected:", keys),
+          }}
+          rowActions={rowActions}
+          pagination={{
+            defaultPageSize: 5,
+            pageSizeOptions: [5, 10, 20],
+            showSizeChanger: true,
+            showQuickJumper: true,
+            onChange: (page, size) => console.log("page:", page, size),
+          }}
+          onDragEnd={(_from, _to, newData) =>
+            setFullDemoData(newData as typeof fullDemoData)
+          }
         />
       ),
     },
