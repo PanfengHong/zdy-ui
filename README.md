@@ -3,6 +3,7 @@
 一套基于 React + TypeScript 的跨端组件库，同时提供 PC 端与移动端两套组件实现，覆盖通用、布局、表单、反馈、展示等常用场景，开箱即用。
 
 npm: https://www.npmjs.com/package/zdy-design
+git: https://github.com/PanfengHong/zdy-ui
 
 ## 特性
 
@@ -17,28 +18,28 @@ npm: https://www.npmjs.com/package/zdy-design
 
 ## 技术栈
 
-| 分类 | 技术 |
-| --- | --- |
-| 核心框架 | React 19 |
-| 开发语言 | TypeScript 5.9 |
-| 构建工具 | Vite 8 |
-| 样式方案 | Less 4 |
+| 分类     | 技术                                          |
+| -------- | --------------------------------------------- |
+| 核心框架 | React 19                                      |
+| 开发语言 | TypeScript 5.9                                |
+| 构建工具 | Vite 8                                        |
+| 样式方案 | Less 4                                        |
 | 类型检查 | tsc（`tsconfig.types.json` 独立产出 `.d.ts`） |
-| 代码规范 | ESLint 9 + typescript-eslint |
-| 类名组合 | classnames |
-| 包管理 | npm |
+| 代码规范 | ESLint 9 + typescript-eslint                  |
+| 类名组合 | classnames                                    |
+| 包管理   | npm                                           |
 
 ## 组件总览
 
 ### PC 端组件（47 个）
 
-| 分类 | 组件 |
-| --- | --- |
-| 通用 | Button 按钮、Icon 图标、Avatar 头像 |
-| 布局 | Layout 布局、Grid 栅格、Masonry 瀑布流 |
+| 分类 | 组件                                                                                                                                                                                                                                                         |
+| ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| 通用 | Button 按钮、Icon 图标、Avatar 头像                                                                                                                                                                                                                          |
+| 布局 | Layout 布局、Grid 栅格、Masonry 瀑布流                                                                                                                                                                                                                       |
 | 表单 | Input 输入框、Textarea 文本域、Select 下拉选择、Radio 单选框、Checkbox 多选框、Switch 开关、Slider 滑块、Rate 评分、Upload 上传、DatePicker 日期选择、TimePicker 时间选择、DateTimePicker 日期时间选择器、ColorPicker 颜色选择器、Form 表单、Transfer 穿梭框 |
-| 反馈 | Dialog 弹框、Drawer 抽屉、Alert 提醒、Message 消息、Notification 通知、Loading 加载、Skeleton 骨架屏、Watermark 水印、Progress 进度条 |
-| 展示 | Menu 菜单、Carousel 走马灯、Table 表格、List 列表、Breadcrumb 面包屑、Steps 步骤条、Anchor 锚点、Pagination 分页、Tabs 标签页、Tree 树形控件、Calendar 日历、Empty 空状态、Popover 气泡、Collapse 折叠面板、Tag 标签、Intro 引导、Board 看板 |
+| 反馈 | Dialog 弹框、Drawer 抽屉、Alert 提醒、Message 消息、Notification 通知、Loading 加载、Skeleton 骨架屏、Watermark 水印、Progress 进度条                                                                                                                        |
+| 展示 | Menu 菜单、Carousel 走马灯、Table 表格、List 列表、Breadcrumb 面包屑、Steps 步骤条、Anchor 锚点、Pagination 分页、Tabs 标签页、Tree 树形控件、Calendar 日历、Empty 空状态、Popover 气泡、Collapse 折叠面板、Tag 标签、Intro 引导、Board 看板                 |
 
 ### 移动端组件（43 个）
 
@@ -70,7 +71,7 @@ yarn add zdy-design
 PC 端组件全部做顶层具名导出，解构出来直接使用，Vite / Webpack 会自动 Tree-shaking 移除未引用组件。
 
 ```tsx
-import { Alert, Button, Input, Form } from 'zdy-design';
+import { Alert, Button, Input, Form } from "zdy-design";
 
 const App = () => (
   <>
@@ -91,17 +92,15 @@ const App = () => (
 
 ```tsx
 // 引入单个 PC 组件
-import Alert from 'zdy-design/pc/Alert';
-import Button from 'zdy-design/pc/Button';
-import Select from 'zdy-design/pc/Select';
+import Alert from "zdy-design/pc/Alert";
+import Button from "zdy-design/pc/Button";
+import Select from "zdy-design/pc/Select";
 
 // 引入单个移动端组件
-import Alert from 'zdy-design/mobile/Alert';
-import Button from 'zdy-design/mobile/Button';
+import Alert from "zdy-design/mobile/Alert";
+import Button from "zdy-design/mobile/Button";
 
-const App = () => (
-  <Alert type="success" message="操作成功" />
-);
+const App = () => <Alert type="success" message="操作成功" />;
 ```
 
 ---
@@ -139,10 +138,14 @@ import { Mobile } from 'zdy-design';
 
 ```ts
 // 从主入口直接引类型（与组件是同一份类型）
-import type { AlertProps, ButtonProps, SelectProps } from 'zdy-design';
+import type { AlertProps, ButtonProps, SelectProps } from "zdy-design";
 
 // 或从 types 子路径引
-import type { AlertProps, BaseComponentProps, SizeType } from 'zdy-design/types';
+import type {
+  AlertProps,
+  BaseComponentProps,
+  SizeType,
+} from "zdy-design/types";
 ```
 
 ---
@@ -160,13 +163,13 @@ import type { AlertProps, BaseComponentProps, SizeType } from 'zdy-design/types'
 
 ```ts
 // 全量样式（可选，通常不需要）
-import 'zdy-design/styles.css';
+import "zdy-design/styles.css";
 ```
 
 Less 变量定制：
 
 ```less
-@import 'zdy-design/src/styles/variables.less';
+@import "zdy-design/src/styles/variables.less";
 
 // 覆盖主色等设计 Token
 @primary-color: #722ed1;
@@ -178,17 +181,21 @@ Less 变量定制：
 ## 使用示例
 
 ```tsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 // ✅ 方式一：解构引入（样式自动加载）
-import { Form, Input, Radio, Button, Alert } from 'zdy-design';
+import { Form, Input, Radio, Button, Alert } from "zdy-design";
 
 const Demo = () => {
-  const [gender, setGender] = useState('1');
+  const [gender, setGender] = useState("1");
 
   return (
     <>
-      <Alert type="info" message="提示" description="样式已自动加载，无需额外 import CSS" />
+      <Alert
+        type="info"
+        message="提示"
+        description="样式已自动加载，无需额外 import CSS"
+      />
 
       <Form layout="vertical">
         <Form.Item label="姓名">
