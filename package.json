@@ -1,7 +1,7 @@
 {
   "name": "zdy-design",
   "private": false,
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A React component library with PC and mobile versions",
   "type": "module",
   "main": "./dist/zdy-design.cjs.js",
