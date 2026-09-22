@@ -22,6 +22,45 @@ export interface TableProps {
   showHeaderSelectAll?: boolean;
   /** 自定义 row key 字段 */
   rowKey?: string;
+  /**
+   * 表头固定时的表体最大高度（数字按 px 处理）。
+   * 设置后内容超出出现纵向滚动条，表头自动吸顶；
+   * 列宽超出容器时出现横向滚动，配合列 fixed 可固定列。
+   */
+  maxHeight?: number | string;
+  /**
+   * 分页配置。传 true 使用默认配置；传对象细粒度配置；false/不传 关闭分页。
+   * - 不传 total：前端分页模式，组件自动对 dataSource 切片，total = dataSource.length
+   * - 显式传 total：服务端分页模式，dataSource 视为当前页数据（由外部负责切片）
+   */
+  pagination?: boolean | TablePaginationConfig;
+}
+
+export interface TablePaginationConfig {
+  /** 当前页（受控） */
+  current?: number;
+  /** 默认当前页（非受控） */
+  defaultCurrent?: number;
+  /** 每页条数（受控） */
+  pageSize?: number;
+  /** 默认每页条数（非受控），默认 10 */
+  defaultPageSize?: number;
+  /** 总条数。不传时取 dataSource.length（前端分页）；传入时为服务端分页 */
+  total?: number;
+  /** 是否展示每页条数切换器，默认 true */
+  showSizeChanger?: boolean;
+  /** 是否展示快速跳转输入框 */
+  showQuickJumper?: boolean;
+  /** 总数展示；返回 null 可隐藏左侧默认的"共 N 条" */
+  showTotal?: ((total: number, range: [number, number]) => React.ReactNode) | null;
+  /** 可选每页条数 */
+  pageSizeOptions?: number[];
+  /** 分页器尺寸 */
+  size?: "default" | "small";
+  /** 页码 / 每页条数变化回调 */
+  onChange?: (page: number, pageSize: number) => void;
+  /** 每页条数变化回调 */
+  onShowSizeChange?: (current: number, size: number) => void;
 }
 
 export interface TableColumn {

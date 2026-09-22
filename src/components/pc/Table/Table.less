@@ -1,25 +1,46 @@
 @import "../../../styles/variables.less";
 
-.zdy-table-wrapper {
-  width: 100%;
-  overflow-x: auto;
-  margin-top: 16px;
-  background-color: var(--background);
+// 固定列选中态需要不透明背景（避免横向滚动时内容透过）
+@selected-solid: color-mix(in srgb, @primary-color 6%, var(--background));
+@selected-solid-hover: color-mix(
+  in srgb,
+  @primary-color 10%,
+  var(--background)
+);
+@drop-indicator: @primary-color;
+// 固定列紧邻滚动区一侧的投影
+@fixed-elevation-left: 8px 0 8px -8px rgba(0, 0, 0, 0.18);
+@fixed-elevation-right: -8px 0 8px -8px rgba(0, 0, 0, 0.18);
+@fixed-separator: inset -1px 0 0 var(--border);
+@fixed-separator-r: inset 1px 0 0 var(--border);
 
-  // 默认带边框，由 wrapper 负责 border + radius + overflow
-  // 这样 border-collapse: collapse 不会破坏圆角连续性
-  border: 1px solid var(--border);
+.zdy-table-container {
+  width: 100%;
+  margin-top: 16px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
   border-radius: var(--radius);
+  // 裁剪内部滚动内容，保证圆角连续（Popover 走 portal，不受影响）
   overflow: hidden;
 
   &--bordered {
-    // 默认就是 bordered，这里保留 class 兼容旧用法
+    border: 1px solid var(--border);
   }
+}
+
+.zdy-table-wrapper {
+  flex: 1 1 auto;
+  min-height: 0;
+  // auto：内容不超出时不出现滚动条，超出时横/纵均可滚动（sticky 依赖 overflow 非 visible）
+  overflow: auto;
 }
 
 .zdy-table {
   width: 100%;
-  border-collapse: collapse;
+  // 必须用 separate：sticky 单元格在 collapse 模式下边框会丢失，且亚像素舍入会抖动
+  border-collapse: separate;
+  border-spacing: 0;
   font-size: 14px;
   color: var(--foreground);
   table-layout: auto;
@@ -28,15 +49,20 @@
   th,
   td {
     padding: 12px 16px;
+    line-height: 20px;
     text-align: left;
     border-bottom: 1px solid var(--border-subtle);
     vertical-align: middle;
     white-space: nowrap;
+    background-color: transparent;
   }
 
-  // 表头
+  // 表头：始终吸顶（无纵向滚动时 sticky 不产生效果，零副作用）
   thead {
     th {
+      position: sticky;
+      top: 0;
+      z-index: 3;
       background-color: var(--muted);
       font-weight: var(--font-weight-medium);
       color: var(--foreground);
@@ -56,41 +82,116 @@
         background-color: var(--hover);
       }
 
-      td {
-        background-color: transparent;
-      }
-
       &:last-child td {
         border-bottom: none;
       }
 
-      // 选中行
+      // 选中行（实色，保证固定列不透明）
       &.zdy-table-row--selected td {
-        background-color: var(--selected-bg);
+        background-color: @selected-solid;
       }
       &.zdy-table-row--selected:hover td {
-        background-color: var(--selected-bg-hover);
-      }
-
-      // 拖拽目标行高亮
-      &.zdy-table-row--drag-over td {
-        border-top: 2px solid @primary-color;
+        background-color: @selected-solid-hover;
       }
     }
 
-    // 拖拽源行半透明
-    tr[draggable="true"] {
-      &:active td {
-        opacity: 0.7;
-      }
+    // 拖拽源行
+    tr.zdy-table-row--dragging td {
+      opacity: 0.55;
     }
   }
 
-  // 特殊列宽
+  // ===== 固定列 =====
+  // 注意：背景必须按 thead / tbody 分层设置，固定列表头与普通列表头同为 --muted
+  .zdy-table-cell--fixed-left,
+  .zdy-table-cell--fixed-right {
+    position: sticky;
+    z-index: 2;
+  }
+
+  thead th.zdy-table-cell--fixed-left,
+  thead th.zdy-table-cell--fixed-right {
+    z-index: 5;
+    background-color: var(--muted);
+  }
+
+  tbody td.zdy-table-cell--fixed-left,
+  tbody td.zdy-table-cell--fixed-right {
+    background-color: var(--background);
+  }
+
+  tbody {
+    tr:hover td.zdy-table-cell--fixed-left,
+    tr:hover td.zdy-table-cell--fixed-right {
+      background-color: var(--hover);
+    }
+    tr.zdy-table-row--selected td.zdy-table-cell--fixed-left,
+    tr.zdy-table-row--selected td.zdy-table-cell--fixed-right {
+      background-color: @selected-solid;
+    }
+    tr.zdy-table-row--selected:hover td.zdy-table-cell--fixed-left,
+    tr.zdy-table-row--selected:hover td.zdy-table-cell--fixed-right {
+      background-color: @selected-solid-hover;
+    }
+  }
+
+  // 横向滚动时，固定列紧邻滚动区的边缘出现分隔线 + 投影
+  .zdy-table-wrapper--shadow-right & .zdy-table-cell--edge-left,
+  .zdy-table-wrapper--shadow-right & thead th.zdy-table-cell--edge-left {
+    box-shadow: @fixed-separator, @fixed-elevation-left;
+  }
+  .zdy-table-wrapper--shadow-left & .zdy-table-cell--edge-right,
+  .zdy-table-wrapper--shadow-left & thead th.zdy-table-cell--edge-right {
+    box-shadow: @fixed-separator-r, @fixed-elevation-right;
+  }
+
+  // ===== 拖拽落点指示线（box-shadow，不占布局，行高零变化）=====
+  tbody tr.zdy-table-row--drop-before > td {
+    box-shadow: inset 0 2px 0 0 @drop-indicator;
+  }
+  tbody tr.zdy-table-row--drop-after > td {
+    box-shadow: inset 0 -2px 0 0 @drop-indicator;
+  }
+  // 指示线 + 固定列投影同时存在时合并
+  .zdy-table-wrapper--shadow-right
+    tbody
+    tr.zdy-table-row--drop-before
+    > td.zdy-table-cell--edge-left {
+    box-shadow:
+      inset 0 2px 0 0 @drop-indicator,
+      @fixed-elevation-left;
+  }
+  .zdy-table-wrapper--shadow-left
+    tbody
+    tr.zdy-table-row--drop-before
+    > td.zdy-table-cell--edge-right {
+    box-shadow:
+      inset 0 2px 0 0 @drop-indicator,
+      @fixed-elevation-right;
+  }
+  .zdy-table-wrapper--shadow-right
+    tbody
+    tr.zdy-table-row--drop-after
+    > td.zdy-table-cell--edge-left {
+    box-shadow:
+      inset 0 -2px 0 0 @drop-indicator,
+      @fixed-elevation-left;
+  }
+  .zdy-table-wrapper--shadow-left
+    tbody
+    tr.zdy-table-row--drop-after
+    > td.zdy-table-cell--edge-right {
+    box-shadow:
+      inset 0 -2px 0 0 @drop-indicator,
+      @fixed-elevation-right;
+  }
+
+  // ===== 辅助列宽 =====
   .zdy-table-col-drag,
   .zdy-table-cell-drag {
     width: 40px;
     min-width: 40px;
+    max-width: 40px;
     padding-left: 12px;
     padding-right: 12px;
   }
@@ -99,6 +200,7 @@
   .zdy-table-cell-select {
     width: 48px;
     min-width: 48px;
+    max-width: 48px;
     padding-left: 12px;
     padding-right: 8px;
   }
@@ -107,10 +209,34 @@
   .zdy-table-cell-actions {
     width: 56px;
     min-width: 56px;
+    max-width: 56px;
     padding-left: 8px;
     padding-right: 12px;
     text-align: right;
   }
+}
+
+// -------- 分页栏 --------
+.zdy-table-pagination-bar {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 12px 16px;
+  background-color: var(--background);
+  border-top: 1px solid var(--border-subtle);
+
+  .zdy-pagination {
+    margin: 0;
+  }
+}
+
+.zdy-table-pagination-total {
+  font-size: 13px;
+  color: var(--muted-foreground);
+  white-space: nowrap;
 }
 
 // -------- 拖拽手柄 --------
@@ -123,13 +249,14 @@
   color: var(--muted-foreground);
   border-radius: 4px;
   cursor: grab;
+  user-select: none;
   transition:
     color 0.15s ease,
     background-color 0.15s ease;
 
   &:hover {
     color: var(--foreground);
-    background-color: var(--hover);
+    background-color: var(--muted);
   }
 
   &:active {
@@ -162,8 +289,7 @@
 }
 
 // -------- 操作菜单下拉内容 --------
-// 注意：Popover 外层的 .zdy-popover-inner 自带 padding: 12px 16px，
-// 这里通过 .zdy-table-row-menu-popover 把它清零，让内容容器自己控制 padding
+// Popover 外层的 .zdy-popover-inner 自带 padding，这里清零让内容容器自控
 .zdy-table-row-menu-popover {
   .zdy-popover-inner {
     padding: 0;
@@ -186,6 +312,7 @@
   background: transparent;
   border-radius: 6px;
   font-size: 14px;
+  line-height: 20px;
   color: var(--foreground);
   cursor: pointer;
   text-align: left;
@@ -225,8 +352,12 @@
 
 // -------- 内嵌 Checkbox --------
 .zdy-checkbox {
+  position: relative;
   display: inline-flex;
   align-items: center;
+  // middle 对齐 + 单元格统一 line-height，杜绝空/满 inline-flex 的行盒 baseline 抖动
+  vertical-align: middle;
+  line-height: 1;
   cursor: pointer;
   user-select: none;
 
@@ -260,16 +391,29 @@
     color: #fff;
   }
 
+  // 对勾节点始终挂载（未选中时隐藏），保证任何状态下行盒几何完全一致
   .zdy-checkbox-check {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     line-height: 1;
+    visibility: hidden;
   }
 
   .zdy-checkbox-input:checked + .zdy-checkbox-box {
     background-color: @primary-color;
     border-color: @primary-color;
+    .zdy-checkbox-check {
+      visibility: visible;
+    }
+  }
+
+  .zdy-checkbox-input:indeterminate + .zdy-checkbox-box {
+    background-color: @primary-color;
+    border-color: @primary-color;
+    .zdy-checkbox-check {
+      visibility: visible;
+    }
   }
 
   .zdy-checkbox-input:focus-visible + .zdy-checkbox-box {
