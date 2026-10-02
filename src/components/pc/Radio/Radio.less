@@ -81,4 +81,87 @@
   &-vertical {
     flex-direction: column;
   }
+
+  // 按钮组模式：去掉间距，由按钮自身拼接
+  &--button {
+    gap: 0;
+  }
+}
+
+// ============================================================
+// 按钮组样式（Radio.Button）
+// ============================================================
+.zdy-radio-button {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 32px;
+  padding: 0 16px;
+  font-size: @pc-font-size-base;
+  color: @text-color;
+  background-color: #fff;
+  border: 1px solid @border-color;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+
+  // 相邻按钮拼接：合并边框
+  + .zdy-radio-button {
+    margin-left: -1px;
+  }
+
+  &:first-child {
+    border-top-left-radius: @border-radius;
+    border-bottom-left-radius: @border-radius;
+  }
+
+  &:last-child {
+    border-top-right-radius: @border-radius;
+    border-bottom-right-radius: @border-radius;
+  }
+
+  // 只有一个按钮时保持完整圆角
+  &:first-child:last-child {
+    border-radius: @border-radius;
+  }
+
+  &:hover:not(.zdy-radio-button--disabled) {
+    color: @primary-color;
+    border-color: @primary-color;
+    z-index: 1;
+  }
+
+  &--checked {
+    color: @primary-color;
+    border-color: @primary-color;
+    background-color: @primary-color-light;
+    z-index: 1;
+    font-weight: 500;
+
+    &:hover {
+      color: @primary-color;
+      border-color: @primary-color;
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    color: @text-color-disabled;
+    background-color: var(--muted);
+  }
+
+  &-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-label {
+    line-height: 1;
+  }
 }

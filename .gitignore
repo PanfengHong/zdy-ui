@@ -5,6 +5,7 @@ coverage/
 storybook-static/
 .vscode/
 .idea/
+.workbuddy/
 .DS_Store
 *.log
 *.local

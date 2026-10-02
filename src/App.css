@@ -1,7 +1,8 @@
-/* 整体布局 */
+/* 整体布局：高度锁定，滚动交给内容区域 */
 .app-container {
   display: flex;
-  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
   font-family: Arial, sans-serif;
 }
 
@@ -449,12 +450,14 @@
   to { transform: rotate(360deg); }
 }
 
-/* 主内容区域 */
+/* 主内容区域：内部滚动，滚动条只出现在右侧内容区 */
 .app-content {
   flex: 1;
   margin-left: 240px;
   margin-top: 56px;
-  min-height: calc(100vh - 56px);
+  height: calc(100vh - 56px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .app-header {
@@ -842,6 +845,8 @@
 @media (max-width: 768px) {
   .app-container {
     flex-direction: column;
+    height: auto;
+    overflow: visible;
   }
   
   .app-top-header {
@@ -883,7 +888,8 @@
     margin-left: 0;
     margin-top: 0;
     padding: 10px;
-    min-height: auto;
+    height: auto;
+    overflow: visible;
   }
   
   .app-header h1 {

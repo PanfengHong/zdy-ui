@@ -15,5 +15,7 @@ export interface BaseRadioGroupProps extends BaseComponentProps {
   value?: string;
   defaultValue?: string;
   onChange?: (value: string) => void;
+  /** 单选类型：default 普通单选框，button 按钮组样式（配合 Radio.Button） */
+  optionType?: 'default' | 'button';
   children?: React.ReactNode;
 }

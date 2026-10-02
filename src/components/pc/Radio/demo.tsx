@@ -5,6 +5,7 @@ import Radio from './Radio';
 
 const RadioDemo = () => {
   const [radioValue, setRadioValue] = useState('a');
+  const [buttonValue, setButtonValue] = useState('a');
 
   const apiData = [
     { prop: 'value', desc: '当前选中值', type: 'string', default: '-' },
@@ -21,6 +22,18 @@ const RadioDemo = () => {
     { prop: 'value', desc: '当前选中值', type: 'string', default: '-' },
     { prop: 'defaultValue', desc: '默认选中值', type: 'string', default: '-' },
     { prop: 'onChange', desc: '值变化回调', type: 'function(value)', default: '-' },
+    { prop: 'optionType', desc: '单选类型，button 时配合 Radio.Button 使用', type: "'default' | 'button'", default: "'default'" },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
+  ];
+
+  const buttonApiData = [
+    { prop: 'value', desc: '当前选中值', type: 'string', default: '-' },
+    { prop: 'checked', desc: '是否选中', type: 'boolean', default: '-' },
+    { prop: 'defaultChecked', desc: '默认是否选中', type: 'boolean', default: 'false' },
+    { prop: 'onChange', desc: '值变化回调', type: 'function', default: '-' },
+    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
+    { prop: 'label', desc: '标签内容', type: 'ReactNode', default: '-' },
     { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
   ];
@@ -51,6 +64,23 @@ const RadioDemo = () => {
         </>
       ),
     },
+    {
+      title: '按钮组样式',
+      code: `<Radio.Group value={value} onChange={setValue} optionType="button">\n  <Radio.Button value="a">选项A</Radio.Button>\n  <Radio.Button value="b">选项B</Radio.Button>\n  <Radio.Button value="c" disabled>选项C</Radio.Button>\n</Radio.Group>`,
+      render: (
+        <>
+          <Radio.Group value={buttonValue} onChange={setButtonValue} optionType="button">
+            <Radio.Button value="a">选项A</Radio.Button>
+            <Radio.Button value="b">选项B</Radio.Button>
+            <Radio.Button value="c">选项C</Radio.Button>
+            <Radio.Button value="d" disabled>选项D</Radio.Button>
+          </Radio.Group>
+          <p style={{ marginTop: '12px', color: '#666', fontSize: '14px' }}>
+            当前选中：{buttonValue}
+          </p>
+        </>
+      ),
+    },
   ];
 
   return (
@@ -68,6 +98,10 @@ const RadioDemo = () => {
       <div className="component-group">
         <h3>Radio.Group API</h3>
         <ApiTable dataSource={groupApiData} />
+      </div>
+      <div className="component-group">
+        <h3>Radio.Button API</h3>
+        <ApiTable dataSource={buttonApiData} />
       </div>
     </>
   );
