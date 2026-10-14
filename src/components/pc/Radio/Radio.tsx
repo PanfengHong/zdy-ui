@@ -1,170 +1,173 @@
-import React, { useState, useContext, createContext } from 'react';
+import React, { useId, useState } from 'react';
 import classNames from 'classnames';
-import type { BaseRadioProps, BaseRadioGroupProps } from './types';
+import type { BaseRadioProps, RadioGroupProps, RadioSingleProps } from './types';
 
 import './Radio.less';
 
-interface RadioGroupContextValue {
-  value?: string;
-  onChange?: (value: string) => void;
-}
+type OptionType = 'default' | 'button' | 'text';
 
-const RadioGroupContext = createContext<RadioGroupContextValue | null>(null);
+// optionType → 类名后缀（option 圆点 / button 按钮 / text 纯文字），三种形态样式各自独立
+const kindOf = (optionType: OptionType = 'default') =>
+  optionType === 'button' ? 'button' : optionType === 'text' ? 'text' : 'option';
 
-interface RadioComponent extends React.FC<BaseRadioProps> {
-  Group: React.FC<BaseRadioGroupProps>;
-  Button: React.FC<BaseRadioProps>;
-}
-
-// Radio 与 Radio.Button 共用的选中逻辑
-const useRadioState = ({
-  value,
-  checked: checkedProp,
-  defaultChecked = false,
-  onChange,
-  disabled = false
-}: BaseRadioProps) => {
-  const [internalChecked, setInternalChecked] = useState(defaultChecked);
-  const context = useContext(RadioGroupContext);
-
-  const isControlled = checkedProp !== undefined || context !== null;
-  const isChecked = context !== null
-    ? context.value === value
-    : (isControlled ? checkedProp : internalChecked);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (disabled) return;
-    if (!isControlled && context === null) {
-      setInternalChecked(true);
-    }
-    onChange?.(e);
-    context?.onChange?.(value ?? '');
-  };
-
-  return { isChecked, handleChange };
-};
-
-const Radio = ({
-  value,
-  checked: checkedProp,
-  defaultChecked,
-  onChange,
-  disabled = false,
-  label,
-  children,
-  className = '',
-  style
-}: BaseRadioProps) => {
-  const { isChecked, handleChange } = useRadioState({
-    value,
-    checked: checkedProp,
-    defaultChecked,
-    onChange,
-    disabled
-  });
-
-  return (
-    <label className={classNames('zdy-radio', { 'zdy-radio--checked': isChecked }, { 'zdy-radio--disabled': disabled }, className)} style={style}>
-      <input
-        type="radio"
-        value={value}
-        checked={isChecked}
-        onChange={handleChange}
-        disabled={disabled}
-        className="zdy-radio-input"
-      />
-      <span className="zdy-radio-inner" />
-      {(label || children) && (
-        <span className="zdy-radio-label">
-          {label || children}
-        </span>
-      )}
-    </label>
+const rootClassOf = (optionType: OptionType, disabled: boolean, className?: string) =>
+  classNames(
+    'zdy-radio',
+    { 'zdy-radio--button': optionType === 'button' },
+    { 'zdy-radio--text': optionType === 'text' },
+    { 'zdy-radio--disabled': disabled },
+    className
   );
-};
 
-// 按钮样式的单选（通常配合 Radio.Group 使用）
-const RadioButton = ({
-  value,
-  checked: checkedProp,
-  defaultChecked,
-  onChange,
-  disabled = false,
-  label,
-  children,
-  className = '',
-  style
-}: BaseRadioProps) => {
-  const { isChecked, handleChange } = useRadioState({
-    value,
-    checked: checkedProp,
-    defaultChecked,
-    onChange,
-    disabled
-  });
+interface RadioItemProps {
+  kind: string;
+  content: React.ReactNode;
+  checked: boolean;
+  disabled: boolean;
+  name?: string;
+  value?: string;
+  onSelect: () => void;
+}
+
+// 选项节点：组用法与单个用法共用
+const RadioItem = ({ kind, content, checked, disabled, name, value, onSelect }: RadioItemProps) => {
+  const itemClass = `zdy-radio-${kind}`;
 
   return (
     <label
       className={classNames(
-        'zdy-radio-button',
-        { 'zdy-radio-button--checked': isChecked },
-        { 'zdy-radio-button--disabled': disabled },
-        className
+        itemClass,
+        { [`${itemClass}--checked`]: checked },
+        { [`${itemClass}--disabled`]: disabled }
       )}
-      style={style}
     >
       <input
         type="radio"
+        name={name}
         value={value}
-        checked={isChecked}
-        onChange={handleChange}
+        checked={checked}
         disabled={disabled}
-        className="zdy-radio-button-input"
+        onChange={onSelect}
+        className={`${itemClass}-input`}
       />
-      <span className="zdy-radio-button-label">
-        {label || children}
-      </span>
+      {kind === 'option' && <span className="zdy-radio-option-inner" />}
+      <span className={`${itemClass}-label`}>{content}</span>
     </label>
   );
 };
 
+/**
+ * 组用法：options 决定选项，选中值即选项的 id
+ */
 const RadioGroup = ({
+  options,
   value: valueProp,
   defaultValue,
   onChange,
   optionType = 'default',
-  children,
-  className = '',
+  disabled = false,
+  name,
+  className,
   style
-}: BaseRadioGroupProps) => {
+}: RadioGroupProps) => {
   const [internalValue, setInternalValue] = useState(defaultValue);
+  const autoName = useId();
+  const groupName = name ?? autoName;
+
   const isControlled = valueProp !== undefined;
   const currentValue = isControlled ? valueProp : internalValue;
 
-  const handleChange = (value: string) => {
+  const handleSelect = (id: string) => {
+    if (disabled) return;
     if (!isControlled) {
-      setInternalValue(value);
+      setInternalValue(id);
     }
-    onChange?.(value);
+    onChange?.(id);
   };
 
+  const kind = kindOf(optionType);
+
   return (
-    <div
-      className={classNames(
-        'zdy-radio-group',
-        { 'zdy-radio-group--button': optionType === 'button' },
-        className
-      )}
-      style={style}
-    >
-      <RadioGroupContext.Provider value={{ value: currentValue, onChange: handleChange }}>
-        {children}
-      </RadioGroupContext.Provider>
+    <div className={rootClassOf(optionType, disabled, className)} style={style}>
+      {options.map((option) => (
+        <RadioItem
+          key={option.id}
+          kind={kind}
+          value={option.id}
+          content={option.content}
+          checked={currentValue === option.id}
+          disabled={disabled}
+          name={groupName}
+          onSelect={() => handleSelect(option.id)}
+        />
+      ))}
     </div>
   );
 };
 
-(Radio as RadioComponent).Group = RadioGroup;
-(Radio as RadioComponent).Button = RadioButton;
+/**
+ * 单个用法：children 即唯一选项的内容，选中态由 value / defaultValue 控制
+ */
+const RadioSingle = ({
+  value: valueProp,
+  defaultValue = false,
+  onChange,
+  optionType = 'default',
+  disabled = false,
+  name,
+  children,
+  className,
+  style
+}: RadioSingleProps) => {
+  const [internalValue, setInternalValue] = useState(defaultValue);
 
-export default Radio as RadioComponent;
+  const isControlled = valueProp !== undefined;
+  const isChecked = isControlled ? valueProp : internalValue;
+
+  // 单选：已选中时点击不产生变化，且不能取消选中
+  const handleSelect = () => {
+    if (disabled || isChecked) return;
+    if (!isControlled) {
+      setInternalValue(true);
+    }
+    onChange?.(true);
+  };
+
+  if (children === undefined || children === null) return null;
+
+  const kind = kindOf(optionType);
+
+  return (
+    <div className={rootClassOf(optionType, disabled, className)} style={style}>
+      <RadioItem
+        kind={kind}
+        content={children}
+        checked={isChecked}
+        disabled={disabled}
+        name={name}
+        onSelect={handleSelect}
+      />
+    </div>
+  );
+};
+
+// 传了非空 options 走组用法，否则按单个用法渲染 children
+const isGroupMode = (props: BaseRadioProps): props is RadioGroupProps =>
+  Array.isArray(props.options) && props.options.length > 0;
+
+/**
+ * Radio 单选框
+ *
+ * 单个：<Radio checked={value} onChange={setValue}>radio</Radio>
+ * 一组：<Radio options={[{ id: 'a', content: '选项A' }]} value={value} onChange={setValue} />
+ */
+// 用重载调用签名而非 props 联合类型：两种用法下 onChange 的参数都能被正确推断
+interface RadioComponent {
+  (props: RadioSingleProps): React.ReactElement | null;
+  (props: RadioGroupProps): React.ReactElement | null;
+}
+
+const Radio: RadioComponent = (props: BaseRadioProps) =>
+  isGroupMode(props) ? <RadioGroup {...props} /> : <RadioSingle {...props} />;
+
+export default Radio;

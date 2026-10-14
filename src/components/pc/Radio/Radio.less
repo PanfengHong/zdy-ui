@@ -1,6 +1,33 @@
 @import '../../../styles/variables.less';
 
+// ============================================================
+// Radio：一组单选（options 驱动）
+// ============================================================
 .zdy-radio {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 16px;
+
+  // 按钮组模式：去掉间距，由按钮自身拼接
+  &--button {
+    gap: 0;
+  }
+
+  // 文字模式：间距更紧凑
+  &--text {
+    gap: 8px;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+  }
+}
+
+// ============================================================
+// 默认形态（圆点单选框）
+// ============================================================
+.zdy-radio-option {
+  position: relative;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -9,8 +36,8 @@
   color: @text-color;
   transition: all 0.2s ease;
 
-  &:hover:not(.zdy-radio--disabled) {
-    .zdy-radio-inner {
+  &:hover:not(.zdy-radio-option--disabled) {
+    .zdy-radio-option-inner {
       border-color: @primary-color;
     }
   }
@@ -21,7 +48,7 @@
   }
 
   &--checked {
-    .zdy-radio-inner {
+    .zdy-radio-option-inner {
       border-color: @primary-color;
       background-color: @primary-color;
     }
@@ -61,7 +88,7 @@
   }
 
   &--checked {
-    .zdy-radio-inner::after {
+    .zdy-radio-option-inner::after {
       transform: translate(-50%, -50%) scale(1);
     }
   }
@@ -73,23 +100,13 @@
   }
 }
 
-.zdy-radio-group {
-  display: inline-flex;
-  flex-direction: row;
-  gap: 16px;
-
-  &-vertical {
-    flex-direction: column;
-  }
-
-  // 按钮组模式：去掉间距，由按钮自身拼接
-  &--button {
-    gap: 0;
-  }
+// 键盘聚焦态（原生 radio 被隐藏，这里补一个可见焦点圈）
+.zdy-radio-option:has(.zdy-radio-option-input:focus-visible) .zdy-radio-option-inner {
+  box-shadow: 0 0 0 3px var(--selected-bg-hover);
 }
 
 // ============================================================
-// 按钮组样式（Radio.Button）
+// 按钮组形态
 // ============================================================
 .zdy-radio-button {
   position: relative;
@@ -164,4 +181,71 @@
   &-label {
     line-height: 1;
   }
+}
+
+.zdy-radio-button:has(.zdy-radio-button-input:focus-visible) {
+  color: @primary-color;
+  border-color: @primary-color;
+  box-shadow: 0 0 0 3px var(--selected-bg-hover);
+  z-index: 1;
+}
+
+// ============================================================
+// 纯文字形态：无选中框，选中后文字带背景色
+// ============================================================
+.zdy-radio-text {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 28px;
+  padding: 0 8px;
+  font-size: @pc-font-size-base;
+  color: @text-color-secondary;
+  background-color: transparent;
+  border-radius: @border-radius;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+
+  &:hover:not(.zdy-radio-text--disabled):not(.zdy-radio-text--checked) {
+    color: @primary-color;
+    background-color: @background-color-hover;
+  }
+
+  &--checked {
+    color: @primary-color;
+    background-color: @primary-color-light;
+    font-weight: 500;
+
+    &:hover {
+      color: @primary-color;
+      background-color: var(--selected-bg-hover);
+    }
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    color: @text-color-disabled;
+    background-color: transparent;
+  }
+
+  &-input {
+    position: absolute;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  &-label {
+    line-height: 1;
+  }
+}
+
+.zdy-radio-text:has(.zdy-radio-text-input:focus-visible) {
+  color: @primary-color;
+  background-color: var(--selected-bg-hover);
 }

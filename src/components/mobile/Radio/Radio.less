@@ -1,6 +1,20 @@
 @import '../../../styles/variables.less';
 
-.zdy-mobile-zdy-mobile-radio {
+// ============================================================
+// 移动端 Radio：一组单选（options 驱动）
+// ============================================================
+.zdy-mobile-radio {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 16px;
+
+  &--disabled {
+    cursor: not-allowed;
+  }
+}
+
+.zdy-mobile-radio-option {
+  position: relative;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -9,8 +23,8 @@
   color: @text-color;
   transition: all 0.2s ease;
 
-  &:hover:not(.zdy-mobile-radio--disabled) {
-    .zdy-mobile-radio-inner {
+  &:hover:not(.zdy-mobile-radio-option--disabled) {
+    .zdy-mobile-radio-option-inner {
       border-color: @primary-color;
     }
   }
@@ -21,7 +35,7 @@
   }
 
   &--checked {
-    .zdy-mobile-radio-inner {
+    .zdy-mobile-radio-option-inner {
       border-color: @primary-color;
       background-color: @primary-color;
     }
@@ -61,7 +75,7 @@
   }
 
   &--checked {
-    .zdy-mobile-radio-inner::after {
+    .zdy-mobile-radio-option-inner::after {
       transform: translate(-50%, -50%) scale(1);
     }
   }
@@ -73,12 +87,7 @@
   }
 }
 
-.zdy-mobile-zdy-mobile-radio-group {
-  display: inline-flex;
-  flex-direction: row;
-  gap: 16px;
-
-  &-vertical {
-    flex-direction: column;
-  }
+// 键盘聚焦态
+.zdy-mobile-radio-option:has(.zdy-mobile-radio-option-input:focus-visible) .zdy-mobile-radio-option-inner {
+  box-shadow: 0 0 0 3px var(--selected-bg-hover);
 }

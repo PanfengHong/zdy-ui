@@ -202,10 +202,14 @@ const Demo = () => {
           <Input placeholder="请输入姓名" />
         </Form.Item>
         <Form.Item label="性别">
-          <Radio.Group value={gender} onChange={setGender}>
-            <Radio value="1">男</Radio>
-            <Radio value="2">女</Radio>
-          </Radio.Group>
+          <Radio
+            options={[
+              { id: "1", content: "男" },
+              { id: "2", content: "女" },
+            ]}
+            value={gender}
+            onChange={setGender}
+          />
         </Form.Item>
         <Form.Item>
           <Button type="primary">提交</Button>

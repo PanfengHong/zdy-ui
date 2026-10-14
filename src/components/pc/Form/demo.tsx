@@ -118,17 +118,16 @@ const FormDemo = () => {
     <Input />
   </FormItem>
   <FormItem name="gender" label="性别" rules={[{ required: true }]}>
-    <Radio.Group>
-      <Radio value="male">男</Radio>
-      <Radio value="female">女</Radio>
-    </Radio.Group>
+    <Radio options={[{ id: 'male', content: '男' }, { id: 'female', content: '女' }]} />
   </FormItem>
   <FormItem name="hobbies" label="爱好">
-    <Checkbox.Group>
-      <Checkbox value="music">音乐</Checkbox>
-      <Checkbox value="sport">运动</Checkbox>
-      <Checkbox value="read">阅读</Checkbox>
-    </Checkbox.Group>
+    <Checkbox
+      options={[
+        { id: 'music', content: '音乐' },
+        { id: 'sport', content: '运动' },
+        { id: 'read', content: '阅读' },
+      ]}
+    />
   </FormItem>
   <FormItem name="city" label="城市" rules={[{ required: true }]}>
     <Select options={[...]} />
@@ -149,17 +148,16 @@ const FormDemo = () => {
               <Input placeholder="请输入姓名" />
             </FormItem>
             <FormItem name="gender" label="性别" rules={[{ required: true, message: '请选择性别' }]}>
-              <Radio.Group>
-                <Radio value="male">男</Radio>
-                <Radio value="female">女</Radio>
-              </Radio.Group>
+              <Radio options={[{ id: 'male', content: '男' }, { id: 'female', content: '女' }]} />
             </FormItem>
             <FormItem name="hobbies" label="爱好">
-              <Checkbox.Group>
-                <Checkbox value="music">音乐</Checkbox>
-                <Checkbox value="sport">运动</Checkbox>
-                <Checkbox value="read">阅读</Checkbox>
-              </Checkbox.Group>
+              <Checkbox
+                options={[
+                  { id: 'music', content: '音乐' },
+                  { id: 'sport', content: '运动' },
+                  { id: 'read', content: '阅读' },
+                ]}
+              />
             </FormItem>
             <FormItem name="city" label="城市" rules={[{ required: true, message: '请选择城市' }]}>
               <Select

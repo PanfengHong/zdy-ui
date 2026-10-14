@@ -1,6 +1,23 @@
 @import '../../../styles/variables.less';
 
+// ============================================================
+// Checkbox：一组多选（options 驱动）
+// ============================================================
 .zdy-checkbox {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 16px;
+
+  &--disabled {
+    cursor: not-allowed;
+  }
+}
+
+// ============================================================
+// 单个选项（勾选框 + 文字）
+// ============================================================
+.zdy-checkbox-option {
+  position: relative;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -9,8 +26,8 @@
   color: @text-color;
   transition: all 0.2s ease;
 
-  &:hover:not(.zdy-checkbox--disabled) {
-    .zdy-checkbox-inner {
+  &:hover:not(.zdy-checkbox-option--disabled) {
+    .zdy-checkbox-option-inner {
       border-color: @primary-color;
     }
   }
@@ -21,14 +38,7 @@
   }
 
   &--checked {
-    .zdy-checkbox-inner {
-      border-color: @primary-color;
-      background-color: @primary-color;
-    }
-  }
-
-  &--indeterminate {
-    .zdy-checkbox-inner {
+    .zdy-checkbox-option-inner {
       border-color: @primary-color;
       background-color: @primary-color;
     }
@@ -68,22 +78,8 @@
   }
 
   &--checked {
-    .zdy-checkbox-inner::after {
+    .zdy-checkbox-option-inner::after {
       transform: translate(-50%, -50%) rotate(45deg) scale(1);
-    }
-  }
-
-  &--indeterminate {
-    .zdy-checkbox-inner::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 10px;
-      height: 2px;
-      background-color: #fff;
-      transform: translate(-50%, -50%) scale(1);
-      border: none;
     }
   }
 
@@ -94,12 +90,7 @@
   }
 }
 
-.zdy-checkbox-group {
-  display: inline-flex;
-  flex-direction: row;
-  gap: 16px;
-
-  &-vertical {
-    flex-direction: column;
-  }
+// 键盘聚焦态（原生 checkbox 被隐藏，这里补一个可见焦点圈）
+.zdy-checkbox-option:has(.zdy-checkbox-option-input:focus-visible) .zdy-checkbox-option-inner {
+  box-shadow: 0 0 0 3px var(--selected-bg-hover);
 }

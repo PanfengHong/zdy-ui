@@ -1,6 +1,20 @@
 @import '../../../styles/variables.less';
 
-.zdy-mobile-zdy-mobile-checkbox {
+// ============================================================
+// 移动端 Checkbox：一组多选（options 驱动）
+// ============================================================
+.zdy-mobile-checkbox {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 16px;
+
+  &--disabled {
+    cursor: not-allowed;
+  }
+}
+
+.zdy-mobile-checkbox-option {
+  position: relative;
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -9,8 +23,8 @@
   color: @text-color;
   transition: all 0.2s ease;
 
-  &:hover:not(.zdy-mobile-checkbox--disabled) {
-    .zdy-mobile-checkbox-inner {
+  &:hover:not(.zdy-mobile-checkbox-option--disabled) {
+    .zdy-mobile-checkbox-option-inner {
       border-color: @primary-color;
     }
   }
@@ -21,14 +35,7 @@
   }
 
   &--checked {
-    .zdy-mobile-checkbox-inner {
-      border-color: @primary-color;
-      background-color: @primary-color;
-    }
-  }
-
-  &--indeterminate {
-    .zdy-mobile-checkbox-inner {
+    .zdy-mobile-checkbox-option-inner {
       border-color: @primary-color;
       background-color: @primary-color;
     }
@@ -68,22 +75,8 @@
   }
 
   &--checked {
-    .zdy-mobile-checkbox-inner::after {
+    .zdy-mobile-checkbox-option-inner::after {
       transform: translate(-50%, -50%) rotate(45deg) scale(1);
-    }
-  }
-
-  &--indeterminate {
-    .zdy-mobile-checkbox-inner::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 12px;
-      height: 2px;
-      background-color: #fff;
-      transform: translate(-50%, -50%) scale(1);
-      border: none;
     }
   }
 
@@ -94,12 +87,6 @@
   }
 }
 
-.zdy-mobile-zdy-mobile-checkbox-group {
-  display: inline-flex;
-  flex-direction: row;
-  gap: 16px;
-
-  &-vertical {
-    flex-direction: column;
-  }
+.zdy-mobile-checkbox-option:has(.zdy-mobile-checkbox-option-input:focus-visible) .zdy-mobile-checkbox-option-inner {
+  box-shadow: 0 0 0 3px var(--selected-bg-hover);
 }
