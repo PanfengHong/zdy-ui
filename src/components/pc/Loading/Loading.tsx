@@ -1,6 +1,7 @@
 import React from 'react';
 import { createRoot, type Root } from 'react-dom/client';
 import classNames from 'classnames';
+import Icon from '../Icon/Icon';
 import type { BaseLoadingProps, LoadingConfig } from './types';
 
 import './Loading.less';
@@ -40,6 +41,8 @@ const Loading: React.FC<BaseLoadingProps> & {
   tip,
   fullscreen = false,
   indicator,
+  closable = false,
+  onClose,
   children,
   className,
   style
@@ -47,6 +50,11 @@ const Loading: React.FC<BaseLoadingProps> & {
   if (fullscreen) {
     return (
       <div className={classNames('zdy-loading', 'zdy-loading--fullscreen', className)} style={style}>
+        {closable && (
+          <button type="button" className="zdy-loading-close" onClick={onClose} aria-label="关闭">
+            <Icon type="close" size="sm" />
+          </button>
+        )}
         <LoadingIndicator size={size} indicator={indicator} />
         {tip && <div className="zdy-loading-text">{tip}</div>}
       </div>
@@ -78,12 +86,19 @@ Loading.show = (config?: LoadingConfig) => {
     fullscreenRoot = createRoot(fullscreenContainer);
   }
 
+  const handleClose = () => {
+    config?.onClose?.();
+    Loading.hide();
+  };
+
   fullscreenRoot!.render(
     <div className="zdy-loading-fullscreen-root">
       <Loading
         size={config?.size}
         tip={config?.tip}
         indicator={config?.indicator}
+        closable={config?.closable}
+        onClose={handleClose}
         fullscreen
       />
     </div>

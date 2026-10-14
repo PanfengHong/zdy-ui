@@ -22,6 +22,40 @@
   position: relative;
 }
 
+// 全屏加载界面内的关闭按钮（closable 时渲染）
+.zdy-loading-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  color: @text-color-secondary;
+  cursor: pointer;
+  transition: color 0.2s ease, background-color 0.2s ease;
+
+  &:hover {
+    color: @text-color;
+    background-color: rgba(0, 0, 0, 0.06);
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid @primary-color;
+    outline-offset: 2px;
+  }
+}
+
 .zdy-loading-mask {
   position: absolute;
   top: 0;
@@ -107,5 +141,15 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+// 圆点指示器：单个点渐隐，配合 animationDelay 形成绕圈旋转的拖尾
+@keyframes loadingDotPulse {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.1;
   }
 }
