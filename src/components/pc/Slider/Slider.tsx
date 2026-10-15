@@ -56,7 +56,13 @@ const Slider: React.FC<BaseSliderProps> = ({
       ? (clientPos - rect.top) / rect.height
       : (clientPos - rect.left) / rect.width;
     const clampedPos = Math.min(1, Math.max(0, rawPos));
-    const actualPos = reverse ? 1 - clampedPos : clampedPos;
+    // 垂直模式的轨道是「底部 = min、顶部 = max」（handle / filled / marks 都用 bottom 定位），
+    // 与水平模式「左 = min、右 = max」的坐标方向相反，所以这里要翻转一次，
+    // 否则取值方向与滑块位置相反，拖拽时滑块会跑到鼠标的对侧。
+    // 与渲染保持一致：垂直轴不叠加 reverse。
+    const actualPos = vertical
+      ? 1 - clampedPos
+      : (reverse ? 1 - clampedPos : clampedPos);
     let newVal = min + actualPos * (max - min);
     if (step > 0) {
       newVal = Math.round(newVal / step) * step;

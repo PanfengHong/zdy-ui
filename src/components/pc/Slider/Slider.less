@@ -179,6 +179,9 @@
 
     .zdy-slider-filled {
       top: auto;
+      // 垂直方向「底部 = min、顶部 = max」：单值填充条从底部向上生长
+      // （range 模式会用内联 bottom 覆盖，从 startPercent 处起算）
+      bottom: 0;
       left: 50%;
       width: 4px;
       height: auto;
