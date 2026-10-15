@@ -1,13 +1,16 @@
-import React, { useState, useMemo, useCallback } from 'react';
-import classNames from 'classnames';
-import type { TransferProps, TransferItem } from './types';
+import React, { useState, useMemo, useCallback } from "react";
+import classNames from "classnames";
+import type { TransferProps, TransferItem } from "./types";
+import Icon from "../Icon/Icon";
+import Input from "../Input/Input";
 
-import './Transfer.less';
+import "./Transfer.less";
 
 const defaultFilter = (inputValue: string, item: TransferItem): boolean => {
   return (
     item.title.toLowerCase().includes(inputValue.toLowerCase()) ||
-    (item.description?.toLowerCase().includes(inputValue.toLowerCase()) ?? false)
+    (item.description?.toLowerCase().includes(inputValue.toLowerCase()) ??
+      false)
   );
 };
 
@@ -39,7 +42,7 @@ const TransferList: React.FC<TransferListProps> = ({
   footer,
   style,
   onSelectChange,
-  onSearchChange
+  onSearchChange,
 }) => {
   const [searchValue, setSearchValue] = useState(searchText);
 
@@ -49,17 +52,21 @@ const TransferList: React.FC<TransferListProps> = ({
   }, [items, searchValue, filterOption]);
 
   // 全选/取消全选
-  const allChecked = filteredItems.length > 0 && filteredItems.every((item) =>
-    selectedKeys.includes(item.key) || item.disabled
-  );
+  const allChecked =
+    filteredItems.length > 0 &&
+    filteredItems.every(
+      (item) => selectedKeys.includes(item.key) || item.disabled,
+    );
   const checkableItems = filteredItems.filter((item) => !item.disabled);
-  const checkedCount = filteredItems.filter((item) => selectedKeys.includes(item.key)).length;
+  const checkedCount = filteredItems.filter((item) =>
+    selectedKeys.includes(item.key),
+  ).length;
 
   const handleCheckAll = () => {
     if (allChecked) {
       // 取消选中当前列表中所有已选的
       const newSelected = selectedKeys.filter(
-        (key) => !checkableItems.some((item) => item.key === key)
+        (key) => !checkableItems.some((item) => item.key === key),
       );
       onSelectChange(newSelected);
     } else {
@@ -85,7 +92,9 @@ const TransferList: React.FC<TransferListProps> = ({
 
   return (
     <div
-      className={classNames('zdy-transfer-list', { 'zdy-transfer-list--disabled': disabled })}
+      className={classNames("zdy-transfer-list", {
+        "zdy-transfer-list--disabled": disabled,
+      })}
       style={style}
     >
       {/* 头部 */}
@@ -97,9 +106,7 @@ const TransferList: React.FC<TransferListProps> = ({
             onChange={handleCheckAll}
             disabled={disabled || checkableItems.length === 0}
           />
-          <span className="zdy-transfer-list-header-title">
-            {titleText}
-          </span>
+          <span className="zdy-transfer-list-header-title">{titleText}</span>
         </label>
         <span className="zdy-transfer-list-header-count">
           {checkedCount}/{filteredItems.length}
@@ -109,14 +116,13 @@ const TransferList: React.FC<TransferListProps> = ({
       {/* 搜索框 */}
       {showSearch && (
         <div className="zdy-transfer-list-search">
-          <input
-            type="text"
+          <Input
             placeholder="搜索"
             value={searchValue}
             onChange={handleSearch}
             disabled={disabled}
+            suffix={<Icon type="search" />}
           />
-          <span className="zdy-transfer-list-search-icon">🔍</span>
         </div>
       )}
 
@@ -131,26 +137,41 @@ const TransferList: React.FC<TransferListProps> = ({
               return (
                 <li
                   key={item.key}
-                  className={classNames('zdy-transfer-list-item', {
-                    'zdy-transfer-list-item--selected': isSelected,
-                    'zdy-transfer-list-item--disabled': item.disabled
+                  className={classNames("zdy-transfer-list-item", {
+                    "zdy-transfer-list-item--selected": isSelected,
+                    "zdy-transfer-list-item--disabled": item.disabled,
                   })}
-                  onClick={() => !item.disabled && !disabled && handleItemCheck(item.key, !isSelected)}
+                  onClick={() =>
+                    !item.disabled &&
+                    !disabled &&
+                    handleItemCheck(item.key, !isSelected)
+                  }
                 >
-                  <label className="zdy-transfer-list-item-checkbox" onClick={(e) => e.stopPropagation()}>
+                  <label
+                    className="zdy-transfer-list-item-checkbox"
+                    onClick={(e) => e.stopPropagation()}
+                  >
                     <input
                       type="checkbox"
                       checked={isSelected}
-                      onChange={(e) => handleItemCheck(item.key, e.target.checked)}
+                      onChange={(e) =>
+                        handleItemCheck(item.key, e.target.checked)
+                      }
                       disabled={item.disabled || disabled}
                     />
                   </label>
                   <span className="zdy-transfer-list-item-content">
-                    {render ? render(item) : (
+                    {render ? (
+                      render(item)
+                    ) : (
                       <>
-                        <span className="zdy-transfer-list-item-title">{item.title}</span>
+                        <span className="zdy-transfer-list-item-title">
+                          {item.title}
+                        </span>
                         {item.description && (
-                          <span className="zdy-transfer-list-item-desc">{item.description}</span>
+                          <span className="zdy-transfer-list-item-desc">
+                            {item.description}
+                          </span>
                         )}
                       </>
                     )}
@@ -163,9 +184,7 @@ const TransferList: React.FC<TransferListProps> = ({
       </div>
 
       {/* 底部 */}
-      {footer && (
-        <div className="zdy-transfer-list-footer">{footer}</div>
-      )}
+      {footer && <div className="zdy-transfer-list-footer">{footer}</div>}
     </div>
   );
 };
@@ -175,8 +194,8 @@ const Transfer: React.FC<TransferProps> = ({
   targetKeys: controlledTargetKeys,
   defaultTargetKeys = [],
   selectedKeys: controlledSelectedKeys,
-  titles = ['源列表', '目标列表'],
-  operations = ['→', '←'],
+  titles = ["源列表", "目标列表"],
+  operations = [<Icon type="right" />, <Icon type="left" />],
   showSearch = false,
   filterOption = defaultFilter,
   listStyle,
@@ -187,11 +206,14 @@ const Transfer: React.FC<TransferProps> = ({
   onChange,
   onSelectChange,
   onSearch,
-  className = '',
-  style
+  className = "",
+  style,
 }) => {
-  const [internalTargetKeys, setInternalTargetKeys] = useState<string[]>(defaultTargetKeys);
-  const [internalSelectedKeys, setInternalSelectedKeys] = useState<string[]>([]);
+  const [internalTargetKeys, setInternalTargetKeys] =
+    useState<string[]>(defaultTargetKeys);
+  const [internalSelectedKeys, setInternalSelectedKeys] = useState<string[]>(
+    [],
+  );
 
   const targetKeys = controlledTargetKeys ?? internalTargetKeys;
   const selectedKeys = controlledSelectedKeys ?? internalSelectedKeys;
@@ -199,37 +221,46 @@ const Transfer: React.FC<TransferProps> = ({
   // 左侧（源）数据
   const leftItems = useMemo(
     () => dataSource.filter((item) => !targetKeys.includes(item.key)),
-    [dataSource, targetKeys]
+    [dataSource, targetKeys],
   );
 
   // 右侧（目标）数据
   const rightItems = useMemo(
     () => dataSource.filter((item) => targetKeys.includes(item.key)),
-    [dataSource, targetKeys]
+    [dataSource, targetKeys],
   );
 
   // 左右两侧的搜索值
-  const [leftSearch, setLeftSearch] = useState('');
-  const [rightSearch, setRightSearch] = useState('');
+  const [leftSearch, setLeftSearch] = useState("");
+  const [rightSearch, setRightSearch] = useState("");
 
   // 左右两侧选中的 key
   const leftSelectedKeys = useMemo(
-    () => selectedKeys.filter((key) => leftItems.some((item) => item.key === key)),
-    [selectedKeys, leftItems]
+    () =>
+      selectedKeys.filter((key) => leftItems.some((item) => item.key === key)),
+    [selectedKeys, leftItems],
   );
   const rightSelectedKeys = useMemo(
-    () => selectedKeys.filter((key) => rightItems.some((item) => item.key === key)),
-    [selectedKeys, rightItems]
+    () =>
+      selectedKeys.filter((key) => rightItems.some((item) => item.key === key)),
+    [selectedKeys, rightItems],
   );
 
-  const updateSelectedKeys = useCallback((newKeys: string[]) => {
-    if (controlledSelectedKeys === undefined) {
-      setInternalSelectedKeys(newKeys);
-    }
-    const newLeft = newKeys.filter((key) => leftItems.some((item) => item.key === key));
-    const newRight = newKeys.filter((key) => rightItems.some((item) => item.key === key));
-    onSelectChange?.(newLeft, newRight);
-  }, [controlledSelectedKeys, leftItems, rightItems, onSelectChange]);
+  const updateSelectedKeys = useCallback(
+    (newKeys: string[]) => {
+      if (controlledSelectedKeys === undefined) {
+        setInternalSelectedKeys(newKeys);
+      }
+      const newLeft = newKeys.filter((key) =>
+        leftItems.some((item) => item.key === key),
+      );
+      const newRight = newKeys.filter((key) =>
+        rightItems.some((item) => item.key === key),
+      );
+      onSelectChange?.(newLeft, newRight);
+    },
+    [controlledSelectedKeys, leftItems, rightItems, onSelectChange],
+  );
 
   const moveToRight = useCallback(() => {
     const moveKeys = leftSelectedKeys;
@@ -243,12 +274,25 @@ const Transfer: React.FC<TransferProps> = ({
     if (controlledSelectedKeys === undefined) {
       setInternalSelectedKeys(newSelected);
     }
-    onChange?.(newTargetKeys, 'right', moveKeys);
+    onChange?.(newTargetKeys, "right", moveKeys);
     onSelectChange?.(
-      newSelected.filter((key) => leftItems.some((item) => item.key === key) && !moveKeys.includes(key)),
-      newSelected.filter((key) => rightItems.some((item) => item.key === key))
+      newSelected.filter(
+        (key) =>
+          leftItems.some((item) => item.key === key) && !moveKeys.includes(key),
+      ),
+      newSelected.filter((key) => rightItems.some((item) => item.key === key)),
     );
-  }, [leftSelectedKeys, targetKeys, controlledTargetKeys, controlledSelectedKeys, selectedKeys, leftItems, rightItems, onChange, onSelectChange]);
+  }, [
+    leftSelectedKeys,
+    targetKeys,
+    controlledTargetKeys,
+    controlledSelectedKeys,
+    selectedKeys,
+    leftItems,
+    rightItems,
+    onChange,
+    onSelectChange,
+  ]);
 
   const moveToLeft = useCallback(() => {
     const moveKeys = rightSelectedKeys;
@@ -261,27 +305,41 @@ const Transfer: React.FC<TransferProps> = ({
     if (controlledSelectedKeys === undefined) {
       setInternalSelectedKeys(newSelected);
     }
-    onChange?.(newTargetKeys, 'left', moveKeys);
+    onChange?.(newTargetKeys, "left", moveKeys);
     onSelectChange?.(
       newSelected.filter((key) => leftItems.some((item) => item.key === key)),
-      newSelected.filter((key) => rightItems.some((item) => item.key === key) && !moveKeys.includes(key))
+      newSelected.filter(
+        (key) =>
+          rightItems.some((item) => item.key === key) &&
+          !moveKeys.includes(key),
+      ),
     );
-  }, [rightSelectedKeys, targetKeys, controlledTargetKeys, controlledSelectedKeys, selectedKeys, leftItems, rightItems, onChange, onSelectChange]);
+  }, [
+    rightSelectedKeys,
+    targetKeys,
+    controlledTargetKeys,
+    controlledSelectedKeys,
+    selectedKeys,
+    leftItems,
+    rightItems,
+    onChange,
+    onSelectChange,
+  ]);
 
   const handleLeftSearch = (value: string) => {
     setLeftSearch(value);
-    onSearch?.('left', value);
+    onSearch?.("left", value);
   };
 
   const handleRightSearch = (value: string) => {
     setRightSearch(value);
-    onSearch?.('right', value);
+    onSearch?.("right", value);
   };
 
   const rootClass = classNames(
-    'zdy-transfer',
-    { 'zdy-transfer--disabled': disabled, 'zdy-transfer--one-way': oneWay },
-    className
+    "zdy-transfer",
+    { "zdy-transfer--disabled": disabled, "zdy-transfer--one-way": oneWay },
+    className,
   );
 
   return (
@@ -295,7 +353,7 @@ const Transfer: React.FC<TransferProps> = ({
         disabled={disabled}
         filterOption={filterOption}
         render={render}
-        footer={footer?.({ direction: 'left' })}
+        footer={footer?.({ direction: "left" })}
         style={listStyle}
         onSelectChange={updateSelectedKeys}
         onSearchChange={handleLeftSearch}
@@ -307,7 +365,6 @@ const Transfer: React.FC<TransferProps> = ({
           className="zdy-transfer-btn"
           onClick={moveToRight}
           disabled={disabled || leftSelectedKeys.length === 0}
-          title={operations[0]}
         >
           {operations[0]}
         </button>
@@ -316,7 +373,6 @@ const Transfer: React.FC<TransferProps> = ({
             className="zdy-transfer-btn"
             onClick={moveToLeft}
             disabled={disabled || rightSelectedKeys.length === 0}
-            title={operations[1]}
           >
             {operations[1]}
           </button>
@@ -332,7 +388,7 @@ const Transfer: React.FC<TransferProps> = ({
         disabled={disabled}
         filterOption={filterOption}
         render={render}
-        footer={footer?.({ direction: 'right' })}
+        footer={footer?.({ direction: "right" })}
         style={listStyle}
         onSelectChange={updateSelectedKeys}
         onSearchChange={handleRightSearch}
