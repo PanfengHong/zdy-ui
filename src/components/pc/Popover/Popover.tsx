@@ -14,10 +14,17 @@ interface Position {
 interface PlacementInfo {
   placement: PopoverPlacement;
   position: Position;
+  /** 箭头中心相对气泡左边缘的偏移（top / bottom 系列使用），单位 px；null 表示该轴不参与箭头对齐 */
+  arrowX: number | null;
+  /** 箭头中心相对气泡上边缘的偏移（left / right 系列使用），单位 px；null 表示该轴不参与箭头对齐 */
+  arrowY: number | null;
 }
 
 // 触发器与气泡的间距
 const GAP = 8;
+
+// 箭头中心距气泡边缘的最小距离，避免箭头压到圆角（半对角线 8.5px + 圆角 4px，取 14px 留余量）
+const ARROW_MIN_INSET = 14;
 
 // 计算气泡位置：基于触发器 rect 与气泡尺寸
 const computePlacement = (
@@ -100,9 +107,34 @@ const computePlacement = (
     pos.left = pos.left - (newAbsLeft + popWidth - (viewportWidth - 8));
   }
 
+  // ---------- 箭头对齐 ----------
+  // 气泡用 left / top 定位的是边框盒，换算成视口坐标后，
+  // 用「触发器中心 - 气泡左上角」得到箭头中心应当在气泡内的位置，
+  // 这样即使气泡被视口边界钳制过（上面的溢出修正），箭头依然对准触发器。
+  const popupViewportLeft = containerRect.left + pos.left;
+  const popupViewportTop = containerRect.top + pos.top;
+
+  const clampOffset = (value: number, size: number) =>
+    Math.min(
+      Math.max(value, ARROW_MIN_INSET),
+      Math.max(ARROW_MIN_INSET, size - ARROW_MIN_INSET)
+    );
+
+  const isVerticalPlacement =
+    finalPlacement.startsWith('top') || finalPlacement.startsWith('bottom');
+
+  const arrowX = isVerticalPlacement
+    ? clampOffset(triggerRect.left + tw / 2 - popupViewportLeft, popWidth)
+    : null;
+  const arrowY = isVerticalPlacement
+    ? null
+    : clampOffset(triggerRect.top + th / 2 - popupViewportTop, popHeight);
+
   return {
     placement: finalPlacement,
     position: { top: pos.top + scrollY, left: pos.left + scrollX },
+    arrowX,
+    arrowY,
   };
 };
 
@@ -133,6 +165,7 @@ const Popover: React.FC<PopoverProps> = ({
   const open = isControlled ? openProp! : internalOpen;
 
   const [popupStyle, setPopupStyle] = useState<React.CSSProperties>({});
+  const [arrowStyle, setArrowStyle] = useState<React.CSSProperties>({});
   const [actualPlacement, setActualPlacement] = useState<PopoverPlacement>(placement);
   const [mounted, setMounted] = useState<boolean>(open);
   const [visible, setVisible] = useState<boolean>(open);
@@ -168,14 +201,16 @@ const Popover: React.FC<PopoverProps> = ({
   const updatePosition = useCallback(() => {
     if (!open || !triggerRef.current || !popupRef.current) return;
     const triggerRect = triggerRef.current.getBoundingClientRect();
-    const popRect = popupRef.current.getBoundingClientRect();
-    const container = getContainer();
-    const { placement: finalPlacement, position } = computePlacement(
+    const popup = popupRef.current;
+    // 用 offsetWidth / offsetHeight 量气泡尺寸，而不是 getBoundingClientRect()：
+    // 首次定位发生在出场动画里（此时还带着 transform: scale(0.9)），
+    // getBoundingClientRect() 拿到的是缩放后的尺寸，会让气泡整体偏移、箭头也跟着错位。
+    const { placement: finalPlacement, position, arrowX, arrowY } = computePlacement(
       triggerRect,
-      popRect.width,
-      popRect.height,
+      popup.offsetWidth,
+      popup.offsetHeight,
       placement,
-      container
+      getContainer()
     );
     setActualPlacement(finalPlacement);
     setPopupStyle({
@@ -184,6 +219,10 @@ const Popover: React.FC<PopoverProps> = ({
       left: position.left,
       zIndex,
     });
+    setArrowStyle({
+      ...(arrowX !== null ? { '--zdy-popover-arrow-x': `${arrowX}px` } : null),
+      ...(arrowY !== null ? { '--zdy-popover-arrow-y': `${arrowY}px` } : null),
+    } as React.CSSProperties);
   }, [open, placement, getContainer, zIndex]);
 
   // 挂载/卸载与动画
@@ -315,7 +354,7 @@ const Popover: React.FC<PopoverProps> = ({
         onMouseEnter={handlePopupMouseEnter}
         onMouseLeave={handlePopupMouseLeave}
       >
-        {arrow && <div className="zdy-popover-arrow" />}
+        {arrow && <div className="zdy-popover-arrow" style={arrowStyle} />}
         <div className="zdy-popover-inner">
           {title && <div className="zdy-popover-title">{title}</div>}
           {content != null && <div className="zdy-popover-content">{content}</div>}
@@ -345,7 +384,6 @@ const Popover: React.FC<PopoverProps> = ({
         onClick={handleClick}
         onFocus={handleFocus}
         onBlur={handleBlur}
-        style={{ display: 'inline-block' }}
       >
         {children}
       </div>

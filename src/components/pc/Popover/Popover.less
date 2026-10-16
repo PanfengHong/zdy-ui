@@ -1,14 +1,17 @@
 @import '../../../styles/variables.less';
 
-@popover-arrow-size: 8px;
 @popover-bg: #fff;
 @popover-border-color: #f0f0f0;
+@popover-border-width: 1px;
+// 箭头盒的半宽：盒 12×12，旋转 45° 后尖端探出 12 / 2 * √2 ≈ 8.5px，
+// 与 GAP(8px) 对齐，尖端正好落在触发区边缘上。
+@popover-arrow-half: 6px;
 
 .zdy-popover {
   position: absolute;
   max-width: 400px;
   background: @popover-bg;
-  border: 1px solid @popover-border-color;
+  border: @popover-border-width solid @popover-border-color;
   border-radius: @border-radius;
   box-shadow: @box-shadow;
   font-size: @pc-font-size-base;
@@ -54,100 +57,67 @@
   }
 
   // ============ 箭头 ============
+  // 箭头中心固定落在气泡边框盒的对应边缘上（用 margin 抵消 1px 边框 + 半个箭头盒），
+  // 沿边缘的方向则由 JS 下发的 --zdy-popover-arrow-x / -y 决定（对准触发器中心）。
   &-arrow {
     position: absolute;
-    width: @popover-arrow-size * 2;
-    height: @popover-arrow-size * 2;
+    box-sizing: border-box;
+    width: @popover-arrow-half * 2;
+    height: @popover-arrow-half * 2;
     background: @popover-bg;
-    border: 1px solid @popover-border-color;
+    border: @popover-border-width solid @popover-border-color;
     transform: rotate(45deg);
     z-index: -1;
   }
 
-  &--top &-arrow {
-    bottom: -@popover-arrow-size;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    border-top: none;
-    border-left: none;
-  }
-  &--topLeft &-arrow {
-    bottom: -@popover-arrow-size;
-    left: @popover-arrow-size + 4;
-    transform: rotate(45deg);
-    border-top: none;
-    border-left: none;
-  }
-  &--topRight &-arrow {
-    bottom: -@popover-arrow-size;
-    right: @popover-arrow-size + 4;
-    transform: rotate(45deg);
-    border-top: none;
-    border-left: none;
-  }
-
-  &--bottom &-arrow {
-    top: -@popover-arrow-size;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    border-bottom: none;
-    border-right: none;
-  }
-  &--bottomLeft &-arrow {
-    top: -@popover-arrow-size;
-    left: @popover-arrow-size + 4;
-    transform: rotate(45deg);
-    border-bottom: none;
-    border-right: none;
-  }
+  &--top &-arrow,
+  &--topLeft &-arrow,
+  &--topRight &-arrow,
+  &--bottom &-arrow,
+  &--bottomLeft &-arrow,
   &--bottomRight &-arrow {
-    top: -@popover-arrow-size;
-    right: @popover-arrow-size + 4;
-    transform: rotate(45deg);
-    border-bottom: none;
-    border-right: none;
+    left: var(--zdy-popover-arrow-x, 50%);
+    margin-left: -(@popover-arrow-half + @popover-border-width);
   }
 
-  &--left &-arrow {
-    right: -@popover-arrow-size;
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-    border-left: none;
-    border-bottom: none;
-  }
-  &--leftTop &-arrow {
-    right: -@popover-arrow-size;
-    top: @popover-arrow-size + 4;
-    transform: rotate(45deg);
-    border-left: none;
-    border-bottom: none;
-  }
-  &--leftBottom &-arrow {
-    right: -@popover-arrow-size;
-    bottom: @popover-arrow-size + 4;
-    transform: rotate(45deg);
-    border-left: none;
-    border-bottom: none;
-  }
-
-  &--right &-arrow {
-    left: -@popover-arrow-size;
-    top: 50%;
-    transform: translateY(-50%) rotate(45deg);
-    border-right: none;
-    border-top: none;
-  }
-  &--rightTop &-arrow {
-    left: -@popover-arrow-size;
-    top: @popover-arrow-size + 4;
-    transform: rotate(45deg);
-    border-right: none;
-    border-top: none;
-  }
+  &--left &-arrow,
+  &--leftTop &-arrow,
+  &--leftBottom &-arrow,
+  &--right &-arrow,
+  &--rightTop &-arrow,
   &--rightBottom &-arrow {
-    left: -@popover-arrow-size;
-    bottom: @popover-arrow-size + 4;
-    transform: rotate(45deg);
+    top: var(--zdy-popover-arrow-y, 50%);
+    margin-top: -(@popover-arrow-half + @popover-border-width);
+  }
+
+  &--top &-arrow,
+  &--topLeft &-arrow,
+  &--topRight &-arrow {
+    bottom: -(@popover-arrow-half + @popover-border-width);
+    border-top: none;
+    border-left: none;
+  }
+
+  &--bottom &-arrow,
+  &--bottomLeft &-arrow,
+  &--bottomRight &-arrow {
+    top: -(@popover-arrow-half + @popover-border-width);
+    border-bottom: none;
+    border-right: none;
+  }
+
+  &--left &-arrow,
+  &--leftTop &-arrow,
+  &--leftBottom &-arrow {
+    right: -(@popover-arrow-half + @popover-border-width);
+    border-left: none;
+    border-bottom: none;
+  }
+
+  &--right &-arrow,
+  &--rightTop &-arrow,
+  &--rightBottom &-arrow {
+    left: -(@popover-arrow-half + @popover-border-width);
     border-right: none;
     border-top: none;
   }
@@ -202,4 +172,11 @@
 
 .zdy-popover-trigger {
   display: inline-block;
+  // 触发区必须严格等于子元素盒子：定位与箭头对齐都以它的 rect 为准。
+  // 但 inline-block 作为 grid / flex 子项时会被「块化」，并沿容器方向被拉伸
+  // （grid 的 justify-items: stretch、flex 的 align-items: stretch），
+  // 触发区就会被撑满整格 —— 表现为 hover 命中范围过大、气泡对准格子中心而不是真实元素。
+  // 显式收缩到内容尺寸，保证在任何布局上下文里都贴住子元素。
+  width: fit-content;
+  height: fit-content;
 }
