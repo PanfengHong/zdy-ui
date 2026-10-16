@@ -1,1 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="120" viewBox="0 0 200 120"><rect width="200" height="120" fill="#f8f9fb"/><ellipse cx="100" cy="75" rx="50" ry="8" fill="#e8e8e8" opacity="0.5"/><path d="M60 70 L65 40 L80 45 L95 30 L110 42 L130 35 L140 70 Z" fill="none" stroke="#d9d9d9" stroke-width="1.5"/><text x="100" y="100" font-family="Arial,sans-serif" font-size="11" fill="#bbb" text-anchor="middle">No data</text></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="120" viewBox="0 0 200 120">
+  <rect width="200" height="120" fill="#f8f9fb"/>
+  <circle cx="100" cy="22" r="3" fill="#dcdcdc"/>
+  <circle cx="60" cy="30" r="2" fill="#e8e8e8"/>
+  <circle cx="140" cy="28" r="2" fill="#e8e8e8"/>
+  <ellipse cx="100" cy="99" rx="44" ry="6" fill="#ececec"/>
+  <polygon points="58,57 70,51.5 42,38.5 30,44" fill="#f0f0f0" stroke="#d9d9d9" stroke-width="1.2" stroke-linejoin="round"/>
+  <polygon points="142,57 130,51.5 158,38.5 170,44" fill="#f0f0f0" stroke="#d9d9d9" stroke-width="1.2" stroke-linejoin="round"/>
+  <path d="M58 56 H142 V90 Q142 95 137 95 H63 Q58 95 58 90 Z" fill="#fafafa" stroke="#d9d9d9" stroke-width="1.5"/>
+  <ellipse cx="100" cy="56" rx="42" ry="9" fill="#e2e2e2" stroke="#d9d9d9" stroke-width="1.5"/>
+  <text x="100" y="114" font-family="Arial,sans-serif" font-size="11" fill="#bbb" text-anchor="middle">No data</text>
+</svg>

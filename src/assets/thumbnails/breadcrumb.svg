@@ -1,1 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="200" height="120" viewBox="0 0 200 120"><rect width="200" height="120" fill="#f8f9fb"/><circle cx="45" cy="60" r="5" fill="none" stroke="#1890ff" stroke-width="1.5"/><text x="45" y="64" font-family="Arial,sans-serif" font-size="7" fill="#1890ff" text-anchor="middle">1</text><rect x="55" y="57" width="30" height="6" rx="1" fill="#1890ff"/><polygon points="90,57 100,60 90,63" fill="#1890ff"/><rect x="105" y="57" width="30" height="6" rx="1" fill="#999"/><polygon points="140,57 150,60 140,63" fill="#999"/><rect x="155" y="57" width="30" height="6" rx="1" fill="#333"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="200" height="120" viewBox="0 0 200 120">
+  <rect width="200" height="120" fill="#f8f9fb"/>
+  <path d="M17.5 56.5 L21.5 52.5 L25.5 56.5 V60.5 H17.5 Z" fill="#8c8c8c"/>
+  <text x="30" y="61" font-family="Arial,sans-serif" font-size="8.5" fill="#8c8c8c">Home</text>
+  <text x="59" y="61" font-family="Arial,sans-serif" font-size="8.5" fill="#d0d0d0" text-anchor="middle">/</text>
+  <text x="69" y="61" font-family="Arial,sans-serif" font-size="8.5" fill="#8c8c8c">Components</text>
+  <text x="126" y="61" font-family="Arial,sans-serif" font-size="8.5" fill="#d0d0d0" text-anchor="middle">/</text>
+  <text x="136" y="61" font-family="Arial,sans-serif" font-size="8.5" font-weight="bold" fill="#262626">Breadcrumb</text>
+</svg>
