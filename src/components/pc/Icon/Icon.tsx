@@ -543,6 +543,110 @@ const IconSvg = ({ type, size }: { type: string; size: number }) => {
           <circle cx="12" cy="19" r="1" />
         </svg>
       );
+    case "monitor":
+      return (
+        <svg
+          width={iconSize}
+          height={iconSize}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect width="20" height="14" x="2" y="3" rx="2" ry="2" />
+          <line x1="8" x2="16" y1="21" y2="21" />
+          <line x1="12" x2="12" y1="17" y2="21" />
+        </svg>
+      );
+    case "smartphone":
+      return (
+        <svg
+          width={iconSize}
+          height={iconSize}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <rect width="14" height="20" x="5" y="2" rx="2" ry="2" />
+          <path d="M12 18h.01" />
+        </svg>
+      );
+    case "component":
+      return (
+        <svg
+          width={iconSize}
+          height={iconSize}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M5.5 8.5 9 12l-3.5 3.5L2 12l3.5-3.5Z" />
+          <path d="m12 2 3.5 3.5L12 9 8.5 5.5 12 2Z" />
+          <path d="M18.5 8.5 22 12l-3.5 3.5L15 12l3.5-3.5Z" />
+          <path d="m12 15 3.5 3.5L12 22l-3.5-3.5L12 15Z" />
+        </svg>
+      );
+    case "shield-check":
+      return (
+        <svg
+          width={iconSize}
+          height={iconSize}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" />
+          <path d="m9 12 2 2 4-4" />
+        </svg>
+      );
+    case "palette":
+      return (
+        <svg
+          width={iconSize}
+          height={iconSize}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <circle cx="13.5" cy="6.5" r=".5" fill="currentColor" />
+          <circle cx="17.5" cy="10.5" r=".5" fill="currentColor" />
+          <circle cx="8.5" cy="7.5" r=".5" fill="currentColor" />
+          <circle cx="6.5" cy="12.5" r=".5" fill="currentColor" />
+          <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.555C21.965 6.012 17.461 2 12 2z" />
+        </svg>
+      );
+    case "package":
+      return (
+        <svg
+          width={iconSize}
+          height={iconSize}
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z" />
+          <path d="M12 22V12" />
+          <polyline points="3.29 7 12 12 20.71 7" />
+          <path d="m7.5 4.27 9 5.15" />
+        </svg>
+      );
     default:
       return null;
   }

@@ -37,7 +37,13 @@ export type IconType =
   | "upload"
   | "drag"
   | "more-horizontal"
-  | "more-vertical";
+  | "more-vertical"
+  | "monitor"
+  | "smartphone"
+  | "component"
+  | "shield-check"
+  | "palette"
+  | "package";
 
 export type IconSizeType = "xs" | "sm" | "md" | "lg" | "xl";
 

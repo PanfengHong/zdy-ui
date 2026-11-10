@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Routes, Route, NavLink, Link, useLocation, Outlet, Navigate } from 'react-router-dom';
 
 import Icon from '../components/pc/Icon/Icon';
@@ -20,9 +21,33 @@ const TopHeader = () => {
   const isDesign = location.pathname.startsWith('/design');
   const isComponents = location.pathname.startsWith('/components');
   const isHome = location.pathname === '/';
+  // 主页：初始与 Hero 融为一体，滚动后切换为玻璃拟态悬浮
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    if (!isHome) {
+      setScrolled(false);
+      return;
+    }
+    // 主页滚动发生在 .app-content 容器内，使用捕获阶段监听
+    const onScroll = (e: Event) => {
+      const target = e.target as HTMLElement | Document;
+      const top = target instanceof HTMLElement ? target.scrollTop : window.scrollY;
+      setScrolled(top > 8);
+    };
+    window.addEventListener('scroll', onScroll, true);
+    onScroll({ target: document.querySelector('.home-content') } as unknown as Event);
+    return () => window.removeEventListener('scroll', onScroll, true);
+  }, [isHome]);
+
+  const headerClass = [
+    'app-top-header',
+    isHome ? 'app-top-header--home' : '',
+    scrolled ? 'app-top-header--scrolled' : '',
+  ].filter(Boolean).join(' ');
 
   return (
-    <header className="app-top-header">
+    <header className={headerClass}>
       <div className="app-top-header-inner">
         <div className="app-top-header-left">
           <Link className="app-top-header-logo" to="/">Zdy Design</Link>
@@ -51,7 +76,7 @@ const TopHeader = () => {
           </nav>
           <a
             className="app-top-header-github"
-            href="https://github.com"
+            href="https://github.com/PanfengHong/zdy-ui"
             target="_blank"
             rel="noopener noreferrer"
             title="GitHub"
