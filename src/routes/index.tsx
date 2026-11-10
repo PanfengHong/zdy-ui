@@ -12,20 +12,30 @@ import DesignShadowPage from '../pages/Design/Shadow';
 import OverviewPage from '../pages/Components/Overview';
 import ChangelogPage from '../pages/Components/Changelog';
 import ComponentDemoPage from '../pages/Components/Demo';
+import HomePage from '../pages/Home';
 
 // ============== 顶部导航（两个布局共用） ==============
 const TopHeader = () => {
   const location = useLocation();
   const isDesign = location.pathname.startsWith('/design');
+  const isComponents = location.pathname.startsWith('/components');
+  const isHome = location.pathname === '/';
 
   return (
     <header className="app-top-header">
       <div className="app-top-header-inner">
         <div className="app-top-header-left">
-          <Link className="app-top-header-logo" to="/components/overview">Zdy Design</Link>
+          <Link className="app-top-header-logo" to="/">Zdy Design</Link>
         </div>
         <div className="app-top-header-right">
           <nav className="app-top-header-nav">
+            <NavLink
+              className={`app-top-header-nav-item ${isHome ? 'active' : ''}`}
+              to="/"
+              end
+            >
+              首页
+            </NavLink>
             <NavLink
               className={`app-top-header-nav-item ${isDesign ? 'active' : ''}`}
               to="/design/introduction"
@@ -33,7 +43,7 @@ const TopHeader = () => {
               设计
             </NavLink>
             <NavLink
-              className={`app-top-header-nav-item ${!isDesign ? 'active' : ''}`}
+              className={`app-top-header-nav-item ${isComponents ? 'active' : ''}`}
               to="/components/overview"
             >
               组件
@@ -99,6 +109,18 @@ const DesignLayout = () => {
   );
 };
 
+// ============== 主页布局（仅顶部导航，无侧边栏） ==============
+const HomeLayout = () => {
+  return (
+    <div className="app-container">
+      <TopHeader />
+      <div className="app-content home-content">
+        <Outlet />
+      </div>
+    </div>
+  );
+};
+
 // ============== 组件页面布局（含侧边栏） ==============
 const MainLayout = () => {
   return (
@@ -118,6 +140,11 @@ const MainLayout = () => {
 const AppRoutes = () => {
   return (
     <Routes>
+      {/* 主页 - 无侧边栏 */}
+      <Route element={<HomeLayout />}>
+        <Route path="/" element={<HomePage />} />
+      </Route>
+
       {/* 设计页面 - 含侧边栏 */}
       <Route element={<DesignLayout />}>
         <Route path="/design" element={<Navigate to="/design/introduction" replace />} />
@@ -138,10 +165,10 @@ const AppRoutes = () => {
       </Route>
 
       {/* 默认跳转 */}
-      <Route path="/" element={<Navigate to="/components/overview" replace />} />
+      <Route path="/home" element={<Navigate to="/" replace />} />
 
       {/* 兜底 */}
-      <Route path="*" element={<Navigate to="/components/overview" replace />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 };

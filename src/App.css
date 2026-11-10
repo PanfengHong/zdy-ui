@@ -841,6 +841,11 @@
   word-break: break-all;
 }
 
+/* 主页内容区域：无侧边栏，全宽展示 */
+.home-content {
+  margin-left: 0;
+}
+
 /* 响应式设计 */
 @media (max-width: 768px) {
   .app-container {
