@@ -1,3 +1,4 @@
+@import '../../../styles/variables.less';
 .zdy-dialog-mask {
   position: fixed;
   top: 0;
@@ -35,7 +36,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 16px 24px;
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid var(--zdy-border-color-strong);
   }
 
   &-icon {
@@ -48,7 +49,7 @@
     margin: 0;
     font-size: 16px;
     font-weight: 500;
-    color: #333;
+    color: var(--zdy-text-color);
     line-height: 24px;
   }
 
@@ -61,21 +62,21 @@
     border: none;
     background: none;
     font-size: 20px;
-    color: #999;
+    color: var(--zdy-text-color-disabled);
     cursor: pointer;
     border-radius: 4px;
     transition: all 0.2s ease;
 
     &:hover {
-      color: #666;
-      background-color: #f5f5f5;
+      color: var(--zdy-text-color-secondary);
+      background-color: var(--zdy-bg-hover);
     }
   }
 
   &-body {
     padding: 24px;
     font-size: 14px;
-    color: #666;
+    color: var(--zdy-text-color-secondary);
     line-height: 1.6;
   }
 
@@ -85,8 +86,8 @@
     justify-content: flex-end;
     gap: 12px;
     padding: 16px 24px;
-    border-top: 1px solid #e8e8e8;
-    background-color: #fafafa;
+    border-top: 1px solid var(--zdy-border-color-strong);
+    background-color: var(--zdy-bg-light);
   }
 }
 

@@ -11,7 +11,7 @@
   font-size: @pc-font-size-small;
   border: 1px solid @border-color;
   border-radius: @border-radius-sm;
-  background-color: #fafafa;
+  background-color: var(--zdy-bg-light);
   color: @text-color;
   white-space: nowrap;
   user-select: none;
@@ -65,7 +65,7 @@
   // ======== 预设颜色（与内联 style 配合使用） ========
   // 颜色样式通过内联 style 注入，这里只做 hover 增强
   &--color-default:hover {
-    background-color: #f0f0f0 !important;
+    background-color: var(--zdy-border-color-split) !important;
   }
 
   // ======== 状态点（status 属性） ========
@@ -137,14 +137,14 @@
 
   // ======== CheckableTag ========
   &-checkable {
-    background-color: #fafafa;
+    background-color: var(--zdy-bg-light);
     border: 1px solid @border-color;
     color: @text-color;
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
-      background-color: #f0f0f0;
+      background-color: var(--zdy-border-color-split);
     }
 
     &--checked {

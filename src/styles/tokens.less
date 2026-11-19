@@ -1,0 +1,80 @@
+// ============================================================
+// Zdy Design 设计令牌（Design Tokens）
+// 单一输出层：所有令牌以 --zdy-* CSS 变量暴露在 :root 上
+//
+// 使用约定：
+//   - 组件样式一律引用 var(--zdy-*)，禁止硬编码色值/尺寸
+//   - 语义层令牌（文本/边框/背景）优先取 global.less 的主题变量，
+//     库被单独使用（无主题变量）时自动降级到内置默认值
+//   - 品牌色 / 功能色为具体值：供 LESS 的 darken() 等编译期函数使用，
+//     见 variables.less 中同名 LESS 变量（两处需保持同步）
+// ============================================================
+
+:root {
+  /* ---------- 品牌色 ---------- */
+  --zdy-color-primary: #1890ff;
+  --zdy-color-primary-hover: #40a9ff;
+  --zdy-color-primary-active: #096dd9;
+  --zdy-color-primary-light: #e6f7ff;
+  --zdy-color-primary-bg-hover: #f0f5ff;
+  --zdy-color-primary-bg-active: #e0ebff;
+  --zdy-color-link-active: #0f5bc4;
+  --zdy-color-white: #fff;
+
+  /* ---------- 功能色 ---------- */
+  --zdy-color-success: #52c41a;
+  --zdy-color-success-active: #389e0d;
+  --zdy-color-warning: #faad14;
+  --zdy-color-warning-active: #d48806;
+  --zdy-color-error: #f5222d;
+  --zdy-color-danger: #ff4d4f;
+  --zdy-color-info: #1890ff;
+
+  /* ---------- 文本 ---------- */
+  --zdy-text-color: var(--foreground, #333);
+  --zdy-text-color-secondary: var(--muted-foreground, #666);
+  --zdy-text-color-disabled: #999;
+  --zdy-text-color-quaternary: #bfbfbf;
+
+  /* ---------- 背景 ---------- */
+  --zdy-bg-container: var(--background, #fff);
+  --zdy-bg-hover: var(--hover, #f5f5f5);
+  --zdy-bg-light: var(--secondary, #fafafa);
+
+  /* ---------- 边框 ---------- */
+  --zdy-border-color: var(--input, #d9d9d9);
+  --zdy-border-color-strong: var(--border, #e8e8e8);
+  --zdy-border-color-split: var(--border-subtle, #f0f0f0);
+
+  /* ---------- 圆角 ---------- */
+  --zdy-border-radius-sm: 4px;
+  --zdy-border-radius-base: 5px;
+  --zdy-border-radius-lg: 8px;
+  --zdy-border-radius-round: 20px;
+
+  /* ---------- 阴影 ---------- */
+  --zdy-shadow-sm: 0 1px 4px rgba(0, 0, 0, 0.06);
+  --zdy-shadow-base: 0 2px 8px rgba(0, 0, 0, 0.15);
+  --zdy-shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+  --zdy-shadow-primary: 0 4px 12px rgba(24, 144, 255, 0.4);
+  --zdy-shadow-primary-sm: 0 2px 6px rgba(24, 144, 255, 0.3);
+  --zdy-shadow-success: 0 4px 12px rgba(82, 196, 26, 0.4);
+  --zdy-shadow-warning: 0 4px 12px rgba(255, 152, 0, 0.4);
+  --zdy-shadow-danger: 0 4px 12px rgba(245, 108, 108, 0.4);
+
+  /* ---------- 字体（PC） ---------- */
+  --zdy-font-size-small: 12px;
+  --zdy-font-size-base: 14px;
+  --zdy-font-size-large: 16px;
+
+  /* ---------- 字体（Mobile） ---------- */
+  --zdy-font-size-mobile-small: 14px;
+  --zdy-font-size-mobile-base: 16px;
+  --zdy-font-size-mobile-large: 18px;
+
+  /* ---------- 层级 ---------- */
+  --zdy-z-index-dropdown: 1000;
+  --zdy-z-index-tooltip: 1000;
+  --zdy-z-index-modal: 1000;
+  --zdy-z-index-message: 1010;
+}

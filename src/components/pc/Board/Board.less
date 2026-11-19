@@ -56,7 +56,7 @@
       border-radius: 2px;
 
       &:hover {
-        background: #f0f0f0;
+        background: var(--zdy-border-color-split);
       }
     }
 
@@ -78,7 +78,7 @@
     &-count {
       font-size: @pc-font-size-small;
       color: @text-color-secondary;
-      background: #f0f0f0;
+      background: var(--zdy-border-color-split);
       border-radius: 10px;
       padding: 0 8px;
       height: 18px;
@@ -105,7 +105,7 @@
       transition: opacity 0.15s, background 0.15s;
 
       &:hover {
-        background: #f0f0f0;
+        background: var(--zdy-border-color-split);
       }
     }
 
@@ -138,14 +138,14 @@
     position: relative;
     padding: 10px 12px;
     background: #fff;
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--zdy-border-color-split);
     border-radius: @border-radius;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
     cursor: grab;
     transition: box-shadow 0.15s, border-color 0.15s;
 
     &:hover {
-      border-color: #d9d9d9;
+      border-color: var(--zdy-border-color);
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     }
 
@@ -207,7 +207,7 @@
     &-tag {
       font-size: @pc-font-size-small;
       color: @text-color-secondary;
-      background: #f5f5f5;
+      background: var(--zdy-bg-hover);
       border-radius: 2px;
       padding: 1px 6px;
     }
@@ -237,7 +237,7 @@
       transition: opacity 0.15s, background 0.15s;
 
       &:hover {
-        background: #f0f0f0;
+        background: var(--zdy-border-color-split);
       }
     }
 
@@ -266,7 +266,7 @@
       width: 100%;
       padding: 6px 8px;
       background: transparent;
-      border: 1px dashed #d9d9d9;
+      border: 1px dashed var(--zdy-border-color);
       border-radius: @border-radius;
       color: @text-color-secondary;
       font-size: @pc-font-size-small;
@@ -282,7 +282,7 @@
 
     &-form {
       background: #fff;
-      border: 1px solid #d9d9d9;
+      border: 1px solid var(--zdy-border-color);
       border-radius: @border-radius;
       padding: 8px;
       box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
@@ -294,7 +294,7 @@
       padding: 6px 8px;
       font-size: @pc-font-size-base;
       color: @text-color;
-      border: 1px solid #d9d9d9;
+      border: 1px solid var(--zdy-border-color);
       border-radius: 2px;
       outline: none;
       resize: vertical;
@@ -326,7 +326,7 @@
       width: 100%;
       padding: 12px;
       background: rgba(255, 255, 255, 0.6);
-      border: 1px dashed #d9d9d9;
+      border: 1px dashed var(--zdy-border-color);
       border-radius: @border-radius;
       color: @text-color-secondary;
       font-size: @pc-font-size-base;
@@ -352,7 +352,7 @@
       padding: 6px 8px;
       font-size: @pc-font-size-base;
       color: @text-color;
-      border: 1px solid #d9d9d9;
+      border: 1px solid var(--zdy-border-color);
       border-radius: 2px;
       outline: none;
 
@@ -375,7 +375,7 @@
     font-size: @pc-font-size-small;
     color: @text-color;
     background: #fff;
-    border: 1px solid #d9d9d9;
+    border: 1px solid var(--zdy-border-color);
     border-radius: 2px;
     cursor: pointer;
     transition: all 0.15s;

@@ -5,8 +5,7 @@ import { readdirSync, statSync, existsSync } from 'fs';
 import { execSync } from 'child_process';
 import dts from 'vite-plugin-dts';
 
-import { fileURLToPath } from 'node:url';
-const dirname = typeof __dirname !== 'undefined' ? __dirname : path.dirname(fileURLToPath(import.meta.url));
+const dirname = import.meta.dirname;
 
 // Shared logic: run `git log` and parse into commit objects
 function getGitLogData(count: number = 50) {

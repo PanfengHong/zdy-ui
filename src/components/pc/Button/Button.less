@@ -21,19 +21,19 @@
   // 主按钮 - 实心蓝色
   &--primary {
     height: 40px;
-    color: #fff;
-    background-color: #2587ff;
-    border-color: #2587ff;
+    color: var(--zdy-color-white);
+    background-color: var(--zdy-color-primary);
+    border-color: var(--zdy-color-primary);
     
     &:hover {
-      background-color: #2587ff;
-      border-color: #2587ff;
-      box-shadow: 0 4px 12px rgba(37, 135, 255, 0.4);
+      background-color: var(--zdy-color-primary);
+      border-color: var(--zdy-color-primary);
+      box-shadow: var(--zdy-shadow-primary);
     }
     
     &:active {
-      background-color: #1a6ee0;
-      border-color: #1a6ee0;
+      background-color: var(--zdy-color-primary-active);
+      border-color: var(--zdy-color-primary-active);
       box-shadow: none;
     }
   }
@@ -41,39 +41,39 @@
   // 次按钮 - 边框按钮
   &--default {
     height: 36px;
-    color: #333;
+    color: var(--zdy-text-color);
     background-color: transparent;
-    border-color: #d9d9d9;
+    border-color: var(--zdy-border-color);
     
     &:hover {
-      color: #2587ff;
+      color: var(--zdy-color-primary);
       background-color: transparent;
-      border-color: #2587ff;
-      box-shadow: 0 4px 12px rgba(37, 135, 255, 0.4);
+      border-color: var(--zdy-color-primary);
+      box-shadow: var(--zdy-shadow-primary);
     }
     
     &:active {
-      color: #1a6ee0;
-      border-color: #1a6ee0;
-      box-shadow: 0 2px 6px rgba(37, 135, 255, 0.3);
+      color: var(--zdy-color-primary-active);
+      border-color: var(--zdy-color-primary-active);
+      box-shadow: var(--zdy-shadow-primary-sm);
     }
   }
   
   // 次按钮灰色 - 浅灰色背景
   &--success {
     height: 32px;
-    color: #666;
-    background-color: #f5f5f5;
-    border-color: #e8e8e8;
+    color: var(--zdy-text-color-secondary);
+    background-color: var(--zdy-bg-hover);
+    border-color: var(--zdy-border-color-strong);
     
     &:hover {
-      background-color: #e8e8e8;
-      border-color: #d9d9d9;
+      background-color: var(--zdy-border-color-strong);
+      border-color: var(--zdy-border-color);
     }
     
     &:active {
-      background-color: #d9d9d9;
-      border-color: #bfbfbf;
+      background-color: var(--zdy-border-color);
+      border-color: var(--zdy-text-color-quaternary);
     }
   }
   
@@ -81,22 +81,22 @@
   &--text {
     height: 32px;
     padding: 0;
-    color: #666;
+    color: var(--zdy-text-color-secondary);
     background-color: transparent;
     border-color: transparent;
     border-width: 0;
     
     &:hover {
-      color: #2587ff;
-      background-color: #f0f5ff;
+      color: var(--zdy-color-primary);
+      background-color: var(--zdy-color-primary-bg-hover);
       border-color: transparent;
       border-width: 0;
       box-shadow: none;
     }
     
     &:active {
-      color: #1a6ee0;
-      background-color: #e0ebff;
+      color: var(--zdy-color-primary-active);
+      background-color: var(--zdy-color-primary-bg-active);
       border-color: transparent;
       border-width: 0;
       box-shadow: none;
@@ -107,13 +107,13 @@
   &--link {
     height: 32px;
     padding: 0;
-    color: #2587ff;
+    color: var(--zdy-color-primary);
     background-color: transparent;
     border-color: transparent;
     border-width: 0;
     
     &:hover {
-      color: #1a6ee0;
+      color: var(--zdy-color-primary-active);
       text-decoration: underline;
       border-color: transparent;
       border-width: 0;
@@ -121,7 +121,7 @@
     }
     
     &:active {
-      color: #0f5bc4;
+      color: var(--zdy-color-link-active);
       border-color: transparent;
       border-width: 0;
       box-shadow: none;
@@ -131,14 +131,14 @@
   // 成功按钮 - 绿色
   &--success {
     height: 40px;
-    color: #fff;
+    color: var(--zdy-color-white);
     background-color: @success-color;
     border-color: @success-color;
     
     &:hover {
       background-color: darken(@success-color, 10%);
       border-color: darken(@success-color, 10%);
-      box-shadow: 0 4px 12px rgba(82, 196, 26, 0.4);
+      box-shadow: var(--zdy-shadow-success);
     }
     
     &:active {
@@ -147,20 +147,20 @@
     }
 
     .zdy-button--loading-icon {
-      color: #fff;
+      color: var(--zdy-color-white);
     }
   }  
   // 警告按钮 - 橙色
   &--warning {
     height: 40px;
-    color: #fff;
+    color: var(--zdy-color-white);
     background-color: @warning-color;
     border-color: @warning-color;
     
     &:hover {
       background-color: darken(@warning-color, 10%);
       border-color: darken(@warning-color, 10%);
-      box-shadow: 0 4px 12px rgba(255, 152, 0, 0.4);
+      box-shadow: var(--zdy-shadow-warning);
     }
     
     &:active {
@@ -172,14 +172,14 @@
   // 危险按钮 - 红色
   &--danger {
     height: 40px;
-    color: #fff;
+    color: var(--zdy-color-white);
     background-color: @error-color;
     border-color: @error-color;
     
     &:hover {
       background-color: darken(@error-color, 10%);
       border-color: darken(@error-color, 10%);
-      box-shadow: 0 4px 12px rgba(245, 108, 108, 0.4);
+      box-shadow: var(--zdy-shadow-danger);
     }
     
     &:active {
@@ -191,14 +191,14 @@
   // 错误按钮（兼容旧版）
   &--error {
     height: 40px;
-    color: #fff;
+    color: var(--zdy-color-white);
     background-color: @error-color;
     border-color: @error-color;
     
     &:hover {
       background-color: darken(@error-color, 10%);
       border-color: darken(@error-color, 10%);
-      box-shadow: 0 4px 12px rgba(245, 108, 108, 0.4);
+      box-shadow: var(--zdy-shadow-danger);
     }
     
     &:active {
@@ -246,9 +246,9 @@
     &,
     &:hover,
     &:active {
-      color: #999;
-      background-color: #f5f5f5;
-      border-color: #e8e8e8;
+      color: var(--zdy-text-color-disabled);
+      background-color: var(--zdy-bg-hover);
+      border-color: var(--zdy-border-color-strong);
       box-shadow: none;
     }
   }

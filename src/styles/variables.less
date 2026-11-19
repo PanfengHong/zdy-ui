@@ -1,54 +1,69 @@
 // ============================================================
-// LESS 变量 → 指向 global.less 里定义的 CSS 变量
-// 好处：现有组件不用改，自动跟随主题切换
-// 新组件推荐直接用 var(--xxx) 语义化变量
+// LESS 编译期变量
+//
+// 分层说明：
+//   1. tokens.less  输出 :root 上的 --zdy-* CSS 变量（运行时层）
+//   2. 本文件       提供 LESS 编译期变量（组件继续用 @xxx 引用）
+//
+// 注意：
+//   - 品牌色 / 功能色必须保留具体色值，因为 darken() 等 LESS
+//     颜色函数无法作用于 CSS 变量（编译期不可解析）
+//   - 其余变量指向 var(--zdy-*)，跟随主题切换
+//   - 品牌色具体值与 tokens.less 中同名令牌需保持同步
 // ============================================================
+@import './tokens.less';
 
-// 品牌色（保持 LESS 原有值，这些是纯业务语义）
+// 品牌色（编译期具体值，供 darken/lighten 等函数使用）
 @primary-color: #1890ff;
+@primary-color-hover: #40a9ff;
+@primary-color-active: #096dd9;
+@primary-color-light: #e6f7ff;
 @success-color: #52c41a;
 @warning-color: #faad14;
 @error-color: #f5222d;
 
-// ↓↓↓ 下面全部指向 CSS 变量，主题切换自动生效 ↓↓↓
+// 以下变量指向 CSS 令牌，主题切换自动生效
 
 // 文本颜色
-@text-color: var(--foreground);
-@text-color-secondary: var(--muted-foreground);
-@text-color-disabled: rgba(0, 0, 0, 0.4);
+@text-color: var(--zdy-text-color);
+@text-color-secondary: var(--zdy-text-color-secondary);
+@text-color-disabled: var(--zdy-text-color-disabled);
 
 // 边框
-@border-color: var(--border);
-@border-color-split: var(--border-subtle);
+@border-color: var(--zdy-border-color);
+@border-color-strong: var(--zdy-border-color-strong);
+@border-color-split: var(--zdy-border-color-split);
 
 // 圆角
-@border-radius: 4px;
-@border-radius-sm: 4px;
-@border-radius-base: 5px;
+@border-radius: var(--zdy-border-radius-sm);
+@border-radius-sm: var(--zdy-border-radius-sm);
+@border-radius-base: var(--zdy-border-radius-base);
+@border-radius-lg: var(--zdy-border-radius-lg);
 
 // 阴影
-@box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-@shadow-md: 0 4px 12px rgba(0, 0, 0, 0.15);
+@box-shadow: var(--zdy-shadow-base);
+@shadow-sm: var(--zdy-shadow-sm);
+@shadow-md: var(--zdy-shadow-md);
 
 // 占位符
-@placeholder-color: rgba(0, 0, 0, 0.45);
+@placeholder-color: var(--zdy-text-color-quaternary);
 
 // hover 背景
-@background-color-hover: var(--hover);
+@background-color-hover: var(--zdy-bg-hover);
 
 // 主色浅色（选中背景等）
-@primary-color-light: var(--selected-bg);
+@primary-color-light: var(--zdy-color-primary-light);
 
 // z-index
-@z-index-dropdown: 1000;
-@z-index-tooltip: 1000;
+@z-index-dropdown: var(--zdy-z-index-dropdown);
+@z-index-tooltip: var(--zdy-z-index-tooltip);
 
 // PC端字体
-@pc-font-size-base: 14px;
-@pc-font-size-large: 16px;
-@pc-font-size-small: 12px;
+@pc-font-size-base: var(--zdy-font-size-base);
+@pc-font-size-large: var(--zdy-font-size-large);
+@pc-font-size-small: var(--zdy-font-size-small);
 
 // 移动端字体
-@mobile-font-size-base: 16px;
-@mobile-font-size-large: 18px;
-@mobile-font-size-small: 14px;
+@mobile-font-size-base: var(--zdy-font-size-mobile-base);
+@mobile-font-size-large: var(--zdy-font-size-mobile-large);
+@mobile-font-size-small: var(--zdy-font-size-mobile-small);

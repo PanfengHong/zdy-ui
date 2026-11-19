@@ -65,11 +65,11 @@
     }
 
     &--done {
-      border-color: #52c41a;
+      border-color: var(--zdy-color-success);
     }
 
     &--error {
-      border-color: #ff4d4f;
+      border-color: var(--zdy-color-danger);
     }
   }
 
@@ -96,7 +96,7 @@
     width: 100%;
     height: 4px;
     margin-top: 8px;
-    background-color: #f0f0f0;
+    background-color: var(--zdy-border-color-split);
     border-radius: 2px;
     overflow: hidden;
   }
@@ -118,7 +118,7 @@
     color: @primary-color;
 
     &--error {
-      color: #ff4d4f;
+      color: var(--zdy-color-danger);
     }
   }
 
@@ -152,7 +152,7 @@
     }
 
     &--remove:hover {
-      color: #ff4d4f;
+      color: var(--zdy-color-danger);
     }
   }
 }

@@ -1,3 +1,4 @@
+@import '../../../styles/variables.less';
 .zdy-list {
   width: 100%;
   background: #fff;
@@ -6,7 +7,7 @@
 
   .zdy-list-header {
     padding: 16px 24px;
-    border-bottom: 1px solid #f0f0f0;
+    border-bottom: 1px solid var(--zdy-border-color-split);
     font-size: 16px;
     font-weight: 500;
     color: rgba(0, 0, 0, 0.85);
@@ -18,7 +19,7 @@
 
   .zdy-list-footer {
     padding: 16px 24px;
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid var(--zdy-border-color-split);
     font-size: 14px;
     color: rgba(0, 0, 0, 0.65);
   }
@@ -29,7 +30,7 @@
 
     &--split {
       .zdy-list-item {
-        border-bottom: 1px solid #f0f0f0;
+        border-bottom: 1px solid var(--zdy-border-color-split);
 
         &:last-child {
           border-bottom: none;
@@ -44,7 +45,7 @@
     transition: background 0.2s ease;
 
     &:hover {
-      background: #fafafa;
+      background: var(--zdy-bg-light);
     }
 
     &--horizontal {
@@ -64,7 +65,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background: #1890ff;
+      background: var(--zdy-color-primary);
       color: #fff;
       display: flex;
       align-items: center;
@@ -150,12 +151,12 @@
 
   .zdy-list-item-action {
     font-size: 14px;
-    color: #1890ff;
+    color: var(--zdy-color-primary);
     cursor: pointer;
     transition: color 0.2s;
 
     &:hover {
-      color: #40a9ff;
+      color: var(--zdy-color-primary-hover);
     }
   }
 
@@ -163,7 +164,7 @@
     display: inline-block;
     width: 1px;
     height: 12px;
-    background: #e8e8e8;
+    background: var(--zdy-border-color-strong);
     margin: 0 8px;
     vertical-align: middle;
   }
@@ -193,7 +194,7 @@
 
   .zdy-list-card {
     width: 100%;
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--zdy-border-color-split);
     border-radius: 8px;
     padding: 16px;
     transition: box-shadow 0.2s, border-color 0.2s;
@@ -202,7 +203,7 @@
 
     &:hover {
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-      border-color: #d9d9d9;
+      border-color: var(--zdy-border-color);
     }
   }
 
@@ -237,7 +238,7 @@
   .zdy-list-card-extra {
     margin-top: 12px;
     padding-top: 12px;
-    border-top: 1px solid #f5f5f5;
+    border-top: 1px solid var(--zdy-bg-hover);
     font-size: 13px;
     color: rgba(0, 0, 0, 0.45);
   }
@@ -250,11 +251,11 @@
 
   .zdy-list-card-action {
     font-size: 14px;
-    color: #1890ff;
+    color: var(--zdy-color-primary);
     cursor: pointer;
 
     &:hover {
-      color: #40a9ff;
+      color: var(--zdy-color-primary-hover);
     }
   }
 
@@ -275,7 +276,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background: linear-gradient(90deg, var(--zdy-border-color-split) 25%, var(--zdy-border-color-strong) 50%, var(--zdy-border-color-split) 75%);
     background-size: 200% 100%;
     animation: zdy-list-shimmer 1.5s infinite;
     flex-shrink: 0;
@@ -291,7 +292,7 @@
   .zdy-list-loading-line {
     height: 14px;
     border-radius: 4px;
-    background: linear-gradient(90deg, #f0f0f0 25%, #e8e8e8 50%, #f0f0f0 75%);
+    background: linear-gradient(90deg, var(--zdy-border-color-split) 25%, var(--zdy-border-color-strong) 50%, var(--zdy-border-color-split) 75%);
     background-size: 200% 100%;
     animation: zdy-list-shimmer 1.5s infinite;
 
@@ -337,7 +338,7 @@
     justify-content: flex-end;
     gap: 4px;
     padding: 16px 24px;
-    border-top: 1px solid #f0f0f0;
+    border-top: 1px solid var(--zdy-border-color-split);
   }
 
   .zdy-list-pagination-item {
@@ -345,7 +346,7 @@
     height: 32px;
     padding: 0 8px;
     border-radius: 4px;
-    border: 1px solid #d9d9d9;
+    border: 1px solid var(--zdy-border-color);
     background: #fff;
     font-size: 14px;
     color: rgba(0, 0, 0, 0.65);
@@ -356,13 +357,13 @@
     transition: all 0.2s;
 
     &:hover:not(:disabled):not(.zdy-list-pagination-item--active) {
-      border-color: #1890ff;
-      color: #1890ff;
+      border-color: var(--zdy-color-primary);
+      color: var(--zdy-color-primary);
     }
 
     &--active {
-      border-color: #1890ff;
-      background: #1890ff;
+      border-color: var(--zdy-color-primary);
+      background: var(--zdy-color-primary);
       color: #fff;
       cursor: default;
     }

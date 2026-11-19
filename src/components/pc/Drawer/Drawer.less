@@ -28,7 +28,7 @@
   box-shadow: -6px 0 16px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  z-index: @z-index-dropdown + 1;
+  z-index: calc(var(--zdy-z-index-dropdown) + 1);
   pointer-events: none;
   transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
 
@@ -151,5 +151,5 @@
   gap: 8px;
   padding: 10px 16px;
   border-top: 1px solid @border-color-split;
-  background-color: #fafafa;
+  background-color: var(--zdy-bg-light);
 }

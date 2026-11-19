@@ -1,7 +1,7 @@
 @import '../../../styles/variables.less';
 
 @popover-bg: #fff;
-@popover-border-color: #f0f0f0;
+@popover-border-color: var(--zdy-border-color-split);
 @popover-border-width: 1px;
 // 箭头盒的半宽：盒 12×12，旋转 45° 后尖端探出 12 / 2 * √2 ≈ 8.5px，
 // 与 GAP(8px) 对齐，尖端正好落在触发区边缘上。
@@ -165,7 +165,7 @@
     transition: background 0.15s;
 
     &:hover {
-      background: #f0f0f0;
+      background: var(--zdy-border-color-split);
     }
   }
 }

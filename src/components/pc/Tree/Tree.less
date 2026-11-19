@@ -7,7 +7,7 @@
 @tree-primary: @primary-color;
 @tree-text: @text-color;
 @tree-text-secondary: @text-color-secondary;
-@tree-border: #d9d9d9;
+@tree-border: var(--zdy-border-color);
 @tree-selected-bg: @primary-color-light;
 
 .zdy-tree {
@@ -130,7 +130,7 @@
     &-line {
       width: 1px;
       height: 100%;
-      background-color: #d9d9d9;
+      background-color: var(--zdy-border-color);
     }
   }
 
@@ -143,7 +143,7 @@
         width: 6px;
         height: 6px;
         border-radius: 50%;
-        background-color: #d9d9d9;
+        background-color: var(--zdy-border-color);
       }
     }
   }
@@ -218,12 +218,12 @@
       cursor: not-allowed;
 
       &-inner {
-        background-color: #f5f5f5;
-        border-color: #d9d9d9;
+        background-color: var(--zdy-bg-hover);
+        border-color: var(--zdy-border-color);
       }
 
       &:hover &-inner {
-        border-color: #d9d9d9;
+        border-color: var(--zdy-border-color);
       }
     }
   }

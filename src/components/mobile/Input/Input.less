@@ -20,7 +20,7 @@
     -webkit-tap-highlight-color: transparent;
 
     &:hover {
-      border-color: #40a9ff;
+      border-color: var(--zdy-color-primary-hover);
     }
 
     &:focus {
@@ -30,7 +30,7 @@
 
     &[disabled] {
       color: @text-color-secondary;
-      background-color: #f5f5f5;
+      background-color: var(--zdy-bg-hover);
       border-color: @border-color;
       cursor: not-allowed;
 
@@ -92,7 +92,7 @@
   &--disabled {
     .zdy-mobile-input {
       color: @text-color-secondary;
-      background-color: #f5f5f5;
+      background-color: var(--zdy-bg-hover);
       border-color: @border-color;
       cursor: not-allowed;
     }

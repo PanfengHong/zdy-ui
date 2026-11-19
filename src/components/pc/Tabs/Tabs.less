@@ -1,13 +1,14 @@
+@import '../../../styles/variables.less';
 .zdy-tabs {
   font-size: 14px;
-  color: #333;
+  color: var(--zdy-text-color);
 
   &-nav {
     position: relative;
     display: flex;
     align-items: center;
-    border-bottom: 1px solid #e8e8e8;
-    background-color: #fff;
+    border-bottom: 1px solid var(--zdy-border-color-strong);
+    background-color: var(--zdy-color-white);
   }
 
   &-nav-wrap {
@@ -18,7 +19,7 @@
     position: relative;
     padding: 12px 24px;
     font-size: 14px;
-    color: #666;
+    color: var(--zdy-text-color-secondary);
     cursor: pointer;
     transition: all 0.3s ease;
     white-space: nowrap;
@@ -26,13 +27,13 @@
     margin-bottom: -1px;
 
     &:hover {
-      color: #2587ff;
+      color: var(--zdy-color-primary);
     }
 
     &--active {
-      color: #2587ff;
+      color: var(--zdy-color-primary);
       font-weight: 500;
-      border-bottom-color: #2587ff;
+      border-bottom-color: var(--zdy-color-primary);
     }
   }
 
@@ -63,16 +64,16 @@
       transition: all 0.3s ease;
 
       &:hover:not(.zdy-tabs-tab--active) {
-        background-color: rgba(37, 135, 255, 0.08);
+        background-color: var(--selected-bg-hover);
       }
 
       &--active {
-        background-color: #2587ff;
-        color: #fff;
+        background-color: var(--zdy-color-primary);
+        color: var(--zdy-color-white);
 
         &:hover {
-          background-color: #2587ff;
-          color: #fff;
+          background-color: var(--zdy-color-primary);
+          color: var(--zdy-color-white);
         }
       }
     }
@@ -93,16 +94,16 @@
       transition: all 0.3s ease;
 
       &:hover:not(.zdy-tabs-tab--active) {
-        background-color: rgba(37, 135, 255, 0.08);
+        background-color: var(--selected-bg-hover);
       }
 
       &--active {
-        background-color: #2587ff;
-        color: #fff;
+        background-color: var(--zdy-color-primary);
+        color: var(--zdy-color-white);
 
         &:hover {
-          background-color: #2587ff;
-          color: #fff;
+          background-color: var(--zdy-color-primary);
+          color: var(--zdy-color-white);
         }
       }
     }

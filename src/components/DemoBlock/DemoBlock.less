@@ -1,6 +1,7 @@
+@import '../../styles/variables.less';
 .demo-block {
   background: #fff;
-  border: 1px solid #e8e8e8;
+  border: 1px solid var(--zdy-border-color-strong);
   border-radius: 8px;
   overflow: hidden;
   margin-bottom: 16px;
@@ -10,27 +11,27 @@
     justify-content: space-between;
     align-items: center;
     padding: 12px 16px;
-    background-color: #fafafa;
-    border-bottom: 1px solid #e8e8e8;
+    background-color: var(--zdy-bg-light);
+    border-bottom: 1px solid var(--zdy-border-color-strong);
   }
 
   &-title {
     font-size: 14px;
     font-weight: 500;
-    color: #333;
+    color: var(--zdy-text-color);
   }
 
   &-toggle {
     background: none;
     border: none;
     font-size: 12px;
-    color: #999;
+    color: var(--zdy-text-color-disabled);
     cursor: pointer;
     padding: 4px 8px;
     transition: color 0.2s;
 
     &:hover {
-      color: #2587ff;
+      color: var(--zdy-color-primary);
     }
   }
 
@@ -58,7 +59,7 @@
       width: 50%;
       display: flex;
       flex-direction: column;
-      border-left: 1px solid #e8e8e8;
+      border-left: 1px solid var(--zdy-border-color-strong);
     }
   }
 

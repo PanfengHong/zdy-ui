@@ -1,15 +1,16 @@
+@import '../../../styles/variables.less';
 .zdy-collapse {
   font-size: 14px;
-  color: #333;
+  color: var(--zdy-text-color);
   background-color: #fff;
   border-radius: 4px;
 
   // 带边框模式
   &--bordered {
-    border: 1px solid #f0f0f0;
+    border: 1px solid var(--zdy-border-color-split);
 
     > .zdy-collapse-item {
-      border-bottom: 1px solid #f0f0f0;
+      border-bottom: 1px solid var(--zdy-border-color-split);
 
       &:last-child {
         border-bottom: none;
@@ -68,7 +69,7 @@
       }
 
       &:focus-visible {
-        outline: 2px solid #2587ff;
+        outline: 2px solid var(--zdy-color-primary);
         outline-offset: -2px;
       }
     }

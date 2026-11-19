@@ -1,3 +1,4 @@
+@import '../../../styles/variables.less';
 .zdy-switch {
   display: inline-flex;
   align-items: center;
@@ -65,7 +66,7 @@
     position: relative;
     width: 40px;
     height: 20px;
-    background-color: #e8e8e8;
+    background-color: var(--zdy-border-color-strong);
     border-radius: 10px;
     transition: all 0.3s ease;
     padding: 2px;
@@ -97,7 +98,7 @@
 
   &--checked {
     .zdy-switch-inner {
-      background-color: #2587ff;
+      background-color: var(--zdy-color-primary);
     }
 
     .zdy-switch-thumb {
@@ -119,7 +120,7 @@
 
   &:hover:not(.zdy-switch--disabled) {
     .zdy-switch-inner {
-      background-color: #d9d9d9;
+      background-color: var(--zdy-border-color);
     }
   }
 
@@ -131,12 +132,12 @@
 
   &-label {
     font-size: 12px;
-    color: #666;
+    color: var(--zdy-text-color-secondary);
     margin-left: 8px;
     white-space: nowrap;
 
     &--checked {
-      color: #2587ff;
+      color: var(--zdy-color-primary);
     }
   }
 }
