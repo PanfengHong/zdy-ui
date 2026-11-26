@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Routes, Route, NavLink, Link, useLocation, useParams, useSearchParams, Outlet, Navigate } from 'react-router-dom';
 
 import Icon from '../components/pc/Icon/Icon';
-import { menuGroups, designMenuGroups } from './menuConfig';
+import { menuGroups, designMenuGroups, mobileMenuGroups } from './menuConfig';
 import type { MenuGroup } from './menuConfig';
 import DesignIntroductionPage from '../pages/Design/Introduction';
 import DesignColorPage from '../pages/Design/Color';
@@ -15,9 +15,7 @@ import PlatformSwitch from '../pages/Components/PlatformSwitch';
 import ChangelogPage from '../pages/Changelog';
 import ComponentDemoPage from '../pages/Components/Demo';
 import HomePage from '../pages/Home';
-import MobilePage from '../pages/Mobile';
-import MobileDemoPage from '../pages/Mobile/MobileDemo';
-import MobileMenu from '../pages/Mobile/MobileMenu';
+import MobileDemoPage from '../pages/Components/mobile/MobileDemo';
 import AdminLayout from '../pages/Admin/AdminLayout';
 import AdminLoginPage from '../pages/Admin/Login';
 import AdminDashboardPage from '../pages/Admin/Dashboard';
@@ -145,24 +143,33 @@ const TopHeader = () => {
   );
 };
 
-// ============== 通用侧边栏 ==============
-const Sidebar = ({ groups, overviewLink = false }: { groups: MenuGroup[]; overviewLink?: boolean }) => {
-  const visibleGroups = overviewLink
-    ? groups.filter(group => group.label !== '信息')
-    : groups;
+// ============== 通用侧边栏（PC / 移动端共用） ==============
+const Sidebar = ({
+  groups,
+  platform,
+}: {
+  groups: MenuGroup[];
+  platform?: 'pc' | 'mobile';
+}) => {
+  const { pathname } = useLocation();
+  const showOverview = platform === 'pc' || platform === 'mobile';
+  const visibleGroups =
+    platform === 'pc' ? groups.filter(group => group.label !== '信息') : groups;
+  const overviewTo =
+    platform === 'mobile' ? '/components/overview?platform=mobile' : '/components/overview';
 
   return (
     <aside className="app-sidebar">
       <nav className="sidebar-nav">
-        {overviewLink && (
-          <NavLink
-            to="/components/overview"
-            className={({ isActive }) =>
-              `nav-item nav-item--overview ${isActive ? 'active' : ''}`
-            }
+        {showOverview && (
+          <Link
+            to={overviewTo}
+            className={`nav-item nav-item--overview ${
+              pathname === '/components/overview' ? 'active' : ''
+            }`}
           >
             <span className="nav-label">总览</span>
-          </NavLink>
+          </Link>
         )}
         {visibleGroups.map((group) => (
           <div key={group.id} className="menu-group">
@@ -236,7 +243,7 @@ const ChangelogLayout = () => {
 // ============== 组件页面布局（含侧边栏） ==============
 const MainLayout = () => {
   const [searchParams] = useSearchParams();
-  const isMobileDocs = searchParams.get('platform') === 'mobile';
+  const isMobile = searchParams.get('platform') === 'mobile';
 
   return (
     <div className="app-container">
@@ -247,7 +254,10 @@ const MainLayout = () => {
             <PlatformSwitch />
           </div>
           <div className="docs-layout">
-            {isMobileDocs ? <MobileMenu /> : <Sidebar groups={menuGroups} overviewLink />}
+            <Sidebar
+              groups={isMobile ? mobileMenuGroups : menuGroups}
+              platform={isMobile ? 'mobile' : 'pc'}
+            />
             <main className="app-main app-main--docs">
               <Outlet />
             </main>
@@ -259,11 +269,6 @@ const MainLayout = () => {
 };
 
 // 平台通过 ?platform=mobile 区分，PC / 移动端共用同一路由
-const OverviewRoute = () => {
-  const [searchParams] = useSearchParams();
-  return searchParams.get('platform') === 'mobile' ? <MobilePage /> : <OverviewPage />;
-};
-
 const ComponentRoute = () => {
   const [searchParams] = useSearchParams();
   return searchParams.get('platform') === 'mobile' ? <MobileDemoPage /> : <ComponentDemoPage />;
@@ -332,7 +337,7 @@ const AppRoutes = () => {
       {/* 组件页面 - 含侧边栏 */}
       <Route element={<MainLayout />}>
         <Route path="/components" element={<Navigate to="/components/overview" replace />} />
-        <Route path="/components/overview" element={<OverviewRoute />} />
+        <Route path="/components/overview" element={<OverviewPage />} />
         <Route path="/components/:componentName" element={<ComponentRoute />} />
       </Route>
 

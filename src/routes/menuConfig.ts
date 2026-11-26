@@ -119,6 +119,87 @@ export const menuGroups: MenuGroup[] = [
   },
 ];
 
+// 移动端组件菜单：与 PC 菜单共用同一套 MenuGroup 结构
+export const mobileMenuGroups: MenuGroup[] = [
+  {
+    id: 'mobile-general',
+    label: '通用',
+    items: [
+      { id: 'm-button', label: 'MButton 按钮', icon: '🔘', type: 'component', component: 'MButton', path: '/components/MButton?platform=mobile' },
+      { id: 'm-icon', label: 'MIcon 图标', icon: '🎨', type: 'component', component: 'MIcon', path: '/components/MIcon?platform=mobile' },
+    ],
+  },
+  {
+    id: 'mobile-layout',
+    label: '布局',
+    items: [
+      { id: 'm-layout', label: 'MLayout 布局', icon: '📐', type: 'component', component: 'MLayout', path: '/components/MLayout?platform=mobile' },
+      { id: 'm-grid', label: 'MGrid 栅格', icon: '🔲', type: 'component', component: 'MGrid', path: '/components/MGrid?platform=mobile' },
+      { id: 'm-masonry', label: 'MMasonry 瀑布流', icon: '🧱', type: 'component', component: 'MMasonry', path: '/components/MMasonry?platform=mobile' },
+    ],
+  },
+  {
+    id: 'mobile-feedback',
+    label: '反馈',
+    items: [
+      { id: 'm-dialog', label: 'MDialog 弹框', icon: '💬', type: 'component', component: 'MDialog', path: '/components/MDialog?platform=mobile' },
+      { id: 'm-alert', label: 'MAlert 提醒', icon: '⚠️', type: 'component', component: 'MAlert', path: '/components/MAlert?platform=mobile' },
+      { id: 'm-message', label: 'MMessage 消息', icon: '📨', type: 'component', component: 'MMessage', path: '/components/MMessage?platform=mobile' },
+      { id: 'm-notification', label: 'MNotification 通知', icon: '🔔', type: 'component', component: 'MNotification', path: '/components/MNotification?platform=mobile' },
+      { id: 'm-loading', label: 'MLoading 加载', icon: '⏳', type: 'component', component: 'MLoading', path: '/components/MLoading?platform=mobile' },
+      { id: 'm-skeleton', label: 'MSkeleton 骨架屏', icon: '💀', type: 'component', component: 'MSkeleton', path: '/components/MSkeleton?platform=mobile' },
+      { id: 'm-watermark', label: 'MWatermark 水印', icon: '💧', type: 'component', component: 'MWatermark', path: '/components/MWatermark?platform=mobile' },
+      { id: 'm-progress', label: 'MProgress 进度条', icon: '📊', type: 'component', component: 'MProgress', path: '/components/MProgress?platform=mobile' },
+    ],
+  },
+  {
+    id: 'mobile-display',
+    label: '展示',
+    items: [
+      { id: 'm-menu', label: 'MMenu 菜单', icon: '📋', type: 'component', component: 'MMenu', path: '/components/MMenu?platform=mobile' },
+      { id: 'm-carousel', label: 'MCarousel 走马灯', icon: '🎠', type: 'component', component: 'MCarousel', path: '/components/MCarousel?platform=mobile' },
+      { id: 'm-table', label: 'MTable 表格', icon: '📋', type: 'component', component: 'MTable', path: '/components/MTable?platform=mobile' },
+      { id: 'm-list', label: 'MList 列表', icon: '📝', type: 'component', component: 'MList', path: '/components/MList?platform=mobile' },
+      { id: 'm-breadcrumb', label: 'MBreadcrumb 面包屑', icon: '🍞', type: 'component', component: 'MBreadcrumb', path: '/components/MBreadcrumb?platform=mobile' },
+      { id: 'm-steps', label: 'MSteps 步骤条', icon: '📶', type: 'component', component: 'MSteps', path: '/components/MSteps?platform=mobile' },
+      { id: 'm-pagination', label: 'MPagination 分页', icon: '📄', type: 'component', component: 'MPagination', path: '/components/MPagination?platform=mobile' },
+      { id: 'm-anchor', label: 'MAnchor 锚点', icon: '⚓', type: 'component', component: 'MAnchor', path: '/components/MAnchor?platform=mobile' },
+      { id: 'm-tabs', label: 'MTabs 标签页', icon: '📑', type: 'component', component: 'MTabs', path: '/components/MTabs?platform=mobile' },
+      { id: 'm-tree', label: 'MTree 树形控件', icon: '🌳', type: 'component', component: 'MTree', path: '/components/MTree?platform=mobile' },
+      { id: 'm-calendar', label: 'MCalendar 日历', icon: '📅', type: 'component', component: 'MCalendar', path: '/components/MCalendar?platform=mobile' },
+      { id: 'm-empty', label: 'MEmpty 空状态', icon: '📭', type: 'component', component: 'MEmpty', path: '/components/MEmpty?platform=mobile' },
+      { id: 'm-popover', label: 'MPopover 气泡卡片', icon: '💭', type: 'component', component: 'MPopover', path: '/components/MPopover?platform=mobile' },
+      { id: 'm-collapse', label: 'MCollapse 折叠面板', icon: '📁', type: 'component', component: 'MCollapse', path: '/components/MCollapse?platform=mobile' },
+      { id: 'm-intro', label: 'MIntro 引导', icon: '🎯', type: 'component', component: 'MIntro', path: '/components/MIntro?platform=mobile' },
+      { id: 'm-tag', label: 'MTag 标签', icon: '🏷️', type: 'component', component: 'MTag', path: '/components/MTag?platform=mobile' },
+      { id: 'm-board', label: 'MBoard 看板', icon: '📊', type: 'component', component: 'MBoard', path: '/components/MBoard?platform=mobile' },
+    ],
+  },
+  {
+    id: 'mobile-form',
+    label: '表单',
+    items: [
+      { id: 'm-input', label: 'MInput 输入框', icon: '📝', type: 'component', component: 'MInput', path: '/components/MInput?platform=mobile' },
+      { id: 'm-textarea', label: 'MTextarea 文本域', icon: '📄', type: 'component', component: 'MTextarea', path: '/components/MTextarea?platform=mobile' },
+      { id: 'm-select', label: 'MSelect 选择器', icon: '📋', type: 'component', component: 'MSelect', path: '/components/MSelect?platform=mobile' },
+      { id: 'm-radio', label: 'MRadio 单选框', icon: '⭕', type: 'component', component: 'MRadio', path: '/components/MRadio?platform=mobile' },
+      { id: 'm-checkbox', label: 'MCheckbox 多选框', icon: '☑️', type: 'component', component: 'MCheckbox', path: '/components/MCheckbox?platform=mobile' },
+      { id: 'm-upload', label: 'MUpload 上传', icon: '📤', type: 'component', component: 'MUpload', path: '/components/MUpload?platform=mobile' },
+      { id: 'm-switch', label: 'MSwitch 开关', icon: '🔘', type: 'component', component: 'MSwitch', path: '/components/MSwitch?platform=mobile' },
+      { id: 'm-datetimepicker', label: 'MDateTimePicker 日期时间选择', icon: '🗓️', type: 'component', component: 'MDateTimePicker', path: '/components/MDateTimePicker?platform=mobile' },
+      { id: 'm-colorpicker', label: 'MColorPicker 颜色选择', icon: '🎨', type: 'component', component: 'MColorPicker', path: '/components/MColorPicker?platform=mobile' },
+      { id: 'm-form', label: 'MForm 表单', icon: '📋', type: 'component', component: 'MForm', path: '/components/MForm?platform=mobile' },
+      { id: 'm-transfer', label: 'MTransfer 穿梭框', icon: '↔️', type: 'component', component: 'MTransfer', path: '/components/MTransfer?platform=mobile' },
+      { id: 'm-slider', label: 'MSlider 滑动输入条', icon: '🎚️', type: 'component', component: 'MSlider', path: '/components/MSlider?platform=mobile' },
+      { id: 'm-rate', label: 'MRate 评分', icon: '⭐', type: 'component', component: 'MRate', path: '/components/MRate?platform=mobile' },
+    ],
+  },
+];
+
+export const mobileMenuItems: MenuItem[] = mobileMenuGroups.flatMap(group => group.items);
+
+export const mobileTotalComponents = mobileMenuItems.length;
+
 export const findMenuItemByComponent = (componentName: string): MenuItem | undefined => {
   for (const group of menuGroups) {
     const item = group.items.find(item => item.component === componentName);

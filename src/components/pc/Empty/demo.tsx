@@ -1,5 +1,5 @@
-import DemoBlock from '../../DemoBlock/DemoBlock';
-import ApiTable from '../../ApiTable/ApiTable';
+import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
+import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
 import Empty from './Empty';
 import Button from '../Button/Button';
 

@@ -97,8 +97,8 @@ import Button from "zdy-design/pc/Button";
 import Select from "zdy-design/pc/Select";
 
 // 引入单个移动端组件
-import Alert from "zdy-design/mobile/Alert";
-import Button from "zdy-design/mobile/Button";
+import MAlert from "zdy-design/mobile/MAlert";
+import MButton from "zdy-design/mobile/MButton";
 
 const App = () => <Alert type="success" message="操作成功" />;
 ```
@@ -127,9 +127,9 @@ import { PC } from 'zdy-design';
 ```tsx
 import { Mobile } from 'zdy-design';
 
-<Mobile.Button type="primary">移动端按钮</Mobile.Button>
-<Mobile.Input placeholder="请输入" />
-<Mobile.Alert type="warning" message="注意" />
+<Mobile.MButton type="primary">移动端按钮</Mobile.MButton>
+<Mobile.MInput placeholder="请输入" />
+<Mobile.MAlert type="warning" message="注意" />
 ```
 
 ---
@@ -313,7 +313,7 @@ dist/
 ├── mobile/
 │   ├── index.js             # Mobile 所有组件具名导出
 │   ├── index.d.ts
-│   ├── Alert.js             # 单个 Mobile 组件 ES 入口（含 CSS 自动注入）
+│   ├── MAlert.js            # 单个 Mobile 组件 ES 入口（含 CSS 自动注入）
 │   └── ...
 ├── types/
 │   └── index.d.ts           # 公共类型

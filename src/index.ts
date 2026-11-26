@@ -3,7 +3,7 @@
 //   1. import { Alert, Button } from 'zdy-design';        // PC 组件具名导出
 //   2. import Alert from 'zdy-design/pc/Alert';          // PC 组件按需引入
 //   3. import { Mobile } from 'zdy-design';              // 移动端命名空间
-//   4. import MobileAlert from 'zdy-design/mobile/Alert';// 移动端组件按需引入
+//   4. import MAlert from 'zdy-design/mobile/Alert';      // 移动端组件按需引入
 
 // PC 端组件：具名导出（顶层），支持解构引入
 export * from './components/pc';

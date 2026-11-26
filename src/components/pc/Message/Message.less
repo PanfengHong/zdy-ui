@@ -2,56 +2,52 @@
 
 .zdy-message-container {
   position: fixed;
-  top: 20px;
+  top: 24px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  align-items: center;
+  gap: 10px;
   pointer-events: none;
 }
 
 .zdy-message {
   display: flex;
   align-items: center;
-  padding: 8px 16px;
+  gap: 12px;
+  padding: 10px 14px 10px 12px;
   background-color: #fff;
-  border-radius: 4px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
-  font-size: 14px;
-  min-width: 260px;
-  max-width: 400px;
+  border-radius: 18px;
+  box-shadow:
+    0 12px 32px rgba(15, 23, 42, 0.12),
+    0 2px 8px rgba(15, 23, 42, 0.06);
+  font-size: 15px;
+  min-width: 300px;
+  max-width: 460px;
   pointer-events: auto;
-  animation: messageFadeIn 0.3s ease;
+  animation: messageFadeIn 0.24s ease;
 
   &--success {
-    border-left: 4px solid var(--zdy-color-success);
-
     .zdy-message-icon {
       color: var(--zdy-color-success);
     }
   }
 
   &--info {
-    border-left: 4px solid var(--zdy-color-primary);
-
     .zdy-message-icon {
       color: var(--zdy-color-primary);
     }
   }
 
   &--warning {
-    border-left: 4px solid var(--zdy-color-warning);
-
     .zdy-message-icon {
       color: var(--zdy-color-warning);
     }
   }
 
   &--error {
-    border-left: 4px solid var(--zdy-color-error);
-
     .zdy-message-icon {
       color: var(--zdy-color-error);
     }
@@ -59,39 +55,53 @@
 }
 
 .zdy-message-icon {
-  margin-right: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: #f3f4f6;
 }
 
 .zdy-message-content {
   flex: 1;
+  min-width: 0;
   line-height: 1.5;
-  color: @text-color;
+  color: #1f2329;
+  font-weight: 500;
 }
 
 .zdy-message-close {
-  margin-left: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  margin-left: 2px;
   padding: 0;
   background: none;
   border: none;
+  border-radius: 50%;
   cursor: pointer;
-  color: @text-color-secondary;
-  transition: color 0.2s ease;
-  flex-shrink: 0;
+  color: #8a9099;
+  transition: color 0.2s ease, background-color 0.2s ease;
 
   &:hover {
-    color: @text-color;
-    background-color: rgba(0, 0, 0, 0.04);
+    color: #1f2329;
+    background-color: #f3f4f6;
   }
 }
 
 @keyframes messageFadeIn {
   from {
     opacity: 0;
-    transform: translateY(-20px);
+    transform: translateY(-12px) scale(0.98);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
   }
 }

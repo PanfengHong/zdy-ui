@@ -1,6 +1,6 @@
 import React from 'react';
-import DemoBlock from '../../DemoBlock/DemoBlock';
-import ApiTable from '../../ApiTable/ApiTable';
+import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
+import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
 import Grid from './Grid';
 
 const GridDemo = () => {

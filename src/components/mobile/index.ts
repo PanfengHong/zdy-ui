@@ -1,54 +1,54 @@
-// 移动端组件导出
+// 移动端组件导出（统一 M 前缀，避免与 PC 端组件重名）
 
 // 通用组件
-export { default as Button } from './Button';
-export { default as Icon } from './Icon';
+export { default as MButton } from './MButton';
+export { default as MIcon } from './MIcon';
 
 // 布局组件
-export { default as Layout } from './Layout';
-export { default as Grid } from './Grid';
-export { default as Masonry } from './Masonry';
+export { default as MLayout } from './MLayout';
+export { default as MGrid } from './MGrid';
+export { default as MMasonry } from './MMasonry';
 
 // 反馈组件
-export { default as Dialog } from './Dialog';
-export { default as Alert } from './Alert';
-export { default as Message } from './Message';
-export { default as Notification } from './Notification';
-export { default as Loading } from './Loading';
-export { default as Skeleton } from './Skeleton';
-export { default as Watermark } from './Watermark';
-export { default as Progress } from './Progress';
+export { default as MDialog } from './MDialog';
+export { default as MAlert } from './MAlert';
+export { default as MMessage } from './MMessage';
+export { default as MNotification } from './MNotification';
+export { default as MLoading } from './MLoading';
+export { default as MSkeleton } from './MSkeleton';
+export { default as MWatermark } from './MWatermark';
+export { default as MProgress } from './MProgress';
 
 // 展示组件
-export { default as Menu } from './Menu';
-export { default as Carousel } from './Carousel';
-export { default as Table } from './Table';
-export { default as List } from './List';
-export { default as Breadcrumb } from './Breadcrumb';
-export { default as Steps } from './Steps';
-export { default as Pagination } from './Pagination';
-export { default as Anchor } from './Anchor';
-export { default as Tabs } from './Tabs';
-export { default as Tree } from './Tree';
-export { default as Calendar } from './Calendar';
-export { default as Empty } from './Empty';
-export { default as Popover } from './Popover';
-export { default as Collapse } from './Collapse';
-export { default as Intro } from './Intro';
-export { default as Tag } from './Tag';
-export { default as Board } from './Board';
+export { default as MMenu } from './MMenu';
+export { default as MCarousel } from './MCarousel';
+export { default as MTable } from './MTable';
+export { default as MList } from './MList';
+export { default as MBreadcrumb } from './MBreadcrumb';
+export { default as MSteps } from './MSteps';
+export { default as MPagination } from './MPagination';
+export { default as MAnchor } from './MAnchor';
+export { default as MTabs } from './MTabs';
+export { default as MTree } from './MTree';
+export { default as MCalendar } from './MCalendar';
+export { default as MEmpty } from './MEmpty';
+export { default as MPopover } from './MPopover';
+export { default as MCollapse } from './MCollapse';
+export { default as MIntro } from './MIntro';
+export { default as MTag } from './MTag';
+export { default as MBoard } from './MBoard';
 
 // 表单组件
-export { default as Input } from './Input';
-export { default as Textarea } from './Textarea';
-export { default as Select } from './Select';
-export { default as Radio } from './Radio';
-export { default as Checkbox } from './Checkbox';
-export { default as Upload } from './Upload';
-export { default as Switch } from './Switch';
-export { default as DateTimePicker } from './DateTimePicker';
-export { default as ColorPicker } from './ColorPicker';
-export { default as Form } from './Form';
-export { default as Transfer } from './Transfer';
-export { default as Slider } from './Slider';
-export { default as Rate } from './Rate';
+export { default as MInput } from './MInput';
+export { default as MTextarea } from './MTextarea';
+export { default as MSelect } from './MSelect';
+export { default as MRadio } from './MRadio';
+export { default as MCheckbox } from './MCheckbox';
+export { default as MUpload } from './MUpload';
+export { default as MSwitch } from './MSwitch';
+export { default as MDateTimePicker } from './MDateTimePicker';
+export { default as MColorPicker } from './MColorPicker';
+export { default as MForm } from './MForm';
+export { default as MTransfer } from './MTransfer';
+export { default as MSlider } from './MSlider';
+export { default as MRate } from './MRate';

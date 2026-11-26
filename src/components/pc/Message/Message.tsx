@@ -36,10 +36,10 @@ const MessageItem: React.FC<MessageItemProps> = ({
   };
 
   const iconMap: Record<MessageType, React.ReactNode> = {
-    success: (<Icon type='confirm' />),
-    info: (<Icon type='info' />),
-    warning: (<Icon type='warning' />),
-    error: (<Icon type='error' />)
+    success: (<Icon type='confirm' size={18} />),
+    info: (<Icon type='info' size={18} />),
+    warning: (<Icon type='warning' size={18} />),
+    error: (<Icon type='error' size={18} />)
   };
 
   return (

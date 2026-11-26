@@ -40,7 +40,7 @@ const ComponentDemoPage = () => {
     return (
       <DocsContent>
         <div className="docs-breadcrumb">
-          <Link to="/components/overview">组件库</Link>
+          <Link to="/components/overview">PC端组件库</Link>
           <span>/</span>
           <span>{componentTitle}</span>
         </div>

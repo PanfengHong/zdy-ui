@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import DemoBlock from '../../DemoBlock/DemoBlock';
-import ApiTable from '../../ApiTable/ApiTable';
+import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
+import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
 import Form, { FormItem, useForm } from './Form';
 import Input from '../Input/Input';
 import Textarea from '../Textarea/Textarea';

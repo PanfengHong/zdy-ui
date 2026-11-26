@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import DemoBlock from '../../DemoBlock/DemoBlock';
-import ApiTable from '../../ApiTable/ApiTable';
+import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
+import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
 import Dialog from './Dialog';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';

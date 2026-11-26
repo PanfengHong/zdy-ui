@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import DemoBlock from "../../DemoBlock/DemoBlock";
+import DemoBlock from "../../../pages/Components/DemoBlock/DemoBlock";
 import Table from "../Table";
 import type { RowAction } from "../Table/types";
-import ApiTable from "../../ApiTable/ApiTable";
+import ApiTable from "../../../pages/Components/ApiTable/ApiTable";
 
 const TableDemo = () => {
   const apiData = [

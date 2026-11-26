@@ -1,9 +1,13 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Icon } from '../../components/pc';
-import { designMenuGroups, getNonInfoGroups } from '../../routes/menuConfig';
-import MobilePreview from '../Mobile/MobilePreview';
-import { mobileGroups, totalComponents } from '../Mobile/catalog';
+import {
+  designMenuGroups,
+  getNonInfoGroups,
+  mobileMenuGroups,
+  mobileTotalComponents,
+} from '../../routes/menuConfig';
+import MobilePreview from './MobilePreview/MobilePreview';
 import './Home.css';
 
 const installCode = `# npm
@@ -28,17 +32,17 @@ export default function App() {
 }`;
 
 const mobileUsageCode = `import {
-  Alert,
-  Button,
-  Input
+  MAlert,
+  MButton,
+  MInput
 } from 'zdy-design/mobile';
 
 // 移动端样式独立注入，与 PC 端互不影响
 export default function App() {
   return (
     <>
-      <Alert type="info" message="移动端组件已接入" />
-      <Button type="primary">开始使用</Button>
+      <MAlert type="info" message="移动端组件已接入" />
+      <MButton type="primary">开始使用</MButton>
     </>
   );
 }`;
@@ -85,7 +89,7 @@ const PcPreview = () => (
               <span>PC 组件</span>
             </div>
             <div className="home-browser-stat">
-              <strong>{totalComponents}</strong>
+              <strong>{mobileTotalComponents}</strong>
               <span>移动组件</span>
             </div>
             <div className="home-browser-stat">
@@ -280,11 +284,11 @@ const HomePage = () => {
               </div>
               <div className="home-platform-meta">
                 <div className="home-platform-meta-item">
-                  <strong>{totalComponents}</strong>
+                  <strong>{mobileTotalComponents}</strong>
                   <span>移动组件</span>
                 </div>
                 <div className="home-platform-meta-item">
-                  <strong>{mobileGroups.length}</strong>
+                  <strong>{mobileMenuGroups.length}</strong>
                   <span>场景分类</span>
                 </div>
                 <div className="home-platform-meta-item">

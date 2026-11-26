@@ -250,228 +250,228 @@
       "require": "./dist/pc/Watermark.js",
       "types": "./dist/pc/Watermark.d.ts"
     },
-    "./mobile/Alert": {
-      "import": "./dist/mobile/Alert.js",
-      "require": "./dist/mobile/Alert.js",
-      "types": "./dist/mobile/Alert.d.ts"
+    "./mobile/MAlert": {
+      "import": "./dist/mobile/MAlert.js",
+      "require": "./dist/mobile/MAlert.js",
+      "types": "./dist/mobile/MAlert.d.ts"
     },
-    "./mobile/Anchor": {
-      "import": "./dist/mobile/Anchor.js",
-      "require": "./dist/mobile/Anchor.js",
-      "types": "./dist/mobile/Anchor.d.ts"
+    "./mobile/MAnchor": {
+      "import": "./dist/mobile/MAnchor.js",
+      "require": "./dist/mobile/MAnchor.js",
+      "types": "./dist/mobile/MAnchor.d.ts"
     },
-    "./mobile/Board": {
-      "import": "./dist/mobile/Board.js",
-      "require": "./dist/mobile/Board.js",
-      "types": "./dist/mobile/Board.d.ts"
+    "./mobile/MBoard": {
+      "import": "./dist/mobile/MBoard.js",
+      "require": "./dist/mobile/MBoard.js",
+      "types": "./dist/mobile/MBoard.d.ts"
     },
-    "./mobile/Breadcrumb": {
-      "import": "./dist/mobile/Breadcrumb.js",
-      "require": "./dist/mobile/Breadcrumb.js",
-      "types": "./dist/mobile/Breadcrumb.d.ts"
+    "./mobile/MBreadcrumb": {
+      "import": "./dist/mobile/MBreadcrumb.js",
+      "require": "./dist/mobile/MBreadcrumb.js",
+      "types": "./dist/mobile/MBreadcrumb.d.ts"
     },
-    "./mobile/Button": {
-      "import": "./dist/mobile/Button.js",
-      "require": "./dist/mobile/Button.js",
-      "types": "./dist/mobile/Button.d.ts"
+    "./mobile/MButton": {
+      "import": "./dist/mobile/MButton.js",
+      "require": "./dist/mobile/MButton.js",
+      "types": "./dist/mobile/MButton.d.ts"
     },
-    "./mobile/Calendar": {
-      "import": "./dist/mobile/Calendar.js",
-      "require": "./dist/mobile/Calendar.js",
-      "types": "./dist/mobile/Calendar.d.ts"
+    "./mobile/MCalendar": {
+      "import": "./dist/mobile/MCalendar.js",
+      "require": "./dist/mobile/MCalendar.js",
+      "types": "./dist/mobile/MCalendar.d.ts"
     },
-    "./mobile/Carousel": {
-      "import": "./dist/mobile/Carousel.js",
-      "require": "./dist/mobile/Carousel.js",
-      "types": "./dist/mobile/Carousel.d.ts"
+    "./mobile/MCarousel": {
+      "import": "./dist/mobile/MCarousel.js",
+      "require": "./dist/mobile/MCarousel.js",
+      "types": "./dist/mobile/MCarousel.d.ts"
     },
-    "./mobile/Checkbox": {
-      "import": "./dist/mobile/Checkbox.js",
-      "require": "./dist/mobile/Checkbox.js",
-      "types": "./dist/mobile/Checkbox.d.ts"
+    "./mobile/MCheckbox": {
+      "import": "./dist/mobile/MCheckbox.js",
+      "require": "./dist/mobile/MCheckbox.js",
+      "types": "./dist/mobile/MCheckbox.d.ts"
     },
-    "./mobile/Collapse": {
-      "import": "./dist/mobile/Collapse.js",
-      "require": "./dist/mobile/Collapse.js",
-      "types": "./dist/mobile/Collapse.d.ts"
+    "./mobile/MCollapse": {
+      "import": "./dist/mobile/MCollapse.js",
+      "require": "./dist/mobile/MCollapse.js",
+      "types": "./dist/mobile/MCollapse.d.ts"
     },
-    "./mobile/ColorPicker": {
-      "import": "./dist/mobile/ColorPicker.js",
-      "require": "./dist/mobile/ColorPicker.js",
-      "types": "./dist/mobile/ColorPicker.d.ts"
+    "./mobile/MColorPicker": {
+      "import": "./dist/mobile/MColorPicker.js",
+      "require": "./dist/mobile/MColorPicker.js",
+      "types": "./dist/mobile/MColorPicker.d.ts"
     },
-    "./mobile/DateTimePicker": {
-      "import": "./dist/mobile/DateTimePicker.js",
-      "require": "./dist/mobile/DateTimePicker.js",
-      "types": "./dist/mobile/DateTimePicker.d.ts"
+    "./mobile/MDateTimePicker": {
+      "import": "./dist/mobile/MDateTimePicker.js",
+      "require": "./dist/mobile/MDateTimePicker.js",
+      "types": "./dist/mobile/MDateTimePicker.d.ts"
     },
-    "./mobile/Dialog": {
-      "import": "./dist/mobile/Dialog.js",
-      "require": "./dist/mobile/Dialog.js",
-      "types": "./dist/mobile/Dialog.d.ts"
+    "./mobile/MDialog": {
+      "import": "./dist/mobile/MDialog.js",
+      "require": "./dist/mobile/MDialog.js",
+      "types": "./dist/mobile/MDialog.d.ts"
     },
-    "./mobile/Empty": {
-      "import": "./dist/mobile/Empty.js",
-      "require": "./dist/mobile/Empty.js",
-      "types": "./dist/mobile/Empty.d.ts"
+    "./mobile/MEmpty": {
+      "import": "./dist/mobile/MEmpty.js",
+      "require": "./dist/mobile/MEmpty.js",
+      "types": "./dist/mobile/MEmpty.d.ts"
     },
-    "./mobile/Form": {
-      "import": "./dist/mobile/Form.js",
-      "require": "./dist/mobile/Form.js",
-      "types": "./dist/mobile/Form.d.ts"
+    "./mobile/MForm": {
+      "import": "./dist/mobile/MForm.js",
+      "require": "./dist/mobile/MForm.js",
+      "types": "./dist/mobile/MForm.d.ts"
     },
-    "./mobile/Grid": {
-      "import": "./dist/mobile/Grid.js",
-      "require": "./dist/mobile/Grid.js",
-      "types": "./dist/mobile/Grid.d.ts"
+    "./mobile/MGrid": {
+      "import": "./dist/mobile/MGrid.js",
+      "require": "./dist/mobile/MGrid.js",
+      "types": "./dist/mobile/MGrid.d.ts"
     },
-    "./mobile/Icon": {
-      "import": "./dist/mobile/Icon.js",
-      "require": "./dist/mobile/Icon.js",
-      "types": "./dist/mobile/Icon.d.ts"
+    "./mobile/MIcon": {
+      "import": "./dist/mobile/MIcon.js",
+      "require": "./dist/mobile/MIcon.js",
+      "types": "./dist/mobile/MIcon.d.ts"
     },
-    "./mobile/Input": {
-      "import": "./dist/mobile/Input.js",
-      "require": "./dist/mobile/Input.js",
-      "types": "./dist/mobile/Input.d.ts"
+    "./mobile/MInput": {
+      "import": "./dist/mobile/MInput.js",
+      "require": "./dist/mobile/MInput.js",
+      "types": "./dist/mobile/MInput.d.ts"
     },
-    "./mobile/Intro": {
-      "import": "./dist/mobile/Intro.js",
-      "require": "./dist/mobile/Intro.js",
-      "types": "./dist/mobile/Intro.d.ts"
+    "./mobile/MIntro": {
+      "import": "./dist/mobile/MIntro.js",
+      "require": "./dist/mobile/MIntro.js",
+      "types": "./dist/mobile/MIntro.d.ts"
     },
-    "./mobile/Layout": {
-      "import": "./dist/mobile/Layout.js",
-      "require": "./dist/mobile/Layout.js",
-      "types": "./dist/mobile/Layout.d.ts"
+    "./mobile/MLayout": {
+      "import": "./dist/mobile/MLayout.js",
+      "require": "./dist/mobile/MLayout.js",
+      "types": "./dist/mobile/MLayout.d.ts"
     },
-    "./mobile/List": {
-      "import": "./dist/mobile/List.js",
-      "require": "./dist/mobile/List.js",
-      "types": "./dist/mobile/List.d.ts"
+    "./mobile/MList": {
+      "import": "./dist/mobile/MList.js",
+      "require": "./dist/mobile/MList.js",
+      "types": "./dist/mobile/MList.d.ts"
     },
-    "./mobile/Loading": {
-      "import": "./dist/mobile/Loading.js",
-      "require": "./dist/mobile/Loading.js",
-      "types": "./dist/mobile/Loading.d.ts"
+    "./mobile/MLoading": {
+      "import": "./dist/mobile/MLoading.js",
+      "require": "./dist/mobile/MLoading.js",
+      "types": "./dist/mobile/MLoading.d.ts"
     },
-    "./mobile/Masonry": {
-      "import": "./dist/mobile/Masonry.js",
-      "require": "./dist/mobile/Masonry.js",
-      "types": "./dist/mobile/Masonry.d.ts"
+    "./mobile/MMasonry": {
+      "import": "./dist/mobile/MMasonry.js",
+      "require": "./dist/mobile/MMasonry.js",
+      "types": "./dist/mobile/MMasonry.d.ts"
     },
-    "./mobile/Menu": {
-      "import": "./dist/mobile/Menu.js",
-      "require": "./dist/mobile/Menu.js",
-      "types": "./dist/mobile/Menu.d.ts"
+    "./mobile/MMenu": {
+      "import": "./dist/mobile/MMenu.js",
+      "require": "./dist/mobile/MMenu.js",
+      "types": "./dist/mobile/MMenu.d.ts"
     },
-    "./mobile/Message": {
-      "import": "./dist/mobile/Message.js",
-      "require": "./dist/mobile/Message.js",
-      "types": "./dist/mobile/Message.d.ts"
+    "./mobile/MMessage": {
+      "import": "./dist/mobile/MMessage.js",
+      "require": "./dist/mobile/MMessage.js",
+      "types": "./dist/mobile/MMessage.d.ts"
     },
-    "./mobile/Notification": {
-      "import": "./dist/mobile/Notification.js",
-      "require": "./dist/mobile/Notification.js",
-      "types": "./dist/mobile/Notification.d.ts"
+    "./mobile/MNotification": {
+      "import": "./dist/mobile/MNotification.js",
+      "require": "./dist/mobile/MNotification.js",
+      "types": "./dist/mobile/MNotification.d.ts"
     },
-    "./mobile/Pagination": {
-      "import": "./dist/mobile/Pagination.js",
-      "require": "./dist/mobile/Pagination.js",
-      "types": "./dist/mobile/Pagination.d.ts"
+    "./mobile/MPagination": {
+      "import": "./dist/mobile/MPagination.js",
+      "require": "./dist/mobile/MPagination.js",
+      "types": "./dist/mobile/MPagination.d.ts"
     },
-    "./mobile/Popover": {
-      "import": "./dist/mobile/Popover.js",
-      "require": "./dist/mobile/Popover.js",
-      "types": "./dist/mobile/Popover.d.ts"
+    "./mobile/MPopover": {
+      "import": "./dist/mobile/MPopover.js",
+      "require": "./dist/mobile/MPopover.js",
+      "types": "./dist/mobile/MPopover.d.ts"
     },
-    "./mobile/Progress": {
-      "import": "./dist/mobile/Progress.js",
-      "require": "./dist/mobile/Progress.js",
-      "types": "./dist/mobile/Progress.d.ts"
+    "./mobile/MProgress": {
+      "import": "./dist/mobile/MProgress.js",
+      "require": "./dist/mobile/MProgress.js",
+      "types": "./dist/mobile/MProgress.d.ts"
     },
-    "./mobile/Radio": {
-      "import": "./dist/mobile/Radio.js",
-      "require": "./dist/mobile/Radio.js",
-      "types": "./dist/mobile/Radio.d.ts"
+    "./mobile/MRadio": {
+      "import": "./dist/mobile/MRadio.js",
+      "require": "./dist/mobile/MRadio.js",
+      "types": "./dist/mobile/MRadio.d.ts"
     },
-    "./mobile/Rate": {
-      "import": "./dist/mobile/Rate.js",
-      "require": "./dist/mobile/Rate.js",
-      "types": "./dist/mobile/Rate.d.ts"
+    "./mobile/MRate": {
+      "import": "./dist/mobile/MRate.js",
+      "require": "./dist/mobile/MRate.js",
+      "types": "./dist/mobile/MRate.d.ts"
     },
-    "./mobile/Select": {
-      "import": "./dist/mobile/Select.js",
-      "require": "./dist/mobile/Select.js",
-      "types": "./dist/mobile/Select.d.ts"
+    "./mobile/MSelect": {
+      "import": "./dist/mobile/MSelect.js",
+      "require": "./dist/mobile/MSelect.js",
+      "types": "./dist/mobile/MSelect.d.ts"
     },
-    "./mobile/Skeleton": {
-      "import": "./dist/mobile/Skeleton.js",
-      "require": "./dist/mobile/Skeleton.js",
-      "types": "./dist/mobile/Skeleton.d.ts"
+    "./mobile/MSkeleton": {
+      "import": "./dist/mobile/MSkeleton.js",
+      "require": "./dist/mobile/MSkeleton.js",
+      "types": "./dist/mobile/MSkeleton.d.ts"
     },
-    "./mobile/Slider": {
-      "import": "./dist/mobile/Slider.js",
-      "require": "./dist/mobile/Slider.js",
-      "types": "./dist/mobile/Slider.d.ts"
+    "./mobile/MSlider": {
+      "import": "./dist/mobile/MSlider.js",
+      "require": "./dist/mobile/MSlider.js",
+      "types": "./dist/mobile/MSlider.d.ts"
     },
-    "./mobile/Steps": {
-      "import": "./dist/mobile/Steps.js",
-      "require": "./dist/mobile/Steps.js",
-      "types": "./dist/mobile/Steps.d.ts"
+    "./mobile/MSteps": {
+      "import": "./dist/mobile/MSteps.js",
+      "require": "./dist/mobile/MSteps.js",
+      "types": "./dist/mobile/MSteps.d.ts"
     },
-    "./mobile/Switch": {
-      "import": "./dist/mobile/Switch.js",
-      "require": "./dist/mobile/Switch.js",
-      "types": "./dist/mobile/Switch.d.ts"
+    "./mobile/MSwitch": {
+      "import": "./dist/mobile/MSwitch.js",
+      "require": "./dist/mobile/MSwitch.js",
+      "types": "./dist/mobile/MSwitch.d.ts"
     },
-    "./mobile/Table": {
-      "import": "./dist/mobile/Table.js",
-      "require": "./dist/mobile/Table.js",
-      "types": "./dist/mobile/Table.d.ts"
+    "./mobile/MTable": {
+      "import": "./dist/mobile/MTable.js",
+      "require": "./dist/mobile/MTable.js",
+      "types": "./dist/mobile/MTable.d.ts"
     },
-    "./mobile/Tabs": {
-      "import": "./dist/mobile/Tabs.js",
-      "require": "./dist/mobile/Tabs.js",
-      "types": "./dist/mobile/Tabs.d.ts"
+    "./mobile/MTabs": {
+      "import": "./dist/mobile/MTabs.js",
+      "require": "./dist/mobile/MTabs.js",
+      "types": "./dist/mobile/MTabs.d.ts"
     },
-    "./mobile/Tag": {
-      "import": "./dist/mobile/Tag.js",
-      "require": "./dist/mobile/Tag.js",
-      "types": "./dist/mobile/Tag.d.ts"
+    "./mobile/MTag": {
+      "import": "./dist/mobile/MTag.js",
+      "require": "./dist/mobile/MTag.js",
+      "types": "./dist/mobile/MTag.d.ts"
     },
-    "./mobile/Textarea": {
-      "import": "./dist/mobile/Textarea.js",
-      "require": "./dist/mobile/Textarea.js",
-      "types": "./dist/mobile/Textarea.d.ts"
+    "./mobile/MTextarea": {
+      "import": "./dist/mobile/MTextarea.js",
+      "require": "./dist/mobile/MTextarea.js",
+      "types": "./dist/mobile/MTextarea.d.ts"
     },
-    "./mobile/Transfer": {
-      "import": "./dist/mobile/Transfer.js",
-      "require": "./dist/mobile/Transfer.js",
-      "types": "./dist/mobile/Transfer.d.ts"
+    "./mobile/MTransfer": {
+      "import": "./dist/mobile/MTransfer.js",
+      "require": "./dist/mobile/MTransfer.js",
+      "types": "./dist/mobile/MTransfer.d.ts"
     },
-    "./mobile/Tree": {
-      "import": "./dist/mobile/Tree.js",
-      "require": "./dist/mobile/Tree.js",
-      "types": "./dist/mobile/Tree.d.ts"
+    "./mobile/MTree": {
+      "import": "./dist/mobile/MTree.js",
+      "require": "./dist/mobile/MTree.js",
+      "types": "./dist/mobile/MTree.d.ts"
     },
-    "./mobile/Upload": {
-      "import": "./dist/mobile/Upload.js",
-      "require": "./dist/mobile/Upload.js",
-      "types": "./dist/mobile/Upload.d.ts"
+    "./mobile/MUpload": {
+      "import": "./dist/mobile/MUpload.js",
+      "require": "./dist/mobile/MUpload.js",
+      "types": "./dist/mobile/MUpload.d.ts"
     },
-    "./mobile/Watermark": {
-      "import": "./dist/mobile/Watermark.js",
-      "require": "./dist/mobile/Watermark.js",
-      "types": "./dist/mobile/Watermark.d.ts"
+    "./mobile/MWatermark": {
+      "import": "./dist/mobile/MWatermark.js",
+      "require": "./dist/mobile/MWatermark.js",
+      "types": "./dist/mobile/MWatermark.d.ts"
     },
     "./pc": {
       "import": "./dist/pc/index.js",
       "types": "./dist/pc/index.d.ts"
     },
     "./mobile": {
-      "import": "./dist/mobile/index.js",
-      "types": "./dist/mobile/index.d.ts"
+      "import": "./dist/mobile/Mindex.js",
+      "types": "./dist/mobile/Mindex.d.ts"
     },
     "./types": {
       "types": "./dist/types/index.d.ts"
