@@ -18,9 +18,9 @@ const DesignIntroductionPage = () => {
 
         <h3>快速开始</h3>
         <pre className="design-code">
-{`npm install zdy-ui
+{`npm install zdy-design
 
-import { Button, Input } from 'zdy-ui';`}
+import { Button, Input } from 'zdy-design';`}
         </pre>
       </div>
     </section>

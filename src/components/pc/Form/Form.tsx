@@ -48,9 +48,8 @@ interface FormStore {
 }
 
 const createValidateRule =
-  (store: FormStore) =>
+  () =>
   async (rule: FormRule, value: any, formData: Record<string, any>): Promise<ValidateResult> => {
-    console.log('store', store)
     if (rule.required) {
       const empty =
         value === undefined ||
@@ -75,7 +74,7 @@ const createValidateRule =
   };
 
 const createFormInstance = (store: FormStore): FormInstance => {
-  const validateRule = createValidateRule(store);
+  const validateRule = createValidateRule();
 
   const notify = (name: string) => {
     store.listeners.get(name)?.forEach((cb) => cb());
@@ -135,14 +134,13 @@ const createFormInstance = (store: FormStore): FormInstance => {
       return { ...store.errors };
     },
     submit: async () => {
-      const errors = await Promise.all(names()).then(() => ({ ...store.errors }));
+      const names = Array.from(store.fields.keys());
+      await Promise.all(names.map((n) => validateField(n)));
+      const errors = { ...store.errors };
       if (Object.keys(errors).length === 0) {
         store.onFinish?.({ ...store.values });
       } else {
         store.onFinishFailed?.(errors);
-      }
-      function names() {
-        return Array.from(store.fields.keys());
       }
     },
   };

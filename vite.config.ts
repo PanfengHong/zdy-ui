@@ -2,7 +2,7 @@ import { defineConfig, type UserConfig, type Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 import { readdirSync, statSync, existsSync } from 'fs';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 import dts from 'vite-plugin-dts';
 
 const dirname = import.meta.dirname;
@@ -10,8 +10,10 @@ const dirname = import.meta.dirname;
 // Shared logic: run `git log` and parse into commit objects
 function getGitLogData(count: number = 50) {
   try {
-    const output = execSync(
-      `git log --pretty=format:'%H|%ad|%s|%an' --date=short -n ${count}`,
+    // 使用 execFileSync 直接传参数，避免 Windows cmd 对 | 和 %ad 的解析
+    const output = execFileSync(
+      'git',
+      ['log', '--pretty=format:%H|%ad|%s|%an', '--date=short', '-n', String(count)],
       { cwd: dirname, encoding: 'utf-8' }
     );
     return output.trim().split('\n').map(line => {

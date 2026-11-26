@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Routes, Route, NavLink, Link, useLocation, Outlet, Navigate } from 'react-router-dom';
 
 import Icon from '../components/pc/Icon/Icon';
@@ -14,6 +14,13 @@ import OverviewPage from '../pages/Components/Overview';
 import ChangelogPage from '../pages/Components/Changelog';
 import ComponentDemoPage from '../pages/Components/Demo';
 import HomePage from '../pages/Home';
+import AdminLayout from '../pages/Admin/AdminLayout';
+import AdminLoginPage from '../pages/Admin/Login';
+import AdminDashboardPage from '../pages/Admin/Dashboard';
+import AdminUserListPage from '../pages/Admin/UserList';
+import AdminFormPage from '../pages/Admin/FormPage';
+import AdminSettingsPage from '../pages/Admin/Settings';
+import { getAdminUser } from '../pages/Admin/auth';
 
 // ============== 顶部导航（两个布局共用） ==============
 const TopHeader = () => {
@@ -23,6 +30,24 @@ const TopHeader = () => {
   const isHome = location.pathname === '/';
   // 主页：初始与 Hero 融为一体，滚动后切换为玻璃拟态悬浮
   const [scrolled, setScrolled] = useState(false);
+  // 管理后台入口浮层
+  const [adminPanelOpen, setAdminPanelOpen] = useState(false);
+  const adminEntryRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!adminPanelOpen) return;
+    const handleClickOutside = (event: MouseEvent) => {
+      if (adminEntryRef.current && !adminEntryRef.current.contains(event.target as Node)) {
+        setAdminPanelOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [adminPanelOpen]);
+
+  useEffect(() => {
+    setAdminPanelOpen(false);
+  }, [location.pathname]);
 
   useEffect(() => {
     if (!isHome) {
@@ -73,6 +98,26 @@ const TopHeader = () => {
             >
               组件
             </NavLink>
+            <div className="app-admin-entry" ref={adminEntryRef}>
+              <button
+                type="button"
+                className={`app-top-header-nav-item ${adminPanelOpen ? 'active' : ''}`}
+                aria-expanded={adminPanelOpen}
+                onClick={() => setAdminPanelOpen((open) => !open)}
+              >
+                后台
+              </button>
+              {adminPanelOpen && (
+                <div className="app-admin-panel">
+                  <Link className="app-admin-card" to="/admin">
+                    <span className="app-admin-card-icon">
+                      <Icon type="monitor" size={22} />
+                    </span>
+                    <span className="app-admin-card-label">中后台管理系统</span>
+                  </Link>
+                </div>
+              )}
+            </div>
           </nav>
           <a
             className="app-top-header-github"
@@ -161,10 +206,28 @@ const MainLayout = () => {
   );
 };
 
+// ============== 后台鉴权 ==============
+const RequireAdmin = () => {
+  if (!getAdminUser()) {
+    return <Navigate to="/admin/login" replace />;
+  }
+  return <AdminLayout />;
+};
+
 // ============== 路由配置 ==============
 const AppRoutes = () => {
   return (
     <Routes>
+      {/* 管理后台 - 独立全屏布局 */}
+      <Route path="/admin/login" element={<AdminLoginPage />} />
+      <Route element={<RequireAdmin />}>
+        <Route path="/admin" element={<Navigate to="/admin/dashboard" replace />} />
+        <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+        <Route path="/admin/users" element={<AdminUserListPage />} />
+        <Route path="/admin/form" element={<AdminFormPage />} />
+        <Route path="/admin/settings" element={<AdminSettingsPage />} />
+      </Route>
+
       {/* 主页 - 无侧边栏 */}
       <Route element={<HomeLayout />}>
         <Route path="/" element={<HomePage />} />
