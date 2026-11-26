@@ -1,55 +1,73 @@
 import { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Carousel from './Carousel';
 
-const CarouselDemo = () => {
+const slides = [
+  { color: 'rgb(54, 77, 121)', title: '1', desc: '这里输入描述' },
+  { color: 'rgb(54, 77, 121)', title: '2', desc: '这里输入描述' },
+  { color: 'rgb(54, 77, 121)', title: '3', desc: '这里输入描述' },
+  { color: 'rgb(54, 77, 121)', title: '4', desc: '这里输入描述' },
+];
+
+const renderSlide = (color: string, title: string, desc: string) => (
+  <div
+    style={{
+      background: color,
+      height: 240,
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      justifyContent: 'center',
+      color: '#fff',
+      padding: 24,
+      textAlign: 'center',
+    }}
+  >
+    <div style={{ margin: '0 0 8px', fontSize: 28, fontWeight: 600 }}>{title}</div>
+    <p style={{ margin: 0, fontSize: 14, opacity: 0.9 }}>{desc}</p>
+  </div>
+);
+
+const EffectCarouselDemo = () => {
   const [autoplay, setAutoplay] = useState(true);
   const [effect, setEffect] = useState<'slide' | 'fade' | 'stack'>('slide');
 
-  const slides = [
-    { color: 'rgb(54, 77, 121)', title: '1', desc: '这里输入描述' },
-    { color: 'rgb(54, 77, 121)', title: '2', desc: '这里输入描述' },
-    { color: 'rgb(54, 77, 121)', title: '3', desc: '这里输入描述' },
-    { color: 'rgb(54, 77, 121)', title: '4', desc: '这里输入描述' },
-  ];
-
-  const renderSlide = (color: string, title: string, desc: string) => (
-    <div
-      style={{
-        background: color,
-        height: 240,
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#fff',
-        padding: 24,
-        textAlign: 'center',
-      }}
-    >
-      <div style={{ margin: '0 0 8px', fontSize: 28, fontWeight: 600 }}>{title}</div>
-      <p style={{ margin: 0, fontSize: 14, opacity: 0.9 }}>{desc}</p>
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
+        <label>
+          <input
+            type="checkbox"
+            checked={autoplay}
+            onChange={(e) => setAutoplay(e.target.checked)}
+          />
+          &nbsp;自动播放
+        </label>
+        <select
+          value={effect}
+          onChange={(e) => setEffect(e.target.value as any)}
+          style={{ padding: '4px 8px', borderRadius: 4 }}
+        >
+          <option value="slide">滑动效果 (slide)</option>
+          <option value="fade">淡入淡出 (fade)</option>
+          <option value="stack">层次堆叠 (stack)</option>
+        </select>
+      </div>
+      <div style={{ width: 500, maxWidth: '100%' }}>
+        <Carousel autoplay={autoplay} interval={2000} effect={effect}>
+          {slides.map((s, i) => (
+            <div key={i}>
+              {renderSlide(s.color, s.title, s.desc)}
+            </div>
+          ))}
+        </Carousel>
+      </div>
     </div>
   );
+};
 
-  const apiData = [
-    { prop: 'autoplay', desc: '是否自动播放', type: 'boolean', default: 'true' },
-    { prop: 'interval', desc: '自动播放间隔（毫秒）', type: 'number', default: '3000' },
-    { prop: 'effect', desc: '切换效果', type: "'slide' | 'fade' | 'stack'", default: "'slide'" },
-    { prop: 'dots', desc: '是否显示指示点', type: 'boolean', default: 'true' },
-    { prop: 'arrows', desc: '是否显示切换箭头', type: 'boolean', default: 'true' },
-    { prop: 'loop', desc: '是否循环播放', type: 'boolean', default: 'true' },
-    { prop: 'pauseOnHover', desc: '鼠标悬停时是否暂停', type: 'boolean', default: 'true' },
-    { prop: 'defaultActiveIndex', desc: '默认激活的幻灯片索引', type: 'number', default: '0' },
-    { prop: 'afterChange', desc: '切换完成回调', type: '(current: number) => void', default: '-' },
-    { prop: 'beforeChange', desc: '切换前回调', type: '(from: number, to: number) => void', default: '-' },
-    { prop: 'children', desc: '幻灯片内容', type: 'ReactNode', default: '-' },
-    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' },
-  ];
-
-  const demos = [
+const carouselDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Carousel style={{ width: 500 }}>\n  <div style={{ background: '#1890ff', height: 200 }}>Slide 1</div>\n  <div style={{ background: '#52c41a', height: 200 }}>Slide 2</div>\n  <div style={{ background: '#faad14', height: 200 }}>Slide 3</div>\n</Carousel>`,
@@ -68,38 +86,7 @@ const CarouselDemo = () => {
     {
       title: '效果切换',
       code: `<Carousel effect="fade" interval={2000}>\n  ...\n</Carousel>`,
-      render: (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <div style={{ display: 'flex', gap: 16, alignItems: 'center', flexWrap: 'wrap' }}>
-            <label>
-              <input
-                type="checkbox"
-                checked={autoplay}
-                onChange={(e) => setAutoplay(e.target.checked)}
-              />
-              &nbsp;自动播放
-            </label>
-            <select
-              value={effect}
-              onChange={(e) => setEffect(e.target.value as any)}
-              style={{ padding: '4px 8px', borderRadius: 4 }}
-            >
-              <option value="slide">滑动效果 (slide)</option>
-              <option value="fade">淡入淡出 (fade)</option>
-              <option value="stack">层次堆叠 (stack)</option>
-            </select>
-          </div>
-          <div style={{ width: 500, maxWidth: '100%' }}>
-            <Carousel autoplay={autoplay} interval={2000} effect={effect}>
-              {slides.map((s, i) => (
-                <div key={i}>
-                  {renderSlide(s.color, s.title, s.desc)}
-                </div>
-              ))}
-            </Carousel>
-          </div>
-        </div>
-      ),
+      render: <EffectCarouselDemo />,
     },
     {
       title: '淡入淡出效果',
@@ -253,22 +240,22 @@ const CarouselDemo = () => {
         </>
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'autoplay', desc: '是否自动播放', type: 'boolean', default: 'true' },
+    { prop: 'interval', desc: '自动播放间隔（毫秒）', type: 'number', default: '3000' },
+    { prop: 'effect', desc: '切换效果', type: "'slide' | 'fade' | 'stack'", default: "'slide'" },
+    { prop: 'dots', desc: '是否显示指示点', type: 'boolean', default: 'true' },
+    { prop: 'arrows', desc: '是否显示切换箭头', type: 'boolean', default: 'true' },
+    { prop: 'loop', desc: '是否循环播放', type: 'boolean', default: 'true' },
+    { prop: 'pauseOnHover', desc: '鼠标悬停时是否暂停', type: 'boolean', default: 'true' },
+    { prop: 'defaultActiveIndex', desc: '默认激活的幻灯片索引', type: 'number', default: '0' },
+    { prop: 'afterChange', desc: '切换完成回调', type: '(current: number) => void', default: '-' },
+    { prop: 'beforeChange', desc: '切换前回调', type: '(from: number, to: number) => void', default: '-' },
+    { prop: 'children', desc: '幻灯片内容', type: 'ReactNode', default: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' },
+  ],
 };
 
-export default CarouselDemo;
+export default carouselDemo;

@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Anchor from './Anchor';
 
 const { AnchorLink } = Anchor;
@@ -12,30 +11,58 @@ const lorem = (prefix: string) => (
   </p>
 );
 
-const AnchorDemo = () => {
+const CallbackAnchorDemo = () => {
   const [currentLink, setCurrentLink] = useState<string>('');
 
-  const apiData = [
-    { prop: 'items', desc: '链接数据（与 children 二选一）', type: 'AnchorLinkBaseProps[]', default: '-' },
-    { prop: 'bounds', desc: '锚点区域边界阈值（px）', type: 'number', default: '5' },
-    { prop: 'affix', desc: '是否固定模式', type: 'boolean', default: 'false' },
-    { prop: 'showInkInFixed', desc: '固定模式下是否显示 ink', type: 'boolean', default: 'false' },
-    { prop: 'getContainer', desc: '滚动容器', type: '() => HTMLElement | Window', default: 'window' },
-    { prop: 'offsetTop', desc: '距离顶部偏移量', type: 'number', default: '0' },
-    { prop: 'offsetBottom', desc: '距离底部偏移量', type: 'number', default: '-' },
-    { prop: 'direction', desc: '方向', type: "'vertical' | 'horizontal'", default: "'vertical'" },
-    { prop: 'onChange', desc: '激活链接变化回调', type: '(currentLink) => void', default: '-' },
-    { prop: 'onClick', desc: '点击链接回调', type: '(e, link) => void', default: '-' }
-  ];
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <span>当前激活：</span>
+        <strong style={{ color: '#1890ff' }}>{currentLink || '无'}</strong>
+      </div>
+      <div style={{ display: 'flex', gap: 24, height: 200 }}>
+        <div style={{ width: 160, flexShrink: 0 }}>
+          <Anchor
+            getContainer={() => document.getElementById('callback-scroll-container')}
+            onChange={setCurrentLink}
+            onClick={(_e, link) => console.log('点击了', link)}
+          >
+            <AnchorLink href="#callback-1" title="回调示例 1" />
+            <AnchorLink href="#callback-2" title="回调示例 2" />
+            <AnchorLink href="#callback-3" title="回调示例 3" />
+          </Anchor>
+        </div>
+        <div
+          id="callback-scroll-container"
+          style={{
+            flex: 1,
+            overflow: 'auto',
+            border: '1px solid #f0f0f0',
+            borderRadius: 4,
+            padding: '0 16px',
+            height: 200
+          }}
+        >
+          <section id="callback-1" style={{ padding: '16px 0', borderBottom: '1px solid #f0f0f0' }}>
+            <h4>回调示例 1</h4>
+            {lorem('回调示例 1')}
+          </section>
+          <section id="callback-2" style={{ padding: '16px 0', borderBottom: '1px solid #f0f0f0' }}>
+            <h4>回调示例 2</h4>
+            {lorem('回调示例 2')}
+          </section>
+          <section id="callback-3" style={{ padding: '16px 0' }}>
+            <h4>回调示例 3</h4>
+            {lorem('回调示例 3')}
+          </section>
+        </div>
+      </div>
+    </>
+  );
+};
 
-  const linkApiData = [
-    { prop: 'href', desc: '锚点目标（CSS 选择器）', type: 'string', default: '-' },
-    { prop: 'title', desc: '链接文字', type: 'ReactNode', default: '-' },
-    { prop: 'target', desc: '打开方式', type: 'string', default: '-' },
-    { prop: 'children', desc: '嵌套子链接', type: 'ReactNode', default: '-' }
-  ];
-
-  const demos = [
+const anchorDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法（children 方式）',
       code: `<Anchor>\n  <Anchor.Link href="#section-1" title="第一部分" />\n  <Anchor.Link href="#section-2" title="第二部分" />\n</Anchor>`,
@@ -267,52 +294,8 @@ const AnchorDemo = () => {
     },
     {
       title: '监听变化（onChange + onClick）',
-      description: (
-        <div style={{ marginBottom: 12 }}>
-          <span>当前激活：</span>
-          <strong style={{ color: '#1890ff' }}>{currentLink || '无'}</strong>
-        </div>
-      ),
       code: `<Anchor onChange={setCurrentLink} onClick={(e, link) => console.log(link)}>`,
-      render: (
-        <div style={{ display: 'flex', gap: 24, height: 200 }}>
-          <div style={{ width: 160, flexShrink: 0 }}>
-            <Anchor
-              getContainer={() => document.getElementById('callback-scroll-container')}
-              onChange={setCurrentLink}
-              onClick={(_e, link) => console.log('点击了', link)}
-            >
-              <AnchorLink href="#callback-1" title="回调示例 1" />
-              <AnchorLink href="#callback-2" title="回调示例 2" />
-              <AnchorLink href="#callback-3" title="回调示例 3" />
-            </Anchor>
-          </div>
-          <div
-            id="callback-scroll-container"
-            style={{
-              flex: 1,
-              overflow: 'auto',
-              border: '1px solid #f0f0f0',
-              borderRadius: 4,
-              padding: '0 16px',
-              height: 200
-            }}
-          >
-            <section id="callback-1" style={{ padding: '16px 0', borderBottom: '1px solid #f0f0f0' }}>
-              <h4>回调示例 1</h4>
-              {lorem('回调示例 1')}
-            </section>
-            <section id="callback-2" style={{ padding: '16px 0', borderBottom: '1px solid #f0f0f0' }}>
-              <h4>回调示例 2</h4>
-              {lorem('回调示例 2')}
-            </section>
-            <section id="callback-3" style={{ padding: '16px 0' }}>
-              <h4>回调示例 3</h4>
-              {lorem('回调示例 3')}
-            </section>
-          </div>
-        </div>
-      ),
+      render: <CallbackAnchorDemo />,
     },
     {
       title: '带 offsetTop 偏移',
@@ -356,27 +339,23 @@ const AnchorDemo = () => {
         </div>
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          {'description' in demo && demo.description}
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>Anchor API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-      <div className="component-group">
-        <h3>Anchor.Link API</h3>
-        <ApiTable dataSource={linkApiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'items', desc: '链接数据（与 children 二选一）', type: 'AnchorLinkBaseProps[]', default: '-' },
+    { prop: 'bounds', desc: '锚点区域边界阈值（px）', type: 'number', default: '5' },
+    { prop: 'affix', desc: '是否固定模式', type: 'boolean', default: 'false' },
+    { prop: 'showInkInFixed', desc: '固定模式下是否显示 ink', type: 'boolean', default: 'false' },
+    { prop: 'getContainer', desc: '滚动容器', type: '() => HTMLElement | Window', default: 'window' },
+    { prop: 'offsetTop', desc: '距离顶部偏移量', type: 'number', default: '0' },
+    { prop: 'offsetBottom', desc: '距离底部偏移量', type: 'number', default: '-' },
+    { prop: 'direction', desc: '方向', type: "'vertical' | 'horizontal'", default: "'vertical'" },
+    { prop: 'onChange', desc: '激活链接变化回调', type: '(currentLink) => void', default: '-' },
+    { prop: 'onClick', desc: '点击链接回调', type: '(e, link) => void', default: '-' },
+    { prop: 'href', desc: '锚点目标（CSS 选择器）', type: 'string', default: '-' },
+    { prop: 'title', desc: '链接文字', type: 'ReactNode', default: '-' },
+    { prop: 'target', desc: '打开方式', type: 'string', default: '-' },
+    { prop: 'children', desc: '嵌套子链接', type: 'ReactNode', default: '-' }
+  ],
 };
 
-export default AnchorDemo;
+export default anchorDemo;

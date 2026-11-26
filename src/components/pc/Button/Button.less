@@ -8,7 +8,7 @@
   padding: 0 20px;
   font-size: @pc-font-size-base;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -264,15 +264,23 @@
     }
   }
 
+  &-content {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
+
   &-prefix {
     display: inline-flex;
     align-items: center;
+    line-height: 1;
     margin-right: 4px;
   }
 
   &-suffix {
     display: inline-flex;
     align-items: center;
+    line-height: 1;
     margin-left: 4px;
   }
 }

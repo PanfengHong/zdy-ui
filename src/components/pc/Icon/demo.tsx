@@ -1,32 +1,21 @@
-import React from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Icon from './Icon';
 import type { IconSizeType, IconType } from './types'
 
-const IconDemo: React.FC = () => {
-  const apiData = [
-    { prop: 'type', desc: '图标名称', type: 'string', default: '-' },
-    { prop: 'size', desc: '图标大小', type: 'number | string', default: 'inherit' },
-    { prop: 'color', desc: '图标颜色', type: 'string', default: 'inherit' },
-    { prop: 'spin', desc: '是否旋转', type: 'boolean', default: 'false' },
-    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
-  ];
+const sizeArr: (IconSizeType | number)[] = ['xs', 'sm', 'md', 'lg', 'xl', 64];
 
-  const sizeArr: (IconSizeType | number)[] = ['xs', 'sm', 'md', 'lg', 'xl', 64];
+const colorArr: string[] = ['#2587ff', '#52c41a', '#faad14', '#ff4d4f'];
 
-  const colorArr: string[] = ['#2587ff', '#52c41a', '#faad14', '#ff4d4f'];
+const baseIcons: IconType[] = ['user', 'home', 'add', 'delete', 'close', 'edit', 'search', 'save', 'setting', 'more-horizontal', 'more-vertical'];
 
-  const baseIcons: IconType[] = ['user', 'home', 'add', 'delete', 'close', 'edit', 'search', 'save', 'setting', 'more-horizontal', 'more-vertical'];
+const navIcons: IconType[] = ['up', 'down', 'left', 'right'];
 
-  const navIcons: IconType[] = ['up', 'down', 'left', 'right'];
+const triangleIcons: IconType[] = ['caret-up', 'caret-down', 'caret-left', 'caret-right'];
 
-  const triangleIcons: IconType[] = ['caret-up', 'caret-down', 'caret-left', 'caret-right'];
+const statusIcons: IconType[] = ['check', 'error', 'warning', 'info', 'confirm', 'cancel'];
 
-  const statusIcons: IconType[] = ['check', 'error', 'warning', 'info', 'confirm', 'cancel'];
-
-  const demos = [
+const iconDemo: DemoConfig = {
+  demos: [
     {
       title: '基础图标',
       code: `<Icon type="user" />\n<Icon type="home" />\n<Icon type="add" />\n<Icon type="delete" />\n<Icon type="close" />\n<Icon type="edit" />\n<Icon type="search" />\n<Icon type="save" />`,
@@ -135,22 +124,15 @@ const IconDemo: React.FC = () => {
         </>
       )
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'type', desc: '图标名称', type: 'string', default: '-' },
+    { prop: 'size', desc: '图标大小', type: 'number | string', default: 'inherit' },
+    { prop: 'color', desc: '图标颜色', type: 'string', default: 'inherit' },
+    { prop: 'spin', desc: '是否旋转', type: 'boolean', default: 'false' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
+  ],
 };
 
-export default IconDemo;
+export default iconDemo;

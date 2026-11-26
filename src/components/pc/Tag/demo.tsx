@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Tag from './Tag';
 import Icon from '../Icon/Icon';
 
@@ -17,13 +16,33 @@ const statusList: Array<{ status: 'success' | 'processing' | 'error' | 'default'
   { status: 'warning', text: '警告' },
 ];
 
-const TagDemo = () => {
+const ControlledVisibleDemo = () => {
   const [visible, setVisible] = useState(true);
-  const [checkedTags, setCheckedTags] = useState<string[]>(['Apple', 'Orange']);
 
-  const handleClose = (e: React.MouseEvent<HTMLSpanElement>) => {
-    console.log('关闭按钮被点击', e);
-  };
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <button
+          onClick={() => setVisible((v) => !v)}
+          style={{
+            padding: '4px 12px',
+            border: '1px solid #d9d9d9',
+            borderRadius: 4,
+            background: '#fff',
+            cursor: 'pointer'
+          }}
+        >
+          {visible ? '隐藏' : '显示'}标签
+        </button>
+      </div>
+      <Tag visible={visible} closable onChange={(v) => setVisible(v)}>受控标签</Tag>
+      {!visible && <span style={{ color: '#999', marginLeft: 8 }}>标签已隐藏</span>}
+    </>
+  );
+};
+
+const CheckableTagDemo = () => {
+  const [checkedTags, setCheckedTags] = useState<string[]>(['Apple', 'Orange']);
 
   const toggleCheckable = (tag: string) => {
     setCheckedTags((prev) =>
@@ -31,29 +50,27 @@ const TagDemo = () => {
     );
   };
 
-  const apiData = [
-    { prop: 'color', desc: '标签颜色（预设色或自定义颜色）', type: "TagColor | string", default: "'default'" },
-    { prop: 'status', desc: '状态色（带状态点）', type: "'success' | 'processing' | 'error' | 'default' | 'warning'", default: '-' },
-    { prop: 'closable', desc: '是否可关闭', type: 'boolean', default: 'false' },
-    { prop: 'closeIcon', desc: '自定义关闭图标', type: 'ReactNode', default: '×' },
-    { prop: 'visible', desc: '是否显示（受控）', type: 'boolean', default: '-' },
-    { prop: 'defaultVisible', desc: '默认是否显示', type: 'boolean', default: 'true' },
-    { prop: 'bordered', desc: '是否有边框', type: 'boolean', default: 'true' },
-    { prop: 'icon', desc: '前置图标', type: 'ReactNode', default: '-' },
-    { prop: 'size', desc: '尺寸', type: "'small' | 'default' | 'large'", default: "'default'" },
-    { prop: 'onClick', desc: '点击回调', type: '(e) => void', default: '-' },
-    { prop: 'onClose', desc: '关闭回调', type: '(e) => void', default: '-' },
-    { prop: 'onChange', desc: '显示/隐藏变化回调', type: '(visible) => void', default: '-' }
-  ];
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <span>已选：</span>
+        <strong style={{ color: '#1890ff' }}>{checkedTags.join(', ') || '无'}</strong>
+      </div>
+      {['Apple', 'Banana', 'Orange', 'Mango'].map((tag) => (
+        <Tag.CheckableTag
+          key={tag}
+          checked={checkedTags.includes(tag)}
+          onChange={() => toggleCheckable(tag)}
+        >
+          {tag}
+        </Tag.CheckableTag>
+      ))}
+    </>
+  );
+};
 
-  const checkableApiData = [
-    { prop: 'checked', desc: '是否选中（受控）', type: 'boolean', default: '-' },
-    { prop: 'defaultChecked', desc: '默认是否选中', type: 'boolean', default: 'false' },
-    { prop: 'onChange', desc: '选中状态变化回调', type: '(checked) => void', default: '-' },
-    { prop: 'onClick', desc: '点击回调', type: '(e) => void', default: '-' }
-  ];
-
-  const demos = [
+const tagDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Tag>标签一</Tag>\n<Tag>标签二</Tag>\n<Tag>标签三</Tag>`,
@@ -133,96 +150,53 @@ const TagDemo = () => {
       code: `<Tag icon={<Icon type="check" />}>检查</Tag>`,
       render: <Tag icon={<Icon type="check" />}>检查</Tag>,
     },
-      {
-        title: '可关闭',
-        code: `<Tag closable>可关闭标签</Tag>`,
-        render: (
-          <>
-            <Tag closable>可关闭标签</Tag>
-          </>
-        ),
-      },
-      {
-        title: '自定义关闭图标',
-        code: `<Tag closable closeIcon={<Icon type="close" />}>可关闭标签</Tag>`,
-        render: (
-          <>
-            <Tag closable closeIcon={<Icon type="close" />}>可关闭标签</Tag>
-          </>
-        ),
-      },
-      {
-        title: '受控显示/隐藏',
-        code: `const [visible, setVisible] = useState(true);\n\n<Tag visible={visible} closable onChange={(v) => setVisible(v)}>受控标签</Tag>`,
-        prepend: (
-          <div style={{ marginBottom: 12 }}>
-          <button
-            onClick={() => setVisible((v) => !v)}
-            style={{
-              padding: '4px 12px',
-              border: '1px solid #d9d9d9',
-              borderRadius: 4,
-              background: '#fff',
-              cursor: 'pointer'
-            }}
-          >
-            {visible ? '隐藏' : '显示'}标签
-          </button>
-        </div>
-        ),
-        render: (
-          <>
-            <Tag visible={visible} closable onChange={(v) => setVisible(v)}>受控标签</Tag>
-          {!visible && <span style={{ color: '#999', marginLeft: 8 }}>标签已隐藏</span>}
-          </>
-        )
-      },
-      {
-        title: 'CheckableTag 可勾选',
-        code: `<Tag.CheckableTag checked={checked} onChange={(c) => setChecked(c)}>标签</Tag.CheckableTag>`,
-        prepend:(
-          <div style={{ marginBottom: 12 }}>
-          <span>已选：</span>
-          <strong style={{ color: '#1890ff' }}>{checkedTags.join(', ') || '无'}</strong>
-        </div>
-        ),
-        render: (
-          <>
-            {['Apple', 'Banana', 'Orange', 'Mango'].map((tag) => (
-            <Tag.CheckableTag
-              key={tag}
-              checked={checkedTags.includes(tag)}
-              onChange={() => toggleCheckable(tag)}
-            >
-              {tag}
-            </Tag.CheckableTag>
-          ))}
-          </>
-        ),
-      }
-  ]
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          {demo.prepend}
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>Tag API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-
-      <div className="component-group">
-        <h3>Tag.CheckableTag API</h3>
-        <ApiTable dataSource={checkableApiData} />
-      </div>
-    </>
-  );
+    {
+      title: '可关闭',
+      code: `<Tag closable>可关闭标签</Tag>`,
+      render: (
+        <>
+          <Tag closable>可关闭标签</Tag>
+        </>
+      ),
+    },
+    {
+      title: '自定义关闭图标',
+      code: `<Tag closable closeIcon={<Icon type="close" />}>可关闭标签</Tag>`,
+      render: (
+        <>
+          <Tag closable closeIcon={<Icon type="close" />}>可关闭标签</Tag>
+        </>
+      ),
+    },
+    {
+      title: '受控显示/隐藏',
+      code: `const [visible, setVisible] = useState(true);\n\n<Tag visible={visible} closable onChange={(v) => setVisible(v)}>受控标签</Tag>`,
+      render: <ControlledVisibleDemo />,
+    },
+    {
+      title: 'CheckableTag 可勾选',
+      code: `<Tag.CheckableTag checked={checked} onChange={(c) => setChecked(c)}>标签</Tag.CheckableTag>`,
+      render: <CheckableTagDemo />,
+    }
+  ],
+  api: [
+    { prop: 'color', desc: '标签颜色（预设色或自定义颜色）', type: "TagColor | string", default: "'default'" },
+    { prop: 'status', desc: '状态色（带状态点）', type: "'success' | 'processing' | 'error' | 'default' | 'warning'", default: '-' },
+    { prop: 'closable', desc: '是否可关闭', type: 'boolean', default: 'false' },
+    { prop: 'closeIcon', desc: '自定义关闭图标', type: 'ReactNode', default: '×' },
+    { prop: 'visible', desc: '是否显示（受控）', type: 'boolean', default: '-' },
+    { prop: 'defaultVisible', desc: '默认是否显示', type: 'boolean', default: 'true' },
+    { prop: 'bordered', desc: '是否有边框', type: 'boolean', default: 'true' },
+    { prop: 'icon', desc: '前置图标', type: 'ReactNode', default: '-' },
+    { prop: 'size', desc: '尺寸', type: "'small' | 'default' | 'large'", default: "'default'" },
+    { prop: 'onClick', desc: '点击回调', type: '(e) => void', default: '-' },
+    { prop: 'onClose', desc: '关闭回调', type: '(e) => void', default: '-' },
+    { prop: 'onChange', desc: '显示/隐藏变化回调', type: '(visible) => void', default: '-' },
+    { prop: 'checked', desc: '是否选中（受控）', type: 'boolean', default: '-' },
+    { prop: 'defaultChecked', desc: '默认是否选中', type: 'boolean', default: 'false' },
+    { prop: 'onChange', desc: '选中状态变化回调', type: '(checked) => void', default: '-' },
+    { prop: 'onClick', desc: '点击回调', type: '(e) => void', default: '-' }
+  ],
 };
 
-export default TagDemo;
+export default tagDemo;

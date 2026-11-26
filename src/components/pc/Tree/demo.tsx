@@ -1,6 +1,5 @@
-import React, { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import { useState } from 'react';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Tree from './Tree';
 import type { TreeNodeData } from './types';
 
@@ -94,15 +93,64 @@ const treeDataDisableCheckbox: TreeNodeData[] = [
   },
 ];
 
-const TreeDemo = () => {
+const EventInfo = ({ info }: { info: string }) => (
+  <div style={{ marginTop: 8, padding: 12, background: '#f5f5f5', borderRadius: 4, minHeight: 40 }}>
+    {info}
+  </div>
+);
+
+const SelectableTreeDemo = () => {
   const [selectedKeys, setSelectedKeys] = useState<(string | number)[]>([]);
-  const [checkedKeys, setCheckedKeys] = useState<(string | number)[]>([]);
-  const [expandedKeys, setExpandedKeys] = useState<(string | number)[]>(['1', '1-1']);
-  const [data, setData] = useState<TreeNodeData[]>(treeData);
   const [info, setInfo] = useState<string>('点击或勾选节点查看信息');
 
-  // 拖拽数据
+  return (
+    <>
+      <div style={{ marginBottom: 8 }}>
+        <span>当前选中：</span>
+        <strong style={{ color: '#1890ff' }}>{selectedKeys.join(', ') || '无'}</strong>
+      </div>
+      <Tree
+        treeData={treeData}
+        defaultExpandedKeys={['1']}
+        selectedKeys={selectedKeys}
+        onSelect={(keys, info) => {
+          setSelectedKeys(keys);
+          setInfo(`选择节点：${info.node.title}（${info.selected ? '选中' : '取消'}）`);
+        }}
+      />
+      <EventInfo info={info} />
+    </>
+  );
+};
+
+const CheckableTreeDemo = () => {
+  const [checkedKeys, setCheckedKeys] = useState<(string | number)[]>([]);
+  const [info, setInfo] = useState<string>('点击或勾选节点查看信息');
+
+  return (
+    <>
+      <div style={{ marginBottom: 8 }}>
+        <span>当前勾选：</span>
+        <strong style={{ color: '#1890ff' }}>{checkedKeys.join(', ') || '无'}</strong>
+      </div>
+      <Tree
+        treeData={treeData}
+        checkable
+        defaultExpandAll
+        checkedKeys={checkedKeys}
+        onCheck={(keys) => {
+          setCheckedKeys(keys as (string | number)[]);
+          setInfo(`勾选：${(keys as (string | number)[]).join(', ')}`);
+        }}
+      />
+      <EventInfo info={info} />
+    </>
+  );
+};
+
+const DraggableTreeDemo = () => {
   const [dragData, setDragData] = useState<TreeNodeData[]>(treeData);
+  const [info, setInfo] = useState<string>('点击或勾选节点查看信息');
 
   // 递归处理拖拽移动
   const handleDrop = (info: { node: TreeNodeData; dragNode: TreeNodeData; dropPosition: number; dropToGap: boolean }) => {
@@ -154,43 +202,19 @@ const TreeDemo = () => {
     setDragData(newData);
   };
 
-  const apiData = [
-    { prop: 'treeData', desc: '树形数据', type: 'TreeNodeData[]', default: '[]' },
-    { prop: 'expandedKeys', desc: '受控展开的 key（受控）', type: '(string|number)[]', default: '-' },
-    { prop: 'defaultExpandedKeys', desc: '默认展开的 key', type: '(string|number)[]', default: '[]' },
-    { prop: 'selectedKeys', desc: '受控选中的 key（受控）', type: '(string|number)[]', default: '-' },
-    { prop: 'defaultSelectedKeys', desc: '默认选中的 key', type: '(string|number)[]', default: '[]' },
-    { prop: 'checkedKeys', desc: '受控勾选的 key（受控）', type: 'array | { checked, halfChecked }', default: '-' },
-    { prop: 'defaultCheckedKeys', desc: '默认勾选的 key', type: '(string|number)[]', default: '[]' },
-    { prop: 'checkable', desc: '是否显示 checkbox', type: 'boolean', default: 'false' },
-    { prop: 'checkStrictly', desc: '严格模式（父子不关联）', type: 'boolean', default: 'false' },
-    { prop: 'disabled', desc: '整体禁用', type: 'boolean', default: 'false' },
-    { prop: 'showIcon', desc: '是否显示自定义图标', type: 'boolean', default: 'false' },
-    { prop: 'showLine', desc: '是否显示连接线', type: 'boolean', default: 'false' },
-    { prop: 'draggable', desc: '是否可拖拽', type: 'boolean', default: 'false' },
-    { prop: 'blockNode', desc: '节点占满整行', type: 'boolean', default: 'false' },
-    { prop: 'multiple', desc: '允许多选', type: 'boolean', default: 'false' },
-    { prop: 'defaultExpandAll', desc: '默认展开全部', type: 'boolean', default: 'false' },
-    { prop: 'switcherIcon', desc: '自定义展开图标', type: 'ReactNode', default: '默认箭头' },
-    { prop: 'titleRender', desc: '自定义标题渲染', type: '(node) => ReactNode', default: '-' },
-    { prop: 'onExpand', desc: '展开/收起回调', type: '(keys, info) => void', default: '-' },
-    { prop: 'onSelect', desc: '选择回调', type: '(keys, info) => void', default: '-' },
-    { prop: 'onCheck', desc: '勾选回调', type: '(keys, info) => void', default: '-' },
-    { prop: 'onDrop', desc: '拖拽放下回调', type: '(info) => void', default: '-' },
-  ];
+  return (
+    <>
+      <div style={{ marginBottom: 8, color: '#666' }}>
+        提示：拖动节点到目标节点的上/下边缘可插入间隙，拖到中间可放入内部
+      </div>
+      <Tree treeData={dragData} draggable defaultExpandAll onDrop={handleDrop} />
+      <EventInfo info={info} />
+    </>
+  );
+};
 
-  const nodeApiData = [
-    { prop: 'key', desc: '节点唯一标识（必填）', type: 'string | number', default: '-' },
-    { prop: 'title', desc: '标题', type: 'ReactNode', default: '-' },
-    { prop: 'children', desc: '子节点', type: 'TreeNodeData[]', default: '-' },
-    { prop: 'disabled', desc: '禁用节点', type: 'boolean', default: 'false' },
-    { prop: 'disableCheckbox', desc: '禁用 checkbox', type: 'boolean', default: 'false' },
-    { prop: 'selectable', desc: '是否可选中', type: 'boolean', default: 'true' },
-    { prop: 'isLeaf', desc: '是否叶子节点', type: 'boolean', default: '自动判断' },
-    { prop: 'icon', desc: '自定义图标', type: 'ReactNode', default: '-' },
-  ];
-
-  const demos = [
+const treeDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Tree treeData={treeData} defaultExpandAll />`,
@@ -204,23 +228,7 @@ const TreeDemo = () => {
     {
       title: '带选择（受控）',
       code: `<Tree\n  treeData={treeData}\n  selectedKeys={selectedKeys}\n  onSelect={onSelect}\n/>`,
-      render: (
-        <>
-          <div style={{ marginBottom: 8 }}>
-            <span>当前选中：</span>
-            <strong style={{ color: '#1890ff' }}>{selectedKeys.join(', ') || '无'}</strong>
-          </div>
-          <Tree
-            treeData={treeData}
-            defaultExpandedKeys={['1']}
-            selectedKeys={selectedKeys}
-            onSelect={(keys, info) => {
-              setSelectedKeys(keys);
-              setInfo(`选择节点：${info.node.title}（${info.selected ? '选中' : '取消'}）`);
-            }}
-          />
-        </>
-      ),
+      render: <SelectableTreeDemo />,
     },
     {
       title: '多选',
@@ -230,24 +238,7 @@ const TreeDemo = () => {
     {
       title: '带勾选（级联）',
       code: `<Tree treeData={treeData} checkable defaultExpandAll />`,
-      render: (
-        <>
-          <div style={{ marginBottom: 8 }}>
-            <span>当前勾选：</span>
-            <strong style={{ color: '#1890ff' }}>{checkedKeys.join(', ') || '无'}</strong>
-          </div>
-          <Tree
-            treeData={treeData}
-            checkable
-            defaultExpandAll
-            checkedKeys={checkedKeys}
-            onCheck={(keys) => {
-              setCheckedKeys(keys as (string | number)[]);
-              setInfo(`勾选：${(keys as (string | number)[]).join(', ')}`);
-            }}
-          />
-        </>
-      ),
+      render: <CheckableTreeDemo />,
     },
     {
       title: '严格模式（父子不关联）',
@@ -308,41 +299,41 @@ const TreeDemo = () => {
     {
       title: '可拖拽（支持间隙和内部放置）',
       code: `<Tree treeData={treeData} draggable onDrop={handleDrop} />`,
-      render: (
-        <>
-          <div style={{ marginBottom: 8, color: '#666' }}>
-            提示：拖动节点到目标节点的上/下边缘可插入间隙，拖到中间可放入内部
-          </div>
-          <Tree treeData={dragData} draggable defaultExpandAll onDrop={handleDrop} />
-        </>
-      ),
+      render: <DraggableTreeDemo />,
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group">
-        <h3>事件信息</h3>
-        <div style={{ padding: 12, background: '#f5f5f5', borderRadius: 4, minHeight: 40 }}>
-          {info}
-        </div>
-      </div>
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>Tree API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>TreeNodeData</h3>
-        <ApiTable dataSource={nodeApiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'treeData', desc: '树形数据', type: 'TreeNodeData[]', default: '[]' },
+    { prop: 'expandedKeys', desc: '受控展开的 key（受控）', type: '(string|number)[]', default: '-' },
+    { prop: 'defaultExpandedKeys', desc: '默认展开的 key', type: '(string|number)[]', default: '[]' },
+    { prop: 'selectedKeys', desc: '受控选中的 key（受控）', type: '(string|number)[]', default: '-' },
+    { prop: 'defaultSelectedKeys', desc: '默认选中的 key', type: '(string|number)[]', default: '[]' },
+    { prop: 'checkedKeys', desc: '受控勾选的 key（受控）', type: 'array | { checked, halfChecked }', default: '-' },
+    { prop: 'defaultCheckedKeys', desc: '默认勾选的 key', type: '(string|number)[]', default: '[]' },
+    { prop: 'checkable', desc: '是否显示 checkbox', type: 'boolean', default: 'false' },
+    { prop: 'checkStrictly', desc: '严格模式（父子不关联）', type: 'boolean', default: 'false' },
+    { prop: 'disabled', desc: '整体禁用', type: 'boolean', default: 'false' },
+    { prop: 'showIcon', desc: '是否显示自定义图标', type: 'boolean', default: 'false' },
+    { prop: 'showLine', desc: '是否显示连接线', type: 'boolean', default: 'false' },
+    { prop: 'draggable', desc: '是否可拖拽', type: 'boolean', default: 'false' },
+    { prop: 'blockNode', desc: '节点占满整行', type: 'boolean', default: 'false' },
+    { prop: 'multiple', desc: '允许多选', type: 'boolean', default: 'false' },
+    { prop: 'defaultExpandAll', desc: '默认展开全部', type: 'boolean', default: 'false' },
+    { prop: 'switcherIcon', desc: '自定义展开图标', type: 'ReactNode', default: '默认箭头' },
+    { prop: 'titleRender', desc: '自定义标题渲染', type: '(node) => ReactNode', default: '-' },
+    { prop: 'onExpand', desc: '展开/收起回调', type: '(keys, info) => void', default: '-' },
+    { prop: 'onSelect', desc: '选择回调', type: '(keys, info) => void', default: '-' },
+    { prop: 'onCheck', desc: '勾选回调', type: '(keys, info) => void', default: '-' },
+    { prop: 'onDrop', desc: '拖拽放下回调', type: '(info) => void', default: '-' },
+    { prop: 'key', desc: '节点唯一标识（必填）', type: 'string | number', default: '-' },
+    { prop: 'title', desc: '标题', type: 'ReactNode', default: '-' },
+    { prop: 'children', desc: '子节点', type: 'TreeNodeData[]', default: '-' },
+    { prop: 'disabled', desc: '禁用节点', type: 'boolean', default: 'false' },
+    { prop: 'disableCheckbox', desc: '禁用 checkbox', type: 'boolean', default: 'false' },
+    { prop: 'selectable', desc: '是否可选中', type: 'boolean', default: 'true' },
+    { prop: 'isLeaf', desc: '是否叶子节点', type: 'boolean', default: '自动判断' },
+    { prop: 'icon', desc: '自定义图标', type: 'ReactNode', default: '-' },
+  ],
 };
 
-export default TreeDemo;
+export default treeDemo;

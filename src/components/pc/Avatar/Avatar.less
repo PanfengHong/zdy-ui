@@ -109,7 +109,7 @@
     }
 
     &:hover {
-      z-index: 1;
+      z-index: 3;
       margin-left: 0;
       margin-right: 4px;
 
@@ -119,8 +119,10 @@
     }
   }
 
-  // 超出计数头像
+  // 超出计数头像：始终叠放在最上层，避免被前面的头像或悬停态遮挡
   .zdy-avatar--excess {
+    position: relative;
+    z-index: 2;
     background-color: var(--zdy-border-color-split);
     color: @text-color-secondary;
     border: 1px solid #fff;

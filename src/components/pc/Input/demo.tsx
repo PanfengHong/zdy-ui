@@ -1,24 +1,9 @@
-import React from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Input from './Input';
 import Icon from '../Icon/Icon';
 
-const InputDemo: React.FC = () => {
-  const apiData = [
-    { prop: 'type', desc: '输入框类型', type: 'string', default: 'text' },
-    { prop: 'value', desc: '当前值', type: 'string | number', default: '-' },
-    { prop: 'onChange', desc: '值变化回调', type: 'function', default: '-' },
-    { prop: 'placeholder', desc: '占位提示', type: 'string', default: '-' },
-    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
-    { prop: 'size', desc: '输入框尺寸', type: 'SizeType', default: 'medium' },
-    { prop: 'prefix', desc: '前缀内容', type: 'ReactNode', default: '-' },
-    { prop: 'suffix', desc: '后缀内容', type: 'ReactNode', default: '-' },
-    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
-  ];
-
-  const demos = [
+const inputDemo: DemoConfig = {
+  demos: [
     {
       title: '基础示例',
       code: `<Input placeholder="请输入内容" />`,
@@ -46,22 +31,19 @@ const InputDemo: React.FC = () => {
         </div>
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'type', desc: '输入框类型', type: 'string', default: 'text' },
+    { prop: 'value', desc: '当前值', type: 'string | number', default: '-' },
+    { prop: 'onChange', desc: '值变化回调', type: 'function', default: '-' },
+    { prop: 'placeholder', desc: '占位提示', type: 'string', default: '-' },
+    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
+    { prop: 'size', desc: '输入框尺寸', type: 'SizeType', default: 'medium' },
+    { prop: 'prefix', desc: '前缀内容', type: 'ReactNode', default: '-' },
+    { prop: 'suffix', desc: '后缀内容', type: 'ReactNode', default: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
+  ],
 };
 
-export default InputDemo;
+export default inputDemo;

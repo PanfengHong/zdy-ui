@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Popover from './Popover';
 import Button from '../Button/Button';
 
@@ -14,31 +13,85 @@ const sharedBtnStyle: React.CSSProperties = {
   color: 'rgba(0,0,0,0.85)',
 };
 
-const PopoverDemo = () => {
+// 12 种位置展示
+const PlacementShowcase = () => {
+  const btnStyle: React.CSSProperties = {
+    ...sharedBtnStyle,
+    padding: '4px 10px',
+    fontSize: 12,
+  };
+
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(4, 1fr)',
+        gap: 16,
+        padding: 16,
+        background: '#fafafa',
+        borderRadius: 4,
+      }}
+    >
+      <Popover placement="top" content="top"><button style={btnStyle}>Top</button></Popover>
+      <Popover placement="topLeft" content="topLeft"><button style={btnStyle}>TopLeft</button></Popover>
+      <Popover placement="topRight" content="topRight"><button style={btnStyle}>TopRight</button></Popover>
+      <Popover placement="bottom" content="bottom"><button style={btnStyle}>Bottom</button></Popover>
+
+      <Popover placement="bottomLeft" content="bottomLeft"><button style={btnStyle}>BottomLeft</button></Popover>
+      <Popover placement="bottomRight" content="bottomRight"><button style={btnStyle}>BottomRight</button></Popover>
+      <Popover placement="left" content="left"><button style={btnStyle}>Left</button></Popover>
+      <Popover placement="leftTop" content="leftTop"><button style={btnStyle}>LeftTop</button></Popover>
+
+      <Popover placement="leftBottom" content="leftBottom"><button style={btnStyle}>LeftBottom</button></Popover>
+      <Popover placement="right" content="right"><button style={btnStyle}>Right</button></Popover>
+      <Popover placement="rightTop" content="rightTop"><button style={btnStyle}>RightTop</button></Popover>
+      <Popover placement="rightBottom" content="rightBottom"><button style={btnStyle}>RightBottom</button></Popover>
+    </div>
+  );
+};
+
+const ControlledPopoverDemo = () => {
   const [open, setOpen] = useState(false);
+
+  return (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      <Popover
+        open={open}
+        onOpenChange={setOpen}
+        title="受控模式"
+        content="由外部 state 完全控制"
+        trigger="click"
+      >
+        <button style={sharedBtnStyle}>{open ? '关闭' : '打开'}</button>
+      </Popover>
+      <button
+        style={{ ...sharedBtnStyle, color: '#1890ff', borderColor: '#1890ff' }}
+        onClick={() => setOpen(!open)}
+      >
+        外部切换
+      </button>
+    </div>
+  );
+};
+
+const EventPopoverDemo = () => {
   const [log, setLog] = useState<string>('未触发');
 
-  const apiData = [
-    { prop: 'content', desc: '气泡内容', type: 'ReactNode', default: '-' },
-    { prop: 'title', desc: '气泡标题', type: 'ReactNode', default: '-' },
-    { prop: 'trigger', desc: '触发方式', type: "'hover' | 'click' | 'focus'", default: "'hover'" },
-    { prop: 'placement', desc: '气泡位置（12 种）', type: 'PopoverPlacement', default: "'top'" },
-    { prop: 'defaultOpen', desc: '默认是否打开', type: 'boolean', default: 'false' },
-    { prop: 'open', desc: '是否打开（受控）', type: 'boolean', default: '-' },
-    { prop: 'onOpenChange', desc: '打开状态变化回调', type: 'function(open)', default: '-' },
-    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
-    { prop: 'arrow', desc: '是否显示箭头', type: 'boolean', default: 'true' },
-    { prop: 'showClose', desc: '是否显示关闭按钮', type: 'boolean', default: 'false' },
-    { prop: 'width', desc: '气泡宽度', type: 'number | string', default: '-' },
-    { prop: 'mouseEnterDelay', desc: '鼠标进入延迟（秒）', type: 'number', default: '0.1' },
-    { prop: 'mouseLeaveDelay', desc: '鼠标离开延迟（秒）', type: 'number', default: '0.1' },
-    { prop: 'destroyOnHide', desc: '隐藏时销毁 DOM', type: 'boolean', default: 'false' },
-    { prop: 'zIndex', desc: '层级', type: 'number', default: '1050' },
-    { prop: 'getPopupContainer', desc: '挂载容器', type: 'function(triggerNode)', default: 'body' },
-    { prop: 'onVisibleChange', desc: '可见性变化回调（兼容）', type: 'function(visible)', default: '-' },
-  ];
+  return (
+    <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+      <Popover
+        content="观察下方日志"
+        onOpenChange={(o) => setLog(`${new Date().toLocaleTimeString()} ${o ? '已打开' : '已关闭'}`)}
+      >
+        <button style={sharedBtnStyle}>触发</button>
+      </Popover>
+      <span style={{ fontSize: 12, color: '#666' }}>最近事件：{log}</span>
+    </div>
+  );
+};
 
-  const demos = [
+const popoverDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Popover title="标题" content="这是一段气泡内容">\n  <button style={sharedBtnStyle}>Hover 我</button>\n</Popover>`,
@@ -83,40 +136,12 @@ const PopoverDemo = () => {
     {
       title: '受控用法',
       code: `const [open, setOpen] = useState(false);\n<Popover\n  open={open}\n  onOpenChange={setOpen}\n  title="受控模式"\n  content="外部完全控制打开状态"\n  trigger="click"\n>\n  <button>{open ? '关闭' : '打开'}</button>\n</Popover>`,
-      render: (
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <Popover
-            open={open}
-            onOpenChange={setOpen}
-            title="受控模式"
-            content="由外部 state 完全控制"
-            trigger="click"
-          >
-            <button style={sharedBtnStyle}>{open ? '关闭' : '打开'}</button>
-          </Popover>
-          <button
-            style={{ ...sharedBtnStyle, color: '#1890ff', borderColor: '#1890ff' }}
-            onClick={() => setOpen(!open)}
-          >
-            外部切换
-          </button>
-        </div>
-      ),
+      render: <ControlledPopoverDemo />,
     },
     {
       title: '事件回调',
       code: `<Popover\n  content="观察下方日志"\n  onOpenChange={(o) => setLog(o ? '已打开' : '已关闭')}\n>\n  <button>触发</button>\n</Popover>`,
-      render: (
-        <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-          <Popover
-            content="观察下方日志"
-            onOpenChange={(o) => setLog(`${new Date().toLocaleTimeString()} ${o ? '已打开' : '已关闭'}`)}
-          >
-            <button style={sharedBtnStyle}>触发</button>
-          </Popover>
-          <span style={{ fontSize: 12, color: '#666' }}>最近事件：{log}</span>
-        </div>
-      ),
+      render: <EventPopoverDemo />,
     },
     {
       title: '自定义内容',
@@ -170,59 +195,26 @@ const PopoverDemo = () => {
         </div>
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'content', desc: '气泡内容', type: 'ReactNode', default: '-' },
+    { prop: 'title', desc: '气泡标题', type: 'ReactNode', default: '-' },
+    { prop: 'trigger', desc: '触发方式', type: "'hover' | 'click' | 'focus'", default: "'hover'" },
+    { prop: 'placement', desc: '气泡位置（12 种）', type: 'PopoverPlacement', default: "'top'" },
+    { prop: 'defaultOpen', desc: '默认是否打开', type: 'boolean', default: 'false' },
+    { prop: 'open', desc: '是否打开（受控）', type: 'boolean', default: '-' },
+    { prop: 'onOpenChange', desc: '打开状态变化回调', type: 'function(open)', default: '-' },
+    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
+    { prop: 'arrow', desc: '是否显示箭头', type: 'boolean', default: 'true' },
+    { prop: 'showClose', desc: '是否显示关闭按钮', type: 'boolean', default: 'false' },
+    { prop: 'width', desc: '气泡宽度', type: 'number | string', default: '-' },
+    { prop: 'mouseEnterDelay', desc: '鼠标进入延迟（秒）', type: 'number', default: '0.1' },
+    { prop: 'mouseLeaveDelay', desc: '鼠标离开延迟（秒）', type: 'number', default: '0.1' },
+    { prop: 'destroyOnHide', desc: '隐藏时销毁 DOM', type: 'boolean', default: 'false' },
+    { prop: 'zIndex', desc: '层级', type: 'number', default: '1050' },
+    { prop: 'getPopupContainer', desc: '挂载容器', type: 'function(triggerNode)', default: 'body' },
+    { prop: 'onVisibleChange', desc: '可见性变化回调（兼容）', type: 'function(visible)', default: '-' },
+  ],
 };
 
-// 12 种位置展示
-const PlacementShowcase = () => {
-  const btnStyle: React.CSSProperties = {
-    ...sharedBtnStyle,
-    padding: '4px 10px',
-    fontSize: 12,
-  };
-
-  return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(4, 1fr)',
-        gap: 16,
-        padding: 16,
-        background: '#fafafa',
-        borderRadius: 4,
-      }}
-    >
-      <Popover placement="top" content="top"><button style={btnStyle}>Top</button></Popover>
-      <Popover placement="topLeft" content="topLeft"><button style={btnStyle}>TopLeft</button></Popover>
-      <Popover placement="topRight" content="topRight"><button style={btnStyle}>TopRight</button></Popover>
-      <Popover placement="bottom" content="bottom"><button style={btnStyle}>Bottom</button></Popover>
-
-      <Popover placement="bottomLeft" content="bottomLeft"><button style={btnStyle}>BottomLeft</button></Popover>
-      <Popover placement="bottomRight" content="bottomRight"><button style={btnStyle}>BottomRight</button></Popover>
-      <Popover placement="left" content="left"><button style={btnStyle}>Left</button></Popover>
-      <Popover placement="leftTop" content="leftTop"><button style={btnStyle}>LeftTop</button></Popover>
-
-      <Popover placement="leftBottom" content="leftBottom"><button style={btnStyle}>LeftBottom</button></Popover>
-      <Popover placement="right" content="right"><button style={btnStyle}>Right</button></Popover>
-      <Popover placement="rightTop" content="rightTop"><button style={btnStyle}>RightTop</button></Popover>
-      <Popover placement="rightBottom" content="rightBottom"><button style={btnStyle}>RightBottom</button></Popover>
-    </div>
-  );
-};
-
-export default PopoverDemo;
+export default popoverDemo;

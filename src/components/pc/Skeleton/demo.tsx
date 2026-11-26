@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import { useState, useEffect } from 'react';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Skeleton from './Skeleton';
 import Button from '../Button/Button';
 
-const SkeletonDemo = () => {
+const WrapperSkeletonDemo = () => {
   const [loading, setLoading] = useState(true);
-  const [loadData, setLoadData] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -14,6 +12,27 @@ const SkeletonDemo = () => {
     }, 2000);
     return () => clearTimeout(timer);
   }, []);
+
+  return (
+    <>
+      <Skeleton loading={loading} avatar active>
+        <div style={{ padding: '16px 0' }}>
+          <h3>实现完成的内容</h3>
+          <p>这是加载完成后显示的实际内容。</p>
+          <p>骨架屏在数据加载完成后会自动消失。</p>
+        </div>
+      </Skeleton>
+      <div style={{ marginTop: 12 }}>
+        <Button onClick={() => { setLoading(true); setTimeout(() => setLoading(false), 2000); }} type="primary">
+          重新加载
+        </Button>
+      </div>
+    </>
+  );
+};
+
+const CustomContentSkeletonDemo = () => {
+  const [loadData, setLoadData] = useState(true);
 
   useEffect(() => {
     if (loadData) {
@@ -24,28 +43,27 @@ const SkeletonDemo = () => {
     }
   }, [loadData]);
 
-  const apiData = [
-    { prop: 'active', desc: '是否显示动画效果', type: 'boolean', default: 'true' },
-    { prop: 'avatar', desc: '是否显示头像占位', type: 'boolean | { size?: number; shape?: string }', default: 'false' },
-    { prop: 'title', desc: '是否显示标题占位', type: 'boolean | { width?: number | string }', default: 'true' },
-    { prop: 'paragraph', desc: '是否显示段落占位', type: 'boolean | { rows?: number; width?: number | string | Array }', default: 'true' },
-    { prop: 'loading', desc: '是否显示骨架屏（包裹模式）', type: 'boolean', default: 'true' },
-    { prop: 'children', desc: '实际内容（loading为false时显示）', type: 'ReactNode', default: '-' },
-    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
-  ];
+  return (
+    <>
+      <Skeleton loading={loadData} active avatar>
+        <div style={{ padding: '16px 0' }}>
+          <h3>用户信息</h3>
+          <p>姓名：张三</p>
+          <p>年龄：28</p>
+          <p>职业：前端工程师</p>
+        </div>
+      </Skeleton>
+      <div style={{ marginTop: 12 }}>
+        <Button onClick={() => { setLoadData(true); setTimeout(() => setLoadData(false), 2000); }} type="primary">
+          重新加载
+        </Button>
+      </div>
+    </>
+  );
+};
 
-  const paragraphApiData = [
-    { prop: 'rows', desc: '段落行数', type: 'number', default: '3' },
-    { prop: 'width', desc: '每行宽度', type: 'number | string | Array', default: '最后一行为61%' }
-  ];
-
-  const avatarApiData = [
-    { prop: 'size', desc: '头像尺寸', type: 'number', default: '40' },
-    { prop: 'shape', desc: '头像形状', type: "'circle' | 'square'", default: 'circle' }
-  ];
-
-  const demos = [
+const skeletonDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Skeleton active />`.trim(),
@@ -105,19 +123,7 @@ useEffect(() => {
   </div>
 </Skeleton>
           `.trim(),
-      render: <Skeleton loading={loading} avatar active>
-            <div style={{ padding: '16px 0' }}>
-              <h3>实现完成的内容</h3>
-              <p>这是加载完成后显示的实际内容。</p>
-              <p>骨架屏在数据加载完成后会自动消失。</p>
-            </div>
-          </Skeleton>,
-          actions: [
-            {
-              label: '重新加载',
-              onClick: () => { setLoading(true); setTimeout(() => setLoading(false), 2000); }
-            }
-          ]
+      render: <WrapperSkeletonDemo />
     },
     {
       title: '自定义加载内容',
@@ -133,57 +139,23 @@ const [loadData, setLoadData] = useState(true);
   </div>
 </Skeleton>
           `.trim(),
-      render: (
-        <Skeleton loading={loadData} active avatar>
-            <div style={{ padding: '16px 0' }}>
-              <h3>用户信息</h3>
-              <p>姓名：张三</p>
-              <p>年龄：28</p>
-              <p>职业：前端工程师</p>
-            </div>
-          </Skeleton>
-      ),
-      actions: [
-        {
-          label: '重新加载',
-          onClick: () => { setLoadData(true); setTimeout(() => setLoadData(false), 2000); }
-        }
-      ]
+      render: <CustomContentSkeletonDemo />
     }
-  ];
-
-  return (
-    <>
-    {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-          {demo.actions && (
-            <div style={{ marginTop: 12 }}>
-              {demo.actions.map((action) => (
-                <Button key={action.label} onClick={action.onClick} type="primary">
-                  {action.label}
-                </Button>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
-
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-      <div className="component-group">
-        <h3>Paragraph 配置</h3>
-        <ApiTable dataSource={paragraphApiData} />
-      </div>
-      <div className="component-group">
-        <h3>Avatar 配置</h3>
-        <ApiTable dataSource={avatarApiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'active', desc: '是否显示动画效果', type: 'boolean', default: 'true' },
+    { prop: 'avatar', desc: '是否显示头像占位', type: 'boolean | { size?: number; shape?: string }', default: 'false' },
+    { prop: 'title', desc: '是否显示标题占位', type: 'boolean | { width?: number | string }', default: 'true' },
+    { prop: 'paragraph', desc: '是否显示段落占位', type: 'boolean | { rows?: number; width?: number | string | Array }', default: 'true' },
+    { prop: 'loading', desc: '是否显示骨架屏（包裹模式）', type: 'boolean', default: 'true' },
+    { prop: 'children', desc: '实际内容（loading为false时显示）', type: 'ReactNode', default: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' },
+    { prop: 'rows', desc: '段落行数', type: 'number', default: '3' },
+    { prop: 'width', desc: '每行宽度', type: 'number | string | Array', default: '最后一行为61%' },
+    { prop: 'size', desc: '头像尺寸', type: 'number', default: '40' },
+    { prop: 'shape', desc: '头像形状', type: "'circle' | 'square'", default: 'circle' }
+  ],
 };
 
-export default SkeletonDemo;
+export default skeletonDemo;

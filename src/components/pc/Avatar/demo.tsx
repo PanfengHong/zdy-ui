@@ -1,34 +1,11 @@
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Avatar from './Avatar';
 
 // 使用 picsum 提供占位头像
 const avatarUrl = (seed: string) => `https://i.pravatar.cc/100?u=${seed}`;
 
-const AvatarDemo = () => {
-  const apiData = [
-    { prop: 'src', desc: '图片地址', type: 'string', default: '-' },
-    { prop: 'srcSet', desc: '图片 srcset', type: 'string', default: '-' },
-    { prop: 'alt', desc: '图片 alt 文本', type: 'string', default: '-' },
-    { prop: 'icon', desc: '自定义图标（无图片时展示）', type: 'ReactNode', default: '-' },
-    { prop: 'text', desc: '文字内容（无图片时展示）', type: 'ReactNode', default: '-' },
-    { prop: 'size', desc: '尺寸', type: "'small' | 'medium' | 'large' | number", default: "'medium'" },
-    { prop: 'shape', desc: '形状', type: "'circle' | 'square'", default: "'circle'" },
-    { prop: 'status', desc: '状态点', type: "'online' | 'busy' | 'away' | 'offline'", default: '-' },
-    { prop: 'statusColor', desc: '自定义状态点颜色', type: 'string', default: '-' },
-    { prop: 'gap', desc: '文字与背景的间距比例', type: 'number', default: '4' },
-    { prop: 'onError', desc: '图片加载失败回调，返回 false 阻止默认回退', type: '() => boolean', default: '-' },
-    { prop: 'onClick', desc: '点击回调', type: '(e) => void', default: '-' },
-  ];
-
-  const groupApiData = [
-    { prop: 'maxCount', desc: '最大显示数量', type: 'number', default: '-' },
-    { prop: 'maxStyle', desc: '超出计数头像样式', type: 'CSSProperties', default: '-' },
-    { prop: 'size', desc: '组内头像尺寸', type: "'small' | 'medium' | 'large' | number", default: "'medium'" },
-    { prop: 'shape', desc: '组内头像形状', type: "'circle' | 'square'", default: "'circle'" },
-  ];
-
-  const demos = [
+const avatarDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Avatar src="https://i.pravatar.cc/100?u=1" />\n<Avatar text="U" />\n<Avatar text="张" />\n<Avatar icon="👤" />`,
@@ -203,26 +180,25 @@ const AvatarDemo = () => {
         </Avatar.Group>
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>Avatar API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-      <div className="component-group">
-        <h3>Avatar.Group API</h3>
-        <ApiTable dataSource={groupApiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'src', desc: '图片地址', type: 'string', default: '-' },
+    { prop: 'srcSet', desc: '图片 srcset', type: 'string', default: '-' },
+    { prop: 'alt', desc: '图片 alt 文本', type: 'string', default: '-' },
+    { prop: 'icon', desc: '自定义图标（无图片时展示）', type: 'ReactNode', default: '-' },
+    { prop: 'text', desc: '文字内容（无图片时展示）', type: 'ReactNode', default: '-' },
+    { prop: 'size', desc: '尺寸', type: "'small' | 'medium' | 'large' | number", default: "'medium'" },
+    { prop: 'shape', desc: '形状', type: "'circle' | 'square'", default: "'circle'" },
+    { prop: 'status', desc: '状态点', type: "'online' | 'busy' | 'away' | 'offline'", default: '-' },
+    { prop: 'statusColor', desc: '自定义状态点颜色', type: 'string', default: '-' },
+    { prop: 'gap', desc: '文字与背景的间距比例', type: 'number', default: '4' },
+    { prop: 'onError', desc: '图片加载失败回调，返回 false 阻止默认回退', type: '() => boolean', default: '-' },
+    { prop: 'onClick', desc: '点击回调', type: '(e) => void', default: '-' },
+    { prop: 'maxCount', desc: '最大显示数量', type: 'number', default: '-' },
+    { prop: 'maxStyle', desc: '超出计数头像样式', type: 'CSSProperties', default: '-' },
+    { prop: 'size', desc: '组内头像尺寸', type: "'small' | 'medium' | 'large' | number", default: "'medium'" },
+    { prop: 'shape', desc: '组内头像形状', type: "'circle' | 'square'", default: "'circle'" },
+  ],
 };
 
-export default AvatarDemo;
+export default avatarDemo;

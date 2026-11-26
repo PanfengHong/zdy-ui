@@ -1,8 +1,9 @@
 import React from 'react';
 import classNames from 'classnames';
+import { Icon } from '../../pc';
 import type { BaseButtonProps } from '../../../types';
-
 import './MButton.less';
+
 const MButton: React.FC<BaseButtonProps> = ({
   type = 'default',
   size = 'medium',
@@ -30,8 +31,8 @@ const MButton: React.FC<BaseButtonProps> = ({
       disabled={disabled || loading}
       onClick={onClick}
     >
-      {loading && <span className="zdy-button-m--loading-icon">⏳</span>}
-      {children}
+      {loading &&  <Icon type="loading" size={20} spin className="zdy-button--loading-icon" />}
+      <span className="zdy-mobile-button-content">{children}</span>
     </button>
   );
 };

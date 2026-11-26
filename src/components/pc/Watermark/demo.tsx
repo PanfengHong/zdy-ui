@@ -1,51 +1,58 @@
 import React, { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Watermark from './Watermark';
 import Input from '../Input/Input';
 import Slider from '../Slider/Slider';
 
-const WatermarkDemo = () => {
+const containerStyle: React.CSSProperties = {
+  height: 200,
+  padding: 16,
+  background: '#fafafa',
+  border: '1px solid #f0f0f0',
+  borderRadius: 8,
+  overflow: 'hidden'
+};
+
+const DynamicWatermarkDemo = () => {
   const [content, setContent] = useState('ZDY UI');
   const [fontSize, setFontSize] = useState(14);
   const [rotate, setRotate] = useState(-22);
   const [gapX, setGapX] = useState(100);
   const [gapY, setGapY] = useState(100);
-  const [color, setColor] = useState('rgba(0, 0, 0, 0.15)');
+  const color = 'rgba(0, 0, 0, 0.15)';
 
-  const containerStyle: React.CSSProperties = {
-    height: 200,
-    padding: 16,
-    background: '#fafafa',
-    border: '1px solid #f0f0f0',
-    borderRadius: 8,
-    overflow: 'hidden'
-  };
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
+        <span>内容:</span>
+        <Input size="small" value={content} onChange={(e: any) => setContent(e.target.value)} style={{ width: 160 }} />
+        <span>字号: {fontSize}px</span>
+        <Slider min={10} max={32} value={fontSize} onChange={(v) => setFontSize(Array.isArray(v) ? v[0] : v)} style={{ width: 120 }} />
+      </div>
+      <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
+        <span>旋转: {rotate}°</span>
+        <Slider min={-90} max={90} value={rotate} onChange={(v) => setRotate(Array.isArray(v) ? v[0] : v)} style={{ width: 120 }} />
+        <span>水平间距: {gapX}</span>
+        <Slider min={0} max={300} value={gapX} onChange={(v) => setGapX(Array.isArray(v) ? v[0] : v)} style={{ width: 120 }} />
+        <span>垂直间距: {gapY}</span>
+        <Slider min={0} max={300} value={gapY} onChange={(v) => setGapY(Array.isArray(v) ? v[0] : v)} style={{ width: 120 }} />
+      </div>
+      <Watermark
+        content={content}
+        rotate={rotate}
+        gap={[gapX, gapY]}
+        font={{ color, fontSize, fontWeight: 'normal' }}
+      >
+        <div style={containerStyle}>
+          动态调整水印参数，实时预览效果。尝试用开发者工具删除水印元素，观察防篡改效果。
+        </div>
+      </Watermark>
+    </div>
+  );
+};
 
-  const apiData = [
-    { prop: 'content', desc: '水印文字内容，支持多行（数组形式）', type: 'string | string[]', default: "'ZDY UI'" },
-    { prop: 'image', desc: '水印图片地址（优先级高于content）', type: 'string', default: '-' },
-    { prop: 'width', desc: '水印宽度', type: 'number', default: '120' },
-    { prop: 'height', desc: '水印高度', type: 'number', default: '64' },
-    { prop: 'rotate', desc: '旋转角度', type: 'number', default: '-22' },
-    { prop: 'zIndex', desc: '水印层级', type: 'number', default: '9' },
-    { prop: 'gap', desc: '水印间距 [水平, 垂直]', type: '[number, number]', default: '[100, 100]' },
-    { prop: 'offset', desc: '水印偏移 [水平, 垂直]', type: '[number, number]', default: '[0, 0]' },
-    { prop: 'font', desc: '字体配置', type: 'WatermarkFontConfig', default: '见下方' },
-    { prop: 'inherit', desc: '是否继承父级水印', type: 'boolean', default: 'false' },
-    { prop: 'children', desc: '被水印包裹的内容', type: 'ReactNode', default: '-' },
-    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
-  ];
-
-  const fontApiData = [
-    { prop: 'color', desc: '字体颜色', type: 'string', default: 'rgba(0, 0, 0, 0.15)' },
-    { prop: 'fontSize', desc: '字体大小', type: 'number', default: '14' },
-    { prop: 'fontFamily', desc: '字体族', type: 'string', default: 'sans-serif' },
-    { prop: 'fontWeight', desc: '字体粗细', type: 'string | number', default: 'normal' }
-  ];
-
-  const demos = [
+const waterMarkDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Watermark content="ZDY UI">\n  <div style={{ height: 200, padding: 16, background: '#fafafa' }}>\n    这是一段被水印包裹的内容，水印会以半透明的方式覆盖在内容之上。\n  </div>\n</Watermark>`,
@@ -119,34 +126,7 @@ const WatermarkDemo = () => {
     {
       title: '动态配置',
       code: `const [content, setContent] = useState('ZDY UI');\nconst [rotate, setRotate] = useState(-22);\nconst [gapX, setGapX] = useState(100);\nconst [gapY, setGapY] = useState(100);\n\n<Watermark\n  content={content}\n  rotate={rotate}\n  gap={[gapX, gapY]}\n  font={{ color: 'rgba(0,0,0,0.15)', fontSize: 14 }}\n>\n  <div style={{ height: 200, padding: 16, background: '#fafafa' }}>\n    动态调整水印参数。\n  </div>\n</Watermark>`,
-      render: (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
-          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
-            <span>内容:</span>
-            <Input size="small" value={content} onChange={(e: any) => setContent(e.target.value)} style={{ width: 160 }} />
-            <span>字号: {fontSize}px</span>
-            <Slider min={10} max={32} value={fontSize} onChange={setFontSize} style={{ width: 120 }} />
-          </div>
-          <div style={{ display: 'flex', gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
-            <span>旋转: {rotate}°</span>
-            <Slider min={-90} max={90} value={rotate} onChange={setRotate} style={{ width: 120 }} />
-            <span>水平间距: {gapX}</span>
-            <Slider min={0} max={300} value={gapX} onChange={setGapX} style={{ width: 120 }} />
-            <span>垂直间距: {gapY}</span>
-            <Slider min={0} max={300} value={gapY} onChange={setGapY} style={{ width: 120 }} />
-          </div>
-          <Watermark
-            content={content}
-            rotate={rotate}
-            gap={[gapX, gapY]}
-            font={{ color, fontSize, fontWeight: 'normal' }}
-          >
-            <div style={containerStyle}>
-              动态调整水印参数，实时预览效果。尝试用开发者工具删除水印元素，观察防篡改效果。
-            </div>
-          </Watermark>
-        </div>
-      ),
+      render: <DynamicWatermarkDemo />,
     },
     {
       title: '防篡改示例',
@@ -160,26 +140,26 @@ const WatermarkDemo = () => {
         </Watermark>
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-      <div className="component-group">
-        <h3>WatermarkFontConfig API</h3>
-        <ApiTable dataSource={fontApiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'content', desc: '水印文字内容，支持多行（数组形式）', type: 'string | string[]', default: "'ZDY UI'" },
+    { prop: 'image', desc: '水印图片地址（优先级高于content）', type: 'string', default: '-' },
+    { prop: 'width', desc: '水印宽度', type: 'number', default: '120' },
+    { prop: 'height', desc: '水印高度', type: 'number', default: '64' },
+    { prop: 'rotate', desc: '旋转角度', type: 'number', default: '-22' },
+    { prop: 'zIndex', desc: '水印层级', type: 'number', default: '9' },
+    { prop: 'gap', desc: '水印间距 [水平, 垂直]', type: '[number, number]', default: '[100, 100]' },
+    { prop: 'offset', desc: '水印偏移 [水平, 垂直]', type: '[number, number]', default: '[0, 0]' },
+    { prop: 'font', desc: '字体配置', type: 'WatermarkFontConfig', default: '见下方' },
+    { prop: 'inherit', desc: '是否继承父级水印', type: 'boolean', default: 'false' },
+    { prop: 'children', desc: '被水印包裹的内容', type: 'ReactNode', default: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' },
+    { prop: 'color', desc: '字体颜色', type: 'string', default: 'rgba(0, 0, 0, 0.15)' },
+    { prop: 'fontSize', desc: '字体大小', type: 'number', default: '14' },
+    { prop: 'fontFamily', desc: '字体族', type: 'string', default: 'sans-serif' },
+    { prop: 'fontWeight', desc: '字体粗细', type: 'string | number', default: 'normal' }
+  ],
 };
 
-export default WatermarkDemo;
+export default waterMarkDemo;

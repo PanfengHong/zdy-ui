@@ -1,5 +1,4 @@
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Empty from './Empty';
 import Button from '../Button/Button';
 
@@ -15,15 +14,8 @@ const CustomSvg = (
 // 自定义 emoji 图片
 const EmojiImg = <div style={{ fontSize: 64, lineHeight: 1 }}>📭</div>;
 
-const EmptyDemo = () => {
-  const apiData = [
-    { prop: 'image', desc: '图片地址或自定义图片节点，false 时不渲染', type: 'string | ReactNode | false', default: '默认插画' },
-    { prop: 'description', desc: '描述文字，null 时不渲染', type: 'ReactNode', default: "'暂无数据'" },
-    { prop: 'imageStyle', desc: '图片样式', type: 'CSSProperties', default: '-' },
-    { prop: 'children', desc: '底部内容（如操作按钮）', type: 'ReactNode', default: '-' }
-  ];
-
-  const demos = [
+const emptyDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Empty />`,
@@ -109,22 +101,13 @@ const EmptyDemo = () => {
         </div>
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'image', desc: '图片地址或自定义图片节点，false 时不渲染', type: 'string | ReactNode | false', default: '默认插画' },
+    { prop: 'description', desc: '描述文字，null 时不渲染', type: 'ReactNode', default: "'暂无数据'" },
+    { prop: 'imageStyle', desc: '图片样式', type: 'CSSProperties', default: '-' },
+    { prop: 'children', desc: '底部内容（如操作按钮）', type: 'ReactNode', default: '-' }
+  ],
 };
 
-export default EmptyDemo;
+export default emptyDemo;

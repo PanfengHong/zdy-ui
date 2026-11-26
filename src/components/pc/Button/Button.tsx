@@ -35,7 +35,7 @@ const Button: React.FC<BaseButtonProps> = ({
     >
       {loading && <Icon type="loading" size={20} spin className="zdy-button--loading-icon" />}
       {prefix && <span className="zdy-button-prefix">{prefix}</span>}
-      {children}
+      <span className="zdy-button-content">{children}</span>
       {suffix && <span className="zdy-button-suffix">{suffix}</span>}
     </button>
   );

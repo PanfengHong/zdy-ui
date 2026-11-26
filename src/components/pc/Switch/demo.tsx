@@ -1,21 +1,8 @@
-import React from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Switch from './Switch';
 
-const SwitchDemo = () => {
-
-  const apiData = [
-    { prop: 'checked', desc: '是否选中', type: 'boolean', default: '-' },
-    { prop: 'defaultChecked', desc: '默认是否选中', type: 'boolean', default: 'false' },
-    { prop: 'onChange', desc: '值变化回调', type: 'function(checked)', default: '-' },
-    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
-    { prop: 'size', desc: '尺寸', type: 'SizeType', default: 'medium' },
-    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
-  ];
-
-  const demos = [
+const switchDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `
@@ -57,22 +44,16 @@ const SwitchDemo = () => {
         </div>
       )
     }
-  ]
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'checked', desc: '是否选中', type: 'boolean', default: '-' },
+    { prop: 'defaultChecked', desc: '默认是否选中', type: 'boolean', default: 'false' },
+    { prop: 'onChange', desc: '值变化回调', type: 'function(checked)', default: '-' },
+    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
+    { prop: 'size', desc: '尺寸', type: 'SizeType', default: 'medium' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
+  ],
 };
 
-export default SwitchDemo;
+export default switchDemo;

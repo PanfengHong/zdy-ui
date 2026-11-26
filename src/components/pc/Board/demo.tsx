@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Board from './Board';
 import type { BoardColumnData } from './types';
 
@@ -35,79 +34,70 @@ const defaultColumns: BoardColumnData[] = [
   },
 ];
 
-const BoardDemo = () => {
+const BasicBoardDemo = () => {
   const [columns, setColumns] = useState<BoardColumnData[]>(defaultColumns);
   const [log, setLog] = useState<string[]>([]);
 
-  const apiData = [
-    { prop: 'columns', desc: '看板列数据（受控）', type: 'BoardColumnData[]', default: '-' },
-    { prop: 'defaultColumns', desc: '默认列数据', type: 'BoardColumnData[]', default: '[]' },
-    { prop: 'draggable', desc: '是否允许拖拽', type: 'boolean', default: 'true' },
-    { prop: 'showColumnCount', desc: '显示列卡片数量', type: 'boolean', default: 'true' },
-    { prop: 'showAddColumn', desc: '显示添加列入口', type: 'boolean', default: 'true' },
-    { prop: 'showAddCard', desc: '显示添加卡片入口', type: 'boolean', default: 'true' },
-    { prop: 'allowRemoveColumn', desc: '允许删除列', type: 'boolean', default: 'true' },
-    { prop: 'allowRemoveCard', desc: '允许删除卡片', type: 'boolean', default: 'true' },
-    { prop: 'emptyDescription', desc: '空列描述', type: 'string', default: "'暂无卡片'" },
-    { prop: 'renderCard', desc: '自定义卡片渲染', type: 'function(card, column)', default: '-' },
-    { prop: 'renderColumnHeader', desc: '自定义列头渲染', type: 'function(column)', default: '-' },
-    { prop: 'onColumnsChange', desc: '列数据变化回调', type: 'function(columns)', default: '-' },
-    { prop: 'onCardMove', desc: '卡片移动回调', type: 'function(cardId, from, to, index)', default: '-' },
-    { prop: 'onColumnAdd', desc: '新增列回调', type: 'function(title)', default: '-' },
-    { prop: 'onColumnRemove', desc: '删除列回调', type: 'function(columnId)', default: '-' },
-    { prop: 'onCardAdd', desc: '新增卡片回调', type: 'function(columnId, card)', default: '-' },
-    { prop: 'onCardRemove', desc: '删除卡片回调', type: 'function(columnId, cardId)', default: '-' },
-    { prop: 'onCardClick', desc: '点击卡片回调', type: 'function(card, columnId)', default: '-' },
-    { prop: 'onColumnTitleChange', desc: '列标题修改回调', type: 'function(columnId, title)', default: '-' },
-  ];
+  return (
+    <>
+      <div style={{ maxHeight: 460, overflow: 'hidden' }}>
+        <Board
+          columns={columns}
+          onColumnsChange={setColumns}
+          onCardMove={(id, from, to, idx) =>
+            setLog((l) => [`${new Date().toLocaleTimeString()} 卡片 ${id}：${from} → ${to}（位置 ${idx}）`, ...l].slice(0, 5))
+          }
+        />
+      </div>
+      {log.length > 0 && (
+        <div style={{ marginTop: 12, padding: 8, background: '#fafafa', borderRadius: 4, fontSize: 12, color: '#666' }}>
+          <div style={{ fontWeight: 500, marginBottom: 4 }}>最近移动：</div>
+          {log.map((t, i) => <div key={i}>{t}</div>)}
+        </div>
+      )}
+    </>
+  );
+};
 
-  const cardApiData = [
-    { prop: 'id', desc: '卡片唯一标识', type: 'string', default: '-' },
-    { prop: 'title', desc: '卡片标题', type: 'string', default: '-' },
-    { prop: 'description', desc: '卡片描述', type: 'string', default: '-' },
-    { prop: 'priority', desc: '优先级', type: "'low' | 'medium' | 'high' | 'urgent'", default: '-' },
-    { prop: 'label', desc: '标签节点', type: 'ReactNode', default: '-' },
-    { prop: 'tags', desc: '标签数组', type: 'string[]', default: '-' },
-    { prop: 'assignee', desc: '负责人', type: 'string', default: '-' },
-    { prop: 'meta', desc: '自定义元数据', type: 'Record<string, any>', default: '-' },
-  ];
+// 点击卡片演示
+const ClickBoardDemo = () => {
+  const [selected, setSelected] = useState<{ title: string; columnId: string } | null>(null);
 
-  const columnApiData = [
-    { prop: 'id', desc: '列唯一标识', type: 'string', default: '-' },
-    { prop: 'title', desc: '列标题', type: 'string', default: '-' },
-    { prop: 'cards', desc: '卡片数据', type: 'BoardCardData[]', default: '[]' },
-    { prop: 'color', desc: '列主题色', type: 'string', default: "'#1890ff'" },
-    { prop: 'wip', desc: '在制品数量上限（超出会高亮）', type: 'number', default: '-' },
-  ];
+  return (
+    <>
+      <div style={{ maxHeight: 360, overflow: 'hidden' }}>
+        <Board
+          allowRemoveCard={false}
+          showAddCard={false}
+          defaultColumns={[
+            {
+              id: 'todo', title: '待办', color: '#1890ff',
+              cards: [
+                { id: '1', title: '点击我试试' },
+                { id: '2', title: '也可以点这个' },
+              ],
+            },
+            {
+              id: 'done', title: '已完成', color: '#52c41a',
+              cards: [{ id: '3', title: '已完成的任务' }],
+            },
+          ]}
+          onCardClick={(card, columnId) => setSelected({ title: card.title, columnId })}
+        />
+      </div>
+      <div style={{ marginTop: 12, padding: 8, background: '#fafafa', borderRadius: 4, fontSize: 12, color: '#666' }}>
+        {selected ? `点击了「${selected.title}」（列：${selected.columnId}）` : '请点击任意卡片'}
+      </div>
+    </>
+  );
+};
 
-  const demos = [
+const boardDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
-      description: (
-        <p style={{ color: '#666', margin: '8px 0' }}>
-          支持拖拽卡片在列间移动、点击列标题编辑、新增/删除列与卡片。
-        </p>
-      ),
       code: `const [columns, setColumns] = useState(defaultColumns);\n<Board\n  columns={columns}\n  onColumnsChange={setColumns}\n  onCardMove={(id, from, to, idx) => console.log(id, from, to, idx)}\n/>`,
-      render: (
-        <>
-          <div style={{ maxHeight: 460, overflow: 'hidden' }}>
-            <Board
-              columns={columns}
-              onColumnsChange={setColumns}
-              onCardMove={(id, from, to, idx) =>
-                setLog((l) => [`${new Date().toLocaleTimeString()} 卡片 ${id}：${from} → ${to}（位置 ${idx}）`, ...l].slice(0, 5))
-              }
-            />
-          </div>
-          {log.length > 0 && (
-            <div style={{ marginTop: 12, padding: 8, background: '#fafafa', borderRadius: 4, fontSize: 12, color: '#666' }}>
-              <div style={{ fontWeight: 500, marginBottom: 4 }}>最近移动：</div>
-              {log.map((t, i) => <div key={i}>{t}</div>)}
-            </div>
-          )}
-        </>
-      ),
+      render: <BasicBoardDemo />,
     },
     {
       title: '非受控用法',
@@ -150,28 +140,28 @@ const BoardDemo = () => {
     },
     {
       title: 'WIP 限制',
-      description: (
-        <p style={{ color: '#666', margin: '8px 0' }}>
-          为列设置 <code>wip</code> 可限制在制品数量，超出时计数会高亮显示。
-        </p>
-      ),
       code: `<Board\n  defaultColumns={[\n    { id: 'doing', title: '进行中（WIP=2）', wip: 2, cards: [\n      { id: '1', title: '任务 1' }, { id: '2', title: '任务 2' }, { id: '3', title: '任务 3' }\n    ]},\n    { id: 'done', title: '已完成', cards: [] }\n  ]}\n/>`,
       render: (
-        <div style={{ maxHeight: 360, overflow: 'hidden' }}>
-          <Board
-            defaultColumns={[
-              {
-                id: 'doing', title: '进行中（WIP=2）', color: '#fa541c', wip: 2,
-                cards: [
-                  { id: '1', title: '任务 1' },
-                  { id: '2', title: '任务 2' },
-                  { id: '3', title: '任务 3（超出限制）' },
-                ],
-              },
-              { id: 'done', title: '已完成', color: '#52c41a', cards: [] },
-            ]}
-          />
-        </div>
+        <>
+          <p style={{ color: '#666', margin: '8px 0' }}>
+            为列设置 <code>wip</code> 可限制在制品数量，超出时计数会高亮显示。
+          </p>
+          <div style={{ maxHeight: 360, overflow: 'hidden' }}>
+            <Board
+              defaultColumns={[
+                {
+                  id: 'doing', title: '进行中（WIP=2）', color: '#fa541c', wip: 2,
+                  cards: [
+                    { id: '1', title: '任务 1' },
+                    { id: '2', title: '任务 2' },
+                    { id: '3', title: '任务 3（超出限制）' },
+                  ],
+                },
+                { id: 'done', title: '已完成', color: '#52c41a', cards: [] },
+              ]}
+            />
+          </div>
+        </>
       ),
     },
     {
@@ -215,64 +205,41 @@ const BoardDemo = () => {
       code: `const [selected, setSelected] = useState(null);\n<Board\n  defaultColumns={columns}\n  allowRemoveCard={false}\n  onCardClick={(card) => setSelected(card)}\n/>`,
       render: <ClickBoardDemo />,
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          {'description' in demo && demo.description}
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API - Board</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-      <div className="component-group">
-        <h3>API - BoardColumnData</h3>
-        <ApiTable dataSource={columnApiData} />
-      </div>
-      <div className="component-group">
-        <h3>API - BoardCardData</h3>
-        <ApiTable dataSource={cardApiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'columns', desc: '看板列数据（受控）', type: 'BoardColumnData[]', default: '-' },
+    { prop: 'defaultColumns', desc: '默认列数据', type: 'BoardColumnData[]', default: '[]' },
+    { prop: 'draggable', desc: '是否允许拖拽', type: 'boolean', default: 'true' },
+    { prop: 'showColumnCount', desc: '显示列卡片数量', type: 'boolean', default: 'true' },
+    { prop: 'showAddColumn', desc: '显示添加列入口', type: 'boolean', default: 'true' },
+    { prop: 'showAddCard', desc: '显示添加卡片入口', type: 'boolean', default: 'true' },
+    { prop: 'allowRemoveColumn', desc: '允许删除列', type: 'boolean', default: 'true' },
+    { prop: 'allowRemoveCard', desc: '允许删除卡片', type: 'boolean', default: 'true' },
+    { prop: 'emptyDescription', desc: '空列描述', type: 'string', default: "'暂无卡片'" },
+    { prop: 'renderCard', desc: '自定义卡片渲染', type: 'function(card, column)', default: '-' },
+    { prop: 'renderColumnHeader', desc: '自定义列头渲染', type: 'function(column)', default: '-' },
+    { prop: 'onColumnsChange', desc: '列数据变化回调', type: 'function(columns)', default: '-' },
+    { prop: 'onCardMove', desc: '卡片移动回调', type: 'function(cardId, from, to, index)', default: '-' },
+    { prop: 'onColumnAdd', desc: '新增列回调', type: 'function(title)', default: '-' },
+    { prop: 'onColumnRemove', desc: '删除列回调', type: 'function(columnId)', default: '-' },
+    { prop: 'onCardAdd', desc: '新增卡片回调', type: 'function(columnId, card)', default: '-' },
+    { prop: 'onCardRemove', desc: '删除卡片回调', type: 'function(columnId, cardId)', default: '-' },
+    { prop: 'onCardClick', desc: '点击卡片回调', type: 'function(card, columnId)', default: '-' },
+    { prop: 'onColumnTitleChange', desc: '列标题修改回调', type: 'function(columnId, title)', default: '-' },
+    { prop: 'id', desc: '卡片唯一标识', type: 'string', default: '-' },
+    { prop: 'title', desc: '卡片标题', type: 'string', default: '-' },
+    { prop: 'description', desc: '卡片描述', type: 'string', default: '-' },
+    { prop: 'priority', desc: '优先级', type: "'low' | 'medium' | 'high' | 'urgent'", default: '-' },
+    { prop: 'label', desc: '标签节点', type: 'ReactNode', default: '-' },
+    { prop: 'tags', desc: '标签数组', type: 'string[]', default: '-' },
+    { prop: 'assignee', desc: '负责人', type: 'string', default: '-' },
+    { prop: 'meta', desc: '自定义元数据', type: 'Record<string, any>', default: '-' },
+    { prop: 'id', desc: '列唯一标识', type: 'string', default: '-' },
+    { prop: 'title', desc: '列标题', type: 'string', default: '-' },
+    { prop: 'cards', desc: '卡片数据', type: 'BoardCardData[]', default: '[]' },
+    { prop: 'color', desc: '列主题色', type: 'string', default: "'#1890ff'" },
+    { prop: 'wip', desc: '在制品数量上限（超出会高亮）', type: 'number', default: '-' },
+  ],
 };
 
-// 点击卡片演示
-const ClickBoardDemo = () => {
-  const [selected, setSelected] = useState<{ title: string; columnId: string } | null>(null);
-
-  return (
-    <>
-      <div style={{ maxHeight: 360, overflow: 'hidden' }}>
-        <Board
-          allowRemoveCard={false}
-          showAddCard={false}
-          defaultColumns={[
-            {
-              id: 'todo', title: '待办', color: '#1890ff',
-              cards: [
-                { id: '1', title: '点击我试试' },
-                { id: '2', title: '也可以点这个' },
-              ],
-            },
-            {
-              id: 'done', title: '已完成', color: '#52c41a',
-              cards: [{ id: '3', title: '已完成的任务' }],
-            },
-          ]}
-          onCardClick={(card, columnId) => setSelected({ title: card.title, columnId })}
-        />
-      </div>
-      <div style={{ marginTop: 12, padding: 8, background: '#fafafa', borderRadius: 4, fontSize: 12, color: '#666' }}>
-        {selected ? `点击了「${selected.title}」（列：${selected.columnId}）` : '请点击任意卡片'}
-      </div>
-    </>
-  );
-};
-
-export default BoardDemo;
+export default boardDemo;

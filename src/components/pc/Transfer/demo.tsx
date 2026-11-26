@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Transfer from './Transfer';
 import type { TransferItem } from './types';
 
@@ -15,36 +14,26 @@ const mockData: TransferItem[] = [
   { key: '8', title: '郑十', description: '架构师' }
 ];
 
-const TransferDemo = () => {
+const ControlledTransferDemo = () => {
   const [targetKeys, setTargetKeys] = useState<string[]>(['2', '5']);
 
-  const apiData = [
-    { prop: 'dataSource', desc: '数据源', type: 'TransferItem[]', default: '[]' },
-    { prop: 'targetKeys', desc: '右侧列表的 key 数组（受控）', type: 'string[]', default: '-' },
-    { prop: 'defaultTargetKeys', desc: '默认右侧列表的 key 数组', type: 'string[]', default: '[]' },
-    { prop: 'selectedKeys', desc: '当前选中的 key（受控）', type: 'string[]', default: '-' },
-    { prop: 'titles', desc: '左右列表标题', type: '[string, string]', default: "['源列表', '目标列表']" },
-    { prop: 'operations', desc: '操作按钮文字', type: '[string, string]', default: "['→', '←']" },
-    { prop: 'showSearch', desc: '是否显示搜索框', type: 'boolean', default: 'false' },
-    { prop: 'filterOption', desc: '自定义搜索过滤函数', type: '(input, item) => boolean', default: '-' },
-    { prop: 'listStyle', desc: '列表自定义样式', type: 'CSSProperties', default: '-' },
-    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
-    { prop: 'oneWay', desc: '单向模式（仅可向右转移）', type: 'boolean', default: 'false' },
-    { prop: 'render', desc: '自定义每行渲染', type: '(item) => ReactNode', default: '-' },
-    { prop: 'footer', desc: '自定义底部', type: '(props) => ReactNode', default: '-' },
-    { prop: 'onChange', desc: '选项转移回调', type: '(targetKeys, direction, moveKeys) => void', default: '-' },
-    { prop: 'onSelectChange', desc: '选中项变化回调', type: '(sourceSelected, targetSelected) => void', default: '-' },
-    { prop: 'onSearch', desc: '搜索回调', type: '(direction, value) => void', default: '-' }
-  ];
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <span>目标列表：</span>
+        <strong style={{ color: '#1890ff' }}>{targetKeys.join(', ') || '空'}</strong>
+      </div>
+      <Transfer
+        dataSource={mockData}
+        targetKeys={targetKeys}
+        onChange={(keys) => setTargetKeys(keys)}
+      />
+    </>
+  );
+};
 
-  const itemApiData = [
-    { prop: 'key', desc: '唯一标识', type: 'string', default: '-' },
-    { prop: 'title', desc: '标题', type: 'string', default: '-' },
-    { prop: 'description', desc: '描述', type: 'string', default: '-' },
-    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' }
-  ];
-
-  const demos = [
+const transferDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `const mockData = [\n  { key: '1', title: '张三', description: '前端工程师' },\n  { key: '2', title: '李四', description: '后端工程师' },\n  // ...\n];\n\n<Transfer dataSource={mockData} />`,
@@ -58,19 +47,7 @@ const TransferDemo = () => {
     {
       title: '受控用法',
       code: `const [targetKeys, setTargetKeys] = useState(['2', '5']);\n\n<Transfer\n  dataSource={mockData}\n  targetKeys={targetKeys}\n  onChange={(keys) => setTargetKeys(keys)}\n/>`,
-      render: (
-        <>
-          <div style={{ marginBottom: 12 }}>
-            <span>目标列表：</span>
-            <strong style={{ color: '#1890ff' }}>{targetKeys.join(', ') || '空'}</strong>
-          </div>
-          <Transfer
-            dataSource={mockData}
-            targetKeys={targetKeys}
-            onChange={(keys) => setTargetKeys(keys)}
-          />
-        </>
-      ),
+      render: <ControlledTransferDemo />,
     },
     {
       title: '自定义标题和操作',
@@ -121,26 +98,29 @@ const TransferDemo = () => {
         />
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>Transfer API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-      <div className="component-group">
-        <h3>TransferItem API</h3>
-        <ApiTable dataSource={itemApiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'dataSource', desc: '数据源', type: 'TransferItem[]', default: '[]' },
+    { prop: 'targetKeys', desc: '右侧列表的 key 数组（受控）', type: 'string[]', default: '-' },
+    { prop: 'defaultTargetKeys', desc: '默认右侧列表的 key 数组', type: 'string[]', default: '[]' },
+    { prop: 'selectedKeys', desc: '当前选中的 key（受控）', type: 'string[]', default: '-' },
+    { prop: 'titles', desc: '左右列表标题', type: '[string, string]', default: "['源列表', '目标列表']" },
+    { prop: 'operations', desc: '操作按钮文字', type: '[string, string]', default: "['→', '←']" },
+    { prop: 'showSearch', desc: '是否显示搜索框', type: 'boolean', default: 'false' },
+    { prop: 'filterOption', desc: '自定义搜索过滤函数', type: '(input, item) => boolean', default: '-' },
+    { prop: 'listStyle', desc: '列表自定义样式', type: 'CSSProperties', default: '-' },
+    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
+    { prop: 'oneWay', desc: '单向模式（仅可向右转移）', type: 'boolean', default: 'false' },
+    { prop: 'render', desc: '自定义每行渲染', type: '(item) => ReactNode', default: '-' },
+    { prop: 'footer', desc: '自定义底部', type: '(props) => ReactNode', default: '-' },
+    { prop: 'onChange', desc: '选项转移回调', type: '(targetKeys, direction, moveKeys) => void', default: '-' },
+    { prop: 'onSelectChange', desc: '选中项变化回调', type: '(sourceSelected, targetSelected) => void', default: '-' },
+    { prop: 'onSearch', desc: '搜索回调', type: '(direction, value) => void', default: '-' },
+    { prop: 'key', desc: '唯一标识', type: 'string', default: '-' },
+    { prop: 'title', desc: '标题', type: 'string', default: '-' },
+    { prop: 'description', desc: '描述', type: 'string', default: '-' },
+    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' }
+  ],
 };
 
-export default TransferDemo;
+export default transferDemo;

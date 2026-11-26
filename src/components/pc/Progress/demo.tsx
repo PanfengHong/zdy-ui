@@ -1,11 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import { useState, useEffect } from 'react';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Progress from './Progress';
 import Button from '../Button/Button';
 
-const ProgressDemo = () => {
+const DynamicProgressDemo = () => {
   const [percent, setPercent] = useState(0);
+
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+      <Progress percent={percent} />
+      <div style={{ display: 'flex', gap: 12 }}>
+        <Button size="small" onClick={() => setPercent(0)}>重置</Button>
+        <Button size="small" onClick={() => setPercent(Math.min(100, percent + 10))}>+10%</Button>
+        <Button size="small" onClick={() => setPercent(Math.max(0, percent - 10))}>-10%</Button>
+      </div>
+    </div>
+  );
+};
+
+const AutoCircularProgressDemo = () => {
   const [loadingPercent, setLoadingPercent] = useState(0);
 
   useEffect(() => {
@@ -18,22 +31,16 @@ const ProgressDemo = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const apiData = [
-    { prop: 'percent', desc: '进度百分比（0-100）', type: 'number', default: '0' },
-    { prop: 'type', desc: '进度条类型', type: "'line' | 'circle'", default: 'line' },
-    { prop: 'status', desc: '状态', type: "'normal' | 'success' | 'exception' | 'active'", default: '-' },
-    { prop: 'strokeColor', desc: '自定义进度条颜色', type: 'string', default: '-' },
-    { prop: 'strokeWidth', desc: '进度条宽度', type: 'number', default: 'line:8 / circle:6' },
-    { prop: 'showInfo', desc: '是否显示进度文字', type: 'boolean', default: 'true' },
-    { prop: 'format', desc: '自定义进度文字', type: 'function(percent)', default: '-' },
-    { prop: 'trailColor', desc: '背景色', type: 'string', default: '#f5f5f5' },
-    { prop: 'width', desc: '环形进度条宽度', type: 'number', default: '120' },
-    { prop: 'gapDegree', desc: '环形进度条缺口角度', type: 'number', default: '0' },
-    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
-  ];
+  return (
+    <div style={{ display: 'flex', gap: 24 }}>
+      <Progress type="circle" percent={loadingPercent} status="active" />
+      <Progress percent={loadingPercent} status="active" />
+    </div>
+  );
+};
 
-  const demos = [
+const progressDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Progress percent={30} />\n<Progress percent={50} />\n<Progress percent={70} />\n<Progress percent={100} />`,
@@ -94,16 +101,7 @@ const ProgressDemo = () => {
     {
       title: '动态进度条',
       code: `const [percent, setPercent] = useState(0);\n\n<Progress percent={percent} />\n<Button onClick={() => setPercent(0)}>重置</Button>\n<Button onClick={() => setPercent(percent + 10)}>+10%</Button>\n<Button onClick={() => setPercent(percent - 10)}>-10%</Button>`,
-      render: (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
-          <Progress percent={percent} />
-          <div style={{ display: 'flex', gap: 12 }}>
-            <Button size="small" onClick={() => setPercent(0)}>重置</Button>
-            <Button size="small" onClick={() => setPercent(Math.min(100, percent + 10))}>+10%</Button>
-            <Button size="small" onClick={() => setPercent(Math.max(0, percent - 10))}>-10%</Button>
-          </div>
-        </div>
-      ),
+      render: <DynamicProgressDemo />,
     },
     {
       title: '环形进度条',
@@ -155,29 +153,23 @@ const ProgressDemo = () => {
     {
       title: '动态环形进度',
       code: `// 自动循环的进度条\n<Progress type="circle" percent={loadingPercent} status="active" />`,
-      render: (
-        <div style={{ display: 'flex', gap: 24 }}>
-          <Progress type="circle" percent={loadingPercent} status="active" />
-          <Progress percent={loadingPercent} status="active" />
-        </div>
-      ),
+      render: <AutoCircularProgressDemo />,
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'percent', desc: '进度百分比（0-100）', type: 'number', default: '0' },
+    { prop: 'type', desc: '进度条类型', type: "'line' | 'circle'", default: 'line' },
+    { prop: 'status', desc: '状态', type: "'normal' | 'success' | 'exception' | 'active'", default: '-' },
+    { prop: 'strokeColor', desc: '自定义进度条颜色', type: 'string', default: '-' },
+    { prop: 'strokeWidth', desc: '进度条宽度', type: 'number', default: 'line:8 / circle:6' },
+    { prop: 'showInfo', desc: '是否显示进度文字', type: 'boolean', default: 'true' },
+    { prop: 'format', desc: '自定义进度文字', type: 'function(percent)', default: '-' },
+    { prop: 'trailColor', desc: '背景色', type: 'string', default: '#f5f5f5' },
+    { prop: 'width', desc: '环形进度条宽度', type: 'number', default: '120' },
+    { prop: 'gapDegree', desc: '环形进度条缺口角度', type: 'number', default: '0' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
+  ],
 };
 
-export default ProgressDemo;
+export default progressDemo;

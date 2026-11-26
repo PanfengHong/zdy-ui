@@ -10,12 +10,11 @@ import DesignTypographyPage from '../pages/Design/Typography';
 import DesignSpacingPage from '../pages/Design/Spacing';
 import DesignBorderPage from '../pages/Design/Border';
 import DesignShadowPage from '../pages/Design/Shadow';
-import OverviewPage from '../pages/Components/Overview';
-import PlatformSwitch from '../pages/Components/PlatformSwitch';
+import OverviewPage from '../pages/Components/Overview/Overview';
+import PlatformSwitch from '../pages/Components/PlatformSwitch/PlatformSwitch';
 import ChangelogPage from '../pages/Changelog';
-import ComponentDemoPage from '../pages/Components/Demo';
+import ComponentDemoPage from '../pages/Components/Demo/Demo';
 import HomePage from '../pages/Home';
-import MobileDemoPage from '../pages/Components/mobile/MobileDemo';
 import AdminLayout from '../pages/Admin/AdminLayout';
 import AdminLoginPage from '../pages/Admin/Login';
 import AdminDashboardPage from '../pages/Admin/Dashboard';
@@ -268,12 +267,6 @@ const MainLayout = () => {
   );
 };
 
-// 平台通过 ?platform=mobile 区分，PC / 移动端共用同一路由
-const ComponentRoute = () => {
-  const [searchParams] = useSearchParams();
-  return searchParams.get('platform') === 'mobile' ? <MobileDemoPage /> : <ComponentDemoPage />;
-};
-
 // 兼容旧的移动端地址
 const MobileLegacyRedirect = () => {
   const { componentName } = useParams();
@@ -338,7 +331,7 @@ const AppRoutes = () => {
       <Route element={<MainLayout />}>
         <Route path="/components" element={<Navigate to="/components/overview" replace />} />
         <Route path="/components/overview" element={<OverviewPage />} />
-        <Route path="/components/:componentName" element={<ComponentRoute />} />
+        <Route path="/components/:componentName" element={<ComponentDemoPage />} />
       </Route>
 
       {/* 兼容旧的移动端地址 */}

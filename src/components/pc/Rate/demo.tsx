@@ -1,74 +1,71 @@
 import { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Rate from './Rate';
 
-const RateDemo = () => {
-  const [value1, setValue1] = useState(3);
-  const [value2, setValue2] = useState(2.5);
-  const [value3, setValue3] = useState(0);
+const BasicRateDemo = () => {
+  const [value, setValue] = useState(3);
 
-  const apiData = [
-    { prop: 'count', desc: '星星总数', type: 'number', default: '5' },
-    { prop: 'value', desc: '当前值（受控）', type: 'number', default: '-' },
-    { prop: 'defaultValue', desc: '默认值', type: 'number', default: '0' },
-    { prop: 'allowHalf', desc: '是否允许半选', type: 'boolean', default: 'false' },
-    { prop: 'allowClear', desc: '是否允许清除', type: 'boolean', default: 'true' },
-    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
-    { prop: 'character', desc: '自定义字符', type: 'ReactNode', default: '★' },
-    { prop: 'size', desc: '尺寸', type: "'small' | 'default' | 'large'", default: "'default'" },
-    { prop: 'tooltips', desc: '自定义提示信息', type: 'string[]', default: '-' },
-    { prop: 'onChange', desc: '值变化回调', type: '(value: number) => void', default: '-' },
-    { prop: 'onHoverChange', desc: 'hover 回调', type: '(value: number) => void', default: '-' },
-    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
-  ];
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <span>当前评分：</span>
+        <strong style={{ color: '#1890ff' }}>{value}</strong>
+      </div>
+      <Rate defaultValue={3} onChange={(v) => setValue(v)} />
+    </>
+  );
+};
 
-  const demos = [
+const HalfRateDemo = () => {
+  const [value, setValue] = useState(2.5);
+
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <span>当前评分：</span>
+        <strong style={{ color: '#1890ff' }}>{value}</strong>
+      </div>
+      <Rate allowHalf defaultValue={2.5} onChange={(v) => setValue(v)} />
+    </>
+  );
+};
+
+const ControlledRateDemo = () => {
+  const [value, setValue] = useState(0);
+
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <span>当前评分：</span>
+        <strong style={{ color: '#1890ff' }}>{value}</strong>
+        <button
+          onClick={() => setValue(0)}
+          style={{ marginLeft: 12, padding: '2px 8px', fontSize: 12, cursor: 'pointer' }}
+        >
+          重置
+        </button>
+      </div>
+      <Rate value={value} onChange={(v) => setValue(v)} />
+    </>
+  );
+};
+
+const rateDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Rate defaultValue={3} onChange={(v) => console.log(v)} />`,
-      render: (
-        <>
-          <div style={{ marginBottom: 12 }}>
-            <span>当前评分：</span>
-            <strong style={{ color: '#1890ff' }}>{value1}</strong>
-          </div>
-          <Rate defaultValue={3} onChange={(v) => setValue1(v)} />
-        </>
-      ),
+      render: <BasicRateDemo />,
     },
     {
       title: '半星',
       code: `<Rate allowHalf defaultValue={2.5} onChange={(v) => console.log(v)} />`,
-      render: (
-        <>
-          <div style={{ marginBottom: 12 }}>
-            <span>当前评分：</span>
-            <strong style={{ color: '#1890ff' }}>{value2}</strong>
-          </div>
-          <Rate allowHalf defaultValue={2.5} onChange={(v) => setValue2(v)} />
-        </>
-      ),
+      render: <HalfRateDemo />,
     },
     {
       title: '受控用法',
       code: `const [value, setValue] = useState(0);\n\n<Rate value={value} onChange={(v) => setValue(v)} />`,
-      render: (
-        <>
-          <div style={{ marginBottom: 12 }}>
-            <span>当前评分：</span>
-            <strong style={{ color: '#1890ff' }}>{value3}</strong>
-            <button
-              onClick={() => setValue3(0)}
-              style={{ marginLeft: 12, padding: '2px 8px', fontSize: 12, cursor: 'pointer' }}
-            >
-              重置
-            </button>
-          </div>
-          <Rate value={value3} onChange={(v) => setValue3(v)} />
-        </>
-      ),
+      render: <ControlledRateDemo />,
     },
     {
       title: '禁用状态',
@@ -129,22 +126,22 @@ const RateDemo = () => {
       code: `<Rate allowClear={false} defaultValue={3} />`,
       render: <Rate allowClear={false} defaultValue={3} />,
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'count', desc: '星星总数', type: 'number', default: '5' },
+    { prop: 'value', desc: '当前值（受控）', type: 'number', default: '-' },
+    { prop: 'defaultValue', desc: '默认值', type: 'number', default: '0' },
+    { prop: 'allowHalf', desc: '是否允许半选', type: 'boolean', default: 'false' },
+    { prop: 'allowClear', desc: '是否允许清除', type: 'boolean', default: 'true' },
+    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
+    { prop: 'character', desc: '自定义字符', type: 'ReactNode', default: '★' },
+    { prop: 'size', desc: '尺寸', type: "'small' | 'default' | 'large'", default: "'default'" },
+    { prop: 'tooltips', desc: '自定义提示信息', type: 'string[]', default: '-' },
+    { prop: 'onChange', desc: '值变化回调', type: '(value: number) => void', default: '-' },
+    { prop: 'onHoverChange', desc: 'hover 回调', type: '(value: number) => void', default: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
+  ],
 };
 
-export default RateDemo;
+export default rateDemo;

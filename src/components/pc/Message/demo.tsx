@@ -1,28 +1,9 @@
-import React from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Button from '../Button/Button';
 import Message from './Message';
 
-const MessageDemo = () => {
-  const apiData = [
-    { prop: 'content', desc: '消息内容', type: 'ReactNode', default: '-' },
-    { prop: 'type', desc: '消息类型', type: "'success' | 'info' | 'warning' | 'error'", default: 'info' },
-    { prop: 'duration', desc: '自动关闭时长（毫秒），0为不自动关闭', type: 'number', default: '3000' },
-    { prop: 'closable', desc: '是否可关闭', type: 'boolean', default: 'true' },
-    { prop: 'onClose', desc: '关闭回调', type: 'function', default: '-' }
-  ];
-
-  const methodApiData = [
-    { prop: 'Message.success(content|config)', desc: '显示成功消息', type: 'function', default: '-' },
-    { prop: 'Message.info(content|config)', desc: '显示信息消息', type: 'function', default: '-' },
-    { prop: 'Message.warning(content|config)', desc: '显示警告消息', type: 'function', default: '-' },
-    { prop: 'Message.error(content|config)', desc: '显示错误消息', type: 'function', default: '-' },
-    { prop: 'Message.loading(content|config)', desc: '显示加载消息', type: 'function', default: '-' },
-    { prop: 'Message.closeAll()', desc: '关闭所有消息', type: 'function', default: '-' }
-  ];
-
-  const demos = [
+const messageDemo: DemoConfig = {
+  demos: [
     {
       title: '基础示例',
       code: `Message.info('这是一条信息提示');\nMessage.success('操作成功');\nMessage.warning('警告信息');\nMessage.error('操作失败');`,
@@ -82,26 +63,20 @@ const MessageDemo = () => {
         }}>显示多条消息</Button>
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>配置参数</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-      <div className="component-group">
-        <h3>方法</h3>
-        <ApiTable dataSource={methodApiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'content', desc: '消息内容', type: 'ReactNode', default: '-' },
+    { prop: 'type', desc: '消息类型', type: "'success' | 'info' | 'warning' | 'error'", default: 'info' },
+    { prop: 'duration', desc: '自动关闭时长（毫秒），0为不自动关闭', type: 'number', default: '3000' },
+    { prop: 'closable', desc: '是否可关闭', type: 'boolean', default: 'true' },
+    { prop: 'onClose', desc: '关闭回调', type: 'function', default: '-' },
+    { prop: 'Message.success(content|config)', desc: '显示成功消息', type: 'function', default: '-' },
+    { prop: 'Message.info(content|config)', desc: '显示信息消息', type: 'function', default: '-' },
+    { prop: 'Message.warning(content|config)', desc: '显示警告消息', type: 'function', default: '-' },
+    { prop: 'Message.error(content|config)', desc: '显示错误消息', type: 'function', default: '-' },
+    { prop: 'Message.loading(content|config)', desc: '显示加载消息', type: 'function', default: '-' },
+    { prop: 'Message.closeAll()', desc: '关闭所有消息', type: 'function', default: '-' }
+  ],
 };
 
-export default MessageDemo;
+export default messageDemo;

@@ -1,25 +1,9 @@
-import React from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Button from './Button';
 import Icon from '../Icon/Icon';
 
-const ButtonDemo = () => {
-  const apiData = [
-    { prop: 'type', desc: '按钮类型', type: 'ButtonType', default: 'default' },
-    { prop: 'size', desc: '按钮尺寸', type: 'SizeType', default: 'medium' },
-    { prop: 'shape', desc: '按钮形状', type: 'ButtonShape', default: 'default' },
-    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
-    { prop: 'loading', desc: '是否加载中', type: 'boolean', default: 'false' },
-    { prop: 'prefix', desc: '前缀图标', type: 'ReactNode', default: '-' },
-    { prop: 'suffix', desc: '后缀图标', type: 'ReactNode', default: '-' },
-    { prop: 'onClick', desc: '点击事件回调', type: 'function', default: '-' },
-    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' },
-    { prop: 'children', desc: '按钮内容', type: 'ReactNode', default: '-' }
-  ];
-
-  const demos = [
+const buttonDemo: DemoConfig = {
+  demos: [
     {
       title: '基础示例',
       code: `<Button type="primary">Primary</Button>\n<Button type="default">Default</Button>\n<Button type="text">Text</Button>\n<Button type="link">Link</Button>\n<Button disabled>Disabled</Button>`,
@@ -95,22 +79,20 @@ const ButtonDemo = () => {
         </div>
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'type', desc: '按钮类型', type: 'ButtonType', default: 'default' },
+    { prop: 'size', desc: '按钮尺寸', type: 'SizeType', default: 'medium' },
+    { prop: 'shape', desc: '按钮形状', type: 'ButtonShape', default: 'default' },
+    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
+    { prop: 'loading', desc: '是否加载中', type: 'boolean', default: 'false' },
+    { prop: 'prefix', desc: '前缀图标', type: 'ReactNode', default: '-' },
+    { prop: 'suffix', desc: '后缀图标', type: 'ReactNode', default: '-' },
+    { prop: 'onClick', desc: '点击事件回调', type: 'function', default: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' },
+    { prop: 'children', desc: '按钮内容', type: 'ReactNode', default: '-' }
+  ],
 };
 
-export default ButtonDemo;
+export default buttonDemo;

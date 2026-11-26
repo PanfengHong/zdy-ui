@@ -1,6 +1,6 @@
 import { Link, useSearchParams } from 'react-router-dom';
 
-import Icon from '../../components/pc/Icon/Icon';
+import Icon from '../../../components/pc/Icon/Icon';
 import './PlatformSwitch.css';
 
 interface PlatformSwitchProps {

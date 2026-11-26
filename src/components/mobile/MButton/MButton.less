@@ -1,12 +1,14 @@
 @import '../../../styles/variables.less';
 
 .zdy-mobile-button {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
   padding: 12px 24px;
   font-size: @mobile-font-size-base;
   font-weight: 500;
-  line-height: 1.5;
+  line-height: 1;
   text-align: center;
   white-space: nowrap;
   vertical-align: middle;
@@ -17,6 +19,20 @@
   transition: all 0.3s ease;
   min-width: 88px;
   min-height: 44px;
+
+  // 加载图标与文字垂直居中
+  > .zdy-button--loading-icon {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    margin-right: 8px;
+  }
+
+  .zdy-mobile-button-content {
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
+  }
 
   &:active {
     transform: scale(0.95);
@@ -105,12 +121,13 @@
   &--disabled {
     opacity: 0.6;
     cursor: not-allowed;
+    color: var(--zdy-text-color-disabled);
 
     &:hover {
-      opacity: 0.6;
-      color: inherit;
-      background-color: inherit;
-      border-color: inherit;
+      color: var(--zdy-text-color-disabled);
+      background-color: var(--zdy-bg-hover);
+      border-color: var(--zdy-border-color-strong);
+      box-shadow: none;
     }
 
     &:active {
@@ -121,6 +138,14 @@
   &--loading {
     opacity: 0.8;
     cursor: not-allowed;
+    color: var(--zdy-text-color-disabled);
+
+    &:hover {
+      color: var(--zdy-text-color-disabled);
+      background-color: var(--zdy-bg-hover);
+      border-color: var(--zdy-border-color-strong);
+      box-shadow: none;
+    }
 
     &--icon {
       margin-right: 8px;

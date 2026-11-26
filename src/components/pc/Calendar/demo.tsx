@@ -1,44 +1,49 @@
 import { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Calendar from './Calendar';
 
-const CalendarDemo = () => {
+const formatDate = (date: Date | null): string => {
+  if (!date) return '未选择';
+  return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
+};
+
+const BasicCalendarDemo = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <span>选中日期：</span>
+        <strong style={{ color: '#1890ff' }}>{formatDate(selectedDate)}</strong>
+      </div>
+      <Calendar onSelect={(date) => setSelectedDate(date)} />
+    </>
+  );
+};
+
+const ControlledCalendarDemo = () => {
   const [controlledDate, setControlledDate] = useState(new Date(2025, 0, 15));
 
-  const formatDate = (date: Date | null): string => {
-    if (!date) return '未选择';
-    return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
-  };
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <span>当前日期：</span>
+        <strong style={{ color: '#1890ff' }}>{formatDate(controlledDate)}</strong>
+      </div>
+      <Calendar
+        value={controlledDate}
+        onChange={(d) => setControlledDate(d)}
+      />
+    </>
+  );
+};
 
-  const apiData = [
-    { prop: 'value', desc: '当前选中的日期（受控）', type: 'Date', default: '-' },
-    { prop: 'defaultValue', desc: '默认选中的日期', type: 'Date', default: 'new Date()' },
-    { prop: 'mode', desc: '面板模式', type: "'month' | 'year'", default: "'month'" },
-    { prop: 'fullscreen', desc: '是否全屏显示', type: 'boolean', default: 'true' },
-    { prop: 'disabledDate', desc: '不可选择的日期', type: '(date: Date) => boolean', default: '-' },
-    { prop: 'dateCellRender', desc: '自定义日期单元格渲染', type: '(date: Date) => ReactNode', default: '-' },
-    { prop: 'monthCellRender', desc: '自定义月份单元格渲染', type: '(date: Date) => ReactNode', default: '-' },
-    { prop: 'headerRender', desc: '自定义头部渲染', type: '(date, mode) => ReactNode', default: '-' },
-    { prop: 'onChange', desc: '日期变化回调', type: '(date: Date, mode) => void', default: '-' },
-    { prop: 'onPanelChange', desc: '面板变化回调', type: '(date: Date, mode) => void', default: '-' },
-    { prop: 'onSelect', desc: '选择日期回调', type: '(date: Date) => void', default: '-' },
-    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
-  ];
-
-  const demos = [
+const calendarDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
-      description: (
-        <div style={{ marginBottom: 12 }}>
-          <span>选中日期：</span>
-          <strong style={{ color: '#1890ff' }}>{formatDate(selectedDate)}</strong>
-        </div>
-      ),
       code: `<Calendar\n  onSelect={(date) => console.log(date)}\n/>`,
-      render: <Calendar onSelect={(date) => setSelectedDate(date)} />,
+      render: <BasicCalendarDemo />,
     },
     {
       title: '卡片模式',
@@ -47,19 +52,8 @@ const CalendarDemo = () => {
     },
     {
       title: '受控用法',
-      description: (
-        <div style={{ marginBottom: 12 }}>
-          <span>当前日期：</span>
-          <strong style={{ color: '#1890ff' }}>{formatDate(controlledDate)}</strong>
-        </div>
-      ),
       code: `const [date, setDate] = useState(new Date(2025, 0, 15));\n\n<Calendar\n  value={date}\n  onChange={(d) => setDate(d)}\n/>`,
-      render: (
-        <Calendar
-          value={controlledDate}
-          onChange={(d) => setControlledDate(d)}
-        />
-      ),
+      render: <ControlledCalendarDemo />,
     },
     {
       title: '禁用日期',
@@ -93,23 +87,22 @@ const CalendarDemo = () => {
       code: `<Calendar mode="year" />`,
       render: <Calendar mode="year" />,
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          {'description' in demo && demo.description}
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'value', desc: '当前选中的日期（受控）', type: 'Date', default: '-' },
+    { prop: 'defaultValue', desc: '默认选中的日期', type: 'Date', default: 'new Date()' },
+    { prop: 'mode', desc: '面板模式', type: "'month' | 'year'", default: "'month'" },
+    { prop: 'fullscreen', desc: '是否全屏显示', type: 'boolean', default: 'true' },
+    { prop: 'disabledDate', desc: '不可选择的日期', type: '(date: Date) => boolean', default: '-' },
+    { prop: 'dateCellRender', desc: '自定义日期单元格渲染', type: '(date: Date) => ReactNode', default: '-' },
+    { prop: 'monthCellRender', desc: '自定义月份单元格渲染', type: '(date: Date) => ReactNode', default: '-' },
+    { prop: 'headerRender', desc: '自定义头部渲染', type: '(date, mode) => ReactNode', default: '-' },
+    { prop: 'onChange', desc: '日期变化回调', type: '(date: Date, mode) => void', default: '-' },
+    { prop: 'onPanelChange', desc: '面板变化回调', type: '(date: Date, mode) => void', default: '-' },
+    { prop: 'onSelect', desc: '选择日期回调', type: '(date: Date) => void', default: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
+  ],
 };
 
-export default CalendarDemo;
+export default calendarDemo;

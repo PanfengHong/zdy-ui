@@ -1,6 +1,5 @@
 import { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Collapse from './Collapse';
 import Icon from '../Icon/Icon';
 
@@ -9,32 +8,31 @@ const text = `
   it can be found as a welcome guest in many households across the world.
 `;
 
-const CollapseDemo = () => {
+const ControlledCollapseDemo = () => {
   const [controlledKeys, setControlledKeys] = useState<string[]>(['1']);
 
-  const collapseApiData = [
-    { prop: 'activeKey', desc: '当前激活面板的 key（受控）', type: 'string[] | string', default: '-' },
-    { prop: 'defaultActiveKey', desc: '默认激活面板的 key', type: 'string[] | string', default: '[]' },
-    { prop: 'accordion', desc: '手风琴模式，每次只展开一个面板', type: 'boolean', default: 'false' },
-    { prop: 'bordered', desc: '是否显示边框', type: 'boolean', default: 'true' },
-    { prop: 'ghost', desc: '幽灵模式（透明背景无边框）', type: 'boolean', default: 'false' },
-    { prop: 'expandIcon', desc: '自定义展开图标', type: 'ReactNode', default: '右箭头' },
-    { prop: 'expandIconPosition', desc: '展开图标位置', type: "'start' | 'end'", default: "'start'" },
-    { prop: 'destroyInactivePanel', desc: '销毁未激活的面板内容', type: 'boolean', default: 'false' },
-    { prop: 'onChange', desc: '切换面板回调', type: 'function(keys)', default: '-' }
-  ];
+  return (
+    <>
+      <p style={{ color: '#999', marginBottom: 8 }}>
+        通过 activeKey 控制激活面板，当前激活：<code>{JSON.stringify(controlledKeys)}</code>
+      </p>
+      <Collapse activeKey={controlledKeys} onChange={setControlledKeys}>
+        <Collapse.Panel panelKey="1" header="This is panel header 1">
+          {text}
+        </Collapse.Panel>
+        <Collapse.Panel panelKey="2" header="This is panel header 2">
+          {text}
+        </Collapse.Panel>
+        <Collapse.Panel panelKey="3" header="This is panel header 3">
+          {text}
+        </Collapse.Panel>
+      </Collapse>
+    </>
+  );
+};
 
-  const panelApiData = [
-    { prop: 'panelKey', desc: '面板唯一标识', type: 'string', default: '-' },
-    { prop: 'header', desc: '面板头部内容', type: 'ReactNode', default: '-' },
-    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
-    { prop: 'extra', desc: '头部右侧额外内容', type: 'ReactNode', default: '-' },
-    { prop: 'forceRender', desc: '隐藏时是否强制渲染', type: 'boolean', default: 'false' },
-    { prop: 'showArrow', desc: '是否显示展开箭头', type: 'boolean', default: 'true' },
-    { prop: 'collapsible', desc: '可折叠区域', type: "'header' | 'disabled' | false", default: "'header'" }
-  ];
-
-  const demos = [
+const collapseDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Collapse defaultActiveKey={['1']}>\n  <Collapse.Panel panelKey="1" header="面板一">\n    内容一\n  </Collapse.Panel>\n  <Collapse.Panel panelKey="2" header="面板二">\n    内容二\n  </Collapse.Panel>\n  <Collapse.Panel panelKey="3" header="面板三">\n    内容三\n  </Collapse.Panel>\n</Collapse>`,
@@ -54,20 +52,22 @@ const CollapseDemo = () => {
     },
     {
       title: '手风琴模式',
-      description: <p style={{ color: '#999', marginBottom: 8 }}>同一时间只允许展开一个面板。</p>,
       code: `<Collapse accordion>\n  <Collapse.Panel panelKey="1" header="面板一">内容一</Collapse.Panel>\n  <Collapse.Panel panelKey="2" header="面板二">内容二</Collapse.Panel>\n  <Collapse.Panel panelKey="3" header="面板三">内容三</Collapse.Panel>\n</Collapse>`,
       render: (
-        <Collapse accordion>
-          <Collapse.Panel panelKey="1" header="This is panel header 1">
-            {text}
-          </Collapse.Panel>
-          <Collapse.Panel panelKey="2" header="This is panel header 2">
-            {text}
-          </Collapse.Panel>
-          <Collapse.Panel panelKey="3" header="This is panel header 3">
-            {text}
-          </Collapse.Panel>
-        </Collapse>
+        <>
+          <p style={{ color: '#999', marginBottom: 8 }}>同一时间只允许展开一个面板。</p>
+          <Collapse accordion>
+            <Collapse.Panel panelKey="1" header="This is panel header 1">
+              {text}
+            </Collapse.Panel>
+            <Collapse.Panel panelKey="2" header="This is panel header 2">
+              {text}
+            </Collapse.Panel>
+            <Collapse.Panel panelKey="3" header="This is panel header 3">
+              {text}
+            </Collapse.Panel>
+          </Collapse>
+        </>
       ),
     },
     {
@@ -99,25 +99,8 @@ const CollapseDemo = () => {
     },
     {
       title: '受控用法',
-      description: (
-        <p style={{ color: '#999', marginBottom: 8 }}>
-          通过 activeKey 控制激活面板，当前激活：<code>{JSON.stringify(controlledKeys)}</code>
-        </p>
-      ),
       code: `const [keys, setKeys] = useState(['1']);\n<Collapse activeKey={keys} onChange={setKeys}>\n  <Collapse.Panel panelKey="1" header="面板一">内容一</Collapse.Panel>\n  <Collapse.Panel panelKey="2" header="面板二">内容二</Collapse.Panel>\n</Collapse>`,
-      render: (
-        <Collapse activeKey={controlledKeys} onChange={setControlledKeys}>
-          <Collapse.Panel panelKey="1" header="This is panel header 1">
-            {text}
-          </Collapse.Panel>
-          <Collapse.Panel panelKey="2" header="This is panel header 2">
-            {text}
-          </Collapse.Panel>
-          <Collapse.Panel panelKey="3" header="This is panel header 3">
-            {text}
-          </Collapse.Panel>
-        </Collapse>
-      ),
+      render: <ControlledCollapseDemo />,
     },
     {
       title: '展开图标位置',
@@ -224,27 +207,25 @@ const CollapseDemo = () => {
         </Collapse>
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          {demo.description}
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>Collapse API</h3>
-        <ApiTable dataSource={collapseApiData} />
-      </div>
-      <div className="component-group">
-        <h3>Collapse.Panel API</h3>
-        <ApiTable dataSource={panelApiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'activeKey', desc: '当前激活面板的 key（受控）', type: 'string[] | string', default: '-' },
+    { prop: 'defaultActiveKey', desc: '默认激活面板的 key', type: 'string[] | string', default: '[]' },
+    { prop: 'accordion', desc: '手风琴模式，每次只展开一个面板', type: 'boolean', default: 'false' },
+    { prop: 'bordered', desc: '是否显示边框', type: 'boolean', default: 'true' },
+    { prop: 'ghost', desc: '幽灵模式（透明背景无边框）', type: 'boolean', default: 'false' },
+    { prop: 'expandIcon', desc: '自定义展开图标', type: 'ReactNode', default: '右箭头' },
+    { prop: 'expandIconPosition', desc: '展开图标位置', type: "'start' | 'end'", default: "'start'" },
+    { prop: 'destroyInactivePanel', desc: '销毁未激活的面板内容', type: 'boolean', default: 'false' },
+    { prop: 'onChange', desc: '切换面板回调', type: 'function(keys)', default: '-' },
+    { prop: 'panelKey', desc: '面板唯一标识', type: 'string', default: '-' },
+    { prop: 'header', desc: '面板头部内容', type: 'ReactNode', default: '-' },
+    { prop: 'disabled', desc: '是否禁用', type: 'boolean', default: 'false' },
+    { prop: 'extra', desc: '头部右侧额外内容', type: 'ReactNode', default: '-' },
+    { prop: 'forceRender', desc: '隐藏时是否强制渲染', type: 'boolean', default: 'false' },
+    { prop: 'showArrow', desc: '是否显示展开箭头', type: 'boolean', default: 'true' },
+    { prop: 'collapsible', desc: '可折叠区域', type: "'header' | 'disabled' | false", default: "'header'" }
+  ],
 };
 
-export default CollapseDemo;
+export default collapseDemo;

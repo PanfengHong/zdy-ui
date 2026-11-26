@@ -1,44 +1,82 @@
 import { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Steps from './Steps';
 
 const { Step } = Steps;
 
-const StepsDemo = () => {
-  const [current1, setCurrent1] = useState(1);
-  const [current2, setCurrent2] = useState(2);
-  const [current3, setCurrent3] = useState(1);
+const stepsData = [
+  { title: '第一步', description: '填写基本信息' },
+  { title: '第二步', description: '配置参数' },
+  { title: '第三步', description: '确认提交' },
+  { title: '第四步', description: '完成' },
+];
 
-  const stepsData = [
-    { title: '第一步', description: '填写基本信息' },
-    { title: '第二步', description: '配置参数' },
-    { title: '第三步', description: '确认提交' },
-    { title: '第四步', description: '完成' },
-  ];
+const ClickableStepsDemo = () => {
+  const [current, setCurrent] = useState(1);
 
-  const apiData = [
-    { prop: 'current', desc: '当前步骤（从0开始）', type: 'number', default: '0' },
-    { prop: 'initial', desc: '起始步骤序号', type: 'number', default: '0' },
-    { prop: 'direction', desc: '方向', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
-    { prop: 'status', desc: '当前步骤状态', type: "'wait' | 'process' | 'finish' | 'error'", default: "'process'" },
-    { prop: 'size', desc: '尺寸', type: "'default' | 'small'", default: "'default'" },
-    { prop: 'labelPlacement', desc: '标签放置位置', type: "'horizontal' | 'vertical'", default: "'vertical'" },
-    { prop: 'percent', desc: '当前步骤进度百分比', type: 'number', default: '-' },
-    { prop: 'type', desc: '类型', type: "'default' | 'navigation'", default: "'default'" },
-    { prop: 'onChange', desc: '点击步骤回调', type: '(current) => void', default: '-' }
-  ];
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <span>当前步骤：</span>
+        <strong style={{ color: '#1890ff' }}>{current}</strong>
+      </div>
+      <Steps current={current} onChange={setCurrent}>
+        {stepsData.map((s) => (
+          <Step key={s.title} title={s.title} description={s.description} />
+        ))}
+      </Steps>
+    </>
+  );
+};
 
-  const stepApiData = [
-    { prop: 'title', desc: '标题', type: 'ReactNode', default: '-' },
-    { prop: 'description', desc: '描述', type: 'ReactNode', default: '-' },
-    { prop: 'icon', desc: '自定义图标', type: 'ReactNode', default: '-' },
-    { prop: 'status', desc: '状态（覆盖自动计算）', type: 'StepStatus', default: '-' },
-    { prop: 'disabled', desc: '是否禁用点击', type: 'boolean', default: 'false' },
-    { prop: 'onClick', desc: '点击回调', type: '(e) => void', default: '-' }
-  ];
+const VerticalClickableStepsDemo = () => {
+  const [current, setCurrent] = useState(1);
 
-  const demos = [
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <span>当前步骤：</span>
+        <strong style={{ color: '#1890ff' }}>{current}</strong>
+      </div>
+      <Steps current={current} direction="vertical" onChange={setCurrent} style={{ width: 200 }}>
+        {stepsData.map((s) => (
+          <Step key={s.title} title={s.title} description={s.description} />
+        ))}
+      </Steps>
+    </>
+  );
+};
+
+const PercentStepsDemo = () => {
+  const [current, setCurrent] = useState(2);
+
+  return (
+    <>
+      <div style={{ marginBottom: 12 }}>
+        <button
+          onClick={() => setCurrent((c) => Math.max(0, c - 1))}
+          style={{ padding: '4px 12px', marginRight: 8, border: '1px solid #d9d9d9', borderRadius: 4, background: '#fff', cursor: 'pointer' }}
+        >
+          上一步
+        </button>
+        <button
+          onClick={() => setCurrent((c) => Math.min(2, c + 1))}
+          style={{ padding: '4px 12px', border: '1px solid #d9d9d9', borderRadius: 4, background: '#fff', cursor: 'pointer' }}
+        >
+          下一步
+        </button>
+      </div>
+      <Steps current={current} percent={60}>
+        <Step title="开始" description="任务开始" />
+        <Step title="处理中" description="正在处理任务（60%）" />
+        <Step title="完成" description="任务完成" />
+      </Steps>
+    </>
+  );
+};
+
+const stepsDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<Steps current={1}>\n  <Step title="已完成" />\n  <Step title="进行中" />\n  <Step title="待处理" />\n</Steps>`,
@@ -65,19 +103,7 @@ const StepsDemo = () => {
     {
       title: '可点击切换',
       code: `const [current, setCurrent] = useState(1);\n\n<Steps current={current} onChange={setCurrent}>`,
-      prepend: (
-        <div style={{ marginBottom: 12 }}>
-          <span>当前步骤：</span>
-          <strong style={{ color: '#1890ff' }}>{current1}</strong>
-        </div>
-      ),
-      render: (
-        <Steps current={current1} onChange={setCurrent1}>
-          {stepsData.map((s) => (
-            <Step key={s.title} title={s.title} description={s.description} />
-          ))}
-        </Steps>
-      )
+      render: <ClickableStepsDemo />
     },
     {
       title: '垂直方向',
@@ -96,19 +122,7 @@ const StepsDemo = () => {
     {
       title: '垂直方向可切换',
       code: `<Steps current={current} direction="vertical" onChange={setCurrent}>`,
-      prepend: (
-        <div style={{ marginBottom: 12 }}>
-          <span>当前步骤：</span>
-          <strong style={{ color: '#1890ff' }}>{current3}</strong>
-        </div>
-      ),
-      render: (
-        <Steps current={current3} direction="vertical" onChange={setCurrent3} style={{ width: 200 }}>
-            {stepsData.map((s) => (
-              <Step key={s.title} title={s.title} description={s.description} />
-            ))}
-          </Steps>
-      )
+      render: <VerticalClickableStepsDemo />
     },
     {
       title: '错误状态',
@@ -160,29 +174,7 @@ const StepsDemo = () => {
     {
       title: '进度环',
       code: `<Steps current={current} percent={60}>`,
-      prepend: (
-        <div style={{ marginBottom: 12 }}>
-          <button
-            onClick={() => setCurrent2((c) => Math.max(0, c - 1))}
-            style={{ padding: '4px 12px', marginRight: 8, border: '1px solid #d9d9d9', borderRadius: 4, background: '#fff', cursor: 'pointer' }}
-          >
-            上一步
-          </button>
-          <button
-            onClick={() => setCurrent2((c) => Math.min(2, c + 1))}
-            style={{ padding: '4px 12px', border: '1px solid #d9d9d9', borderRadius: 4, background: '#fff', cursor: 'pointer' }}
-          >
-            下一步
-          </button>
-        </div>
-      ),
-      render: (
-       <Steps current={current2} percent={60}>
-            <Step title="开始" description="任务开始" />
-            <Step title="处理中" description="正在处理任务（60%）" />
-            <Step title="完成" description="任务完成" />
-          </Steps>
-      )
+      render: <PercentStepsDemo />
     },
     {
       title: '导航模式',
@@ -208,29 +200,24 @@ const StepsDemo = () => {
           </Steps>
       )
     }
-  ]
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          {demo.prepend}
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>Steps API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-
-      <div className="component-group">
-        <h3>Step API</h3>
-        <ApiTable dataSource={stepApiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'current', desc: '当前步骤（从0开始）', type: 'number', default: '0' },
+    { prop: 'initial', desc: '起始步骤序号', type: 'number', default: '0' },
+    { prop: 'direction', desc: '方向', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
+    { prop: 'status', desc: '当前步骤状态', type: "'wait' | 'process' | 'finish' | 'error'", default: "'process'" },
+    { prop: 'size', desc: '尺寸', type: "'default' | 'small'", default: "'default'" },
+    { prop: 'labelPlacement', desc: '标签放置位置', type: "'horizontal' | 'vertical'", default: "'vertical'" },
+    { prop: 'percent', desc: '当前步骤进度百分比', type: 'number', default: '-' },
+    { prop: 'type', desc: '类型', type: "'default' | 'navigation'", default: "'default'" },
+    { prop: 'onChange', desc: '点击步骤回调', type: '(current) => void', default: '-' },
+    { prop: 'title', desc: '标题', type: 'ReactNode', default: '-' },
+    { prop: 'description', desc: '描述', type: 'ReactNode', default: '-' },
+    { prop: 'icon', desc: '自定义图标', type: 'ReactNode', default: '-' },
+    { prop: 'status', desc: '状态（覆盖自动计算）', type: 'StepStatus', default: '-' },
+    { prop: 'disabled', desc: '是否禁用点击', type: 'boolean', default: 'false' },
+    { prop: 'onClick', desc: '点击回调', type: '(e) => void', default: '-' }
+  ],
 };
 
-export default StepsDemo;
+export default stepsDemo;

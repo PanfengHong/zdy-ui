@@ -1,15 +1,70 @@
-import React, { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import { useState } from 'react';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import Dialog from './Dialog';
 import Button from '../Button/Button';
 import Icon from '../Icon/Icon';
 
-const DialogDemo = () => {
-  const [visible1, setVisible1] = useState(false);
-  const [visible2, setVisible2] = useState(false);
+const BasicDialogDemo = () => {
+  const [visible, setVisible] = useState(false);
+  return (
+    <>
+      <div style={{ display: 'flex', gap: '16px' }}>
+        <Button onClick={() => setVisible(true)}>
+          打开对话框
+        </Button>
+      </div>
+      <Dialog
+        title="对话框标题"
+        visible={visible}
+        onClose={() => setVisible(false)}
+        footer={
+          <>
+            <Button onClick={() => setVisible(false)}>取消</Button>
+            <Button type="primary" onClick={() => setVisible(false)}>确认</Button>
+          </>
+        }
+      >
+        对话框内容
+      </Dialog>
+    </>
+  );
+};
 
-  const apiData = [
+const IconDialogDemo = () => {
+  const [visible, setVisible] = useState(false);
+  return (
+    <>
+      <div style={{ display: 'flex', gap: '16px' }}>
+        <Button onClick={() => setVisible(true)}>
+          打开对话框
+        </Button>
+      </div>
+      <Dialog
+        visible={visible}
+        title="对话框标题"
+        icon={<Icon type="home" />}
+        onClose={() => setVisible(false)}
+      >
+        对话框内容
+      </Dialog>
+    </>
+  );
+};
+
+const dialogDemo: DemoConfig = {
+  demos: [
+    {
+      title: '基础用法',
+      code: `const [visible, setVisible] = useState(false);\n\n<Button onClick={() => setVisible(true)}>\n  打开对话框\n</Button>\n\n<Dialog\n  title="对话框标题"\n  visible={visible}\n  onClose={() => setVisible(false)}\n  footer={\n    <>\n      <Button onClick={() => setVisible(false)}>取消</Button>\n      <Button type="primary" onClick={() => setVisible(false)}>确认</Button>\n    </>\n  }\n>\n  对话框内容\n</Dialog>`,
+      render: <BasicDialogDemo />,
+    },
+    {
+      title: '带图标对话框',
+      code: `<Dialog\n  visible={visible}\n title="对话框标题"\n icon={<Icon name="home" />}\n  onClose={() => setVisible(false)}\n>\n  对话框内容\n</Dialog>`,
+      render: <IconDialogDemo />,
+    },
+  ],
+  api: [
     { prop: 'visible', desc: '是否显示对话框', type: 'boolean', default: 'false' },
     { prop: 'title', desc: '对话框标题', type: 'ReactNode', default: '-' },
     { prop: 'width', desc: '对话框宽度', type: 'string | number', default: '520' },
@@ -20,72 +75,7 @@ const DialogDemo = () => {
     { prop: 'footer', desc: '自定义底部', type: 'ReactNode', default: '-' },
     { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
     { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' }
-  ];
-
-  const demos = [
-    {
-      title: '基础用法',
-      code: `const [visible, setVisible] = useState(false);\n\n<Button onClick={() => setVisible(true)}>\n  打开对话框\n</Button>\n\n<Dialog\n  title="对话框标题"\n  visible={visible}\n  onClose={() => setVisible(false)}\n  footer={\n    <>\n      <Button onClick={() => setVisible(false)}>取消</Button>\n      <Button type="primary" onClick={() => setVisible(false)}>确认</Button>\n    </>\n  }\n>\n  对话框内容\n</Dialog>`,
-      render: (
-        <>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <Button onClick={() => setVisible1(true)}>
-              打开对话框
-            </Button>
-          </div>
-          <Dialog
-            title="对话框标题"
-            visible={visible1}
-            onClose={() => setVisible1(false)}
-            footer={
-              <>
-                <Button onClick={() => setVisible1(false)}>取消</Button>
-                <Button type="primary" onClick={() => setVisible1(false)}>确认</Button>
-              </>
-            }
-          >
-            对话框内容
-          </Dialog>
-        </>
-      ),
-    },
-    {
-      title: '带图标对话框',
-      code: `<Dialog\n  visible={visible}\n title="对话框标题"\n icon={<Icon name="home" />}\n  onClose={() => setVisible(false)}\n>\n  对话框内容\n</Dialog>`,
-      render: (
-        <>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <Button onClick={() => setVisible2(true)}>
-              打开对话框
-            </Button>
-          </div>
-          <Dialog
-            visible={visible2}
-            title="对话框标题"
-            icon={<Icon type="home" />}
-            onClose={() => setVisible2(false)}
-          >
-            对话框内容
-          </Dialog>
-        </>
-      ),
-    },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
 };
 
-export default DialogDemo;
+export default dialogDemo;

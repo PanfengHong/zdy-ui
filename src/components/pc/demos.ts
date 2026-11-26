@@ -1,4 +1,4 @@
-import type React from 'react';
+import type { DemoConfig } from '../../pages/Components/Demo/types';
 
 import ButtonDemo from './Button/demo';
 import AvatarDemo from './Avatar/demo';
@@ -48,8 +48,8 @@ import TimePickerDemo from './TimePicker/demo';
 import DateTimePickerDemo from './DateTimePicker/demo';
 import FormDemo from './Form/demo';
 
-// 各组件 demo 的统一注册表
-export const demoComponents: Record<string, React.ComponentType> = {
+// 各组件 demo 配置的统一注册表
+export const pcDemoConfigs: Record<string, DemoConfig> = {
   Button: ButtonDemo,
   Avatar: AvatarDemo,
   Input: InputDemo,

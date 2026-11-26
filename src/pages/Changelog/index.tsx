@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 import { getGitCommits } from '../../utils/git';
 import type { GitCommit } from '../../utils/git';
-import DocsContent from '../Components/DocsContent';
+import DocsContent from '../Components/DocsContent/DocsContent';
 
 const ChangelogPage = () => {
   const [gitCommits, setGitCommits] = useState<GitCommit[]>([]);

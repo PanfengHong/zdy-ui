@@ -1,116 +1,98 @@
-import { useState } from 'react';
-import DemoBlock from '../../../pages/Components/DemoBlock/DemoBlock';
-import ApiTable from '../../../pages/Components/ApiTable/ApiTable';
+import type { DemoConfig } from '../../../pages/Components/Demo/types';
 import List from './List';
 
-const ListDemo = () => {
-  const [loading, setLoading] = useState(false);
+const defaultData = [
+  {
+    key: '1',
+    title: 'Ant Design Title 1',
+    description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+    avatar: <div className="zdy-list-avatar" style={{ width: 40, height: 40, borderRadius: '50%', background: '#1890ff', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>A</div>,
+    content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their own product designs easier and more efficiently.',
+  },
+  {
+    key: '2',
+    title: 'Ant Design Title 2',
+    description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+    avatar: <div className="zdy-list-avatar" style={{ width: 40, height: 40, borderRadius: '50%', background: '#52c41a', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>B</div>,
+    content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their own product designs easier and more efficiently.',
+  },
+  {
+    key: '3',
+    title: 'Ant Design Title 3',
+    description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+    avatar: <div className="zdy-list-avatar" style={{ width: 40, height: 40, borderRadius: '50%', background: '#faad14', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>C</div>,
+    content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their own product designs easier and more efficiently.',
+  },
+  {
+    key: '4',
+    title: 'Ant Design Title 4',
+    description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+    avatar: <div className="zdy-list-avatar" style={{ width: 40, height: 40, borderRadius: '50%', background: '#f5222d', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>D</div>,
+    content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their own product designs easier and more efficiently.',
+  },
+];
 
-  const defaultData = [
-    {
-      key: '1',
-      title: 'Ant Design Title 1',
-      description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-      avatar: <div className="zdy-list-avatar" style={{ width: 40, height: 40, borderRadius: '50%', background: '#1890ff', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>A</div>,
-      content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their own product designs easier and more efficiently.',
-    },
-    {
-      key: '2',
-      title: 'Ant Design Title 2',
-      description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-      avatar: <div className="zdy-list-avatar" style={{ width: 40, height: 40, borderRadius: '50%', background: '#52c41a', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>B</div>,
-      content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their own product designs easier and more efficiently.',
-    },
-    {
-      key: '3',
-      title: 'Ant Design Title 3',
-      description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-      avatar: <div className="zdy-list-avatar" style={{ width: 40, height: 40, borderRadius: '50%', background: '#faad14', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>C</div>,
-      content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their own product designs easier and more efficiently.',
-    },
-    {
-      key: '4',
-      title: 'Ant Design Title 4',
-      description: 'Ant Design, a design language for background applications, is refined by Ant UED Team.',
-      avatar: <div className="zdy-list-avatar" style={{ width: 40, height: 40, borderRadius: '50%', background: '#f5222d', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>D</div>,
-      content: 'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their own product designs easier and more efficiently.',
-    },
-  ];
+const gridData = [
+  {
+    key: 'g1',
+    title: '卡片标题 1',
+    description: '这是一段描述信息，展示卡片内容的简短概要。',
+    content: '卡片正文内容',
+    extra: '2024-01-01',
+    actions: ['编辑', '删除'],
+  },
+  {
+    key: 'g2',
+    title: '卡片标题 2',
+    description: '这是一段描述信息，展示卡片内容的简短概要。',
+    content: '卡片正文内容',
+    extra: '2024-01-02',
+    actions: ['编辑', '删除'],
+  },
+  {
+    key: 'g3',
+    title: '卡片标题 3',
+    description: '这是一段描述信息，展示卡片内容的简短概要。',
+    content: '卡片正文内容',
+    extra: '2024-01-03',
+    actions: ['编辑', '删除'],
+  },
+  {
+    key: 'g4',
+    title: '卡片标题 4',
+    description: '这是一段描述信息，展示卡片内容的简短概要。',
+    content: '卡片正文内容',
+    extra: '2024-01-04',
+    actions: ['编辑', '删除'],
+  },
+  {
+    key: 'g5',
+    title: '卡片标题 5',
+    description: '这是一段描述信息，展示卡片内容的简短概要。',
+    content: '卡片正文内容',
+    extra: '2024-01-05',
+    actions: ['编辑', '删除'],
+  },
+  {
+    key: 'g6',
+    title: '卡片标题 6',
+    description: '这是一段描述信息，展示卡片内容的简短概要。',
+    content: '卡片正文内容',
+    extra: '2024-01-06',
+    actions: ['编辑', '删除'],
+  },
+];
 
-  const gridData = [
-    {
-      key: 'g1',
-      title: '卡片标题 1',
-      description: '这是一段描述信息，展示卡片内容的简短概要。',
-      content: '卡片正文内容',
-      extra: '2024-01-01',
-      actions: ['编辑', '删除'],
-    },
-    {
-      key: 'g2',
-      title: '卡片标题 2',
-      description: '这是一段描述信息，展示卡片内容的简短概要。',
-      content: '卡片正文内容',
-      extra: '2024-01-02',
-      actions: ['编辑', '删除'],
-    },
-    {
-      key: 'g3',
-      title: '卡片标题 3',
-      description: '这是一段描述信息，展示卡片内容的简短概要。',
-      content: '卡片正文内容',
-      extra: '2024-01-03',
-      actions: ['编辑', '删除'],
-    },
-    {
-      key: 'g4',
-      title: '卡片标题 4',
-      description: '这是一段描述信息，展示卡片内容的简短概要。',
-      content: '卡片正文内容',
-      extra: '2024-01-04',
-      actions: ['编辑', '删除'],
-    },
-    {
-      key: 'g5',
-      title: '卡片标题 5',
-      description: '这是一段描述信息，展示卡片内容的简短概要。',
-      content: '卡片正文内容',
-      extra: '2024-01-05',
-      actions: ['编辑', '删除'],
-    },
-    {
-      key: 'g6',
-      title: '卡片标题 6',
-      description: '这是一段描述信息，展示卡片内容的简短概要。',
-      content: '卡片正文内容',
-      extra: '2024-01-06',
-      actions: ['编辑', '删除'],
-    },
-  ];
+const paginationData = Array.from({ length: 23 }).map((_, i) => ({
+  key: `p${i}`,
+  title: `列表项标题 ${i + 1}`,
+  description: `这是第 ${i + 1} 项的描述信息`,
+  avatar: <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1890ff', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 500 }}>{i + 1}</div>,
+  content: `这是第 ${i + 1} 项的详细内容，展示列表的分页功能。`,
+}));
 
-  const paginationData = Array.from({ length: 23 }).map((_, i) => ({
-    key: `p${i}`,
-    title: `列表项标题 ${i + 1}`,
-    description: `这是第 ${i + 1} 项的描述信息`,
-    avatar: <div style={{ width: 40, height: 40, borderRadius: '50%', background: '#1890ff', color: '#fff', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 16, fontWeight: 500 }}>{i + 1}</div>,
-    content: `这是第 ${i + 1} 项的详细内容，展示列表的分页功能。`,
-  }));
-
-  const apiData = [
-    { prop: 'header', desc: '列表头部', type: 'ReactNode', default: '-' },
-    { prop: 'footer', desc: '列表底部', type: 'ReactNode', default: '-' },
-    { prop: 'loading', desc: '是否加载中', type: 'boolean', default: 'false' },
-    { prop: 'itemLayout', desc: '列表项布局', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
-    { prop: 'grid', desc: '栅格配置', type: '{ column, gutter, ... }', default: '-' },
-    { prop: 'dataSource', desc: '数据源', type: 'ListItemProps[]', default: '-' },
-    { prop: 'renderItem', desc: '自定义渲染', type: '(item, index) => ReactNode', default: '-' },
-    { prop: 'pagination', desc: '分页配置', type: 'false | PaginationConfig', default: 'false' },
-    { prop: 'locale', desc: '国际化配置', type: '{ emptyText }', default: '-' },
-    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
-    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' },
-  ];
-
-  const demos = [
+const listDemo: DemoConfig = {
+  demos: [
     {
       title: '基础用法',
       code: `<List\n  header={<div>头部内容</div>}\n  dataSource={data}\n  renderItem={item => <List.Item ... />}\n/>`,
@@ -234,22 +216,20 @@ const ListDemo = () => {
         </>
       ),
     },
-  ];
-
-  return (
-    <>
-      {demos.map((demo) => (
-        <div key={demo.title} className="component-group">
-          <h3>{demo.title}</h3>
-          <DemoBlock code={demo.code}>{demo.render}</DemoBlock>
-        </div>
-      ))}
-      <div className="component-group" style={{ marginTop: '32px' }}>
-        <h3>API</h3>
-        <ApiTable dataSource={apiData} />
-      </div>
-    </>
-  );
+  ],
+  api: [
+    { prop: 'header', desc: '列表头部', type: 'ReactNode', default: '-' },
+    { prop: 'footer', desc: '列表底部', type: 'ReactNode', default: '-' },
+    { prop: 'loading', desc: '是否加载中', type: 'boolean', default: 'false' },
+    { prop: 'itemLayout', desc: '列表项布局', type: "'horizontal' | 'vertical'", default: "'horizontal'" },
+    { prop: 'grid', desc: '栅格配置', type: '{ column, gutter, ... }', default: '-' },
+    { prop: 'dataSource', desc: '数据源', type: 'ListItemProps[]', default: '-' },
+    { prop: 'renderItem', desc: '自定义渲染', type: '(item, index) => ReactNode', default: '-' },
+    { prop: 'pagination', desc: '分页配置', type: 'false | PaginationConfig', default: 'false' },
+    { prop: 'locale', desc: '国际化配置', type: '{ emptyText }', default: '-' },
+    { prop: 'className', desc: '自定义类名', type: 'string', default: '-' },
+    { prop: 'style', desc: '自定义样式', type: 'CSSProperties', default: '-' },
+  ],
 };
 
-export default ListDemo;
+export default listDemo;
