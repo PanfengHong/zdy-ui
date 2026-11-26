@@ -1,6 +1,6 @@
 const DesignIntroductionPage = () => {
   return (
-    <section className="component-section">
+    <section className="design-section">
       <h2>介绍</h2>
       <div className="design-content">
         <p>

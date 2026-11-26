@@ -7,7 +7,7 @@ const DesignShadowPage = () => {
   ];
 
   return (
-    <section className="component-section">
+    <section className="design-section">
       <h2>阴影</h2>
       <div className="design-content">
         <p>

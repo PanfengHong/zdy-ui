@@ -1,0 +1,135 @@
+.iphone-frame {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: clamp(584px, calc(100vh - 196px), 784px);
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 400 / 784;
+  padding: 12px;
+  border-radius: 64px;
+  background: linear-gradient(140deg, #d7dde4 0%, #8a939e 22%, #eef2f6 48%, #6b7280 74%, #cbd3db 100%);
+  box-shadow:
+    0 32px 70px rgba(15, 23, 42, 0.22),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.45);
+}
+
+.iphone-screen {
+  position: relative;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  border-radius: 52px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.iphone-statusbar {
+  position: relative;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  padding: 6px 26px 0;
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.iphone-time {
+  letter-spacing: 0.02em;
+}
+
+.iphone-status-icons {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #475569;
+}
+
+.iphone-island {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 112px;
+  height: 30px;
+  padding-right: 11px;
+  border-radius: 999px;
+  background: #090c10;
+  transform: translateX(-50%);
+}
+
+.iphone-camera {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #2f3a4a, #0b0f14 65%);
+}
+
+.iphone-content {
+  flex: 1;
+  padding: 10px 20px 36px;
+  background: #f6f8fc;
+  overflow-y: auto;
+  /* 缩小预览内组件尺寸，让整体更接近真机观感 */
+  zoom: 0.8;
+}
+
+.iphone-content::-webkit-scrollbar {
+  width: 0;
+}
+
+.iphone-home-indicator {
+  position: absolute;
+  bottom: 9px;
+  left: 50%;
+  z-index: 4;
+  width: 118px;
+  height: 5px;
+  border-radius: 3px;
+  background: #0f172a;
+  transform: translateX(-50%);
+}
+
+/* 侧边实体按键 */
+.iphone-side-button {
+  position: absolute;
+  width: 4px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #aab3bd, #6b7280);
+}
+
+.iphone-side-button--volume-up {
+  top: 170px;
+  left: -2px;
+  height: 50px;
+}
+
+.iphone-side-button--volume-down {
+  top: 232px;
+  left: -2px;
+  height: 50px;
+}
+
+.iphone-side-button--power {
+  top: 196px;
+  right: -2px;
+  height: 82px;
+}
+
+@media (max-width: 768px) {
+  .iphone-frame {
+    width: min(340px, 100%);
+    height: auto;
+    padding: 10px;
+    border-radius: 56px;
+  }
+
+  .iphone-screen {
+    border-radius: 46px;
+  }
+}

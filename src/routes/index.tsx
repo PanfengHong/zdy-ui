@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Routes, Route, NavLink, Link, useLocation, Outlet, Navigate } from 'react-router-dom';
+import { Routes, Route, NavLink, Link, useLocation, useParams, useSearchParams, Outlet, Navigate } from 'react-router-dom';
 
 import Icon from '../components/pc/Icon/Icon';
 import { menuGroups, designMenuGroups } from './menuConfig';
@@ -11,9 +11,13 @@ import DesignSpacingPage from '../pages/Design/Spacing';
 import DesignBorderPage from '../pages/Design/Border';
 import DesignShadowPage from '../pages/Design/Shadow';
 import OverviewPage from '../pages/Components/Overview';
-import ChangelogPage from '../pages/Components/Changelog';
+import PlatformSwitch from '../pages/Components/PlatformSwitch';
+import ChangelogPage from '../pages/Changelog';
 import ComponentDemoPage from '../pages/Components/Demo';
 import HomePage from '../pages/Home';
+import MobilePage from '../pages/Mobile';
+import MobileDemoPage from '../pages/Mobile/MobileDemo';
+import MobileMenu from '../pages/Mobile/MobileMenu';
 import AdminLayout from '../pages/Admin/AdminLayout';
 import AdminLoginPage from '../pages/Admin/Login';
 import AdminDashboardPage from '../pages/Admin/Dashboard';
@@ -26,6 +30,7 @@ import { getAdminUser } from '../pages/Admin/auth';
 const TopHeader = () => {
   const location = useLocation();
   const isDesign = location.pathname.startsWith('/design');
+  const isChangelog = location.pathname.startsWith('/changelog');
   const isComponents = location.pathname.startsWith('/components');
   const isHome = location.pathname === '/';
   // 主页：初始与 Hero 融为一体，滚动后切换为玻璃拟态悬浮
@@ -98,6 +103,12 @@ const TopHeader = () => {
             >
               组件
             </NavLink>
+            <NavLink
+              className={`app-top-header-nav-item ${isChangelog ? 'active' : ''}`}
+              to="/changelog"
+            >
+              日志
+            </NavLink>
             <div className="app-admin-entry" ref={adminEntryRef}>
               <button
                 type="button"
@@ -105,7 +116,7 @@ const TopHeader = () => {
                 aria-expanded={adminPanelOpen}
                 onClick={() => setAdminPanelOpen((open) => !open)}
               >
-                后台
+                应用
               </button>
               {adminPanelOpen && (
                 <div className="app-admin-panel">
@@ -135,11 +146,25 @@ const TopHeader = () => {
 };
 
 // ============== 通用侧边栏 ==============
-const Sidebar = ({ groups }: { groups: MenuGroup[] }) => {
+const Sidebar = ({ groups, overviewLink = false }: { groups: MenuGroup[]; overviewLink?: boolean }) => {
+  const visibleGroups = overviewLink
+    ? groups.filter(group => group.label !== '信息')
+    : groups;
+
   return (
     <aside className="app-sidebar">
       <nav className="sidebar-nav">
-        {groups.map((group) => (
+        {overviewLink && (
+          <NavLink
+            to="/components/overview"
+            className={({ isActive }) =>
+              `nav-item nav-item--overview ${isActive ? 'active' : ''}`
+            }
+          >
+            <span className="nav-label">总览</span>
+          </NavLink>
+        )}
+        {visibleGroups.map((group) => (
           <div key={group.id} className="menu-group">
             <div className="group-header">
               <span className="group-label">{group.label}</span>
@@ -192,17 +217,70 @@ const HomeLayout = () => {
 };
 
 // ============== 组件页面布局（含侧边栏） ==============
-const MainLayout = () => {
+// ============== 更新日志布局（独立页面，无侧边栏） ==============
+const ChangelogLayout = () => {
   return (
     <div className="app-container">
       <TopHeader />
-      <Sidebar groups={menuGroups} />
-      <div className="app-content">
-        <main className="app-main">
-          <Outlet />
-        </main>
+      <div className="docs-page">
+        <div className="docs-container">
+          <main className="app-main app-main--docs">
+            <Outlet />
+          </main>
+        </div>
       </div>
     </div>
+  );
+};
+
+// ============== 组件页面布局（含侧边栏） ==============
+const MainLayout = () => {
+  const [searchParams] = useSearchParams();
+  const isMobileDocs = searchParams.get('platform') === 'mobile';
+
+  return (
+    <div className="app-container">
+      <TopHeader />
+      <div className="docs-page">
+        <div className="docs-container">
+          <div className="docs-topbar">
+            <PlatformSwitch />
+          </div>
+          <div className="docs-layout">
+            {isMobileDocs ? <MobileMenu /> : <Sidebar groups={menuGroups} overviewLink />}
+            <main className="app-main app-main--docs">
+              <Outlet />
+            </main>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// 平台通过 ?platform=mobile 区分，PC / 移动端共用同一路由
+const OverviewRoute = () => {
+  const [searchParams] = useSearchParams();
+  return searchParams.get('platform') === 'mobile' ? <MobilePage /> : <OverviewPage />;
+};
+
+const ComponentRoute = () => {
+  const [searchParams] = useSearchParams();
+  return searchParams.get('platform') === 'mobile' ? <MobileDemoPage /> : <ComponentDemoPage />;
+};
+
+// 兼容旧的移动端地址
+const MobileLegacyRedirect = () => {
+  const { componentName } = useParams();
+  return (
+    <Navigate
+      replace
+      to={
+        componentName
+          ? `/components/${componentName}?platform=mobile`
+          : '/components/overview?platform=mobile'
+      }
+    />
   );
 };
 
@@ -244,13 +322,23 @@ const AppRoutes = () => {
         <Route path="/design/shadow" element={<DesignShadowPage />} />
       </Route>
 
+      {/* 更新日志 - 独立页面 */}
+      <Route element={<ChangelogLayout />}>
+        <Route path="/changelog" element={<ChangelogPage />} />
+      </Route>
+      {/* 兼容旧的更新日志地址 */}
+      <Route path="/components/changelog" element={<Navigate to="/changelog" replace />} />
+
       {/* 组件页面 - 含侧边栏 */}
       <Route element={<MainLayout />}>
         <Route path="/components" element={<Navigate to="/components/overview" replace />} />
-        <Route path="/components/overview" element={<OverviewPage />} />
-        <Route path="/components/changelog" element={<ChangelogPage />} />
-        <Route path="/components/:componentName" element={<ComponentDemoPage />} />
+        <Route path="/components/overview" element={<OverviewRoute />} />
+        <Route path="/components/:componentName" element={<ComponentRoute />} />
       </Route>
+
+      {/* 兼容旧的移动端地址 */}
+      <Route path="/mobile" element={<Navigate to="/components/overview?platform=mobile" replace />} />
+      <Route path="/mobile/:componentName" element={<MobileLegacyRedirect />} />
 
       {/* 默认跳转 */}
       <Route path="/home" element={<Navigate to="/" replace />} />

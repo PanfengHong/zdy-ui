@@ -1,0 +1,94 @@
+.mobile-doc-example {
+  margin-bottom: 32px;
+}
+
+.mobile-doc-example h3 {
+  margin: 0 0 6px;
+  color: #111827;
+  font-size: 16px;
+}
+
+.mobile-doc-example p {
+  margin: 0 0 12px;
+  color: #8c8c8c;
+  font-size: 13px;
+}
+
+.mobile-doc-code {
+  margin: 0;
+  padding: 18px 20px;
+  border-radius: 12px;
+  background: #0f172a;
+  color: #e2e8f0;
+  font-size: 12.5px;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+
+.mobile-doc-preview-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.mdemo-block-title {
+  display: block;
+  margin-bottom: 10px;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.mdemo-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mdemo-stack .zdy-mobile-button {
+  width: 100%;
+}
+
+.mdemo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 460px;
+  color: #94a3b8;
+}
+
+.mdemo-placeholder strong {
+  color: #475569;
+  font-size: 18px;
+}
+
+.mobile-doc-empty {
+  padding: 28px;
+  border: 1px dashed #dbe3ee;
+  border-radius: 14px;
+  background: #f8fafc;
+}
+
+.mobile-doc-empty h3 {
+  margin: 0 0 8px;
+  color: #334155;
+  font-size: 16px;
+}
+
+.mobile-doc-empty p {
+  margin: 0 0 14px;
+  color: #8c8c8c;
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+.mobile-doc-empty a {
+  color: #1677ff;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+}

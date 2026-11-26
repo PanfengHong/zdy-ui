@@ -1,39 +1,22 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button, Icon } from '../../components/pc';
-import type { IconType } from '../../components/pc/Icon/types';
-import { menuGroups, designMenuGroups } from '../../routes/menuConfig';
+import { designMenuGroups, getNonInfoGroups } from '../../routes/menuConfig';
+import MobilePreview from '../Mobile/MobilePreview';
+import { mobileGroups, totalComponents } from '../Mobile/catalog';
 import './Home.css';
 
-interface Feature {
-  icon: IconType;
-  title: string;
-  desc: string;
-}
+const installCode = `# npm
+npm install zdy-design
 
-const features: Feature[] = [
-  {
-    icon: 'monitor',
-    title: '双端支持',
-    desc: '同时提供 PC 端与移动端组件，一套设计语言覆盖全场景业务。',
-  },
-  {
-    icon: 'component',
-    title: '丰富的组件',
-    desc: '涵盖通用、布局、表单、反馈、展示等类别的完整组件体系。',
-  },
-  {
-    icon: 'shield-check',
-    title: 'TypeScript',
-    desc: '使用 TypeScript 开发，提供完整的类型定义与智能提示。',
-  },
-  {
-    icon: 'palette',
-    title: '设计规范',
-    desc: '内置色彩、字体、间距、边框、阴影等设计规范，保持视觉一致。',
-  },
-];
+# pnpm
+pnpm add zdy-design`;
 
-const usageCode = `import { Button, Dialog, Form } from 'zdy-design';
+const pcUsageCode = `import {
+  Button,
+  Dialog,
+  Form
+} from 'zdy-design';
 
 // 样式已在构建时自动注入，无需手动引入 CSS
 export default function App() {
@@ -44,15 +27,160 @@ export default function App() {
   );
 }`;
 
-const installCode = `# npm
-npm install zdy-design
+const mobileUsageCode = `import {
+  Alert,
+  Button,
+  Input
+} from 'zdy-design/mobile';
 
-# pnpm
-pnpm add zdy-design`;
+// 移动端样式独立注入，与 PC 端互不影响
+export default function App() {
+  return (
+    <>
+      <Alert type="info" message="移动端组件已接入" />
+      <Button type="primary">开始使用</Button>
+    </>
+  );
+}`;
 
-const componentCount = menuGroups.reduce((sum, g) => sum + g.items.length, 0);
+const pcGroups = getNonInfoGroups();
+const componentCount = pcGroups.reduce((sum, group) => sum + group.items.length, 0);
+
+// PC 端浏览器窗口示意
+const PcPreview = () => (
+  <div className="home-pc-preview">
+    <div className="home-browser">
+      <div className="home-browser-bar">
+        <span className="home-browser-dots">
+          <i />
+          <i />
+          <i />
+        </span>
+        <span className="home-browser-address">zdy-design / overview</span>
+      </div>
+      <div className="home-browser-body">
+        <div className="home-browser-side">
+          <span className="home-browser-logo" />
+          <span className="home-browser-side-item active" />
+          <span className="home-browser-side-item" />
+          <span className="home-browser-side-item" />
+          <span className="home-browser-side-item" />
+          <span className="home-browser-side-item" />
+        </div>
+        <div className="home-browser-main">
+          <div className="home-browser-head">
+            <span className="home-browser-title">组件总览</span>
+            <span className="home-browser-toolbar">
+              <span className="home-browser-search">
+                <Icon type="search" size={10} />
+                搜索组件
+              </span>
+              <span className="home-browser-pill">v1.0.3</span>
+              <span className="home-browser-avatar" />
+            </span>
+          </div>
+          <div className="home-browser-stats">
+            <div className="home-browser-stat">
+              <strong>{componentCount}</strong>
+              <span>PC 组件</span>
+            </div>
+            <div className="home-browser-stat">
+              <strong>{totalComponents}</strong>
+              <span>移动组件</span>
+            </div>
+            <div className="home-browser-stat">
+              <strong>{designMenuGroups[0].items.length}</strong>
+              <span>设计规范</span>
+            </div>
+          </div>
+          <div className="home-browser-panel home-browser-panel--chart">
+            <div className="home-browser-panel-head">
+              <span>组件调用趋势</span>
+              <em>近 7 天</em>
+            </div>
+            <div className="home-browser-chart">
+              {[36, 58, 44, 72, 52, 88, 66].map((height, index) => (
+                <span key={index} style={{ height: `${height}%` }} />
+              ))}
+            </div>
+          </div>
+          <div className="home-browser-panel">
+            <div className="home-browser-panel-head">
+              <span>最近更新</span>
+              <em>查看全部</em>
+            </div>
+            <div className="home-browser-rows">
+              <div className="home-browser-row">
+                <span>Button 按钮</span>
+                <em className="is-success">已完成</em>
+              </div>
+              <div className="home-browser-row">
+                <span>Table 表格</span>
+                <em className="is-primary">进行中</em>
+              </div>
+              <div className="home-browser-row">
+                <span>Form 表单</span>
+                <em className="is-success">已完成</em>
+              </div>
+              <div className="home-browser-row">
+                <span>Dialog 弹框</span>
+                <em className="is-success">已完成</em>
+              </div>
+              <div className="home-browser-row">
+                <span>Upload 上传</span>
+                <em className="is-primary">进行中</em>
+              </div>
+            </div>
+          </div>
+          <div className="home-pc-dock">
+            <div className="home-pc-dock-card">
+              <span className="home-pc-dock-art home-pc-dock-art--button">
+                <i />
+                <i />
+              </span>
+              <span className="home-pc-dock-name">Button</span>
+              <span className="home-pc-dock-desc">按钮 / 交互</span>
+            </div>
+            <div className="home-pc-dock-card">
+              <span className="home-pc-dock-art home-pc-dock-art--table">
+                <i />
+                <i />
+                <i />
+              </span>
+              <span className="home-pc-dock-name">Table</span>
+              <span className="home-pc-dock-desc">表格 / 数据</span>
+            </div>
+            <div className="home-pc-dock-card">
+              <span className="home-pc-dock-art home-pc-dock-art--form">
+                <i />
+                <i />
+              </span>
+              <span className="home-pc-dock-name">Form</span>
+              <span className="home-pc-dock-desc">表单 / 校验</span>
+            </div>
+          </div>
+          <div className="home-browser-foot">
+            <span>共 {componentCount} 个组件</span>
+            <span className="home-browser-pager">
+              <i className="active" />
+              <i />
+              <i />
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+);
 
 const HomePage = () => {
+  const [guideTab, setGuideTab] = useState<'pc' | 'mobile'>('pc');
+
+  const openMobileGuide = () => {
+    setGuideTab('mobile');
+    document.getElementById('home-guide')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   return (
     <div className="home-page">
       {/* Hero */}
@@ -90,55 +218,90 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* 数据统计 */}
-      <section className="home-band">
-        <div className="home-section">
-          <h2 className="home-section-title">项目数据一览</h2>
-          <p className="home-section-subtitle">
-            开箱即用的组件体系与设计规范，经过持续迭代，为业务开发保驾护航
-          </p>
-          <div className="home-stats">
-            <div className="home-stat-card">
-              <div className="home-stat-value">{componentCount}+</div>
-              <div className="home-stat-label">高质量组件</div>
+      {/* PC 端组件库 */}
+      <section className="home-band home-band--pc">
+        <div className="home-section home-section--wide">
+          <div className="home-platform home-platform--pc">
+            <div className="home-platform-visual">
+              <PcPreview />
             </div>
-            <div className="home-stat-card">
-              <div className="home-stat-value">2</div>
-              <div className="home-stat-label">平台（PC / Mobile）</div>
-            </div>
-            <div className="home-stat-card">
-              <div className="home-stat-value">{designMenuGroups[0].items.length}</div>
-              <div className="home-stat-label">设计规范</div>
-            </div>
-            <div className="home-stat-card">
-              <div className="home-stat-value">100%</div>
-              <div className="home-stat-label">TypeScript 覆盖</div>
+            <div className="home-platform-info">
+              <span className="home-platform-badge">
+                <Icon type="monitor" size={14} color="currentColor" />
+                PC Library
+              </span>
+              <h2>PC 端组件库</h2>
+              <p className="home-platform-desc">
+                面向中后台与管理平台的桌面端组件集合，覆盖表格、表单、弹窗、导航等复杂交互场景，
+                适配大屏布局与高密度信息展示。
+              </p>
+              <div className="home-platform-actions">
+                <Link className="home-platform-primary" to="/components/overview">浏览 PC 组件</Link>
+                <Link className="home-platform-secondary" to="/design/introduction">设计规范</Link>
+              </div>
+              <div className="home-platform-meta">
+                <div className="home-platform-meta-item">
+                  <strong>{componentCount}+</strong>
+                  <span>PC 组件</span>
+                </div>
+                <div className="home-platform-meta-item">
+                  <strong>{pcGroups.length}</strong>
+                  <span>组件分类</span>
+                </div>
+                <div className="home-platform-meta-item">
+                  <strong>100%</strong>
+                  <span>TypeScript</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 特性 */}
-      <section className="home-band home-band--gray">
-        <div className="home-section">
-          <h2 className="home-section-title">为什么选择 Zdy Design</h2>
-          <p className="home-section-subtitle">简单易用、功能完备、风格统一</p>
-          <div className="home-features">
-            {features.map((f) => (
-              <div key={f.title} className="home-feature-card">
-                <span className="home-feature-icon">
-                  <Icon type={f.icon} size={24} />
-                </span>
-                <h3 className="home-feature-title">{f.title}</h3>
-                <p className="home-feature-desc">{f.desc}</p>
+      {/* 移动端组件库 */}
+      <section className="home-band home-band--mobile">
+        <div className="home-section home-section--wide">
+          <div className="home-platform home-platform--mobile">
+            <div className="home-platform-info">
+              <span className="home-platform-badge">
+                <Icon type="smartphone" size={14} color="currentColor" />
+                Mobile Library
+              </span>
+              <h2>移动端组件库</h2>
+              <p className="home-platform-desc">
+                面向触屏场景独立实现的组件集合，与桌面端共享设计语言和 TypeScript 类型，
+                覆盖按钮、表单、反馈、展示等高频场景。
+              </p>
+              <div className="home-platform-actions">
+                <Link className="home-platform-primary" to="/components/overview?platform=mobile">浏览移动端组件</Link>
+                <button type="button" className="home-platform-secondary" onClick={openMobileGuide}>
+                  移动端接入
+                </button>
               </div>
-            ))}
+              <div className="home-platform-meta">
+                <div className="home-platform-meta-item">
+                  <strong>{totalComponents}</strong>
+                  <span>移动组件</span>
+                </div>
+                <div className="home-platform-meta-item">
+                  <strong>{mobileGroups.length}</strong>
+                  <span>场景分类</span>
+                </div>
+                <div className="home-platform-meta-item">
+                  <strong>100%</strong>
+                  <span>TypeScript</span>
+                </div>
+              </div>
+            </div>
+            <div className="home-platform-visual">
+              <MobilePreview />
+            </div>
           </div>
         </div>
       </section>
 
       {/* 接入指南 */}
-      <section className="home-band">
+      <section className="home-band home-band--gray" id="home-guide">
         <div className="home-section">
           <h2 className="home-section-title">接入指南</h2>
           <p className="home-section-subtitle">两步完成接入，即刻在你的项目中使用 Zdy Design</p>
@@ -154,8 +317,30 @@ const HomePage = () => {
               <div className="home-guide-card-header">
                 <Icon type="component" size={16} className="home-guide-icon" />
                 <span>第二步 · 引入使用</span>
+                <div className="home-guide-tabs" role="tablist" aria-label="切换 PC 端与移动端接入示例">
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={guideTab === 'pc'}
+                    className={`home-guide-tab ${guideTab === 'pc' ? 'active' : ''}`}
+                    onClick={() => setGuideTab('pc')}
+                  >
+                    PC 端
+                  </button>
+                  <button
+                    type="button"
+                    role="tab"
+                    aria-selected={guideTab === 'mobile'}
+                    className={`home-guide-tab ${guideTab === 'mobile' ? 'active' : ''}`}
+                    onClick={() => setGuideTab('mobile')}
+                  >
+                    移动端
+                  </button>
+                </div>
               </div>
-              <pre className="home-code-block"><code>{usageCode}</code></pre>
+              <pre className="home-code-block">
+                <code>{guideTab === 'pc' ? pcUsageCode : mobileUsageCode}</code>
+              </pre>
             </div>
           </div>
           <div className="home-guide-footer">

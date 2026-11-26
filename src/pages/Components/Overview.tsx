@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getNonInfoGroups } from '../../routes/menuConfig';
+import DocsContent from './DocsContent';
 
 const modules = import.meta.glob('../../assets/thumbnails/*.svg', { eager: true }) as Record<string, { default: string }>;
 
@@ -16,7 +17,10 @@ const getThumbnail = (name: string): string => {
 const OverviewPage = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredGroups = getNonInfoGroups()
+  const groups = getNonInfoGroups();
+  const totalComponents = groups.reduce((total, group) => total + group.items.length, 0);
+
+  const filteredGroups = groups
     .map(group => ({
       ...group,
       items: group.items.filter(item =>
@@ -27,9 +31,22 @@ const OverviewPage = () => {
     .filter(group => group.items.length > 0);
 
   return (
-    <section className="component-section">
-      <h2>组件总览</h2>
-      <div className="component-group">
+    <DocsContent>
+      <div className="docs-breadcrumb">
+        <span>组件库</span>
+        <span>/</span>
+        <span>总览</span>
+      </div>
+      <h1 className="docs-title">
+        组件总览
+        <em>PC</em>
+      </h1>
+      <p className="docs-intro">
+        共 {totalComponents} 个桌面端组件，覆盖通用、布局、反馈、展示等场景，
+        支持按需引入、完整 TypeScript 类型与主题定制。
+      </p>
+      <section className="component-section">
+        <div className="component-group">
         <div className="search-container">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#999" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="11" cy="11" r="8" />
@@ -70,9 +87,10 @@ const OverviewPage = () => {
               </div>
             </div>
           ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </DocsContent>
   );
 };
 

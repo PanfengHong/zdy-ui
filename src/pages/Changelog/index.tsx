@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
+
 import { getGitCommits } from '../../utils/git';
 import type { GitCommit } from '../../utils/git';
+import DocsContent from '../Components/DocsContent';
 
 const ChangelogPage = () => {
   const [gitCommits, setGitCommits] = useState<GitCommit[]>([]);
@@ -18,13 +20,17 @@ const ChangelogPage = () => {
 
   if (isLoading) {
     return (
-      <section className="component-section">
-        <h2>更新日志</h2>
+      <DocsContent>
+        <div className="docs-breadcrumb">
+          <span>更新日志</span>
+        </div>
+        <h1 className="docs-title">更新日志</h1>
+        <p className="docs-intro">基于 git commit 记录自动生成，记录组件库的迭代与修复。</p>
         <div className="loading-container">
           <span className="loading-spinner"></span>
           <span>正在加载 commit 记录...</span>
         </div>
-      </section>
+      </DocsContent>
     );
   }
 
@@ -37,9 +43,12 @@ const ChangelogPage = () => {
   }, {} as Record<string, GitCommit[]>);
 
   return (
-    <section className="component-section">
-      <h2>更新日志</h2>
-      <p className="changelog-hint">基于 git commit 记录自动生成</p>
+    <DocsContent>
+      <div className="docs-breadcrumb">
+        <span>更新日志</span>
+      </div>
+      <h1 className="docs-title">更新日志</h1>
+      <p className="docs-intro">基于 git commit 记录自动生成，记录组件库的迭代与修复。</p>
       <div className="changelog-list">
         {Object.entries(commitsByDate).map(([date, commits]) => (
           <div key={date} className="changelog-group">
@@ -56,7 +65,7 @@ const ChangelogPage = () => {
           </div>
         ))}
       </div>
-    </section>
+    </DocsContent>
   );
 };
 

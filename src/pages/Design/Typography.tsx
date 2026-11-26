@@ -1,6 +1,6 @@
 const DesignTypographyPage = () => {
   return (
-    <section className="component-section">
+    <section className="design-section">
       <h2>字体</h2>
       <div className="design-content">
         <p>

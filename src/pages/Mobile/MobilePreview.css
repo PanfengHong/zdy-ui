@@ -1,0 +1,83 @@
+.mobile-preview-app {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-height: 100%;
+}
+
+.mobile-preview-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.mobile-preview-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111827;
+}
+
+.mobile-preview-sub {
+  margin-top: 2px;
+  font-size: 12px;
+  color: #94a3b8;
+}
+
+.mobile-preview-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.mobile-preview-chip {
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #e6f4ff;
+  color: #1677ff;
+  font-size: 11px;
+}
+
+.mobile-preview-list {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2px 12px;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.mobile-preview-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 9px 0;
+}
+
+.mobile-preview-list-item + .mobile-preview-list-item {
+  border-top: 1px solid #f1f5f9;
+}
+
+.mobile-preview-list-name {
+  color: #334155;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.mobile-preview-list-label {
+  color: #94a3b8;
+  font-size: 11px;
+}
+
+.mobile-preview-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.mobile-preview-actions .zdy-mobile-button {
+  flex: 1;
+  min-width: 0;
+  padding: 12px 8px;
+}

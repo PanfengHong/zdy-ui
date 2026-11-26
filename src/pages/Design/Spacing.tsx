@@ -11,7 +11,7 @@ const DesignSpacingPage = () => {
   ];
 
   return (
-    <section className="component-section">
+    <section className="design-section">
       <h2>间距</h2>
       <div className="design-content">
         <p>

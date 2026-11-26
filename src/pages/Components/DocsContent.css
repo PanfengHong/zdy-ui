@@ -1,0 +1,40 @@
+.docs-content {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: start;
+}
+
+.docs-content--with-preview {
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 40px;
+}
+
+.docs-content-main {
+  min-width: 0;
+}
+
+.docs-content-preview {
+  position: sticky;
+  top: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+.docs-preview-caption {
+  color: #94a3b8;
+  font-size: 12px;
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 1200px) {
+  .docs-content--with-preview {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .docs-content-preview {
+    position: static;
+  }
+}

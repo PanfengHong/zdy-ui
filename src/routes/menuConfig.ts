@@ -37,7 +37,7 @@ export const menuGroups: MenuGroup[] = [
     label: '信息',
     items: [
       { id: 'overview', label: '组件总览', icon: '📊', type: 'overview', path: '/components/overview' },
-      { id: 'changelog', label: '更新日志', icon: '📝', type: 'changelog', path: '/components/changelog' },
+      { id: 'changelog', label: '更新日志', icon: '📝', type: 'changelog', path: '/changelog' },
     ],
   },
   {
