@@ -12,6 +12,7 @@ import MCascaderDemo from './MCascader/demo';
 import MRadioDemo from './MRadio/demo';
 import MPaginationDemo from './MPagination/demo';
 import MSwitchDemo from './MSwitch/demo';
+import MUploadDemo from './MUpload/demo';
 import MTextareaDemo from './MTextarea/demo';
 
 // 各移动端组件 demo 配置的统一注册表
@@ -28,5 +29,6 @@ export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MRadio: MRadioDemo,
   MPagination: MPaginationDemo,
   MSwitch: MSwitchDemo,
+  MUpload: MUploadDemo,
   MTextarea: MTextareaDemo
 };
