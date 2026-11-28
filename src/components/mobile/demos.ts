@@ -17,6 +17,7 @@ import MSwitchDemo from './MSwitch/demo';
 import MSliderDemo from './MSlider/demo';
 import MUploadDemo from './MUpload/demo';
 import MTextareaDemo from './MTextarea/demo';
+import MDialogDemo from './MDialog/demo';
 
 // 各移动端组件 demo 配置的统一注册表
 export const mobileDemoConfigs: Record<string, DemoConfig> = {
@@ -36,5 +37,6 @@ export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MSwitch: MSwitchDemo,
   MSlider: MSliderDemo,
   MUpload: MUploadDemo,
-  MTextarea: MTextareaDemo
+  MTextarea: MTextareaDemo,
+  MDialog: MDialogDemo
 };

@@ -1,5 +1,176 @@
 @import '../../../styles/variables.less';
 
+.zdy-mobile-dialog-root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 24px 16px;
+
+  // 内联模式：铺满最近的定位父级，用于手机预览等受限容器
+  &--inline {
+    position: absolute;
+  }
+}
+
+.zdy-mobile-dialog-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(15, 23, 42, 0.45);
+  animation: zdy-mobile-dialog-fade-in 0.22s ease;
+}
+
 .zdy-mobile-dialog {
-  // 组件样式
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 400px;
+  max-height: 82%;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 12px 40px rgba(15, 23, 42, 0.18);
+  overflow: hidden;
+  animation: zdy-mobile-dialog-zoom-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.zdy-mobile-dialog-close {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: @text-color-secondary;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  svg {
+    display: block;
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.06);
+    color: @text-color;
+  }
+}
+
+.zdy-mobile-dialog-header {
+  flex-shrink: 0;
+  padding: 20px 56px 0 20px;
+}
+
+.zdy-mobile-dialog-title {
+  color: @text-color;
+  font-size: @mobile-font-size-large;
+  font-weight: 600;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.zdy-mobile-dialog-description {
+  margin-top: 6px;
+  color: @text-color-secondary;
+  font-size: @mobile-font-size-small;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.zdy-mobile-dialog-body {
+  flex: 1;
+  min-height: 0;
+  padding: 16px 20px 20px;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  line-height: 1.6;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.zdy-mobile-dialog-footer {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 10px;
+  padding: 12px 20px;
+  border-top: 1px solid @border-color-split;
+
+  // 底部按钮默认铺满宽度，方便拇指单手操作
+  > .zdy-mobile-button {
+    width: 100%;
+  }
+}
+
+// 退出动画
+.zdy-mobile-dialog-root--closing {
+  .zdy-mobile-dialog-mask {
+    animation: zdy-mobile-dialog-fade-out 0.22s ease forwards;
+  }
+
+  .zdy-mobile-dialog {
+    animation: zdy-mobile-dialog-zoom-out 0.22s ease forwards;
+  }
+}
+
+@keyframes zdy-mobile-dialog-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zdy-mobile-dialog-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zdy-mobile-dialog-zoom-in {
+  from {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes zdy-mobile-dialog-zoom-out {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.96);
+  }
 }
