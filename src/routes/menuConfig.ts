@@ -136,7 +136,7 @@ export const mobileMenuGroups: MenuGroup[] = [
     label: '布局',
     items: [
       { id: 'm-layout', label: 'MLayout 布局', icon: '📐', type: 'component', component: 'MLayout', path: '/components/MLayout?platform=mobile' },
-      { id: 'm-grid', label: 'MGrid 栅格', icon: '🔲', type: 'component', component: 'MGrid', path: '/components/MGrid?platform=mobile' },
+      { id: 'm-grid', label: 'MGrid 宫格', icon: '🔲', type: 'component', component: 'MGrid', path: '/components/MGrid?platform=mobile' },
       { id: 'm-masonry', label: 'MMasonry 瀑布流', icon: '🧱', type: 'component', component: 'MMasonry', path: '/components/MMasonry?platform=mobile' },
     ],
   },

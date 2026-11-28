@@ -1,45 +1,72 @@
 @import '../../../styles/variables.less';
 
-.zdy-mobile-zdy-layout {
+.zdy-mobile-layout {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: hidden;
   background-color: var(--zdy-bg-hover);
 
-  &-header {
-    flex-shrink: 0;
-    height: 50px;
-    padding: 0 16px;
-    background-color: #fff;
-    border-bottom: 1px solid @border-color;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    position: sticky;
-    top: 0;
-    z-index: 100;
+  // 页面级用法：占满视口，由子元素各自滚动
+  &--fullscreen {
+    height: 100dvh;
+  }
+}
+
+.zdy-mobile-layout-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 8px 16px;
+  color: @text-color;
+  background-color: var(--zdy-bg-container, #fff);
+  border-bottom: 1px solid @border-color;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.05);
+}
+
+.zdy-mobile-layout-content {
+  flex: 1;
+  min-height: 0;
+  box-sizing: border-box;
+  padding: 12px 16px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+}
+
+.zdy-mobile-layout-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  flex: 0 0 auto;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 8px 16px;
+  color: @text-color-secondary;
+  font-size: @mobile-font-size-small;
+  background-color: var(--zdy-bg-container, #fff);
+  border-top: 1px solid @border-color;
+}
+
+// 仅在启用安全区时避让刘海与 Home Indicator
+.zdy-mobile-layout--safe-area {
+  .zdy-mobile-layout-header {
+    padding-top: calc(env(safe-area-inset-top, 0px) + 8px);
   }
 
-  &-content {
-    flex: 1;
-    padding: 16px;
-    overflow: auto;
-  }
-
-  &-footer {
-    flex-shrink: 0;
-    height: 50px;
-    padding: 0 16px;
-    background-color: #fff;
-    border-top: 1px solid @border-color;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: @text-color-secondary;
-    font-size: @mobile-font-size-small;
-    position: sticky;
-    bottom: 0;
-    z-index: 100;
+  .zdy-mobile-layout-footer {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 8px);
   }
 }

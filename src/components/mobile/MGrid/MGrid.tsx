@@ -1,55 +1,77 @@
-import React from 'react';
+import type { CSSProperties, ReactElement } from 'react';
 import classNames from 'classnames';
+import type { MGridItemProps, MGridProps } from './types';
 
 import './MGrid.less';
 
-interface GridProps {
-  children?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-  columnNum?: number;
-  border?: boolean;
-}
-
-interface GridItemProps {
-  children?: React.ReactNode;
-  className?: string;
-  style?: React.CSSProperties;
-  icon?: React.ReactNode;
-  label?: React.ReactNode;
-}
-
-const MGrid: React.FC<GridProps> & {
-  Item: React.FC<GridItemProps>;
-} = ({
-  children,
-  className = '',
-  style,
+const MGrid = (({
   columnNum = 4,
-  border = true
-}) => {
+  border = true,
+  children,
+  className,
+  style
+}: MGridProps) => {
+  const columns = Math.max(1, Math.floor(columnNum || 4));
+  const gridStyle = {
+    ...style,
+    '--zdy-mobile-grid-columns': columns
+  } as CSSProperties;
+
   return (
-    <div className={classNames('zdy-grid', { 'zdy-grid-border': border }, className)} style={style} data-column-num={columnNum}>
+    <div
+      className={classNames('zdy-mobile-grid', { 'zdy-mobile-grid--border': border }, className)}
+      style={gridStyle}
+      data-column-num={columns}
+    >
       {children}
     </div>
   );
+}) as {
+  (props: MGridProps): ReactElement;
+  Item: (props: MGridItemProps) => ReactElement;
 };
 
-const GridItem: React.FC<GridItemProps> = ({
-  children,
-  className = '',
-  style,
+const MGridItem = ({
   icon,
-  label
-}) => {
+  label,
+  onClick,
+  children,
+  className,
+  style
+}: MGridItemProps) => {
+  const classNameValue = classNames(
+    'zdy-mobile-grid-item',
+    { 'zdy-mobile-grid-item--clickable': Boolean(onClick) },
+    className
+  );
+
+  const content = (
+    <>
+      {icon !== undefined && icon !== null && (
+        <span className="zdy-mobile-grid-item-icon">{icon}</span>
+      )}
+      {label !== undefined && label !== null && (
+        <span className="zdy-mobile-grid-item-label">{label}</span>
+      )}
+      {children}
+    </>
+  );
+
+  if (onClick) {
+    return (
+      <button type="button" className={classNameValue} style={style} onClick={onClick}>
+        {content}
+      </button>
+    );
+  }
+
   return (
-    <div className={classNames('zdy-grid-item', className)} style={style}>
-      {icon && <div className="zdy-grid-item-icon">{icon}</div>}
-      {children || label && <div className="zdy-grid-item-label">{label}</div>}
+    <div className={classNameValue} style={style}>
+      {content}
     </div>
   );
 };
 
-MGrid.Item = GridItem;
+MGrid.Item = MGridItem;
 
 export default MGrid;

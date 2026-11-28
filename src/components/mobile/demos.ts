@@ -25,6 +25,8 @@ import MSkeletonDemo from './MSkeleton/demo';
 import MToastDemo from './MToast/demo';
 import MMessageDemo from './MMessage/demo';
 import MWatermarkDemo from './MWatermark/demo';
+import MGridDemo from './MGrid/demo';
+import MLayoutDemo from './MLayout/demo';
 
 // 各移动端组件 demo 配置的统一注册表
 export const mobileDemoConfigs: Record<string, DemoConfig> = {
@@ -52,5 +54,7 @@ export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MSkeleton: MSkeletonDemo,
   MToast: MToastDemo,
   MMessage: MMessageDemo,
-  MWatermark: MWatermarkDemo
+  MWatermark: MWatermarkDemo,
+  MGrid: MGridDemo,
+  MLayout: MLayoutDemo
 };

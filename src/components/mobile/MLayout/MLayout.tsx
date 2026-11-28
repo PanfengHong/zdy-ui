@@ -1,59 +1,57 @@
-import React from 'react';
+import type { ReactElement } from 'react';
 import classNames from 'classnames';
-import type { LayoutProps, LayoutHeaderProps, LayoutContentProps, LayoutFooterProps } from '../../../types';
+import type {
+  MLayoutContentProps,
+  MLayoutFooterProps,
+  MLayoutHeaderProps,
+  MLayoutProps
+} from './types';
 
 import './MLayout.less';
 
-const MLayout: React.FC<LayoutProps> & {
-  Header: React.FC<LayoutHeaderProps>;
-  Content: React.FC<LayoutContentProps>;
-  Footer: React.FC<LayoutFooterProps>;
-} = ({
-  children,
-  className = '',
-  style
-}) => {
-  return (
-    <div className={classNames('zdy-layout', className)} style={style}>
-      {children}
-    </div>
-  );
-};
+const Header = ({ children, className, style }: MLayoutHeaderProps) => (
+  <header className={classNames('zdy-mobile-layout-header', className)} style={style}>
+    {children}
+  </header>
+);
 
-const Header: React.FC<LayoutHeaderProps> = ({
-  children,
-  className = '',
-  style
-}) => {
-  return (
-    <header className={classNames('zdy-layout-header', className)} style={style}>
-      {children}
-    </header>
-  );
-};
+const Content = ({ children, className, style }: MLayoutContentProps) => (
+  <main className={classNames('zdy-mobile-layout-content', className)} style={style}>
+    {children}
+  </main>
+);
 
-const Content: React.FC<LayoutContentProps> = ({
-  children,
-  className = '',
-  style
-}) => {
-  return (
-    <main className={classNames('zdy-layout-content', className)} style={style}>
-      {children}
-    </main>
-  );
-};
+const Footer = ({ children, className, style }: MLayoutFooterProps) => (
+  <footer className={classNames('zdy-mobile-layout-footer', className)} style={style}>
+    {children}
+  </footer>
+);
 
-const Footer: React.FC<LayoutFooterProps> = ({
+const MLayout = (({
+  fullscreen = false,
+  safeArea = true,
   children,
-  className = '',
+  className,
   style
-}) => {
-  return (
-    <footer className={classNames('zdy-layout-footer', className)} style={style}>
-      {children}
-    </footer>
-  );
+}: MLayoutProps) => (
+  <div
+    className={classNames(
+      'zdy-mobile-layout',
+      {
+        'zdy-mobile-layout--fullscreen': fullscreen,
+        'zdy-mobile-layout--safe-area': safeArea
+      },
+      className
+    )}
+    style={style}
+  >
+    {children}
+  </div>
+)) as {
+  (props: MLayoutProps): ReactElement;
+  Header: (props: MLayoutHeaderProps) => ReactElement;
+  Content: (props: MLayoutContentProps) => ReactElement;
+  Footer: (props: MLayoutFooterProps) => ReactElement;
 };
 
 MLayout.Header = Header;
