@@ -1,12 +1,13 @@
 import React from 'react';
 import classNames from 'classnames';
-
 import './MTransfer.less';
+
 interface TransferProps {
   children?: React.ReactNode;
   className?: string;
   style?: React.CSSProperties;
 }
+
 const MTransfer: React.FC<TransferProps> = ({
   children,
   className = '',

@@ -42,9 +42,12 @@
 
   .zdy-mobile-input__prefix {
     position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
+    left: 14px;
+    top: 0;
+    bottom: 0;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
     color: @text-color-secondary;
     font-size: 20px;
     pointer-events: none;
@@ -52,20 +55,15 @@
 
   .zdy-mobile-input__suffix {
     position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
+    right: 14px;
+    top: 0;
+    bottom: 0;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
     color: @text-color-secondary;
     font-size: 20px;
     pointer-events: none;
-  }
-
-  &--prefix .zdy-mobile-input {
-    padding-left: 48px;
-  }
-
-  &--suffix .zdy-mobile-input {
-    padding-right: 48px;
   }
 
   &--small .zdy-mobile-input {
@@ -87,6 +85,15 @@
     padding: 16px 16px;
     font-size: @mobile-font-size-large;
     border-radius: 16px;
+  }
+
+  // 放在尺寸规则之后，避免 padding 简写把图标留白覆盖掉
+  &--prefix .zdy-mobile-input {
+    padding-left: 40px;
+  }
+
+  &--suffix .zdy-mobile-input {
+    padding-right: 40px;
   }
 
   &--disabled {

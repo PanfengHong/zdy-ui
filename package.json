@@ -250,6 +250,11 @@
       "require": "./dist/pc/Watermark.js",
       "types": "./dist/pc/Watermark.d.ts"
     },
+    "./mobile/MActionSheet": {
+      "import": "./dist/mobile/MActionSheet.js",
+      "require": "./dist/mobile/MActionSheet.js",
+      "types": "./dist/mobile/MActionSheet.d.ts"
+    },
     "./mobile/MAlert": {
       "import": "./dist/mobile/MAlert.js",
       "require": "./dist/mobile/MAlert.js",

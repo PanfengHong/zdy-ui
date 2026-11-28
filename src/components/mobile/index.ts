@@ -11,6 +11,7 @@ export { default as MMasonry } from './MMasonry';
 
 // 反馈组件
 export { default as MDialog } from './MDialog';
+export { default as MActionSheet } from './MActionSheet';
 export { default as MAlert } from './MAlert';
 export { default as MMessage } from './MMessage';
 export { default as MNotification } from './MNotification';

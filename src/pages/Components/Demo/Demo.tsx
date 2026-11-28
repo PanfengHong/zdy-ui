@@ -5,6 +5,7 @@ import { findMenuItemByComponent, mobileMenuItems } from '../../../routes/menuCo
 import ApiTable from '../ApiTable/ApiTable';
 import DemoBlock from '../DemoBlock/DemoBlock';
 import DocsContent from '../DocsContent/DocsContent';
+import { highlightCode } from '../highlightCode';
 import IPhoneFrame from '../IPhoneFrame/IPhoneFrame';
 import './Demo.css';
 
@@ -96,7 +97,9 @@ const ComponentDemoPage = () => {
             <section className="mobile-doc-example" key={demo.title}>
               <h3>{demo.title}</h3>
               {demo.desc && <p>{demo.desc}</p>}
-              <pre className="mobile-doc-code"><code>{demo.code}</code></pre>
+              <pre className="mobile-doc-code">
+                <code dangerouslySetInnerHTML={{ __html: highlightCode(demo.code) }} />
+              </pre>
             </section>
           ))
         ) : (

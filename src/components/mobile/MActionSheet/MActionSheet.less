@@ -1,0 +1,193 @@
+@import '../../../styles/variables.less';
+
+.zdy-mobile-action-sheet-root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  // 内联模式：铺满最近的定位父级，用于手机预览等受限容器
+  &--inline {
+    position: absolute;
+  }
+}
+
+.zdy-mobile-action-sheet-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(15, 23, 42, 0.45);
+  animation: zdy-mobile-action-sheet-fade-in 0.22s ease;
+}
+
+.zdy-mobile-action-sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 82%;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-radius: 20px 20px 0 0;
+  background: #fff;
+  box-shadow: 0 -8px 32px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+  animation: zdy-mobile-action-sheet-slide-up 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.zdy-mobile-action-sheet-header {
+  padding: 18px 24px 14px;
+  border-bottom: 1px solid @border-color-split;
+  text-align: center;
+}
+
+.zdy-mobile-action-sheet-title {
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.zdy-mobile-action-sheet-description {
+  margin-top: 4px;
+  color: @text-color-secondary;
+  font-size: @mobile-font-size-small;
+  line-height: 1.5;
+}
+
+.zdy-mobile-action-sheet-actions {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.zdy-mobile-action-sheet-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  min-height: 56px;
+  padding: 10px 24px;
+  border: none;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 500;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  & + & {
+    border-top: 1px solid @border-color-split;
+  }
+
+  &:active {
+    background-color: var(--zdy-bg-hover);
+  }
+
+  &--danger {
+    color: @error-color;
+  }
+
+  &--disabled {
+    color: @text-color-disabled;
+    cursor: not-allowed;
+
+    &:active {
+      background-color: #fff;
+    }
+  }
+}
+
+.zdy-mobile-action-sheet-item-text {
+  font-size: @mobile-font-size-base;
+}
+
+.zdy-mobile-action-sheet-item-desc {
+  color: @text-color-secondary;
+  font-size: @mobile-font-size-small;
+  font-weight: 400;
+}
+
+.zdy-mobile-action-sheet-cancel-wrap {
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  background-color: #f2f4f8;
+}
+
+.zdy-mobile-action-sheet-cancel {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background-color: var(--zdy-bg-hover);
+  }
+}
+
+// 退出动画
+.zdy-mobile-action-sheet-root--closing {
+  .zdy-mobile-action-sheet-mask {
+    animation: zdy-mobile-action-sheet-fade-out 0.22s ease forwards;
+  }
+
+  .zdy-mobile-action-sheet {
+    animation: zdy-mobile-action-sheet-slide-down 0.22s ease forwards;
+  }
+}
+
+@keyframes zdy-mobile-action-sheet-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zdy-mobile-action-sheet-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zdy-mobile-action-sheet-slide-up {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes zdy-mobile-action-sheet-slide-down {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(100%);
+  }
+}
