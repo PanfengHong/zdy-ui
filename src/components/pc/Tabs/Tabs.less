@@ -12,11 +12,33 @@
   }
 
   &-nav-wrap {
+    position: relative;
     display: flex;
+  }
+
+  // 跟随激活项滑动的指示块，切换时平滑过渡
+  &-ink {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    border-radius: 1px;
+    background-color: var(--zdy-color-primary);
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      transform 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      width 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 0.2s ease;
+
+    &--ready {
+      opacity: 1;
+    }
   }
 
   &-tab {
     position: relative;
+    z-index: 1;
     padding: 12px 24px;
     font-size: 14px;
     color: var(--zdy-text-color-secondary);
@@ -33,7 +55,6 @@
     &--active {
       color: var(--zdy-color-primary);
       font-weight: 500;
-      border-bottom-color: var(--zdy-color-primary);
     }
   }
 
@@ -57,8 +78,16 @@
       border-radius: 4px;
     }
 
+    .zdy-tabs-ink {
+      top: 0;
+      bottom: 0;
+      height: auto;
+      border-radius: 4px;
+    }
+
     .zdy-tabs-tab {
       padding: 8px 20px;
+      border-bottom: none;
       border-radius: 4px;
       margin: 0 4px;
       transition: all 0.3s ease;
@@ -68,11 +97,11 @@
       }
 
       &--active {
-        background-color: var(--zdy-color-primary);
+        background-color: transparent;
         color: var(--zdy-color-white);
 
         &:hover {
-          background-color: var(--zdy-color-primary);
+          background-color: transparent;
           color: var(--zdy-color-white);
         }
       }
@@ -87,8 +116,16 @@
       border-radius: 9999px;
     }
 
+    .zdy-tabs-ink {
+      top: 0;
+      bottom: 0;
+      height: auto;
+      border-radius: 9999px;
+    }
+
     .zdy-tabs-tab {
       padding: 8px 24px;
+      border-bottom: none;
       border-radius: 9999px;
       margin: 0 4px;
       transition: all 0.3s ease;
@@ -98,11 +135,11 @@
       }
 
       &--active {
-        background-color: var(--zdy-color-primary);
+        background-color: transparent;
         color: var(--zdy-color-white);
 
         &:hover {
-          background-color: var(--zdy-color-primary);
+          background-color: transparent;
           color: var(--zdy-color-white);
         }
       }

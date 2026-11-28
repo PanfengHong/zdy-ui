@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect, useRef } from 'react';
 import classNames from 'classnames';
 import type { BaseTabsProps } from './types';
 import TabPane from './TabPane';
@@ -18,6 +18,11 @@ const Tabs: React.FC<BaseTabsProps> & {
   children
 }) => {
   const [currentActiveKey, setCurrentActiveKey] = useState<string | undefined>(defaultActiveKey);
+
+  // 滑动指示块的位置与宽度
+  const [inkStyle, setInkStyle] = useState<{ left: number; width: number } | null>(null);
+  const navWrapRef = useRef<HTMLDivElement>(null);
+  const tabRefs = useRef<Record<string, HTMLDivElement | null>>({});
 
   useEffect(() => {
     if (activeKey !== undefined) {
@@ -53,10 +58,41 @@ const Tabs: React.FC<BaseTabsProps> & {
   const tabs = getTabPanes();
   const activeKeyFinal = currentActiveKey || getDefaultActiveKey();
 
+  // 激活项变化或容器尺寸变化时重新测量指示块
+  useLayoutEffect(() => {
+    const update = () => {
+      const el = activeKeyFinal ? tabRefs.current[activeKeyFinal] : null;
+      if (!el) return;
+      setInkStyle({ left: el.offsetLeft, width: el.offsetWidth });
+    };
+
+    update();
+
+    const wrap = navWrapRef.current;
+    if (!wrap || typeof ResizeObserver === 'undefined') {
+      window.addEventListener('resize', update);
+      return () => window.removeEventListener('resize', update);
+    }
+
+    const observer = new ResizeObserver(update);
+    observer.observe(wrap);
+    return () => observer.disconnect();
+  }, [activeKeyFinal, type, tabs.length]);
+
   return (
     <div className={classNames('zdy-tabs', `zdy-tabs--${type}`, className)} style={style}>
       <div className="zdy-tabs-nav">
-        <div className="zdy-tabs-nav-wrap">
+        <div className="zdy-tabs-nav-wrap" ref={navWrapRef}>
+          <span
+            className={classNames('zdy-tabs-ink', {
+              'zdy-tabs-ink--ready': inkStyle !== null
+            })}
+            style={
+              inkStyle
+                ? { width: inkStyle.width, transform: `translateX(${inkStyle.left}px)` }
+                : undefined
+            }
+          />
           {tabs.map((tab) => {
             if (!React.isValidElement(tab)) return null;
             const tabPane = tab as React.ReactElement<TabPaneProps>;
@@ -65,6 +101,9 @@ const Tabs: React.FC<BaseTabsProps> & {
             return (
               <div
                 key={tabKey}
+                ref={el => {
+                  tabRefs.current[tabKey] = el;
+                }}
                 className={classNames('zdy-tabs-tab', { 'zdy-tabs-tab--active': isActive })}
                 onClick={() => handleTabClick(tabKey)}
               >
