@@ -9,6 +9,7 @@ import MInputDemo from './MInput/demo';
 import MImageDemo from './MImage/demo';
 import MSelectDemo from './MSelect/demo';
 import MRadioDemo from './MRadio/demo';
+import MPaginationDemo from './MPagination/demo';
 
 // 各移动端组件 demo 配置的统一注册表
 export const mobileDemoConfigs: Record<string, DemoConfig> = {
@@ -20,5 +21,6 @@ export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MActionSheet: MActionSheetDemo,
   MSwipeAction: MSwipeActionDemo,
   MCheckbox: MCheckboxDemo,
-  MRadio: MRadioDemo
+  MRadio: MRadioDemo,
+  MPagination: MPaginationDemo
 };

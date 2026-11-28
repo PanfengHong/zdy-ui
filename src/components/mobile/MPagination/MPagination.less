@@ -1,4 +1,461 @@
 @import '../../../styles/variables.less';
+
 .zdy-mobile-pagination {
-  // 组件样式
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  // 启用手势时纵向滚动交给页面，横向滑动留给组件自己处理
+  &--swipeable {
+    touch-action: pan-y;
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+.zdy-mobile-pagination-total {
+  color: @text-color-secondary;
+  font-size: @mobile-font-size-small;
+  text-align: center;
+}
+
+.zdy-mobile-pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+}
+
+// 上一页 / 下一页：44px 触控区
+.zdy-mobile-pagination-nav {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid @border-color-split;
+  border-radius: 12px;
+  background: #fff;
+  color: @text-color;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+
+  &:active:not(:disabled) {
+    background: var(--zdy-bg-hover);
+    transform: scale(0.94);
+  }
+
+  &:disabled {
+    color: @text-color-disabled;
+    background: #f7f8fa;
+    cursor: not-allowed;
+  }
+}
+
+// 紧凑模式：点击页码从底部弹出跳转面板
+.zdy-mobile-pagination-current {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  min-width: 104px;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid @border-color-split;
+  border-radius: 12px;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-variant-numeric: tabular-nums;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:active:not(:disabled) {
+    background: var(--zdy-bg-hover);
+    transform: scale(0.97);
+  }
+
+  &:disabled {
+    color: @text-color-disabled;
+    background: #f7f8fa;
+    cursor: not-allowed;
+  }
+
+  &--open {
+    border-color: @primary-color;
+    color: @primary-color;
+
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.zdy-mobile-pagination-current-value {
+  font-weight: 600;
+}
+
+.zdy-mobile-pagination-current-sep {
+  color: @text-color-secondary;
+}
+
+// 每页条数入口
+.zdy-mobile-pagination-size {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  height: 44px;
+  padding: 0 10px;
+  border: 1px solid @border-color-split;
+  border-radius: 12px;
+  background: #fff;
+  color: @text-color-secondary;
+  font-size: @mobile-font-size-small;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+
+  svg {
+    transition: transform 0.2s ease;
+  }
+
+  &:active:not(:disabled) {
+    background: var(--zdy-bg-hover);
+    transform: scale(0.97);
+  }
+
+  &:disabled {
+    color: @text-color-disabled;
+    background: #f7f8fa;
+    cursor: not-allowed;
+  }
+
+  &--open {
+    border-color: @primary-color;
+    color: @primary-color;
+
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+// 数字模式：横向滚动的页码条
+.zdy-mobile-pagination-pages {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  height: 52px;
+  padding: 4px 2px;
+  overflow-x: auto;
+  scroll-snap-type: x proximity;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.zdy-mobile-pagination-page {
+  flex: none;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 6px;
+  border: 1px solid @border-color-split;
+  border-radius: 12px;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-variant-numeric: tabular-nums;
+  scroll-snap-align: center;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+
+  &:active:not(:disabled) {
+    background: var(--zdy-bg-hover);
+    transform: scale(0.94);
+  }
+
+  &:disabled {
+    color: @text-color-disabled;
+    cursor: not-allowed;
+  }
+
+  &--active,
+  &--active:active:not(:disabled) {
+    border-color: @primary-color;
+    background: @primary-color;
+    color: #fff;
+    font-weight: 600;
+  }
+}
+
+// ====== 底部弹层：与 MSelect 保持一致的遮罩 / 滑入滑出交互 ======
+.zdy-mobile-pagination-root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  // 内联模式：铺满最近的定位父级，用于手机预览等受限容器
+  &--inline {
+    position: absolute;
+  }
+}
+
+.zdy-mobile-pagination-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(15, 23, 42, 0.45);
+  animation: zdy-mobile-pagination-fade-in 0.22s ease;
+}
+
+.zdy-mobile-pagination-sheet {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 80%;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-radius: 20px 20px 0 0;
+  background: #fff;
+  box-shadow: 0 -8px 32px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+  animation: zdy-mobile-pagination-slide-up 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.zdy-mobile-pagination-sheet-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 56px 14px;
+  border-bottom: 1px solid @border-color-split;
+}
+
+.zdy-mobile-pagination-sheet-title {
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.zdy-mobile-pagination-sheet-close {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background-color: var(--zdy-bg-hover);
+  }
+}
+
+.zdy-mobile-pagination-sheet-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px 20px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.zdy-mobile-pagination-jumper {
+  box-sizing: border-box;
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  border: 1px solid @border-color-strong;
+  border-radius: 10px;
+  background: #fff;
+  color: @text-color;
+  font-size: 16px;
+  text-align: center;
+
+  &:focus {
+    outline: none;
+    border-color: @primary-color;
+  }
+}
+
+.zdy-mobile-pagination-quick-pages {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.zdy-mobile-pagination-quick-page {
+  flex: 1;
+  min-width: 44px;
+  height: 44px;
+  padding: 0 4px;
+  border: 1px solid @border-color-split;
+  border-radius: 10px;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  cursor: pointer;
+
+  &:active {
+    background: var(--zdy-bg-hover);
+  }
+
+  &--active {
+    border-color: @primary-color;
+    color: @primary-color;
+    font-weight: 600;
+  }
+}
+
+.zdy-mobile-pagination-confirm {
+  width: 100%;
+  height: 44px;
+  border: none;
+  border-radius: 10px;
+  background: @primary-color;
+  color: #fff;
+  font-size: @mobile-font-size-base;
+  font-weight: 500;
+  cursor: pointer;
+
+  &:active {
+    background: @primary-color-active;
+  }
+}
+
+.zdy-mobile-pagination-sheet-options {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.zdy-mobile-pagination-sheet-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 10px 20px;
+  border: none;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  & + & {
+    border-top: 1px solid @border-color-split;
+  }
+
+  &:active {
+    background-color: var(--zdy-bg-hover);
+  }
+
+  &--active {
+    color: var(--zdy-color-primary);
+    font-weight: 600;
+  }
+}
+
+.zdy-mobile-pagination-sheet-cancel-wrap {
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  background-color: #f2f4f8;
+}
+
+.zdy-mobile-pagination-sheet-cancel {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background-color: var(--zdy-bg-hover);
+  }
+}
+
+// 退出动画
+.zdy-mobile-pagination-root--closing {
+  .zdy-mobile-pagination-mask {
+    animation: zdy-mobile-pagination-fade-out 0.22s ease forwards;
+  }
+
+  .zdy-mobile-pagination-sheet {
+    animation: zdy-mobile-pagination-slide-down 0.22s ease forwards;
+  }
+}
+
+@keyframes zdy-mobile-pagination-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zdy-mobile-pagination-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes zdy-mobile-pagination-slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes zdy-mobile-pagination-slide-down {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
 }
