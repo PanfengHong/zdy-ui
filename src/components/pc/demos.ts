@@ -15,6 +15,7 @@ import AlertDemo from './Alert/demo';
 import RadioDemo from './Radio/demo';
 import CheckboxDemo from './Checkbox/demo';
 import SelectDemo from './Select/demo';
+import CascaderDemo from './Cascader/demo';
 import UploadDemo from './Upload/demo';
 import TextareaDemo from './Textarea/demo';
 import MessageDemo from './Message/demo';
@@ -70,6 +71,7 @@ export const pcDemoConfigs: Record<string, DemoConfig> = {
   Radio: RadioDemo,
   Checkbox: CheckboxDemo,
   Select: SelectDemo,
+  Cascader: CascaderDemo,
   Upload: UploadDemo,
   Textarea: TextareaDemo,
   Message: MessageDemo,

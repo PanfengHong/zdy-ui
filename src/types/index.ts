@@ -28,6 +28,7 @@ export * from '../components/pc/Breadcrumb/types';
 export * from '../components/pc/Button/types';
 export * from '../components/pc/Calendar/types';
 export * from '../components/pc/Carousel/types';
+export * from '../components/pc/Cascader/types';
 export * from '../components/pc/Checkbox/types';
 export * from '../components/pc/Collapse/types';
 export * from '../components/pc/ColorPicker/types';

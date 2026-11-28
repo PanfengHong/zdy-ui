@@ -43,6 +43,7 @@ export { default as MBoard } from './MBoard';
 export { default as MInput } from './MInput';
 export { default as MTextarea } from './MTextarea';
 export { default as MSelect } from './MSelect';
+export { default as MCascader } from './MCascader';
 export { default as MRadio } from './MRadio';
 export { default as MCheckbox } from './MCheckbox';
 export { default as MUpload } from './MUpload';

@@ -1,0 +1,307 @@
+@import '../../../styles/variables.less';
+
+.zdy-mobile-cascader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 14px;
+  border: 1px solid @border-color-split;
+  border-radius: 10px;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  &:active:not(:disabled) {
+    background-color: var(--zdy-bg-hover);
+  }
+
+  &:disabled {
+    background-color: #f7f8fa;
+    color: @text-color-disabled;
+    cursor: not-allowed;
+  }
+}
+
+.zdy-mobile-cascader-value {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zdy-mobile-cascader-value-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.zdy-mobile-cascader-separator {
+  color: @text-color-secondary;
+}
+
+.zdy-mobile-cascader-value--placeholder {
+  color: @text-color-secondary;
+}
+
+.zdy-mobile-cascader-arrow {
+  flex: none;
+  color: #94a3b8;
+  transition: transform 0.25s ease;
+
+  &--opened {
+    transform: rotate(180deg);
+  }
+}
+
+// ============ 底部弹层 ============
+
+.zdy-mobile-cascader-root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  // 内联模式：铺满最近的定位父级，用于手机预览等受限容器
+  &--inline {
+    position: absolute;
+  }
+}
+
+.zdy-mobile-cascader-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(15, 23, 42, 0.45);
+  animation: zdy-mobile-cascader-fade-in 0.22s ease;
+}
+
+.zdy-mobile-cascader-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 80%;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-radius: 20px 20px 0 0;
+  background: #fff;
+  box-shadow: 0 -8px 32px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+  animation: zdy-mobile-cascader-slide-up 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.zdy-mobile-cascader-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 56px 14px;
+  border-bottom: 1px solid @border-color-split;
+}
+
+.zdy-mobile-cascader-title {
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.zdy-mobile-cascader-close {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background-color: var(--zdy-bg-hover);
+  }
+}
+
+.zdy-mobile-cascader-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 0 16px;
+  border-bottom: 1px solid @border-color-split;
+  overflow-x: auto;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.zdy-mobile-cascader-tab {
+  position: relative;
+  flex: none;
+  padding: 12px 4px;
+  border: none;
+  background: transparent;
+  color: @text-color-secondary;
+  font-size: @mobile-font-size-base;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &--active {
+    color: @primary-color;
+    font-weight: 600;
+
+    &::after {
+      content: '';
+      position: absolute;
+      right: 4px;
+      bottom: 0;
+      left: 4px;
+      height: 2px;
+      border-radius: 2px;
+      background-color: @primary-color;
+    }
+  }
+}
+
+.zdy-mobile-cascader-options {
+  flex: 1;
+  min-height: 0;
+  max-height: 50vh;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.zdy-mobile-cascader-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 52px;
+  padding: 10px 20px;
+  border: none;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  & + & {
+    border-top: 1px solid @border-color-split;
+  }
+
+  &:active:not(:disabled) {
+    background-color: var(--zdy-bg-hover);
+  }
+
+  &--selected {
+    color: var(--zdy-color-primary);
+    font-weight: 500;
+  }
+
+  &--disabled {
+    color: @text-color-disabled;
+    cursor: not-allowed;
+  }
+}
+
+.zdy-mobile-cascader-option-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zdy-mobile-cascader-empty {
+  padding: 32px 20px;
+  color: @text-color-secondary;
+  font-size: @mobile-font-size-small;
+  text-align: center;
+}
+
+.zdy-mobile-cascader-cancel-wrap {
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  background-color: #f2f4f8;
+}
+
+.zdy-mobile-cascader-cancel {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background-color: var(--zdy-bg-hover);
+  }
+}
+
+// 退出动画
+.zdy-mobile-cascader-root--closing {
+  .zdy-mobile-cascader-mask {
+    animation: zdy-mobile-cascader-fade-out 0.22s ease forwards;
+  }
+
+  .zdy-mobile-cascader-panel {
+    animation: zdy-mobile-cascader-slide-down 0.22s ease forwards;
+  }
+}
+
+@keyframes zdy-mobile-cascader-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes zdy-mobile-cascader-fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes zdy-mobile-cascader-slide-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes zdy-mobile-cascader-slide-down {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}

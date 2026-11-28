@@ -8,6 +8,7 @@ import MCheckboxDemo from './MCheckbox/demo';
 import MInputDemo from './MInput/demo';
 import MImageDemo from './MImage/demo';
 import MSelectDemo from './MSelect/demo';
+import MCascaderDemo from './MCascader/demo';
 import MRadioDemo from './MRadio/demo';
 import MPaginationDemo from './MPagination/demo';
 import MTextareaDemo from './MTextarea/demo';
@@ -18,6 +19,7 @@ export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MInput: MInputDemo,
   MImage: MImageDemo,
   MSelect: MSelectDemo,
+  MCascader: MCascaderDemo,
   MAlert: MAlertDemo,
   MActionSheet: MActionSheetDemo,
   MSwipeAction: MSwipeActionDemo,

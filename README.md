@@ -31,17 +31,17 @@ git: https://github.com/PanfengHong/zdy-ui
 
 ## 组件总览
 
-### PC 端组件（47 个）
+### PC 端组件（49 个）
 
 | 分类 | 组件                                                                                                                                                                                                                                                         |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | 通用 | Button 按钮、Icon 图标、Avatar 头像                                                                                                                                                                                                                          |
 | 布局 | Layout 布局、Grid 栅格、Masonry 瀑布流                                                                                                                                                                                                                       |
-| 表单 | Input 输入框、Textarea 文本域、Select 下拉选择、Radio 单选框、Checkbox 多选框、Switch 开关、Slider 滑块、Rate 评分、Upload 上传、DatePicker 日期选择、TimePicker 时间选择、DateTimePicker 日期时间选择器、ColorPicker 颜色选择器、Form 表单、Transfer 穿梭框 |
+| 表单 | Input 输入框、Textarea 文本域、Select 下拉选择、Cascader 级联选择、Radio 单选框、Checkbox 多选框、Switch 开关、Slider 滑块、Rate 评分、Upload 上传、DatePicker 日期选择、TimePicker 时间选择、DateTimePicker 日期时间选择器、ColorPicker 颜色选择器、Form 表单、Transfer 穿梭框 |
 | 反馈 | Dialog 弹框、Drawer 抽屉、Alert 提醒、Message 消息、Notification 通知、Loading 加载、Skeleton 骨架屏、Watermark 水印、Progress 进度条                                                                                                                        |
-| 展示 | Menu 菜单、Carousel 走马灯、Table 表格、List 列表、Breadcrumb 面包屑、Steps 步骤条、Anchor 锚点、Pagination 分页、Tabs 标签页、Tree 树形控件、Calendar 日历、Empty 空状态、Popover 气泡、Collapse 折叠面板、Tag 标签、Intro 引导、Board 看板                 |
+| 展示 | Menu 菜单、Carousel 走马灯、Table 表格、List 列表、Breadcrumb 面包屑、Steps 步骤条、Anchor 锚点、Pagination 分页、Tabs 标签页、Tree 树形控件、Calendar 日历、Empty 空状态、Image 图片、Popover 气泡、Collapse 折叠面板、Tag 标签、Intro 引导、Board 看板                 |
 
-### 移动端组件（43 个）
+### 移动端组件（44 个）
 
 与 PC 端组件清单基本对应，按移动端交互习惯进行适配实现（会剔除面包屑、锚点、穿梭框等移动端无适用场景的组件）。
 
@@ -265,7 +265,7 @@ npm run preview:demo
 zdy-ui/
 ├── src/
 │   ├── components/
-│   │   ├── pc/              # PC 端组件（47 个，每个独立目录）
+│   │   ├── pc/              # PC 端组件（49 个，每个独立目录）
 │   │   │   ├── Alert/
 │   │   │   │   ├── Alert.tsx        # 组件实现
 │   │   │   │   ├── Alert.less       # 组件样式
@@ -274,7 +274,7 @@ zdy-ui/
 │   │   │   │   └── index.ts         # default 导出
 │   │   │   ├── Button/
 │   │   │   └── ...
-│   │   ├── mobile/          # 移动端组件（43 个，结构同 pc）
+│   │   ├── mobile/          # 移动端组件（44 个，结构同 pc）
 │   │   ├── ApiTable/        # Demo 站点辅助组件
 │   │   └── DemoBlock/
 │   ├── pages/               # Demo 站点页面

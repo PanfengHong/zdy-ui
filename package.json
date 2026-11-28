@@ -55,6 +55,11 @@
       "require": "./dist/pc/Carousel.js",
       "types": "./dist/pc/Carousel.d.ts"
     },
+    "./pc/Cascader": {
+      "import": "./dist/pc/Cascader.js",
+      "require": "./dist/pc/Cascader.js",
+      "types": "./dist/pc/Cascader.d.ts"
+    },
     "./pc/Checkbox": {
       "import": "./dist/pc/Checkbox.js",
       "require": "./dist/pc/Checkbox.js",
@@ -284,6 +289,11 @@
       "import": "./dist/mobile/MCarousel.js",
       "require": "./dist/mobile/MCarousel.js",
       "types": "./dist/mobile/MCarousel.d.ts"
+    },
+    "./mobile/MCascader": {
+      "import": "./dist/mobile/MCascader.js",
+      "require": "./dist/mobile/MCascader.js",
+      "types": "./dist/mobile/MCascader.d.ts"
     },
     "./mobile/MCheckbox": {
       "import": "./dist/mobile/MCheckbox.js",
