@@ -4,12 +4,12 @@
   position: relative;
   display: flex;
   align-items: flex-start;
-  padding: 16px;
+  padding: 12px 16px;
   margin-bottom: 12px;
   border-radius: 8px;
   border: 1px solid @border-color;
   font-size: @mobile-font-size-base;
-  line-height: 1.6;
+  line-height: 20px;
   transition: all 0.2s ease;
 
   &--no-icon {
@@ -76,25 +76,33 @@
 }
 
 .zdy-mobile-alert-icon {
+  position: relative;
+  // 文字墨迹中心略高于行框中心，图标上移 1px 与首行文字视觉居中
+  top: -1px;
+  display: flex;
   flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
   width: 20px;
   height: 20px;
   margin-right: 12px;
-  margin-top: 2px;
+
+  svg {
+    display: block;
+  }
 }
 
 .zdy-mobile-alert-content {
   flex: 1;
   min-width: 0;
-  margin-left: 4px;
 }
 
 .zdy-mobile-alert-title {
-  margin: 0 0 6px 0;
+  margin: 0 0 2px 0;
   padding: 0;
   font-size: @mobile-font-size-base;
   font-weight: 600;
-  line-height: 1.5;
+  line-height: 20px;
 }
 
 .zdy-mobile-alert-message {
@@ -102,7 +110,7 @@
   padding: 0;
   font-size: @mobile-font-size-small;
   color: @text-color-secondary;
-  line-height: 1.6;
+  line-height: 20px;
 }
 
 .zdy-mobile-alert-close-icon {
