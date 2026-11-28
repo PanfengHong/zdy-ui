@@ -14,6 +14,7 @@ import MCascaderDemo from './MCascader/demo';
 import MRadioDemo from './MRadio/demo';
 import MPaginationDemo from './MPagination/demo';
 import MSwitchDemo from './MSwitch/demo';
+import MSliderDemo from './MSlider/demo';
 import MUploadDemo from './MUpload/demo';
 import MTextareaDemo from './MTextarea/demo';
 
@@ -33,6 +34,7 @@ export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MRadio: MRadioDemo,
   MPagination: MPaginationDemo,
   MSwitch: MSwitchDemo,
+  MSlider: MSliderDemo,
   MUpload: MUploadDemo,
   MTextarea: MTextareaDemo
 };
