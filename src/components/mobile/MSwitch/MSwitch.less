@@ -1,5 +1,139 @@
 @import '../../../styles/variables.less';
 
 .zdy-mobile-switch {
-  // 组件样式
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 6px 2px;
+  border: none;
+  border-radius: 12px;
+  background-color: transparent;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  &:active:not(:disabled) {
+    background-color: var(--zdy-bg-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--zdy-color-primary);
+    outline-offset: 2px;
+  }
+
+  // 带标题的整行用法：标题在左，开关右对齐
+  &--row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    gap: 16px;
+    min-height: 52px;
+    padding: 10px 4px;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  &--loading {
+    cursor: progress;
+  }
+
+  &-content {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  &-label {
+    color: @text-color;
+    font-size: @mobile-font-size-base;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+
+  &-desc {
+    color: @text-color-secondary;
+    font-size: @mobile-font-size-small;
+    line-height: 1.4;
+    word-break: break-word;
+  }
+
+  &-track {
+    position: relative;
+    box-sizing: border-box;
+    flex: none;
+    width: 52px;
+    height: 32px;
+    padding: 2px;
+    border-radius: 999px;
+    background-color: var(--zdy-border-color-strong);
+    transition: background-color 0.25s ease;
+  }
+
+  &-thumb {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 1px 4px rgba(15, 23, 42, 0.22);
+    transition: transform 0.28s cubic-bezier(0.32, 0.72, 0, 1);
+  }
+
+  &-spinner {
+    color: var(--zdy-color-primary);
+    animation: zdy-mobile-switch-spin 0.8s linear infinite;
+  }
+
+  &--checked &-track {
+    background-color: var(--zdy-color-primary);
+  }
+
+  &--checked &-thumb {
+    transform: translateX(20px);
+  }
+
+  &--checked:active:not(:disabled) &-track {
+    filter: brightness(0.94);
+  }
+
+  // 小尺寸：整体等比缩小，触控高度仍保持 44px
+  &--small {
+    .zdy-mobile-switch-track {
+      width: 44px;
+      height: 26px;
+    }
+
+    .zdy-mobile-switch-thumb {
+      width: 22px;
+      height: 22px;
+    }
+
+    &.zdy-mobile-switch--checked .zdy-mobile-switch-thumb {
+      transform: translateX(18px);
+    }
+  }
+}
+
+@keyframes zdy-mobile-switch-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
