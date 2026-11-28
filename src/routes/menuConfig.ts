@@ -175,7 +175,6 @@ export const mobileMenuGroups: MenuGroup[] = [
       { id: 'm-collapse', label: 'MCollapse 折叠面板', icon: '📁', type: 'component', component: 'MCollapse', path: '/components/MCollapse?platform=mobile' },
       { id: 'm-intro', label: 'MIntro 引导', icon: '🎯', type: 'component', component: 'MIntro', path: '/components/MIntro?platform=mobile' },
       { id: 'm-tag', label: 'MTag 标签', icon: '🏷️', type: 'component', component: 'MTag', path: '/components/MTag?platform=mobile' },
-      { id: 'm-board', label: 'MBoard 看板', icon: '📊', type: 'component', component: 'MBoard', path: '/components/MBoard?platform=mobile' },
     ],
   },
   {

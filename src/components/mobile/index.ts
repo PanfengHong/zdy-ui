@@ -37,7 +37,6 @@ export { default as MPopover } from './MPopover';
 export { default as MCollapse } from './MCollapse';
 export { default as MIntro } from './MIntro';
 export { default as MTag } from './MTag';
-export { default as MBoard } from './MBoard';
 
 // 表单组件
 export { default as MInput } from './MInput';

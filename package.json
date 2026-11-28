@@ -270,11 +270,6 @@
       "require": "./dist/mobile/MAlert.js",
       "types": "./dist/mobile/MAlert.d.ts"
     },
-    "./mobile/MBoard": {
-      "import": "./dist/mobile/MBoard.js",
-      "require": "./dist/mobile/MBoard.js",
-      "types": "./dist/mobile/MBoard.d.ts"
-    },
     "./mobile/MButton": {
       "import": "./dist/mobile/MButton.js",
       "require": "./dist/mobile/MButton.js",
