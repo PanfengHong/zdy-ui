@@ -27,6 +27,8 @@ interface MobileCheckboxGroupProps extends MobileCheckboxCommonProps {
   options: CheckboxOption[];
   value?: string[];
   defaultValue?: string[];
+  /** 选项布局：纵向列表（默认）或横向标签 */
+  direction?: 'vertical' | 'horizontal';
   onChange?: (ids: string[]) => void;
 }
 
@@ -65,6 +67,7 @@ const CheckboxGroup = ({
   options,
   value: valueProp,
   defaultValue,
+  direction = 'vertical',
   onChange,
   disabled = false,
   className = '',
@@ -90,8 +93,15 @@ const CheckboxGroup = ({
 
   return (
     <div
-      className={classNames('zdy-mobile-checkbox', { 'zdy-mobile-checkbox--disabled': disabled }, className)}
+      className={classNames(
+        'zdy-mobile-checkbox',
+        `zdy-mobile-checkbox--${direction}`,
+        { 'zdy-mobile-checkbox--disabled': disabled },
+        className
+      )}
       style={style}
+      role="group"
+      aria-disabled={disabled}
     >
       {options.map((option) => (
         <CheckboxItem

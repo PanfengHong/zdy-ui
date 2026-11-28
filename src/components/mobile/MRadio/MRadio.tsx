@@ -29,6 +29,8 @@ interface MobileRadioGroupProps extends MobileRadioCommonProps {
   options: RadioOption[];
   value?: string;
   defaultValue?: string;
+  /** 选项布局：纵向列表（默认）或横向标签 */
+  direction?: 'vertical' | 'horizontal';
   onChange?: (id: string) => void;
 }
 
@@ -69,6 +71,7 @@ const RadioGroup = ({
   options,
   value: valueProp,
   defaultValue,
+  direction = 'vertical',
   onChange,
   disabled = false,
   name,
@@ -92,8 +95,15 @@ const RadioGroup = ({
 
   return (
     <div
-      className={classNames('zdy-mobile-radio', { 'zdy-mobile-radio--disabled': disabled }, className)}
+      className={classNames(
+        'zdy-mobile-radio',
+        `zdy-mobile-radio--${direction}`,
+        { 'zdy-mobile-radio--disabled': disabled },
+        className
+      )}
       style={style}
+      role="radiogroup"
+      aria-disabled={disabled}
     >
       {options.map((option) => (
         <RadioItem

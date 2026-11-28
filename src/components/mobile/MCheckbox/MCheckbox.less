@@ -1,12 +1,14 @@
 @import '../../../styles/variables.less';
 
 // ============================================================
-// 移动端 Checkbox：一组多选（options 驱动）
+// 移动端 Checkbox：默认纵向全宽列表，整行可点
 // ============================================================
 .zdy-mobile-checkbox {
-  display: inline-flex;
-  flex-direction: row;
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
 
   &--disabled {
     cursor: not-allowed;
@@ -15,50 +17,67 @@
 
 .zdy-mobile-checkbox-option {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 4px;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  line-height: 1.45;
   cursor: pointer;
   user-select: none;
-  font-size: @mobile-font-size-base;
-  color: @text-color;
-  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background-color 0.15s ease, opacity 0.15s ease, transform 0.12s ease;
 
-  &:hover:not(.zdy-mobile-checkbox-option--disabled) {
+  & + & {
+    border-top: 1px solid @border-color-split;
+  }
+
+  // 移动端以按压反馈代替 hover
+  &:active:not(.zdy-mobile-checkbox-option--disabled) {
+    background-color: var(--zdy-bg-hover);
+
     .zdy-mobile-checkbox-option-inner {
-      border-color: @primary-color;
+      transform: scale(0.9);
+    }
+  }
+
+  &--checked:not(.zdy-mobile-checkbox-option--disabled) {
+    background-color: @primary-color-light;
+
+    .zdy-mobile-checkbox-option-label {
+      color: @primary-color;
+      font-weight: 500;
     }
   }
 
   &--disabled {
     cursor: not-allowed;
-    opacity: 0.5;
-  }
-
-  &--checked {
-    .zdy-mobile-checkbox-option-inner {
-      border-color: @primary-color;
-      background-color: @primary-color;
-    }
+    opacity: 0.45;
   }
 
   &-input {
     position: absolute;
-    width: 0;
-    height: 0;
-    opacity: 0;
-    margin: 0;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
     padding: 0;
+    overflow: hidden;
+    opacity: 0;
   }
 
   &-inner {
     position: relative;
+    flex: none;
     width: 22px;
     height: 22px;
     border: 2px solid @border-color;
-    border-radius: 5px;
+    border-radius: 6px;
     background-color: #fff;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
+    transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
 
     &::after {
       content: '';
@@ -75,18 +94,69 @@
   }
 
   &--checked {
+    .zdy-mobile-checkbox-option-inner {
+      border-color: @primary-color;
+      background-color: @primary-color;
+    }
+
     .zdy-mobile-checkbox-option-inner::after {
       transform: translate(-50%, -50%) rotate(45deg) scale(1);
     }
   }
 
   &-label {
-    margin-left: 10px;
-    line-height: 22px;
-    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
+    line-height: 1.45;
+    word-break: break-word;
   }
 }
 
-.zdy-mobile-checkbox-option:has(.zdy-mobile-checkbox-option-input:focus-visible) .zdy-mobile-checkbox-option-inner {
-  box-shadow: 0 0 0 3px var(--selected-bg-hover);
+// 横向标签：适合少量短选项
+.zdy-mobile-checkbox--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: auto;
+
+  .zdy-mobile-checkbox-option {
+    width: auto;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1px solid @border-color-split;
+    border-radius: 10px;
+    background-color: #fff;
+
+    & + & {
+      border-top: 1px solid @border-color-split;
+    }
+
+    &:active:not(.zdy-mobile-checkbox-option--disabled) {
+      background-color: var(--zdy-bg-hover);
+      transform: scale(0.97);
+    }
+
+    &--checked:not(.zdy-mobile-checkbox-option--disabled) {
+      border-color: @primary-color;
+      background-color: @primary-color-light;
+    }
+  }
+
+  .zdy-mobile-checkbox-option-label {
+    flex: none;
+    white-space: nowrap;
+  }
+
+  .zdy-mobile-checkbox-option-inner {
+    width: 20px;
+    height: 20px;
+    border-radius: 5px;
+  }
+}
+
+// 键盘聚焦态
+.zdy-mobile-checkbox-option:has(.zdy-mobile-checkbox-option-input:focus-visible) {
+  .zdy-mobile-checkbox-option-inner {
+    box-shadow: 0 0 0 3px var(--selected-bg-hover);
+  }
 }

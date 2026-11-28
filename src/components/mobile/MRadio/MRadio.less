@@ -1,12 +1,14 @@
 @import '../../../styles/variables.less';
 
 // ============================================================
-// 移动端 Radio：一组单选（options 驱动）
+// 移动端 Radio：默认纵向全宽列表，整行可点
 // ============================================================
 .zdy-mobile-radio {
-  display: inline-flex;
-  flex-direction: row;
-  gap: 16px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
 
   &--disabled {
     cursor: not-allowed;
@@ -15,23 +17,80 @@
 
 .zdy-mobile-radio-option {
   position: relative;
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 4px;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  line-height: 1.45;
   cursor: pointer;
   user-select: none;
-  font-size: @mobile-font-size-base;
-  color: @text-color;
-  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  transition: background-color 0.15s ease, opacity 0.15s ease, transform 0.12s ease;
 
-  &:hover:not(.zdy-mobile-radio-option--disabled) {
+  & + & {
+    border-top: 1px solid @border-color-split;
+  }
+
+  // 移动端以按压反馈代替 hover
+  &:active:not(.zdy-mobile-radio-option--disabled) {
+    background-color: var(--zdy-bg-hover);
+
     .zdy-mobile-radio-option-inner {
-      border-color: @primary-color;
+      transform: scale(0.9);
+    }
+  }
+
+  &--checked:not(.zdy-mobile-radio-option--disabled) {
+    background-color: @primary-color-light;
+
+    .zdy-mobile-radio-option-label {
+      color: @primary-color;
+      font-weight: 500;
     }
   }
 
   &--disabled {
     cursor: not-allowed;
-    opacity: 0.5;
+    opacity: 0.45;
+  }
+
+  &-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    opacity: 0;
+  }
+
+  &-inner {
+    position: relative;
+    flex: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid @border-color;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: background-color 0.18s ease, border-color 0.18s ease, transform 0.12s ease;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #fff;
+      transform: translate(-50%, -50%) scale(0);
+      transition: transform 0.2s ease;
+    }
   }
 
   &--checked {
@@ -39,55 +98,64 @@
       border-color: @primary-color;
       background-color: @primary-color;
     }
-  }
 
-  &-input {
-    position: absolute;
-    width: 0;
-    height: 0;
-    opacity: 0;
-    margin: 0;
-    padding: 0;
-  }
-
-  &-inner {
-    position: relative;
-    width: 20px;
-    height: 20px;
-    border: 2px solid @border-color;
-    border-radius: 50%;
-    background-color: #fff;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%) scale(0);
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background-color: #fff;
-      transition: transform 0.2s ease;
-    }
-  }
-
-  &--checked {
     .zdy-mobile-radio-option-inner::after {
       transform: translate(-50%, -50%) scale(1);
     }
   }
 
   &-label {
-    margin-left: 10px;
-    line-height: 20px;
+    flex: 1;
+    min-width: 0;
+    line-height: 1.45;
+    word-break: break-word;
+  }
+}
+
+// 横向标签：适合少量短选项
+.zdy-mobile-radio--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 8px;
+  width: auto;
+
+  .zdy-mobile-radio-option {
+    width: auto;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1px solid @border-color-split;
+    border-radius: 10px;
+    background-color: #fff;
+
+    & + & {
+      border-top: 1px solid @border-color-split;
+    }
+
+    &:active:not(.zdy-mobile-radio-option--disabled) {
+      background-color: var(--zdy-bg-hover);
+      transform: scale(0.97);
+    }
+
+    &--checked:not(.zdy-mobile-radio-option--disabled) {
+      border-color: @primary-color;
+      background-color: @primary-color-light;
+    }
+  }
+
+  .zdy-mobile-radio-option-label {
+    flex: none;
     white-space: nowrap;
+  }
+
+  .zdy-mobile-radio-option-inner {
+    width: 20px;
+    height: 20px;
   }
 }
 
 // 键盘聚焦态
-.zdy-mobile-radio-option:has(.zdy-mobile-radio-option-input:focus-visible) .zdy-mobile-radio-option-inner {
-  box-shadow: 0 0 0 3px var(--selected-bg-hover);
+.zdy-mobile-radio-option:has(.zdy-mobile-radio-option-input:focus-visible) {
+  .zdy-mobile-radio-option-inner {
+    box-shadow: 0 0 0 3px var(--selected-bg-hover);
+  }
 }
