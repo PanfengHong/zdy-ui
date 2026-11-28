@@ -4,6 +4,7 @@ import MAlertDemo from './MAlert/demo';
 import MActionSheetDemo from './MActionSheet/demo';
 import MSwipeActionDemo from './MSwipeAction/demo';
 import MButtonDemo from './MButton/demo';
+import MCarouselDemo from './MCarousel/demo';
 import MCheckboxDemo from './MCheckbox/demo';
 import MInputDemo from './MInput/demo';
 import MImageDemo from './MImage/demo';
@@ -18,6 +19,7 @@ import MTextareaDemo from './MTextarea/demo';
 // 各移动端组件 demo 配置的统一注册表
 export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MButton: MButtonDemo,
+  MCarousel: MCarouselDemo,
   MInput: MInputDemo,
   MImage: MImageDemo,
   MSelect: MSelectDemo,
