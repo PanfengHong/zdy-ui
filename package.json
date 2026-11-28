@@ -265,20 +265,10 @@
       "require": "./dist/mobile/MAlert.js",
       "types": "./dist/mobile/MAlert.d.ts"
     },
-    "./mobile/MAnchor": {
-      "import": "./dist/mobile/MAnchor.js",
-      "require": "./dist/mobile/MAnchor.js",
-      "types": "./dist/mobile/MAnchor.d.ts"
-    },
     "./mobile/MBoard": {
       "import": "./dist/mobile/MBoard.js",
       "require": "./dist/mobile/MBoard.js",
       "types": "./dist/mobile/MBoard.d.ts"
-    },
-    "./mobile/MBreadcrumb": {
-      "import": "./dist/mobile/MBreadcrumb.js",
-      "require": "./dist/mobile/MBreadcrumb.js",
-      "types": "./dist/mobile/MBreadcrumb.d.ts"
     },
     "./mobile/MButton": {
       "import": "./dist/mobile/MButton.js",
@@ -464,11 +454,6 @@
       "import": "./dist/mobile/MTextarea.js",
       "require": "./dist/mobile/MTextarea.js",
       "types": "./dist/mobile/MTextarea.d.ts"
-    },
-    "./mobile/MTransfer": {
-      "import": "./dist/mobile/MTransfer.js",
-      "require": "./dist/mobile/MTransfer.js",
-      "types": "./dist/mobile/MTransfer.d.ts"
     },
     "./mobile/MTree": {
       "import": "./dist/mobile/MTree.js",
