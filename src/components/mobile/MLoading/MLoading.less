@@ -1,4 +1,125 @@
 @import '../../../styles/variables.less';
+
+.zdy-mobile-loading-wrapper {
+  position: relative;
+}
+
+.zdy-mobile-loading-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: inherit;
+  background-color: rgba(255, 255, 255, 0.88);
+  animation: zdy-mobile-loading-fade-in 0.18s ease;
+}
+
+.zdy-mobile-loading-root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 24px;
+  background-color: rgba(255, 255, 255, 0.92);
+  animation: zdy-mobile-loading-fade-in 0.18s ease;
+  touch-action: none;
+
+  // 内联定位：铺满最近的定位父级，用于手机预览等受限容器
+  &--inline {
+    position: absolute;
+  }
+}
+
 .zdy-mobile-loading {
-  // 组件样式
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: @primary-color;
+}
+
+.zdy-mobile-loading-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: @primary-color;
+}
+
+.zdy-mobile-loading-indicator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.zdy-mobile-loading-spinner {
+  display: inline-flex;
+  color: @primary-color;
+  animation: zdy-mobile-loading-rotate 0.9s linear infinite;
+
+  svg {
+    display: block;
+  }
+
+  &--small svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  &--medium svg {
+    width: 26px;
+    height: 26px;
+  }
+
+  &--large svg {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+.zdy-mobile-loading-tip {
+  max-width: 240px;
+  color: @text-color-secondary;
+  font-size: @mobile-font-size-small;
+  line-height: 1.5;
+  text-align: center;
+  word-break: break-word;
+}
+
+@keyframes zdy-mobile-loading-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes zdy-mobile-loading-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+// 圆点指示器：单个圆点渐隐，配合 animationDelay 形成绕圈拖尾（demo 自定义指示器使用）
+@keyframes zdy-mobile-loading-dot {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0.1;
+  }
 }
