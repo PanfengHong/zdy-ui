@@ -24,6 +24,7 @@ import MProgressDemo from './MProgress/demo';
 import MSkeletonDemo from './MSkeleton/demo';
 import MToastDemo from './MToast/demo';
 import MMessageDemo from './MMessage/demo';
+import MWatermarkDemo from './MWatermark/demo';
 
 // 各移动端组件 demo 配置的统一注册表
 export const mobileDemoConfigs: Record<string, DemoConfig> = {
@@ -50,5 +51,6 @@ export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MProgress: MProgressDemo,
   MSkeleton: MSkeletonDemo,
   MToast: MToastDemo,
-  MMessage: MMessageDemo
+  MMessage: MMessageDemo,
+  MWatermark: MWatermarkDemo
 };

@@ -1,4 +1,23 @@
 @import '../../../styles/variables.less';
+
 .zdy-mobile-watermark {
-  // 组件样式
+  position: relative;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+
+  &::selection {
+    background: transparent;
+  }
+}
+
+.zdy-mobile-watermark-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-repeat: repeat;
+  pointer-events: none;
+  user-select: none;
 }
