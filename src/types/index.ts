@@ -62,6 +62,7 @@ export * from '../components/pc/Switch/types';
 export * from '../components/pc/Table/types';
 export * from '../components/pc/Tabs/types';
 export * from '../components/pc/Tag/types';
+export * from '../components/pc/Textarea/types';
 export * from '../components/pc/TimePicker/types';
 export * from '../components/pc/Transfer/types';
 export * from '../components/pc/Tree/types';

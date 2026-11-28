@@ -1,5 +1,118 @@
 @import '../../../styles/variables.less';
 
+.zdy-mobile-textarea-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  border: 2px solid @border-color;
+  border-radius: 12px;
+  background-color: #fff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+
+  &:focus-within {
+    border-color: @primary-color;
+    box-shadow: 0 0 0 3px rgba(24, 144, 255, 0.2);
+  }
+
+  &--small {
+    border-radius: 10px;
+  }
+
+  &--large {
+    border-radius: 14px;
+  }
+
+  &--disabled {
+    background-color: var(--zdy-bg-hover);
+    border-color: @border-color;
+
+    .zdy-mobile-textarea {
+      color: @text-color-secondary;
+      cursor: not-allowed;
+
+      &::placeholder {
+        color: @text-color-disabled;
+      }
+    }
+
+    .zdy-mobile-textarea-count {
+      color: @text-color-disabled;
+    }
+  }
+}
+
 .zdy-mobile-textarea {
-  // 组件样式
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 96px;
+  padding: 12px 14px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: @text-color;
+  font-family: inherit;
+  // 移动端保持 16px，避免 iOS 聚焦时自动放大页面
+  font-size: @mobile-font-size-base;
+  line-height: 1.5;
+  // 触屏下不需要手动拖拽缩放，需要时使用 autoSize
+  resize: none;
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+
+  &::placeholder {
+    color: @placeholder-color;
+  }
+
+  &:disabled {
+    color: @text-color-secondary;
+    cursor: not-allowed;
+  }
+}
+
+.zdy-mobile-textarea-wrapper--small .zdy-mobile-textarea {
+  min-height: 72px;
+  padding: 10px 12px;
+}
+
+.zdy-mobile-textarea-wrapper--medium .zdy-mobile-textarea {
+  min-height: 96px;
+  padding: 12px 14px;
+}
+
+.zdy-mobile-textarea-wrapper--large .zdy-mobile-textarea {
+  min-height: 120px;
+  padding: 14px 16px;
+}
+
+// 自动增高时由内联 height 控制，避免 min-height 覆盖行数限制
+.zdy-mobile-textarea-wrapper--auto-size .zdy-mobile-textarea {
+  min-height: 0;
+}
+
+// 为右下角字数统计预留空间，避免文字与计数重叠
+.zdy-mobile-textarea-wrapper--show-count .zdy-mobile-textarea {
+  padding-bottom: 32px;
+}
+
+.zdy-mobile-textarea-count {
+  position: absolute;
+  right: 12px;
+  bottom: 8px;
+  color: @text-color-secondary;
+  font-size: @mobile-font-size-small;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
+
+  &--overflow {
+    color: @error-color;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zdy-mobile-textarea-wrapper {
+    transition: none;
+  }
 }
