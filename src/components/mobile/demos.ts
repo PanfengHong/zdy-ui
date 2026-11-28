@@ -8,6 +8,7 @@ import MCarouselDemo from './MCarousel/demo';
 import MCheckboxDemo from './MCheckbox/demo';
 import MInputDemo from './MInput/demo';
 import MImageDemo from './MImage/demo';
+import MMasonryDemo from './MMasonry/demo';
 import MSelectDemo from './MSelect/demo';
 import MCascaderDemo from './MCascader/demo';
 import MRadioDemo from './MRadio/demo';
@@ -22,6 +23,7 @@ export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MCarousel: MCarouselDemo,
   MInput: MInputDemo,
   MImage: MImageDemo,
+  MMasonry: MMasonryDemo,
   MSelect: MSelectDemo,
   MCascader: MCascaderDemo,
   MAlert: MAlertDemo,

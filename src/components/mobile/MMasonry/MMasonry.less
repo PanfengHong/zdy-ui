@@ -1,4 +1,24 @@
 @import '../../../styles/variables.less';
+
 .zdy-mobile-masonry {
-  // 组件样式
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.zdy-mobile-masonry-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  border-radius: 10px;
+  visibility: hidden;
+  opacity: 0;
+  transition: top 0.28s ease, left 0.28s ease, opacity 0.2s ease;
+
+  &--placed {
+    visibility: visible;
+    opacity: 1;
+  }
 }
