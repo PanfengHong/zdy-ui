@@ -2,6 +2,7 @@ import type { DemoConfig } from '../../pages/Components/Demo/types';
 
 import MAlertDemo from './MAlert/demo';
 import MActionSheetDemo from './MActionSheet/demo';
+import MSwipeActionDemo from './MSwipeAction/demo';
 import MButtonDemo from './MButton/demo';
 import MCheckboxDemo from './MCheckbox/demo';
 import MInputDemo from './MInput/demo';
@@ -13,6 +14,7 @@ export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MInput: MInputDemo,
   MAlert: MAlertDemo,
   MActionSheet: MActionSheetDemo,
+  MSwipeAction: MSwipeActionDemo,
   MCheckbox: MCheckboxDemo,
   MRadio: MRadioDemo
 };

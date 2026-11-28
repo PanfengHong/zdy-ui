@@ -161,6 +161,7 @@ export const mobileMenuGroups: MenuGroup[] = [
       { id: 'm-carousel', label: 'MCarousel 走马灯', icon: '🎠', type: 'component', component: 'MCarousel', path: '/components/MCarousel?platform=mobile' },
       { id: 'm-table', label: 'MTable 表格', icon: '📋', type: 'component', component: 'MTable', path: '/components/MTable?platform=mobile' },
       { id: 'm-list', label: 'MList 列表', icon: '📝', type: 'component', component: 'MList', path: '/components/MList?platform=mobile' },
+      { id: 'm-swipe-action', label: 'MSwipeAction 滑动操作', icon: '👈', type: 'component', component: 'MSwipeAction', path: '/components/MSwipeAction?platform=mobile' },
       { id: 'm-breadcrumb', label: 'MBreadcrumb 面包屑', icon: '🍞', type: 'component', component: 'MBreadcrumb', path: '/components/MBreadcrumb?platform=mobile' },
       { id: 'm-steps', label: 'MSteps 步骤条', icon: '📶', type: 'component', component: 'MSteps', path: '/components/MSteps?platform=mobile' },
       { id: 'm-pagination', label: 'MPagination 分页', icon: '📄', type: 'component', component: 'MPagination', path: '/components/MPagination?platform=mobile' },

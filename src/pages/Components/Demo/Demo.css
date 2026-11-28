@@ -116,6 +116,31 @@
   line-height: 1.6;
 }
 
+.mdemo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mdemo-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px 16px;
+  background: #fff;
+}
+
+.mdemo-cell-title {
+  color: #111827;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.mdemo-cell-desc {
+  color: #8c8c8c;
+  font-size: 12px;
+}
+
 .mdemo-placeholder {
   display: flex;
   flex-direction: column;

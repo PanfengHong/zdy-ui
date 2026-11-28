@@ -25,6 +25,7 @@ export { default as MMenu } from './MMenu';
 export { default as MCarousel } from './MCarousel';
 export { default as MTable } from './MTable';
 export { default as MList } from './MList';
+export { default as MSwipeAction } from './MSwipeAction';
 export { default as MBreadcrumb } from './MBreadcrumb';
 export { default as MSteps } from './MSteps';
 export { default as MPagination } from './MPagination';

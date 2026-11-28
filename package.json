@@ -430,6 +430,11 @@
       "require": "./dist/mobile/MSwitch.js",
       "types": "./dist/mobile/MSwitch.d.ts"
     },
+    "./mobile/MSwipeAction": {
+      "import": "./dist/mobile/MSwipeAction.js",
+      "require": "./dist/mobile/MSwipeAction.js",
+      "types": "./dist/mobile/MSwipeAction.d.ts"
+    },
     "./mobile/MTable": {
       "import": "./dist/mobile/MTable.js",
       "require": "./dist/mobile/MTable.js",

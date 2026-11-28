@@ -1,0 +1,74 @@
+@import '../../../styles/variables.less';
+
+.zdy-mobile-swipe-action {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #fff;
+}
+
+// 操作按钮铺在内容下方，靠内容左移露出
+.zdy-mobile-swipe-action-actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  display: flex;
+}
+
+.zdy-mobile-swipe-action-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 76px;
+  padding: 0 18px;
+  border: none;
+  background: #e9edf3;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background-color: #dfe4ec;
+  }
+
+  &--danger {
+    background-color: @error-color;
+    color: #fff;
+
+    &:active {
+      background-color: #d9363e;
+    }
+  }
+
+  &--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+
+    &:active {
+      background-color: #e9edf3;
+    }
+  }
+}
+
+.zdy-mobile-swipe-action-content {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  transition: transform 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+  // 垂直方向仍交给页面滚动，水平方向由组件接管
+  touch-action: pan-y;
+  will-change: transform;
+
+  &--dragging {
+    transition: none;
+    user-select: none;
+    cursor: grabbing;
+  }
+}
