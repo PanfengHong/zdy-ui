@@ -16,11 +16,11 @@ export { default as MDrawer } from './MDrawer';
 export { default as MActionSheet } from './MActionSheet';
 export { default as MAlert } from './MAlert';
 export { default as MMessage } from './MMessage';
-export { default as MNotification } from './MNotification';
 export { default as MLoading } from './MLoading';
 export { default as MSkeleton } from './MSkeleton';
 export { default as MWatermark } from './MWatermark';
 export { default as MProgress } from './MProgress';
+export { default as MToast } from './MToast';
 
 // 展示组件
 export { default as MMenu } from './MMenu';

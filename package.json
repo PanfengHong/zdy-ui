@@ -385,11 +385,6 @@
       "require": "./dist/mobile/MMessage.js",
       "types": "./dist/mobile/MMessage.d.ts"
     },
-    "./mobile/MNotification": {
-      "import": "./dist/mobile/MNotification.js",
-      "require": "./dist/mobile/MNotification.js",
-      "types": "./dist/mobile/MNotification.d.ts"
-    },
     "./mobile/MPagination": {
       "import": "./dist/mobile/MPagination.js",
       "require": "./dist/mobile/MPagination.js",
@@ -464,6 +459,11 @@
       "import": "./dist/mobile/MTextarea.js",
       "require": "./dist/mobile/MTextarea.js",
       "types": "./dist/mobile/MTextarea.d.ts"
+    },
+    "./mobile/MToast": {
+      "import": "./dist/mobile/MToast.js",
+      "require": "./dist/mobile/MToast.js",
+      "types": "./dist/mobile/MToast.d.ts"
     },
     "./mobile/MTree": {
       "import": "./dist/mobile/MTree.js",

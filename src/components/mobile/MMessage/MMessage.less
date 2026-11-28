@@ -1,4 +1,172 @@
 @import '../../../styles/variables.less';
+
+.zdy-mobile-message-layer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1300;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  // 页面级：避让 iPhone 刘海 / 灵动岛（宿主页面需设置 viewport-fit=cover）
+  padding: calc(env(safe-area-inset-top, 0px) + 10px) 12px 0;
+  pointer-events: none;
+
+  // 内联定位：铺满最近的定位父级，用于手机预览或自定义容器
+  &--inline {
+    position: absolute;
+    // 内联场景由容器通过变量提供等效安全区（模拟器里的状态栏）
+    padding-top: calc(var(--zdy-mobile-message-safe-top, 0px) + 10px);
+  }
+}
+
+.zdy-mobile-message-group {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 480px;
+}
+
+// 移动端通知横幅：毛玻璃卡片 + 彩色图标徽标 + 大点击区
 .zdy-mobile-message {
-  // 组件样式
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 12px 10px 12px 14px;
+  color: @text-color;
+  font-size: @mobile-font-size-small;
+  line-height: 1.45;
+  background-color: rgba(255, 255, 255, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  box-shadow:
+    0 10px 30px rgba(15, 23, 42, 0.14),
+    0 2px 6px rgba(15, 23, 42, 0.06);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: auto;
+  animation: zdy-mobile-message-in 0.24s cubic-bezier(0.22, 1, 0.36, 1);
+
+  &--closing {
+    animation: zdy-mobile-message-out 0.2s ease forwards;
+  }
+
+  &--info .zdy-mobile-message-icon {
+    background-color: @primary-color;
+  }
+
+  &--success .zdy-mobile-message-icon {
+    background-color: @success-color;
+  }
+
+  &--warning .zdy-mobile-message-icon {
+    background-color: @warning-color;
+  }
+
+  &--error .zdy-mobile-message-icon {
+    background-color: @error-color;
+  }
+}
+
+.zdy-mobile-message-icon {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 28px;
+  height: 28px;
+  color: #fff;
+  background-color: @primary-color;
+  border-radius: 50%;
+
+  svg {
+    display: block;
+    width: 18px;
+    height: 18px;
+  }
+}
+
+.zdy-mobile-message-content {
+  flex: 1;
+  min-width: 0;
+  font-weight: 500;
+  word-break: break-word;
+}
+
+// 关闭按钮：视觉上是小圆点，点击区保持 44 × 44
+.zdy-mobile-message-close {
+  position: relative;
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 44px;
+  height: 44px;
+  margin: -12px -10px -12px 0;
+  padding: 0;
+  color: @text-color-secondary;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background-color: rgba(15, 23, 42, 0.06);
+    border-radius: 50%;
+  }
+
+  svg {
+    position: relative;
+    display: block;
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@keyframes zdy-mobile-message-in {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes zdy-mobile-message-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zdy-mobile-message {
+    animation: none;
+
+    &--closing {
+      opacity: 0;
+    }
+  }
 }

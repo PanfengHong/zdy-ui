@@ -77,6 +77,8 @@
   overflow-y: auto;
   /* 缩小预览内组件尺寸，让整体更接近真机观感 */
   zoom: 0.8;
+  /* 模拟 50px 状态栏（预览内容经过 0.8 缩放，故写入 62.5px） */
+  --zdy-mobile-message-safe-top: 62.5px;
 }
 
 .iphone-content::-webkit-scrollbar {
