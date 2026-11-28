@@ -315,6 +315,11 @@
       "require": "./dist/mobile/MDialog.js",
       "types": "./dist/mobile/MDialog.d.ts"
     },
+    "./mobile/MDrawer": {
+      "import": "./dist/mobile/MDrawer.js",
+      "require": "./dist/mobile/MDrawer.js",
+      "types": "./dist/mobile/MDrawer.d.ts"
+    },
     "./mobile/MEmpty": {
       "import": "./dist/mobile/MEmpty.js",
       "require": "./dist/mobile/MEmpty.js",

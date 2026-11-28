@@ -145,6 +145,7 @@ export const mobileMenuGroups: MenuGroup[] = [
     label: '反馈',
     items: [
       { id: 'm-dialog', label: 'MDialog 弹框', icon: '💬', type: 'component', component: 'MDialog', path: '/components/MDialog?platform=mobile' },
+      { id: 'm-drawer', label: 'MDrawer 抽屉', icon: '🪟', type: 'component', component: 'MDrawer', path: '/components/MDrawer?platform=mobile' },
       { id: 'm-action-sheet', label: 'MActionSheet 操作面板', icon: '📃', type: 'component', component: 'MActionSheet', path: '/components/MActionSheet?platform=mobile' },
       { id: 'm-alert', label: 'MAlert 提醒', icon: '⚠️', type: 'component', component: 'MAlert', path: '/components/MAlert?platform=mobile' },
       { id: 'm-message', label: 'MMessage 消息', icon: '📨', type: 'component', component: 'MMessage', path: '/components/MMessage?platform=mobile' },

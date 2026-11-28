@@ -1,0 +1,182 @@
+@import '../../../styles/variables.less';
+
+.zdy-mobile-drawer-root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1200;
+  overflow: hidden;
+
+  // 内联模式：铺满最近的定位父级，用于手机预览等受限容器
+  &--inline {
+    position: absolute;
+  }
+
+  // 退场过程中不再拦截页面交互
+  &--closing {
+    pointer-events: none;
+  }
+}
+
+.zdy-mobile-drawer-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(15, 23, 42, 0.45);
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.zdy-mobile-drawer {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  max-height: 100%;
+  background: #fff;
+  overflow: hidden;
+  // 使用 transform 过渡（合成层绘制），保证滑出与回弹过程平滑
+  transition: transform 0.28s cubic-bezier(0.22, 0.61, 0.36, 1);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-tap-highlight-color: transparent;
+
+  &--right {
+    top: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px 0 0 16px;
+    box-shadow: -8px 0 32px rgba(15, 23, 42, 0.12);
+    transform: translate3d(100%, 0, 0);
+  }
+
+  &--left {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 0 16px 16px 0;
+    box-shadow: 8px 0 32px rgba(15, 23, 42, 0.12);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  &--top {
+    top: 0;
+    right: 0;
+    left: 0;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 8px 32px rgba(15, 23, 42, 0.12);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  &--bottom {
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 20px 20px 0 0;
+    box-shadow: 0 -8px 32px rgba(15, 23, 42, 0.12);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+
+// 打开态：遮罩淡入、面板回到原位
+.zdy-mobile-drawer-root--open {
+  .zdy-mobile-drawer-mask {
+    opacity: 1;
+  }
+
+  .zdy-mobile-drawer {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.zdy-mobile-drawer-close {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: @text-color-secondary;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  svg {
+    display: block;
+  }
+
+  &:active {
+    background-color: rgba(0, 0, 0, 0.06);
+    color: @text-color;
+  }
+}
+
+.zdy-mobile-drawer-header {
+  flex-shrink: 0;
+  padding: 20px 56px 0 20px;
+}
+
+.zdy-mobile-drawer-title {
+  color: @text-color;
+  font-size: @mobile-font-size-large;
+  font-weight: 600;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.zdy-mobile-drawer-body {
+  flex: 1;
+  min-height: 0;
+  padding: 16px 20px 20px;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  line-height: 1.6;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+.zdy-mobile-drawer-footer {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  gap: 10px;
+  padding: 12px 20px;
+  border-top: 1px solid @border-color-split;
+
+  // 底部按钮默认铺满宽度，方便拇指单手操作
+  > .zdy-mobile-button {
+    width: 100%;
+  }
+}
+
+// 贴住屏幕底部的方向需要额外避让安全区
+.zdy-mobile-drawer--bottom,
+.zdy-mobile-drawer--left,
+.zdy-mobile-drawer--right {
+  .zdy-mobile-drawer-body:last-child {
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
+  }
+
+  .zdy-mobile-drawer-footer {
+    padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zdy-mobile-drawer,
+  .zdy-mobile-drawer-mask {
+    transition-duration: 0.01ms;
+  }
+}
