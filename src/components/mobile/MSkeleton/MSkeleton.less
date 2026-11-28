@@ -1,4 +1,103 @@
 @import '../../../styles/variables.less';
+
 .zdy-mobile-skeleton {
-  // 组件样式
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+
+  &-avatar {
+    display: inline-block;
+    flex: 0 0 auto;
+    background-color: @background-color-hover;
+
+    &--circle {
+      border-radius: 50%;
+    }
+
+    &--square {
+      border-radius: @border-radius-lg;
+    }
+  }
+
+  &-header-info {
+    flex: 1;
+    min-width: 0;
+    margin-left: 12px;
+
+    .zdy-mobile-skeleton-title {
+      margin-bottom: 0;
+    }
+  }
+
+  &-title {
+    height: 18px;
+    margin-bottom: 14px;
+    background-color: @background-color-hover;
+    border-radius: @border-radius-sm;
+  }
+
+  &-paragraph {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  &-row {
+    height: 14px;
+    background-color: @background-color-hover;
+    border-radius: @border-radius-sm;
+  }
+
+  &-block {
+    height: 80px;
+    background-color: @background-color-hover;
+    border-radius: @border-radius-lg;
+  }
+}
+
+// 微光扫过：所有占位块共用，动画由根节点的 --active 统一控制
+.zdy-mobile-skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.65) 50%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+}
+
+.zdy-mobile-skeleton--active .zdy-mobile-skeleton-shimmer::after {
+  animation: zdy-mobile-skeleton-shine 1.5s ease-in-out infinite;
+}
+
+@keyframes zdy-mobile-skeleton-shine {
+  0% {
+    left: -100%;
+  }
+
+  100% {
+    left: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zdy-mobile-skeleton--active .zdy-mobile-skeleton-shimmer::after {
+    animation: none;
+  }
 }
