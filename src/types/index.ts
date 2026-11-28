@@ -39,6 +39,7 @@ export * from '../components/pc/Empty/types';
 export * from '../components/pc/Grid/types';
 export * from '../components/pc/Form/types';
 export * from '../components/pc/Icon/types';
+export * from '../components/pc/Image/types';
 export * from '../components/pc/Input/types';
 export * from '../components/pc/Intro/types';
 export * from '../components/pc/Layout/types';

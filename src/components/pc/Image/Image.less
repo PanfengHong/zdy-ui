@@ -1,0 +1,107 @@
+@import '../../../styles/variables.less';
+
+.zdy-image {
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 6px;
+  background: #f5f7fa;
+  vertical-align: middle;
+
+  &--preview {
+    cursor: zoom-in;
+  }
+
+  &-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &--loaded &-img {
+    opacity: 1;
+  }
+
+  &-placeholder,
+  &-error {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    color: #94a3b8;
+    font-size: 12px;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  &-error {
+    color: #f5222d;
+  }
+}
+
+// 大图预览
+.zdy-image-preview {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: rgba(15, 23, 42, 0.78);
+  cursor: zoom-out;
+  animation: zdy-image-preview-fade 0.2s ease;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+    cursor: default;
+  }
+}
+
+.zdy-image-preview-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.24);
+  }
+}
+
+@keyframes zdy-image-preview-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

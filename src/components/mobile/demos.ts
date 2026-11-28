@@ -6,6 +6,7 @@ import MSwipeActionDemo from './MSwipeAction/demo';
 import MButtonDemo from './MButton/demo';
 import MCheckboxDemo from './MCheckbox/demo';
 import MInputDemo from './MInput/demo';
+import MImageDemo from './MImage/demo';
 import MSelectDemo from './MSelect/demo';
 import MRadioDemo from './MRadio/demo';
 
@@ -13,6 +14,7 @@ import MRadioDemo from './MRadio/demo';
 export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MButton: MButtonDemo,
   MInput: MInputDemo,
+  MImage: MImageDemo,
   MSelect: MSelectDemo,
   MAlert: MAlertDemo,
   MActionSheet: MActionSheetDemo,

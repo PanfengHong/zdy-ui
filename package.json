@@ -110,6 +110,11 @@
       "require": "./dist/pc/Icon.js",
       "types": "./dist/pc/Icon.d.ts"
     },
+    "./pc/Image": {
+      "import": "./dist/pc/Image.js",
+      "require": "./dist/pc/Image.js",
+      "types": "./dist/pc/Image.d.ts"
+    },
     "./pc/Input": {
       "import": "./dist/pc/Input.js",
       "require": "./dist/pc/Input.js",
@@ -334,6 +339,11 @@
       "import": "./dist/mobile/MIcon.js",
       "require": "./dist/mobile/MIcon.js",
       "types": "./dist/mobile/MIcon.d.ts"
+    },
+    "./mobile/MImage": {
+      "import": "./dist/mobile/MImage.js",
+      "require": "./dist/mobile/MImage.js",
+      "types": "./dist/mobile/MImage.d.ts"
     },
     "./mobile/MInput": {
       "import": "./dist/mobile/MInput.js",

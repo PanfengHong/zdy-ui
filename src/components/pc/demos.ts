@@ -8,6 +8,7 @@ import SwitchDemo from './Switch/demo';
 import DialogDemo from './Dialog/demo';
 import DrawerDemo from './Drawer/demo';
 import IconDemo from './Icon/demo';
+import ImageDemo from './Image/demo';
 import LayoutDemo from './Layout/demo';
 import GridDemo from './Grid/demo';
 import AlertDemo from './Alert/demo';
@@ -62,6 +63,7 @@ export const pcDemoConfigs: Record<string, DemoConfig> = {
   Dialog: DialogDemo,
   Drawer: DrawerDemo,
   Icon: IconDemo,
+  Image: ImageDemo,
   Layout: LayoutDemo,
   Grid: GridDemo,
   Alert: AlertDemo,

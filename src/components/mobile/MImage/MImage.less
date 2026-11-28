@@ -1,0 +1,110 @@
+@import '../../../styles/variables.less';
+
+.zdy-mobile-image {
+  position: relative;
+  display: inline-flex;
+  max-width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f2f4f8;
+  vertical-align: middle;
+  -webkit-tap-highlight-color: transparent;
+
+  &--preview {
+    cursor: zoom-in;
+  }
+
+  &-img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &--loaded &-img {
+    opacity: 1;
+  }
+
+  &-placeholder,
+  &-error {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    color: @text-color-secondary;
+    font-size: @mobile-font-size-small;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  &-error {
+    color: @error-color;
+  }
+}
+
+// 大图预览
+.zdy-mobile-image-preview {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(15, 23, 42, 0.86);
+  animation: zdy-mobile-image-fade 0.2s ease;
+
+  // 内联模式：铺满最近的定位父级，用于手机预览等受限容器
+  &--inline {
+    position: absolute;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.35);
+  }
+}
+
+.zdy-mobile-image-preview-close {
+  position: absolute;
+  top: calc(16px + env(safe-area-inset-top));
+  right: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background: rgba(255, 255, 255, 0.28);
+  }
+}
+
+@keyframes zdy-mobile-image-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
