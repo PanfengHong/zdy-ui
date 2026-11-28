@@ -2,7 +2,6 @@
 
 // 通用组件
 export { default as MButton } from './MButton';
-export { default as MIcon } from './MIcon';
 export { default as MImage } from './MImage';
 
 // 布局组件

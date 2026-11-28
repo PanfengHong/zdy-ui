@@ -128,7 +128,6 @@ export const mobileMenuGroups: MenuGroup[] = [
     label: '通用',
     items: [
       { id: 'm-button', label: 'MButton 按钮', icon: '🔘', type: 'component', component: 'MButton', path: '/components/MButton?platform=mobile' },
-      { id: 'm-icon', label: 'MIcon 图标', icon: '🎨', type: 'component', component: 'MIcon', path: '/components/MIcon?platform=mobile' },
     ],
   },
   {

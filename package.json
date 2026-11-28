@@ -335,11 +335,6 @@
       "require": "./dist/mobile/MGrid.js",
       "types": "./dist/mobile/MGrid.d.ts"
     },
-    "./mobile/MIcon": {
-      "import": "./dist/mobile/MIcon.js",
-      "require": "./dist/mobile/MIcon.js",
-      "types": "./dist/mobile/MIcon.d.ts"
-    },
     "./mobile/MImage": {
       "import": "./dist/mobile/MImage.js",
       "require": "./dist/mobile/MImage.js",
