@@ -6,12 +6,14 @@ import MSwipeActionDemo from './MSwipeAction/demo';
 import MButtonDemo from './MButton/demo';
 import MCheckboxDemo from './MCheckbox/demo';
 import MInputDemo from './MInput/demo';
+import MSelectDemo from './MSelect/demo';
 import MRadioDemo from './MRadio/demo';
 
 // 各移动端组件 demo 配置的统一注册表
 export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MButton: MButtonDemo,
   MInput: MInputDemo,
+  MSelect: MSelectDemo,
   MAlert: MAlertDemo,
   MActionSheet: MActionSheetDemo,
   MSwipeAction: MSwipeActionDemo,

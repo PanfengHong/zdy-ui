@@ -1,5 +1,272 @@
 @import '../../../styles/variables.less';
 
 .zdy-mobile-select {
-  // 组件样式
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1px solid @border-color-split;
+  border-radius: 10px;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background-color: var(--zdy-bg-hover);
+  }
+
+  &:disabled {
+    background-color: #f7f8fa;
+    color: @text-color-disabled;
+    cursor: not-allowed;
+  }
+}
+
+.zdy-mobile-select-value {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  &--placeholder {
+    color: @text-color-secondary;
+  }
+}
+
+.zdy-mobile-select-arrow {
+  flex: none;
+  color: #94a3b8;
+  transition: transform 0.25s ease;
+
+  &--opened {
+    transform: rotate(180deg);
+  }
+}
+
+// ============ 弹层 ============
+
+.zdy-mobile-select-root {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  // 内联模式：铺满最近的定位父级，用于手机预览等受限容器
+  &--inline {
+    position: absolute;
+  }
+}
+
+.zdy-mobile-select-mask {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(15, 23, 42, 0.45);
+  animation: zdy-mobile-select-fade-in 0.22s ease;
+}
+
+.zdy-mobile-select-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  max-height: 80%;
+  padding-bottom: env(safe-area-inset-bottom);
+  border-radius: 20px 20px 0 0;
+  background: #fff;
+  box-shadow: 0 -8px 32px rgba(15, 23, 42, 0.12);
+  overflow: hidden;
+  animation: zdy-mobile-select-slide-up 0.26s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.zdy-mobile-select-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px 56px 14px;
+  border-bottom: 1px solid @border-color-split;
+}
+
+.zdy-mobile-select-title {
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.zdy-mobile-select-close {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+  transform: translateY(-50%);
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background-color: var(--zdy-bg-hover);
+  }
+}
+
+.zdy-mobile-select-options {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.zdy-mobile-select-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 52px;
+  padding: 10px 20px;
+  border: none;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  & + & {
+    border-top: 1px solid @border-color-split;
+  }
+
+  &:active {
+    background-color: var(--zdy-bg-hover);
+  }
+
+  &--active {
+    color: var(--zdy-color-primary);
+    font-weight: 600;
+  }
+
+  &--disabled {
+    color: @text-color-disabled;
+    cursor: not-allowed;
+
+    &:active {
+      background-color: #fff;
+    }
+  }
+}
+
+.zdy-mobile-select-option-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.zdy-mobile-select-empty {
+  padding: 32px 20px;
+  color: @text-color-secondary;
+  font-size: @mobile-font-size-small;
+  text-align: center;
+}
+
+.zdy-mobile-select-cancel-wrap {
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  background-color: #f2f4f8;
+}
+
+.zdy-mobile-select-cancel {
+  width: 100%;
+  min-height: 52px;
+  padding: 0 24px;
+  border: none;
+  border-radius: 12px;
+  background: #fff;
+  color: @text-color;
+  font-size: @mobile-font-size-base;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active {
+    background-color: var(--zdy-bg-hover);
+  }
+}
+
+// 退出动画
+.zdy-mobile-select-root--closing {
+  .zdy-mobile-select-mask {
+    animation: zdy-mobile-select-fade-out 0.22s ease forwards;
+  }
+
+  .zdy-mobile-select-panel {
+    animation: zdy-mobile-select-slide-down 0.22s ease forwards;
+  }
+}
+
+@keyframes zdy-mobile-select-fade-in {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes zdy-mobile-select-fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes zdy-mobile-select-slide-up {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes zdy-mobile-select-slide-down {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(100%);
+  }
 }
