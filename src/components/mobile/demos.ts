@@ -20,6 +20,7 @@ import MTextareaDemo from './MTextarea/demo';
 import MDialogDemo from './MDialog/demo';
 import MLoadingDemo from './MLoading/demo';
 import MDrawerDemo from './MDrawer/demo';
+import MProgressDemo from './MProgress/demo';
 
 // 各移动端组件 demo 配置的统一注册表
 export const mobileDemoConfigs: Record<string, DemoConfig> = {
@@ -42,5 +43,6 @@ export const mobileDemoConfigs: Record<string, DemoConfig> = {
   MTextarea: MTextareaDemo,
   MDialog: MDialogDemo,
   MLoading: MLoadingDemo,
-  MDrawer: MDrawerDemo
+  MDrawer: MDrawerDemo,
+  MProgress: MProgressDemo
 };

@@ -1,4 +1,142 @@
 @import '../../../styles/variables.less';
+
 .zdy-mobile-progress {
-  // 组件样式
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  font-size: @mobile-font-size-small;
+  line-height: 1;
+
+  &--line {
+    .zdy-mobile-progress-outer {
+      flex: 1;
+      min-width: 0;
+      margin-right: 8px;
+    }
+
+    .zdy-mobile-progress-inner {
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      background-color: @background-color-hover;
+      border-radius: 100px;
+      transition: background-color 0.3s ease;
+    }
+
+    .zdy-mobile-progress-bar {
+      position: relative;
+      overflow: hidden;
+      transition: width 0.3s ease, background-color 0.3s ease;
+    }
+
+    .zdy-mobile-progress-info {
+      flex: 0 0 auto;
+      min-width: 3.2em;
+      color: @text-color-secondary;
+      font-size: @mobile-font-size-small;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    // 进行中：条内白色流光，提示进度仍在推进
+    &.zdy-mobile-progress--active .zdy-mobile-progress-bar::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: -40%;
+      width: 40%;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.55) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      animation: zdy-mobile-progress-active 1.6s ease-in-out infinite;
+    }
+  }
+
+  &--circle {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: auto;
+    flex: 0 0 auto;
+
+    .zdy-mobile-progress-circle-svg {
+      display: block;
+      transform-origin: center;
+    }
+
+    .zdy-mobile-progress-circle-path {
+      transition: stroke-dashoffset 0.3s ease, stroke 0.3s ease;
+    }
+
+    .zdy-mobile-progress-circle-info {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      padding: 0 4px;
+      overflow: hidden;
+      font-weight: 500;
+      line-height: 1;
+      text-align: center;
+      white-space: nowrap;
+      transform: translate(-50%, -50%);
+
+      svg {
+        width: 2.8em;
+        height: 2.8em;
+        max-width: 100%;
+        max-height: 100%;
+      }
+    }
+
+    // 进行中：圆环呼吸，提示进度仍在推进
+    &.zdy-mobile-progress--active .zdy-mobile-progress-circle-path {
+      animation: zdy-mobile-progress-breath 1.4s ease-in-out infinite;
+    }
+  }
+}
+
+@keyframes zdy-mobile-progress-active {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(350%);
+  }
+}
+
+@keyframes zdy-mobile-progress-breath {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.45;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zdy-mobile-progress {
+    .zdy-mobile-progress-bar,
+    .zdy-mobile-progress-circle-path,
+    .zdy-mobile-progress-inner {
+      transition: none;
+    }
+
+    &.zdy-mobile-progress--active .zdy-mobile-progress-bar::after,
+    &.zdy-mobile-progress--active .zdy-mobile-progress-circle-path {
+      animation: none;
+    }
+  }
 }
